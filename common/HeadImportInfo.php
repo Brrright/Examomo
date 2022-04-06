@@ -17,3 +17,5 @@ crossorigin="anonymous"></script>
 
 <!-- sweet alert pop up -->
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<!-- Caveat font import -->
+<link href='https://fonts.googleapis.com/css?family=Caveat' rel='stylesheet'>
