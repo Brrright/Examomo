@@ -13,7 +13,9 @@
 <body>
     <?php 
         // require "common/header_guest.php";
-        require "common/header_admin.php";
+        // require "common/header_admin.php";
+        // require "common/header_lecturer.php";
+        require "common/header_student.php";
     ?>
 </body>
 </html>
