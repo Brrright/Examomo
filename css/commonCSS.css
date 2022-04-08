@@ -22,11 +22,25 @@
     color:#bae4f2;
 }
 
+.bg-white-template {
+    background-color: white;
+    border-radius: 15px;;
+    box-shadow: 1px 4px #707b8b93;
+    width:90%; 
+    height:auto;
+}
+
+hr {
+    color:#2B5EA4;
+    width: 90%;
+    margin: auto;
+}
+
 body {
     background-image: linear-gradient( rgb(187, 221, 240),rgb(138, 248, 187) ,rgb(211, 250, 213));
     background-repeat: no-repeat;
     background-size: cover;
-    height:100%;
+
 }
 
 html {
