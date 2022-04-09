@@ -22,12 +22,29 @@
     color:#bae4f2;
 }
 
+.main-bg-color {
+    background-color: #2B5EA4;
+}
+
+.sec-bg-color {
+    background-color: #c5f2b8;
+}
+
+.third.bg.color {
+    background-color: #bae4f2;
+}
+
 .bg-white-template {
     background-color: white;
     border-radius: 15px;;
-    box-shadow: 1px 4px #707b8b93;
+    box-shadow: 0px 4px 4px 4px #707b8b93;
     width:90%; 
     height:auto;
+}
+
+.text-justify {
+    text-align: justify;
+    text-justify: inter-word;
 }
 
 hr {
@@ -40,7 +57,6 @@ body {
     background-image: linear-gradient( rgb(187, 221, 240),rgb(138, 248, 187) ,rgb(211, 250, 213));
     background-repeat: no-repeat;
     background-size: cover;
-
 }
 
 html {

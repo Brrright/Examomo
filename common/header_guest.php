@@ -28,7 +28,7 @@
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
               <li><a class="dropdown-item" href="#">Student</a></li>
               <li><a class="dropdown-item" href="#">Lecturer</a></li>
-              <li><hr class="dropdown-divider"></li>
+              <li><hr class="dropdown-divider" style="width:100%"></li>
               <li><a class="dropdown-item" href="#">Admin</a></li>
             </ul>
           </li>

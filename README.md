@@ -1,5 +1,5 @@
 # Examomo
-A online online examination system produced by Asia Pacific University students.
+A online examination system produced by Asia Pacific University students.
 
 Program Leader & Programmer: CHIAH MING LIANG - TP061801
 Programer & Designer: WEE TZE HOE - TP061037

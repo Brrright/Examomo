@@ -14,7 +14,7 @@ crossorigin="anonymous"></script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
 
 <!-- logo icon -->
-<link rel="icon" href="img/logo_small_no_text.png" type="image/ico">
+<link rel="icon" href="img/logo_big_no_text.png" type="image/icon">
 
 <!-- sweet alert pop up -->
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
