@@ -1,0 +1,76 @@
+* {
+    margin: 0;  padding: 0;}
+  
+  body {
+  background: #ddd;  display: flex;  justify-content: center;
+    align-items: center;  font-family: "Quicksand", sans-serif;  user-select: none;
+  }
+  
+  .softcard {  width: 316px;  height: fit-content;
+    background: -webkit-linear-gradient(to right, #f7b733, #fc4a1a);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #f7b733, #fc4a1a); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    border-radius: 20px;  box-shadow: 0px 0px 10px #000;
+  }
+  
+  .calendar-bar {  display: flex;  justify-content: space-between;
+    align-items: center;  padding: 20px;  padding-bottom: 15px;
+    border-bottom: 19px;
+  }
+  
+  .calendar-bar > .current-month {
+    font-size: 20px;  font-weight: bold;  color: #ddd;
+    background:#000;  padding:5px;  border-radius:10px;
+  }
+  
+  .calendar-bar > [class$="soft-btn"] {
+    width: 40px;  aspect-ratio: 1;  text-align: center;
+    line-height: 40px;  font-size: 14px;  color: #000;
+    background: #ddd;  border: none;  border-radius: 50%;
+  }
+  
+  .weekdays-name,
+  .calendar-days {  display: flex;  flex-wrap: wrap;  padding-inline:18px;}
+  .weekdays-name {  padding-top: 12px;}
+  
+  .calendar-days {  padding-bottom: 12px;}
+  
+  .days-name,
+  [class$="-day"] {  width: 40px;  height: 40px;  color: #000;  text-align: center;
+    line-height: 40px;  font-weight: 500;  font-size: 1rem;
+  }
+  
+  .days-name {  color: #fff;  font-weight: 700;}
+  
+  .current-day {
+    background-color: #000;  color: #fff;
+    border-radius: 50%;  font-weight: 700;  transition: 0.5s;  cursor: pointer;
+  }
+  
+  .padding-day {
+    color: #a5a5a5;  user-select: none;
+  }
+  
+  .calendar-bar > [class$="soft-btn"]:hover,
+  .month-day:hover,
+  .btn:hover {
+    border-radius:5px;  background-color:#f8f7fa;  color:#000;  border-radius:15px;
+    transition: 0.1s;  cursor: pointer;
+   
+  }
+  
+  .calendar-bar > [class$="soft-btn"]:focus,
+  .month-day:focus,
+  .btn:focus {  border-radius:15px;  background-color: #000;  color: #ddd;
+  }
+  
+  .goto-buttons {
+    border-top: solid 2px yellow;  padding-block: 18px;  display: flex;
+    justify-content: space-evenly;
+  }
+  
+  .btn {
+    background: #eee  border: none;  border-radius: 10px;
+    padding: 11px 13px;  color:#000;  font-family: "Quicksand", sans-serif;
+    font-weight: 600;  font-size: 0.9rem;  margin-right: 1px;  box-shadow: 0px 0px 0px #000;
+  }
+  
