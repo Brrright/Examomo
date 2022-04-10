@@ -1,22 +1,8 @@
 
 
-<!-- Font Awesome -->
-<link
-  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
-  rel="stylesheet"
-/>
-
-<!-- MDB -->
-<link
-  href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.11.0/mdb.min.css"
-  rel="stylesheet"
-/>
-
-<!-- Add icon library -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 <style>
-  .container{
+  .footer-container{
     position: static;
     bottom: 0;
     display: flex;
@@ -52,12 +38,12 @@
 <!-- style="background-color: #c5f2b8" -->
 <footer class="text-black text-center text-lg-start" >
   <!-- Grid container -->
-  <div class="container">
+  <div class="footer-container  d-flex justify-content-evenly">
     <!--Grid row-->
     <div class="row">
       <!--Grid column-->
       <div class="col ">
-        <img src="img/ExamomoLogo_transparent.png"
+        <img src="img/logo_big_no_text.png"
         class ="w-100"/>
       </div>
       <!--Grid column-->
