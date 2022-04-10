@@ -21,17 +21,3 @@ crossorigin="anonymous"></script>
 <!-- Caveat font import -->
 <link href='https://fonts.googleapis.com/css?family=Caveat' rel='stylesheet'>
 
-<!-- Font Awesome -->
-<link
-  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
-  rel="stylesheet"
-/>
-
-<!-- MDB -->
-<link
-  href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.11.0/mdb.min.css"
-  rel="stylesheet"
-/>
-
-<!-- Add icon library -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
