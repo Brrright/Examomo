@@ -1,17 +1,4 @@
 
-<!DOCTYPE html>
-  
-
-
-<head>
-</head>
-
-<body>
-  <br></br>
-</body>
-
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <!-- Font Awesome -->
 <link
@@ -36,15 +23,6 @@
     flex-wrap: wrap;
   }
 
-
-  html {
-  min-height: 100%;
-}
-
-body {
-    background-image: linear-gradient( rgb(186, 228, 242),rgb(197, 242, 184));
-    height: 100%;
-  }
 
   .fa {
   padding: 5px;
