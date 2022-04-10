@@ -101,10 +101,10 @@
         </div>
     </section>
     <section>
-        <div class="bg-white-template d-flex flex-column mx-auto w-90 p-5">
+        <div class="shadow-lg rounded-3 bg-white-template d-flex flex-column mx-auto w-90 p-5">
             <h1 class="font-caveat text-center main-color" style="font-weight:bold;">3 Major Roles</h1>
             <div class="d-flex flex-wrap justify-content-around mx-auto">
-                <div class="card m-3 p-3 card-style responsive-img" style="width: 20vw">
+                <div class="card m-3 p-3 card-style responsive-img shadow" style="width: 20vw">
                     <img src="img/guest/role_admin_icon.png" alt="admin icon">
                     <div class="card-body">
                         <ul>
@@ -115,7 +115,7 @@
                         </ul>
                     </div>
                 </div>
-                <div class="card m-3 p-3 card-style responsive-img" style="width: 20vw">
+                <div class="card m-3 p-3 card-style responsive-img shadow" style="width: 20vw">
                     <img src="img/guest/role_lecturer_icon.png" alt="lecturer icon">
                     <div class="card-body">
                         <ul>
@@ -126,7 +126,7 @@
                         </ul>
                     </div>
                 </div>
-                <div class="card m-3 p-3 card-style responsive-img" style="width: 20vw">
+                <div class="card m-3 p-3 card-style responsive-img shadow" style="width: 20vw">
                     <img src="img/guest/role_student_icon.png" alt="student icon">
                     <div class="card-body">
                         <ul>
@@ -144,7 +144,7 @@
     </section>
     <div class="d-flex justify-content-around mb-5 align-items-center">
         <h2 class="font-caveat"><b>Create your own company account</b></h2>
-        <a href="#" class="btn btn-primary main-bg-color text-white font-caveat fs-3 btn-hover rounded-pill" style="width:200px;">Get Started  <i class="ms-2 text-white bi bi-arrow-right-circle"></i> </a>
+        <a href="#" class="btn btn-primary main-bg-color text-white font-caveat fs-3 rounded-pill" style="width:200px;">Get Started  <i class="ms-2 text-white bi bi-arrow-right-circle"></i> </a>
     </div>
     <script src="https://unpkg.com/vue@3"></script>
 </body>

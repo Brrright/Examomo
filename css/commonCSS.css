@@ -34,31 +34,16 @@
     background-color: #bae4f2;
 }
 
-.bg-white-template {
-    background-color: white;
-    border-radius: 15px;;
-    box-shadow: 0px 4px 4px 4px #707b8b93;
-    width:90%; 
-    height:auto;
-}
-
-.text-justify {
-    text-align: justify;
-    text-justify: inter-word;
-}
-
 hr {
     color:#2B5EA4;
     width: 90%;
     margin: auto;
 }
 
-body {
+body, html {
     background-image: linear-gradient( rgb(187, 221, 240),rgb(138, 248, 187) ,rgb(211, 250, 213));
     background-repeat: no-repeat;
     background-size: cover;
-}
-
-html {
     min-height: 100%;
+    scroll-behavior: smooth;
 }

@@ -1,5 +1,4 @@
 .guest-ads-title {
-    /* font-family:'Courier New', Courier, monospace; */
     font-weight: bold;
     font-size:4vw;
 }
@@ -16,13 +15,32 @@
 
 .card-style {
     width: 20vw;
-    box-shadow: 0px 4px 4px 4px #707b8b93;
+    /* box-shadow: 0px 4px 4px 4px #707b8b93; */
     min-width: 260px;
     border-radius: 15px;
 }
 
-.btn-hover :hover {
-    background-color: background-color: #c5f2b8;
+.bg-white-template {
+    background-color: white;
+    border-radius: 15px;;
+    box-shadow: 0px 4px 4px 4px #707b8b93;
+    width:90%; 
+    height:auto;
+}
+
+.text-justify {
+    text-align: justify;
+    text-justify: inter-word;
+}
+
+.btn-hover {
+    border-radius: 15px;
+}
+
+.btn-hover:hover {
+    top: 3px;
+    background-color: #4570ac;
+    box-shadow: 0 5px 20px -2px rgb(59, 123, 211)px #bae4f2;
 }
 
 section {
