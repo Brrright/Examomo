@@ -105,9 +105,9 @@
     
     <a class="text-black" href="*">Copyright ©2020 Exammomo</a>
 
-    <a style="margin-left: 10%" class="text-black" href="*">Privacy Policy</a>
+    <a style="margin-left: 10%" class="text-black" href="common/PrivacyPolicy.php">Privacy Policy</a>
 
-    <a style="margin-left: 10%" class="text-black" href="*">Terms and Conditions</a>
+    <a style="margin-left: 10%" class="text-black" href="common/TermAndCondition.php">Terms and Conditions</a>
 
   </div>
   <!-- Copyright -->
