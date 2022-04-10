@@ -20,13 +20,13 @@
         // require "common/header_student.php";
     ?>
     <br>
-    <div class="d-flex flex-wrap justify-content-around mx-auto p-5 bg-white-template" style="margin-top:40px;">
-        <img src="img/logo_big_with_text.png" class="p-3 responsive-img" alt="examomo logo" width="400px"; height="400px">
-        <div class="d-flex flex-column justify-content-center text-center p-3" style="width:400px; height:400px;">
-            <p class="logo-style" style="font-size:5vw">Examomo</p>
-            <p class="text-justify" style="font-size:20px;">is an online examination platform that ensures the honesty of students’ work while providing the necessary functions to conduct examinations and sufficient quality-of-life features for the students. </p>
+    <div class="d-flex flex-wrap justify-content-evenly mx-auto p-5 bg-white-template" style="margin-top:80px;">
+        <img src="img/logo_big_with_text.png" class="p-3 responsive-img" alt="examomo logo" width="300px"; height="300px">
+        <div class="d-flex flex-column justify-content-center text-center p-3 mt-4" style="width:350px; height:300px;">
+            <p class="logo-style" style="font-size:4vw; margin-bottom:0px;">Examomo</p>
+            <p class="text-justify pb-5" style="font-size:20px;">is an online examination platform that ensures the honesty of students’ work while providing the necessary functions to conduct examinations and sufficient quality-of-life features for the students. </p>
         </div>
-        <div class="d-flex flex-column justify-content-center align-content-center mt-3 mb-3 p-3" style="width:400px; height:auto;">
+        <div class="d-flex flex-column justify-content-center align-content-center mt-3 mb-3 p-3" style="width:300px; height:auto;">
             <button class="btn btn-primary main-bg-color text-white mb-5 fs-3 btn-hover">Get Started!</button>
             <div class="btn-group">
                 <button  class="btn btn-primary main-bg-color text-white dropdown-toggle fs-3 btn-hover"  data-bs-toggle="dropdown">
@@ -44,7 +44,7 @@
     <br><br>
     <section class="section-full">
         <div class="d-flex container-fluid flex-wrap justify-content-around mx-auto align-items-center">
-            <div class="d-flex flex-column me-5">
+            <div class="d-flex flex-column me-5" style="width:60%">
                 <h1 class="guest-ads-title font-caveat">Exam Functionalities</h1>
                 <ul class="guest-ads-content">
                     <li>Support MCQ and structure question</li>
@@ -58,10 +58,10 @@
     </section>
     <section class="section-full">
         <div class="d-flex container-fluid flex-wrap justify-content-around mx-auto align-items-center">
-            <div class="d-flex flex-column me-5">
+            <div class="d-flex flex-column me-5 " style="width:60%">
                 <h1 class="guest-ads-title font-caveat">Admin Functionalities</h1>
                 <ul class="guest-ads-content">
-                    <li>Organization management</li>
+                    <li>Organization information management</li>
                     <li>Admin, lecturer, and student account management</li>
                     <li>Class and module management</li>
                     <li>Feedback management</li>
@@ -72,7 +72,7 @@
     </section>
     <section class="section-full">
         <div class="d-flex container-fluid flex-wrap justify-content-around mx-auto align-items-center">
-            <div class="d-flex flex-column me-5">
+            <div class="d-flex flex-column me-5 " style="width:60%">
                 <h1 class="guest-ads-title font-caveat">Lecturer Functionalities</h1>
                 <ul class="guest-ads-content">
                     <li>Exam detail management</li>
@@ -86,7 +86,7 @@
     </section>
     <section class="section-full">
         <div class="d-flex container-fluid flex-wrap justify-content-around mx-auto align-items-center">
-            <div class="d-flex flex-column me-5">
+            <div class="d-flex flex-column me-5 " style="width:60%">
                 <h1 class="guest-ads-title font-caveat">Student Functionalities</h1>
                 <ul class="guest-ads-content">
                     <li>List of Upcoming Exam (Calender view)</li>
@@ -104,8 +104,8 @@
         <div class="shadow-lg rounded-3 bg-white-template d-flex flex-column mx-auto w-90 p-5">
             <h1 class="font-caveat text-center main-color" style="font-weight:bold;">3 Major Roles</h1>
             <div class="d-flex flex-wrap justify-content-around mx-auto">
-                <div class="card m-3 p-3 card-style responsive-img shadow" style="width: 20vw">
-                    <img src="img/guest/role_admin_icon.png" alt="admin icon">
+                <div class="card m-3 p-3 card-style shadow" style="width: 25%">
+                    <img src="img/guest/role_admin_icon.png" class="responsive-img mx-auto" alt="admin icon">
                     <div class="card-body">
                         <ul>
                             <li class="card-text">Organization management</li>
@@ -115,8 +115,8 @@
                         </ul>
                     </div>
                 </div>
-                <div class="card m-3 p-3 card-style responsive-img shadow" style="width: 20vw">
-                    <img src="img/guest/role_lecturer_icon.png" alt="lecturer icon">
+                <div class="card m-3 p-3 card-style shadow" style="width: 25%">
+                    <img src="img/guest/role_lecturer_icon.png" class="responsive-img mx-auto" alt="lecturer icon">
                     <div class="card-body">
                         <ul>
                             <li class="card-text">Exam detail management</li>
@@ -126,8 +126,8 @@
                         </ul>
                     </div>
                 </div>
-                <div class="card m-3 p-3 card-style responsive-img shadow" style="width: 20vw">
-                    <img src="img/guest/role_student_icon.png" alt="student icon">
+                <div class="card m-3 p-3 card-style shadow" style="width: 25%">
+                    <img src="img/guest/role_student_icon.png" class="responsive-img mx-auto" alt="student icon">
                     <div class="card-body">
                         <ul>
                             <li class="card-text">List of Upcoming Exam (Calender view)</li>
@@ -142,9 +142,9 @@
             </div>
         </div>
     </section>
-    <div class="d-flex justify-content-around mb-5 align-items-center">
+    <div class="d-flex justify-content-around align-items-center" style="margin-bottom:50px;">
         <h2 class="font-caveat"><b>Create your own company account</b></h2>
-        <a href="#" class="btn btn-primary main-bg-color text-white font-caveat fs-3 rounded-pill" style="width:200px;">Get Started  <i class="ms-2 text-white bi bi-arrow-right-circle"></i> </a>
+        <a href="#" class="btn btn-primary main-bg-color text-white font-caveat fs-5 rounded-pill" style="width:200px;">Get Started  <i class="ms-2 text-white bi bi-arrow-right-circle"></i> </a>
     </div>
     <?php require "common/footer_guest.php"?>
     <script src="https://unpkg.com/vue@3"></script>

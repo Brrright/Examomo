@@ -9,7 +9,8 @@
 
 .responsive-img {
     width: 100%;
-    max-width: 400px;
+    max-width: 300px;
+    max-height: 300px;
     height:auto;
 }
 
@@ -33,13 +34,9 @@
     text-justify: inter-word;
 }
 
-.btn-hover {
-    border-radius: 15px;
-}
 
 .btn-hover:hover {
-    top: 3px;
-    background-color: #4570ac;
+    background-color: #6654cc;
     box-shadow: 0 5px 20px -2px rgb(59, 123, 211)px #bae4f2;
 }
 
