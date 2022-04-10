@@ -42,7 +42,7 @@
         </div>
     </div>
     <br><br>
-    <section>
+    <section class="section-full">
         <div class="d-flex container-fluid flex-wrap justify-content-around mx-auto align-items-center">
             <div class="d-flex flex-column me-5">
                 <h1 class="guest-ads-title font-caveat">Exam Functionalities</h1>
@@ -56,7 +56,7 @@
             <img src="img/guest/guest_examination.png" alt="exam picture" class="responsive-img" width="300px"; height="300px";>
         </div>
     </section>
-    <section>
+    <section class="section-full">
         <div class="d-flex container-fluid flex-wrap justify-content-around mx-auto align-items-center">
             <div class="d-flex flex-column me-5">
                 <h1 class="guest-ads-title font-caveat">Admin Functionalities</h1>
@@ -70,7 +70,7 @@
             <img src="img/guest/guest_admin.png" alt="exam picture" class="responsive-img" width="300px"; height="300px";>
         </div>
     </section>
-    <section>
+    <section class="section-full">
         <div class="d-flex container-fluid flex-wrap justify-content-around mx-auto align-items-center">
             <div class="d-flex flex-column me-5">
                 <h1 class="guest-ads-title font-caveat">Lecturer Functionalities</h1>
@@ -84,7 +84,7 @@
             <img src="img/guest/guest_lecturer.png" alt="exam picture" class="responsive-img" width="300px"; height="300px";>
         </div>
     </section>
-    <section>
+    <section class="section-full">
         <div class="d-flex container-fluid flex-wrap justify-content-around mx-auto align-items-center">
             <div class="d-flex flex-column me-5">
                 <h1 class="guest-ads-title font-caveat">Student Functionalities</h1>
@@ -100,7 +100,7 @@
             <img src="img/guest/guest_student.png" alt="exam picture" class="responsive-img" width="300px"; height="300px";>
         </div>
     </section>
-    <section>
+    <section class="section-full">
         <div class="shadow-lg rounded-3 bg-white-template d-flex flex-column mx-auto w-90 p-5">
             <h1 class="font-caveat text-center main-color" style="font-weight:bold;">3 Major Roles</h1>
             <div class="d-flex flex-wrap justify-content-around mx-auto">
@@ -146,6 +146,7 @@
         <h2 class="font-caveat"><b>Create your own company account</b></h2>
         <a href="#" class="btn btn-primary main-bg-color text-white font-caveat fs-3 rounded-pill" style="width:200px;">Get Started  <i class="ms-2 text-white bi bi-arrow-right-circle"></i> </a>
     </div>
+    <?php require "common/footer_guest.php"?>
     <script src="https://unpkg.com/vue@3"></script>
 </body>
 </html>
