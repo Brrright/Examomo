@@ -9,6 +9,7 @@
  
   }
 
+
   .bi-google {
   color: #FF7F50;
   } 
@@ -19,7 +20,7 @@
 
 <footer class="text-black text-center text-lg-start font-caveat fw-bold" >
   <!-- Grid container -->
-  <div class="footer-container  d-flex justify-content-center ">
+  <div class="footer-container  d-flex justify-content-evenly">
     <!--Grid row-->
     <div class="row">
       <!--Grid column-->
@@ -30,29 +31,26 @@
       <!--Grid column-->
 
       <!--Grid column-->
-      <div class="col align-items-center" width ="20%">
+      <div class="col" width ="20%">
         <h5 class="text-uppercase fw-bold" style="font-size:20px">Quick Links</h5>
 
         <ul class="list-unstyled mb-0">
           <li>
-            <a href="#!" class="text-blue">Get Started</a>
+            <a href="#!" class="text-blue">Examinations</a>
           </li>
           <li>
-            <a href="#!" class="text-blue">Admin login</a>
+            <a href="#!" class="text-blue">Exam Papers</a>
           </li>
           <li>
-            <a href="#!" class="text-blue">Lecturer login</a>
-          </li>
-          <li>
-            <a href="#!" class="text-blue">Student login</a>
+            <a href="#!" class="text-blue">Completed Exams</a>
           </li>
         </ul>
       </div>
       <!--Grid column-->
 
       <!--Grid column-->
-      <div class="col-md" width="20%">
-        <h5 class="text-uppercase fw-bold align-items-center" style="font-size:20px">Social Media</h5>
+      <div class="col-md " width="20%">
+        <h5 class="text-uppercase fw-bold" style="font-size:20px">Social Media</h5>
 
         <section class="mb-4">
       <!-- Facebook -->

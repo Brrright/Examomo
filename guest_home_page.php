@@ -146,7 +146,12 @@
         <h2 class="font-caveat"><b>Create your own company account</b></h2>
         <a href="#" class="btn btn-primary main-bg-color text-white font-caveat fs-5 rounded-pill" style="width:200px;">Get Started  <i class="ms-2 text-white bi bi-arrow-right-circle"></i> </a>
     </div>
-    <?php require "common/footer_guest.php"?>
+    <?php 
+        // require "common/footer_guest.php";
+        // require "common/footer_admin.php";
+        // require "common/footer_student.php";
+        require "common/footer_lecturer.php";
+    ?>
     <script src="https://unpkg.com/vue@3"></script>
 </body>
 </html>
