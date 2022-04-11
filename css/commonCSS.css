@@ -34,6 +34,23 @@
     background-color: #bae4f2;
 }
 
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    display: none;
+}
+
+::-webkit-scrollbar-thumb {
+    background:hsla(215, 58%, 41%, 0.7); 
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background:rgb(43, 94, 164); 
+}
+
 hr {
     color:#2B5EA4;
     width: 90%;
