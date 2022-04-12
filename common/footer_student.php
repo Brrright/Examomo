@@ -6,7 +6,7 @@
     flex-wrap: wrap;
     box-shadow:  0 6px 20px 0 rgba(0, 0, 0, 0.19);
     padding: 30px;
- 
+    font-size: 20px;
   }
 
 
@@ -83,13 +83,13 @@
   <!-- Grid container -->
 
   <!-- Copyright -->
-  <div class="text-center p-3">
+  <div class="text-center p-3 vw-100">
     
-    <a class="text-black hover-shadow" href="*">Copyright ©2020 Exammomo</a>
+  <p class="copyright" style="color:black" >Copyright ©2022 Exammomo</a>
 
-    <a style="margin-left: 10%" class="text-black hover-shadow" href="*">Privacy Policy</a>
+  <a style="margin-left: 10%; color:black" class="text-black hover-shadow" href="*">Privacy Policy</a>
 
-    <a style="margin-left: 10%" class="text-black hover-shadow" href="*">Terms and Conditions</a>
+  <a style="margin-left: 10%; color:black" class="text-black hover-shadow" href="*">Terms and Conditions</a>
 
   </div>
   <!-- Copyright -->

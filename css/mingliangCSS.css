@@ -37,15 +37,46 @@
 
 .btn-hover:hover {
     background-color: #6654cc;
-    box-shadow: 0 5px 20px -2px rgb(59, 123, 211)px #bae4f2;
+    box-shadow: 0 5px 20px -2px rgb(59, 123, 211) #bae4f2;
 }
 
 .section-full {
-    position: relative;
+    /* position: relative; */
     width: 100%;
-    min-height: 100vh;
-    padding: 100px;
+    min-height: 80vh;
     display: flex;
     justify-content: space-between;
     align-items: center;
+}
+
+.animation-effect {
+    position: relative;
+    animation-name: landing;
+    animation-duration: 2s;
+    animation-timing-function: ease-in-out;
+    animation-fill-mode: forwards;
+    opacity: 0;
+}
+
+@keyframes landing {
+    from {
+        transform: translateY(-30px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.scroll-reveal{
+    position: relative;
+    transform: translateY(150px);
+    opacity: 0;
+    transition: 2s all ease;
+}
+
+.scroll-reveal.active{
+    transform: translateY(0);
+    opacity: 1;
 }
