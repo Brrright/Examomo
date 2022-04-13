@@ -1,26 +1,8 @@
-<style>
-  .footer-container{
-
-    bottom: 0;
-    display: flex;
-    flex-wrap: wrap;
-    box-shadow:  0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    padding: 30px;
-    font-size: 20px;
- 
-  }
-
-  .bi-google {
-  color: #FF7F50;
-  } 
-
-
-</style>
-
 
 <footer class="text-black text-center text-lg-start font-caveat fw-bold">
+  <hr class="footer-line">
   <!-- Grid container -->
-  <div class="footer-container">
+  <div class="footer-container  d-flex justify-content-center ">
     <!--Grid row-->
     <div class="row">
       <!--Grid column-->
@@ -57,23 +39,24 @@
 
         <section class="mb-4">
       <!-- Facebook -->
-        <div class="fb hover-shadow" role="button">
-        <a href="#" class="bi-facebook"></a> Examomo
-
-
-        </div><br>
+          <div class="fb hover-shadow" role="button">
+            <a href="#" class="bi-facebook"></a> Examomo
+          </div>
+          <br>
 
       <!-- Instagram -->
-      <div class="ig hover-shadow" role="button">
-      <i href="#" class="bi-instagram"></i> Examomo
-
-      </div><br>
+          <div class="ig hover-shadow" role="button">
+            <a href="#" class="bi-instagram"></a> Examomo
+          </div>
+          <br>
 
       <!-- Gmail -->
-      <div class="gm hover-shadow" role="button">
-      <a href="#" class="bi-google"></a> Examomo@gmail.com 
+          <div class="gm hover-shadow" role="button">
+            <a href="#" class="bi-google"></a> Examomo@gmail.com 
+          </div>
+          <br>
 
-      </div><br>
+        </section>
 
       </div>
       <!--Grid column-->
@@ -83,11 +66,14 @@
   <!-- Grid container -->
 
   <!-- Copyright -->
-  <div class="text-center p-3 w-100 " style="vw:5px;">
+  <div class="text-center p-2 shadow-lg">
     
     <p class="copyright" style="color:black" >Copyright ©2022 Exammomo</a>
+
     <a style="margin-left: 10%; color:black" class="text-black hover-shadow" href="*">Privacy Policy</a>
+
     <a style="margin-left: 10%; color:black" class="text-black hover-shadow" href="*">Terms and Conditions</a>
+
   </div>
   <!-- Copyright -->
 </footer>

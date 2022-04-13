@@ -1,4 +1,4 @@
-  <nav class="navbar navbar-expand-lg navbar-light" id="header">
+  <nav class="navbar navbar-expand-lg navbar-light blur-bg" id="header">
     <div class="container">
       <!-- Some link need to use if else statement to do, will add on soon (to check session, knowing which role) -->
       <a class="navbar-brand logo-style ms-2" href="guest_home_page.php" style="font-weight: bold; font-family: 'Caveat'; font-size: 32px; color: #2B5EA4; text-shadow: 0px 2px #707b8b93;">
@@ -15,7 +15,7 @@
             <a class="nav-link" style="color:#2B5EA4;" href="guest_home_page.php">Home</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" style="color:#2B5EA4; "href="#">Company Registration</a>
+            <a class="nav-link" style="color:#2B5EA4; "href="guest_registration_page.php">Company Registration</a>
           </li>
           
 

@@ -13,6 +13,17 @@
     <title>Examomo | Registration Page</title>
 </head>
 <body>
-    
+<?php 
+    require "common/header_guest.php";
+?>
+    <section class="section-full">
+
+    </section>
+<?php 
+    // require "common/footer_guest.php";
+    // require "common/footer_admin.php";
+    // require "common/footer_student.php";
+    require "common/footer_guest.php";
+?>
 </body>
 </html>

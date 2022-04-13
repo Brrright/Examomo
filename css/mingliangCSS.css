@@ -34,10 +34,14 @@
     text-justify: inter-word;
 }
 
+.btn-hover {
+    color: white;
+}
+
 
 .btn-hover:hover {
-    background-color: #6654cc;
-    box-shadow: 0 5px 20px -2px rgb(59, 123, 211) #bae4f2;
+    box-shadow: inset 200px 0 0 0 #bae4f2;
+    color: #05040c;
 }
 
 .section-full {

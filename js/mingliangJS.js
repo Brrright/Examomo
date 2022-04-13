@@ -1,5 +1,7 @@
 
 // credit: https://alvarotrigo.com/blog/css-animations-scroll/ (doc citation later)
+// How to Create CSS Animations on Scroll [With Examples]
+// by Oscar Jite
 function revealOnScroll() {
     var reveal_elements = document.querySelectorAll(".scroll-reveal");
     for (var i = 0; i < reveal_elements.length; i++) {

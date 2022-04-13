@@ -28,9 +28,9 @@
                 <p class="text-justify pb-5" style="font-size:20px;">is an online examination platform that ensures the honesty of students’ work while providing the necessary functions to conduct examinations and sufficient quality-of-life features for the students. </p>
             </div>
             <div class="d-flex flex-column justify-content-center align-content-center mt-3 mb-3 p-3" style="width:300px; height:auto;">
-                <button class="btn btn-primary main-bg-color text-white mb-5 fs-3 btn-hover">Get Started!</button>
+                <a class="btn btn-primary main-bg-color text-white mb-5 fs-3" href="guest_registration_page.php">Get Started!</a>
                 <div class="btn-group">
-                    <button  class="btn btn-primary main-bg-color text-white dropdown-toggle fs-3 btn-hover"  data-bs-toggle="dropdown">
+                    <button  class="btn btn-primary main-bg-color text-white dropdown-toggle fs-3"  data-bs-toggle="dropdown">
                         <span style="width:30px; height:30px" class="bi bi-person-circle"></span>
                         Login as
                     </button>
@@ -73,7 +73,7 @@
         </div>
     </section>
     <section class="section-full scroll-reveal">
-        <div class="d-flex container-fluid flex-wrap justify-content-around mx-auto align-items-center  ">
+        <div class="d-flex container-fluid flex-wrap justify-content-around mx-auto align-items-center">
             <div class="d-flex flex-column me-5 " style="width:60%">
                 <h1 class="guest-ads-title font-caveat">Lecturer Functionalities</h1>
                 <ul class="guest-ads-content">
@@ -105,8 +105,9 @@
     <section class="section-full scroll-reveal">
         <div class="shadow-lg rounded-3 bg-white-template d-flex flex-column mx-auto p-5">
             <h1 class="font-caveat text-center main-color" style="font-weight:bold;">3 Major Roles</h1>
-            <div class="d-flex flex-wrap justify-content-around mx-auto">
-                <div class="card m-3 p-3 card-style shadow" style="width: 25%">
+            <!-- <div class="d-flex flex-wrap justify-content-around mx-auto"> -->
+            <div class="row d-flex  justify-content-around mx-auto">
+                <div class="card m-3 p-3 card-style shadow col-sm" style="width: 25%">
                     <h5 class="card-title text-center main-color">Admin</h5>
                     <img src="img/guest/role_admin_icon.png" class="responsive-img mx-auto" alt="admin icon">
                     <div class="card-body">
@@ -118,7 +119,7 @@
                         </ul>
                     </div>
                 </div>
-                <div class="card m-3 p-3 card-style shadow" style="width: 25%">
+                <div class="card m-3 p-3 card-style shadow col-sm" style="width: 25%">
                     <h5 class="card-title text-center main-color">Lecturer</h5>
                     <img src="img/guest/role_lecturer_icon.png" class="responsive-img mx-auto" alt="lecturer icon">
                     <div class="card-body">
@@ -130,7 +131,7 @@
                         </ul>
                     </div>
                 </div>
-                <div class="card m-3 p-3 card-style shadow" style="width: 25%">
+                <div class="card m-3 p-3 card-style shadow col-sm" style="width: 25%">
                     <h5 class="card-title text-center main-color">Student</h5>
                     <img src="img/guest/role_student_icon.png" class="responsive-img mx-auto" alt="student icon">
                     <div class="card-body">
@@ -147,15 +148,15 @@
             </div>
         </div>
     </section>
-    <div class="d-flex justify-content-around align-items-center" style="margin:50px;">
+    <div class="d-flex justify-content-around align-items-center " style="margin:50px;">
         <h2 class="font-caveat"><b>Create your own company account</b></h2>
-        <a href="#" class="btn btn-primary main-bg-color text-white font-caveat fs-5 rounded-pill" style="width:200px;">Get Started  <i class="ms-2 text-white bi bi-arrow-right-circle"></i> </a>
+        <a href="guest_registration_page.php" class="btn btn-primary main-bg-color  font-caveat fs-3 rounded-pill btn-hover" style="width:200px;">Get Started  <i class="ms-2 btn-hover bi bi-arrow-right-circle"></i> </a>
     </div>
     <?php 
-        // require "common/footer_guest.php";
+        require "common/footer_guest.php";
         // require "common/footer_admin.php";
         // require "common/footer_student.php";
-        require "common/footer_lecturer.php";
+        // require "common/footer_lecturer.php";
     ?>
     <script src="js/mingliangJS.js"></script>
     <script src="https://unpkg.com/vue@3"></script>

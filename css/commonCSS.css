@@ -6,6 +6,22 @@
     text-shadow: 0px 2px #707b8b93;
 }
 
+.footer-line {
+    background-color: black; height: 5px; border: 0;
+}
+
+.footer-container{
+    bottom: 0;
+    display: flex;
+    flex-wrap: wrap;
+    padding: 30px;
+    font-size: 20px;
+}
+
+.bi-google {
+    color: #FF7F50;
+}
+
 .font-caveat {
     font-family: 'Caveat';
 }
@@ -51,11 +67,7 @@
     background:rgb(43, 94, 164); 
 }
 
-hr {
-    color:#2B5EA4;
-    width: 90%;
-    margin: auto;
-}
+
 
 body, html {
     background-image: linear-gradient( rgb(187, 221, 240),rgb(138, 248, 187) ,rgb(211, 250, 213));
