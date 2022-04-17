@@ -35,7 +35,7 @@
 }
 
 .third-color {
-    color:#bae4f2;
+    color: rgb(197, 242, 184);
 }
 
 .main-bg-color {
@@ -46,7 +46,7 @@
     background-color: #c5f2b8;
 }
 
-.third.bg.color {
+.third-bg-color {
     background-color: #bae4f2;
 }
 
@@ -66,8 +66,6 @@
 ::-webkit-scrollbar-thumb:hover {
     background:rgb(43, 94, 164); 
 }
-
-
 
 body, html {
     background-image: linear-gradient( rgb(187, 221, 240),rgb(138, 248, 187) ,rgb(211, 250, 213));

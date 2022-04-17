@@ -1,0 +1,17 @@
+.card-welcome{
+    border: 10px solid #ccc;
+    background-color: white;
+}
+
+	
+
+
+.section-full {
+    position: relative;
+    width: 100%;
+    min-height: 100vh;
+    padding: 100px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}

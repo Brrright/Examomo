@@ -23,9 +23,15 @@
 
 .bg-white-template {
     background-color: white;
-    border-radius: 15px;;
+    border-radius: 15px;
     box-shadow: 0px 4px 4px 4px #707b8b93;
     width:90%; 
+    height:auto;
+}
+
+.sec-template {
+    background-color: #E2F8DB;
+    border-radius: 15px;
     height:auto;
 }
 
@@ -37,7 +43,6 @@
 .btn-hover {
     color: white;
 }
-
 
 .btn-hover:hover {
     box-shadow: inset 200px 0 0 0 #bae4f2;
@@ -62,6 +67,14 @@
     opacity: 0;
 }
 
+#part2, #part3, #part4, #part5 {
+    display: none;
+}
+
+#part1 {
+    display: block;
+}
+
 @keyframes landing {
     from {
         transform: translateY(-30px);
@@ -84,3 +97,4 @@
     transform: translateY(0);
     opacity: 1;
 }
+

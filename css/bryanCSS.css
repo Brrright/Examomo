@@ -1,0 +1,85 @@
+
+.welcomemessage {
+    font-weight: bold;
+    font-size: 30px;
+    font-family: "Arial";
+    color: rgb(28, 108, 86);
+    text-align: center;
+    text-shadow: 2px 2px 4px white;
+}
+
+h2{
+    color: white;
+}
+
+h5{
+    font-weight: bold;
+    padding-left: 80px; 
+    color: rgb(19, 13, 135);
+
+}
+
+p {
+    color: whitesmoke;
+}
+
+.carousel-item{
+    height: 100px;
+    min-height: 350px;
+    background-color: rgb(240, 228, 211);
+    background: no-repeat scroll center scroll;
+    -webkit-background-size: cover;
+    background-size:cover;
+}   
+
+
+.container-carousel{
+    position: absolute;
+    left: 150px;
+    right: 0;
+    bottom: 0;
+    padding-bottom: 80px;
+}
+
+.overlay-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-position: center;
+    background-size: cover;
+    filter: brightness(30%);
+}
+
+.card-title-lecturerhp {
+    font-weight: bold;
+    color:rgb(28, 108, 86);
+    font-family: Arial, Helvetica, sans-serif;
+    text-align: center;
+}
+
+.card-text-lecturerhp {
+    font-weight: bold;
+    color: rgb(62, 160, 62);
+    font-family: Arial, Helvetica, sans-serif;
+
+}
+
+.card-lecturerhp {
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    box-shadow: 3px 3px darkseagreen;
+    background-color: #f4f4f4;
+    padding: 20px;
+    margin-bottom: 10px;
+}
+
+
+
+/* #cardbutton {
+    position: center;
+  
+
+  padding-bottom: 10px;
+} */
