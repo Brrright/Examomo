@@ -26,10 +26,10 @@
               Login as
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <li><a class="dropdown-item" href="#">Student</a></li>
-              <li><a class="dropdown-item" href="#">Lecturer</a></li>
+              <li><a class="dropdown-item" href="login_page.php?role=student">Student</a></li>
+              <li><a class="dropdown-item" href="login_page.php?role=lecturer">Lecturer</a></li>
               <li><hr class="dropdown-divider" style="width:100%"></li>
-              <li><a class="dropdown-item" href="#">Admin</a></li>
+              <li><a class="dropdown-item" href="login_page.php?role=admin">Admin</a></li>
             </ul>
           </li>
 

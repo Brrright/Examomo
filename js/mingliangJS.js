@@ -114,6 +114,9 @@ function page(part, validation) {
     }
 }
 
+// this function is used for the registration, take input and make it become selection for another page
+// eg. class name entered (form hvnt submit), but in student page need assign which class by select from the drop down box,
+// so it takes the class name entered and append it into the drop down box
 function handleInputCreateElement(getid, element, finalid) {
     var firstElement = document.getElementById(getid);
     var getValue = firstElement.value;
@@ -134,7 +137,7 @@ function handleInputCreateElement(getid, element, finalid) {
         for (var num =1 ; num < numOfChild; num++) {
             var option = finalElement[num];
             optionList.push(option);
-            console.log("pushing",option)
+            // console.log("pushing",option)
         }
         console.log("finish pushing");
         console.log(optionList)
@@ -142,18 +145,16 @@ function handleInputCreateElement(getid, element, finalid) {
         for (var child = 0; child < optionList.length; child++) {
             console.log("checking")
             if (getValue == optionList[child].value) {
-                console.log("same!")
+                // console.log("same!")
                 return;
             }
             else {
-                console.log("notsame!")
+                // console.log("notsame!")
                 var removeThis = finalElement[child+1]
                 finalElement.removeChild(removeThis);
             }
         }
     }
-    
-    
     var newElement = document.createElement(element);
     newElement.value = getValue;
     newElement.text = getValue;
@@ -165,55 +166,60 @@ function closeToast(divElementId) {
     toastDiv.removeChild(toastDiv.firstElementChild);
 }
 
-
-const registrationForm = document.getElementById("registration-form");
-registrationForm.noValidate = true;
-registrationForm.addEventListener("submit",function(event){
-    event.preventDefault();
-    if (!this.checkValidity()) {
-        Swal.fire({
-            title: "Oops...input invalid.",
-            icon: "error",
-            text: "There is invalid or empty input, please make sure every input is valid."
-        }) 
-    }
-    else {
-        // var errOccured = false;
-        const form_data = Object.fromEntries(new FormData(event.target).entries());
-        // const backendFile = ["registration_insertCompany.php", "registration_insertAdmin.php", "registration_insertModule.php", "registration_insertClass.php", "registration_insertLecturer.php", "registration_insertStudent.php"];
-        fetch ("guest_registration_backend.php", {
-            method: "POST",
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(form_data)
-        })
-        .then(function(res) {
-            return res.json()
-        })
-        .then(function(response) {
-            if(!response.error) {
-                Swal.fire({
-                    title: "Completed",
-                    icon: "success",
-                    text: "Examomo system is now available for your company"
-                }).then(function() {
-                    window.location.href = "admin_home_page.php";
-                })
-            }
-            else {
-                Swal.fire({
-                    title: "Oops...Registration failed.",
-                    icon: "error",
-                    text: response.error
-                })
-                return;
-            }
-        })
-        
-
-
-    }
-});
-
-
+// function formResponseHandler(formid, namechecking, successMsg, destinationAfterSuccess) {
+//     const form = document.getElementById(formid);
+//     form.noValidate = true;
+//     form.addEventListener("submit",function(event){
+//         event.preventDefault();
+//         if (!this.checkValidity()) {
+//             Swal.fire({
+//                 title: "Oops...input invalid.",
+//                 icon: "error",
+//                 text: "There is invalid or empty input, please make sure every input is valid."
+//             }) 
+//             return;
+//         }
+//         if (namechecking == true) {
+//             var checkCompanyName = document.getElementById("notavailable");
+//             console.log(checkCompanyName)
+//             if(checkCompanyName != null){
+//                 Swal.fire({
+//                     title: "Oops...Company name exist.",
+//                     icon: "error",
+//                     text: "The company name exist, please try again."
+//                 }) 
+//                 return;
+//             }
+//         }
+//         const form_data = Object.fromEntries(new FormData(event.target).entries());
+//         fetch ("guest_registration_backend.php", {
+//             method: "POST",
+//             headers: {
+//                 'Content-Type': 'application/json',
+//             },
+//             body: JSON.stringify(form_data)
+//         })
+//         .then(function(res) {
+//             return res.json()
+//         })
+//         .then(function(response) {
+//             if(!response.error) {
+//                 Swal.fire({
+//                     title: "Completed",
+//                     icon: "success",
+//                     text: successMsg
+//                 }).then(function() {
+//                     window.location.href = destinationAfterSuccess;
+//                 })
+//             }
+//             else {
+//                 Swal.fire({
+//                     title: "Oops...Process failed.",
+//                     icon: "error",
+//                     text: response.error
+//                 })
+//                 return;
+//             }
+//         })
+//     });
+// }

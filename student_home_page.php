@@ -32,7 +32,6 @@ require "common/conn.php"
 
 <div class="card m-2 p-1 card-style shadow fw-bold" style="width: 20vw; font-style: strong">
 <?php
-      include ('common/conn.php');
       $sql = "SELECT * FROM student WHERE StudentID = '1'";
       $result = mysqli_query($con, $sql);
 
@@ -65,7 +64,6 @@ require "common/conn.php"
                 <div class="card px-1 pt-2"  style=" width: 40vw">
                   <h5 class="mb-3">Student Details</h5> 
                   <?php
-                        include ('common/conn.php');
                         $sql = "SELECT * FROM student WHERE StudentID = '1'";
                         $result = mysqli_query($con, $sql);
 
@@ -74,7 +72,6 @@ require "common/conn.php"
                             echo "Student Name  :".$row['StudentName']."<br>";
                         }
 
-                        include ('common/conn.php');
                         $sql = "SELECT * FROM class WHERE ClassID = '1'";
                         $result = mysqli_query($con, $sql);
 
@@ -111,7 +108,6 @@ require "common/conn.php"
                     <div class="card-body">
                         <p class= "card-text">
                         <?php
-                            include ('common/conn.php');
                             $sql = "SELECT * FROM exam WHERE LecturerID = '1' AND isPublished LIKE 10 ORDER BY ExamStartDateTime";
                             $result = mysqli_query($con, $sql);
 
@@ -128,7 +124,6 @@ require "common/conn.php"
                     <div class="card-body">
                         <p class= "card-text">
                         <?php
-                            include ('common/conn.php');
                             $sql = "SELECT * FROM exam WHERE LecturerID = '1' AND isPublished LIKE 11 ORDER BY ExamStartDateTime";
                             $result = mysqli_query($con, $sql);
 

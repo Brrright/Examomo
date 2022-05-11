@@ -1,0 +1,19 @@
+html {min-height: 100%;}
+
+body {
+    background-image: linear-gradient( rgb(186, 228, 242),rgb(197, 242, 184));
+  }
+
+.card {
+    margin: 0 auto;
+    float: none;
+    margin-bottom: 10px;
+    border-radius: 15px;
+    box-shadow: 10px;
+  }
+
+.admincontainer {background-color: white;
+border-radius: 15px;
+margin: 15%}
+
+.img {border-radius: 15px;}

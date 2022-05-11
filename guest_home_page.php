@@ -35,9 +35,9 @@
                         Login as
                     </button>
                     <div class="dropdown-menu " style="width:100%; height:auto;">
-                        <a href="" class="dropdown-item">Student</a>
-                        <a href="" class="dropdown-item">Lecturer</a>
-                        <a href="" class="dropdown-item">Admin</a>
+                        <a href="login_page.php?role=student" class="dropdown-item">Student</a>
+                        <a href="login_page.php?role=lecturer" class="dropdown-item">Lecturer</a>
+                        <a href="login_page.php?role=admin" class="dropdown-item">Admin</a>
                     </div>
                 </div>
             </div>
@@ -154,11 +154,7 @@
     </div>
     <?php 
         require "common/footer_guest.php";
-        // require "common/footer_admin.php";
-        // require "common/footer_student.php";
-        // require "common/footer_lecturer.php";
     ?>
     <script src="js/mingliangJS.js"></script>
-    <script src="https://unpkg.com/vue@3"></script>
 </body>
 </html>

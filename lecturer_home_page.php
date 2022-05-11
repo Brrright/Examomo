@@ -10,7 +10,7 @@
         require "common/HeadImportInfo.php" 
     ?>
 
-    <link rel="stylesheet" href="css/lecturer_hp_css.css">
+    <link rel="stylesheet" href="css/bryanCSS.css">
     <link rel="stylesheet" href="css/commonCSS.css"> 
 
     <!-- Required meta tags -->
@@ -33,7 +33,6 @@
   <div class = "welcomemessage">
     <!-- identify lecturer gender and name -->
     <?php
-      include ('common/conn.php');
       $sql = "SELECT LecturerName, LecturerGender FROM lecturer WHERE LecturerID = '123'";          
       $result = mysqli_query($con, $sql);
 
@@ -63,7 +62,6 @@
             
             <!-- retrieve exam details based on lecturer id -->
             <?php
-              include ('common/conn.php');
               $sql = "SELECT examModule, ExamStartDateTime, ExamDescription FROM exam WHERE LecturerID = '123' AND isPublished LIKE 1 ORDER BY ExamID DESC LIMIT 1";   
               $result = mysqli_query($con, $sql);
 
@@ -94,7 +92,6 @@
           <h3 class="card-title-lecturerhp"><i class="bi bi-list-ul"></i> Exam Paper</h3>
           <p class="card-text-lecturerhp">
           <?php
-              include ('common/conn.php');
               $sql = "SELECT PaperName, DateCreated, PaperModule, PaperType FROM exam_paper WHERE LecturerID = '123' ORDER BY DateCreated DESC LIMIT 1";  
               // WHERE ExamStartDateTime IN (SELECT max(ExamStartDateTime) FROM exam) 
               $result = mysqli_query($con, $sql);
@@ -130,7 +127,6 @@
           <h3 class="card-title-lecturerhp"><i class="bi bi-file-earmark"></i> Drafted Exam</h3>
           <p class="card-text-lecturerhp">
           <?php
-              include ('common/conn.php');
               $sql = "SELECT examModule, ExamStartDateTime, ExamDescription, isPublished FROM exam WHERE LecturerID = '123' AND isPublished LIKE 0 ORDER BY ExamID DESC LIMIT 1";   
               $result = mysqli_query($con, $sql);
 
@@ -168,7 +164,7 @@
 
         <!-- Exam slide -->
         <div class="carousel-item active" data-interval="8000ms">
-          <div class="overlay-image" style="background-image:url(./img/lecturer/exam.jpg);"></div>
+          <div class="overlay-image" style="background-image:url(img/lecturer/exam.jpg);"></div>
           <div class="container-carousel">
           <h2>Examinations</h2>
           <p>Create and Organize your Examinations in Examomo</p>
@@ -180,7 +176,7 @@
 
         <!-- Exam Paper slide -->
         <div class="carousel-item" data-interval="8000ms">
-          <div class="overlay-image" style="background-image:url(./img/lecturer/exampaper.jpg);"></div>
+          <div class="overlay-image" style="background-image:url(img/lecturer/exampaper.jpg);"></div>
           <div class="container-carousel">
           <h2>Exam Papers</h2>
           <p>Create and Manage your Exam Papers in Multiple Choice or Structured Format</p>
@@ -192,7 +188,7 @@
 
         <!-- Completed exam slide -->
         <div class="carousel-item" data-interval="8000ms">
-          <div class="overlay-image" style="background-image:url(./img/lecturer/completedexam.jpg);"></div>
+          <div class="overlay-image" style="background-image:url(img/lecturer/completedexam.jpg);"></div>
           <div class="container-carousel">
             <h2>Completed Exams</h2>
             <p>Manage your Completed Exams and Review Students' Exam Papers here</p>

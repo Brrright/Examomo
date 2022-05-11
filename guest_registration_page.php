@@ -14,7 +14,7 @@
 </head>
 <body>
     <div class="logo-style text-center p-4 m-3" style="font-size:4vw">
-        <a href="guest_home_page.php" style="text-decoration:none;">
+        <a href="guest_home_page.php" style="text-decoration:none; color:#2B5EA4;">
             <img src="img/logo_small_no_text.png" alt="logo" style="width:6vw; padding-bottom:10px;">
             Examomo - Registration
         </a>
@@ -31,24 +31,25 @@
                         <li class="page-item"><a class="page-link" onclick="page(5, false)">5</a></li>
                     </ul>
                 </nav>
-                <div class="progress" style="height: 10px; width:80%">
-                    <div class="progress-bar" style="width: 1%;"></div>
+                <div class="progress" style="height: 15px; width:80%">
+                    <div class="progress-bar progress-bar-striped progress-bar-animated" style="width: 1%;"></div>
                 </div>
                 <div class="sec-template m-5 p-5 d-flex flex-column" style="width:90%">
                     <p class="fs-3 fw-bold font-caveat main-color m-3 p-3 text-center" style="text-shadow:0px 2px #707b8b93;">
                         Step 1 - Organization Details & Admin Account Creation
                     </p>
-                    <div class="mx-auto" style="width:90%">
-                        <p class="text-uppercase main-color m-2 font-caveat">
+                    <div class="mx-auto" style="width:90%" id="organization-field">
+                        <p class="text-uppercase fw-bold main-color m-2 font-caveat">
                             organization name
                         </p>
                         <div class="form-floating">
-                            <input type="text" class="form-control shadow-sm" id="org-floatingInput" name="organizationName" placeholder="Organization Name" pattern="[a-zA-Z][a-zA-Z ]{5,}" required>
+                            <input v-model="companyname" @keyup="checkCompanyName()" type="text" class="form-control shadow-sm" id="org-floatingInput" name="organizationName" placeholder="Organization Name" pattern="[a-zA-Z][a-zA-Z ]{5,}" required>
                             <label class="text-secondary" for="org-floatingInput">Organization Name</label>
-                            <div class="valid-feedback">Valid <i class="bi bi-check2-circle"></i></div>
+                            <div class="valid-feedback">Format correct <i class="bi bi-check2-circle"></i></div>
                             <div class="invalid-feedback">Please fill out this field with valid input.</div>
+                            <span class="text-danger" v-bind:id="[isAvailable?'notavailable':'available']">{{responseMessage}}</span>
                         </div>
-                        <p class="text-uppercase main-color m-2 font-caveat">
+                        <p class="text-uppercase fw-bold main-color m-2 font-caveat">
                             Institution Type
                         </p>
                         <select name="institution" class="form-select fw-light shadow-sm" style="height:58px;" required>
@@ -63,7 +64,7 @@
                     </div>
                     <hr>
                     <div class="mx-auto" style="width:90%">
-                        <p class="text-uppercase main-color m-2 font-caveat">
+                        <p class="text-uppercase fw-bold main-color m-2 font-caveat">
                         admin name
                         </p>
                         <div class="form-floating">
@@ -72,7 +73,7 @@
                             <div class="valid-feedback">Valid <i class="bi bi-check2-circle"></i>.</div>
                             <div class="invalid-feedback">Please fill out this field with valid input.</div>
                         </div>
-                        <p class="text-uppercase main-color m-2 font-caveat">
+                        <p class="text-uppercase fw-bold main-color m-2 font-caveat">
                             admin email
                         </p>
                         <div class="form-floating">
@@ -81,7 +82,7 @@
                             <div class="valid-feedback">Valid <i class="bi bi-check2-circle"></i>.</div>
                             <div class="invalid-feedback">Please fill out this field with valid input.</div>
                         </div>
-                        <p class="text-uppercase main-color m-2 font-caveat">
+                        <p class="text-uppercase fw-bold main-color m-2 font-caveat">
                             password
                         </p>
                         <div class="form-floating">
@@ -99,7 +100,7 @@
                         </ul>
                         <p class="text-center text-dark m-3 font-caveat fs-3">more admin account can be created later on :)</p>
                     </div>
-                    <button type="button" class="btn third-bg-color font-caveat shadow mx-auto mt-3" style="width:6vw" onclick="page(2, true)">Next</button>
+                    <button type="button" class="btn third-bg-color font-caveat shadow mx-auto mt-3 fs-4"  onclick="page(2, true)">Next</button>
                     <div class="position-fixed bottom-0 end-0 p-3" id="part1-msg"></div>
                 </div>
             </div>
@@ -115,15 +116,15 @@
                         <li class="page-item"><a class="page-link" onclick="page(5, false)">5</a></li>
                     </ul>
                 </nav>
-                <div class="progress" style="height: 8px; width:80%">
-                    <div class="progress-bar" style="width: 25%;"></div>
+                <div class="progress" style="height: 15px; width:80%">
+                    <div class="progress-bar progress-bar-striped progress-bar-animated" style="width: 25%;"></div>
                 </div>
                 <div class="sec-template m-5 p-5 d-flex flex-column" style="width:90%">
                     <p class="fs-3 fw-bold font-caveat main-color m-3 p-3 text-center" style="text-shadow:0px 2px #707b8b93;">
                         Step 2 - Module Creation
                     </p>
                     <div class="mx-auto" style="width:90%">
-                        <p class="text-uppercase main-color m-2 font-caveat">
+                        <p class="text-uppercase fw-bold main-color m-2 font-caveat">
                             module name
                         </p>
                         <div class="form-floating">
@@ -134,7 +135,7 @@
                         </div>
                         <p class="text-center text-dark m-3  font-caveat fs-3">more module can be created later on :)</p>
                     </div>
-                    <button type="button" class="btn third-bg-color font-caveat shadow mx-auto mt-3" style="width:6vw" onclick="page(3, true)">Next</button>
+                    <button type="button" class="btn third-bg-color font-caveat shadow mx-auto mt-3 fs-4"  onclick="page(3, true)">Next</button>
                     <div class="position-fixed bottom-0 end-0 p-3" id="part2-msg"></div>
                 </div>
             </div>
@@ -151,24 +152,24 @@
                         <li class="page-item"><a class="page-link" onclick="page(5, false)">5</a></li>
                     </ul>
                 </nav>
-                <div class="progress" style="height: 8px; width:80%">
-                    <div class="progress-bar" style="width: 50%;"></div>
+                <div class="progress" style="height: 15px; width:80%">
+                    <div class="progress-bar progress-bar-striped progress-bar-animated" style="width: 50%;"></div>
                 </div>
                 <div class="sec-template m-5 p-5 d-flex flex-column" style="width:90%">
                     <p class="fs-3 fw-bold font-caveat main-color m-3 p-3 text-center" style="text-shadow:0px 2px #707b8b93;">
                         Step 3 - Class Creation
                     </p>
                     <div class="mx-auto" style="width:90%">
-                        <p class="text-uppercase main-color m-2 font-caveat">
+                        <p class="text-uppercase fw-bold main-color m-2 font-caveat">
                             class name
                         </p>
                         <div class="form-floating">
-                            <input type="text" class="form-control shadow-sm" id="cls-floatingInput" name="className" placeholder="Class Name" pattern="[a-zA-Z][a-zA-Z ]{2,}" required>
+                            <input type="text" class="form-control shadow-sm" id="cls-floatingInput" name="className" placeholder="Class Name" pattern="[a-zA-Z][a-zA-Z0-9- ]{3,}" required>
                             <label class="text-secondary" for="cls-floatingInput">Class Name</label>
                             <div class="valid-feedback">Valid <i class="bi bi-check2-circle"></i>.</div>
                             <div class="invalid-feedback">Please fill out this field with valid input.</div>
                         </div>
-                        <p class="text-uppercase main-color m-2 font-caveat">
+                        <p class="text-uppercase fw-bold main-color m-2 font-caveat">
                             RELATED MODULE
                         </p>
                         <select id="module-selection" class="form-select fw-light shadow-sm" style="height:58px;" required>
@@ -177,7 +178,7 @@
                         </select>
                         <p class="text-center text-dark m-3 font-caveat fs-3">more class can be created later on :)</p>
                     </div>
-                    <button type="button" class="btn third-bg-color font-caveat shadow mx-auto mt-3" style="width:6vw" onclick="page(4, true)">Next</button>
+                    <button type="button" class="btn third-bg-color font-caveat shadow mx-auto mt-3 fs-4"  onclick="page(4, true)">Next</button>
                     <div class="position-fixed bottom-0 end-0 p-3" id="part3-msg"></div>
                 </div>
             </div>
@@ -194,15 +195,15 @@
                         <li class="page-item"><a class="page-link" onclick="page(5, false)">5</a></li>
                     </ul>
                 </nav>
-                <div class="progress" style="height: 8px; width:80%">
-                    <div class="progress-bar" style="width: 75%;"></div>
+                <div class="progress" style="height: 15px; width:80%">
+                    <div class="progress-bar progress-bar-striped progress-bar-animated" style="width: 75%;"></div>
                 </div>
                 <div class="sec-template m-5 p-5 d-flex flex-column" style="width:90%">
                     <p class="fs-3 fw-bold font-caveat main-color m-3 p-3 text-center" style="text-shadow:0px 2px #707b8b93;">
                         Step 4 - Lecturer Account Creation
                     </p>
                     <div class="mx-auto" style="width:90%">
-                        <p class="text-uppercase main-color m-2 font-caveat">
+                        <p class="text-uppercase fw-bold main-color m-2 font-caveat">
                             lecturer name
                         </p>
                         <div class="form-floating">
@@ -211,7 +212,7 @@
                             <div class="valid-feedback">Valid <i class="bi bi-check2-circle"></i>.</div>
                             <div class="invalid-feedback">Please fill out this field with valid input.</div>
                         </div>
-                        <p class="text-uppercase main-color m-2 font-caveat">
+                        <p class="text-uppercase fw-bold main-color m-2 font-caveat">
                             Gender
                         </p>
                         <fieldset id="lecturer-gender-radio">
@@ -226,7 +227,7 @@
                                 </div>
                             </div>
                         </fieldset>
-                        <p class="text-uppercase main-color m-2 font-caveat">
+                        <p class="text-uppercase fw-bold main-color m-2 font-caveat">
                             lecturer email
                         </p>
                         <div class="form-floating">
@@ -235,7 +236,7 @@
                             <div class="valid-feedback">Valid <i class="bi bi-check2-circle"></i>.</div>
                             <div class="invalid-feedback">Please fill out this field with valid input.</div>
                         </div>
-                        <p class="text-uppercase main-color m-2 font-caveat">
+                        <p class="text-uppercase fw-bold main-color m-2 font-caveat">
                             password
                         </p>
                         <div class="form-floating">
@@ -251,7 +252,7 @@
                             <li>At least one special character</li>
                             <li>At least 8 characters in length, but no more than 32.</li>
                         </ul>
-                        <p class="text-uppercase main-color m-2 font-caveat">
+                        <p class="text-uppercase fw-bold main-color m-2 font-caveat">
                             RELATED CLASS
                         </p>
                         <select id="class-selection" class="form-select fw-light shadow-sm" style="height:58px;" required>
@@ -261,7 +262,7 @@
                         <p class="text-center text-dark m-3 font-caveat fs-3">more class can be linked later on :)</p>
                         <p class="text-center text-dark m-3 font-caveat fs-3">more account can be created later on :)</p>
                     </div>
-                    <button type="button" class="btn third-bg-color font-caveat shadow mx-auto mt-3" style="width:6vw" onclick="page(5, true)">Next</button>
+                    <button type="button" class="btn third-bg-color font-caveat shadow mx-auto mt-3 fs-4"  onclick="page(5, true)">Next</button>
                     <div class="position-fixed bottom-0 end-0 p-3" id="part4-msg"></div>
                 </div>
             </div>
@@ -278,8 +279,8 @@
                         <li class="page-item"><a class="page-link" onclick="page(5, false)">5</a></li>
                     </ul>
                 </nav>
-                <div class="progress" style="height: 8px; width:80%">
-                    <div class="progress-bar" style="width: 99%;"></div>
+                <div class="progress" style="height: 15px; width:80%">
+                    <div class="progress-bar progress-bar-striped progress-bar-animated" style="width: 99%;"></div>
                 </div>
     
                 <div class="sec-template m-5 p-5 d-flex flex-column" style="width:90%">
@@ -287,7 +288,7 @@
                         Step 5 - Student Account Creation
                     </p>
                     <div class="mx-auto" style="width:90%">
-                        <p class="text-uppercase main-color m-2 font-caveat">
+                        <p class="text-uppercase fw-bold main-color m-2 font-caveat">
                         Student name
                         </p>
                         <div class="form-floating">
@@ -296,7 +297,7 @@
                             <div class="valid-feedback">Valid <i class="bi bi-check2-circle"></i>.</div>
                             <div class="invalid-feedback">Please fill out this field with valid input.</div>
                         </div>
-                        <p class="text-uppercase main-color m-2 font-caveat">
+                        <p class="text-uppercase fw-bold main-color m-2 font-caveat">
                             Gender
                         </p>
                         <fieldset id="stu-gender-radio">
@@ -311,7 +312,7 @@
                                 </div>
                             </div>
                         </fieldset>
-                        <p class="text-uppercase main-color m-2 font-caveat">
+                        <p class="text-uppercase fw-bold main-color m-2 font-caveat">
                             student email
                         </p>
                         <div class="form-floating">
@@ -320,7 +321,7 @@
                             <div class="valid-feedback">Valid <i class="bi bi-check2-circle"></i>.</div>
                             <div class="invalid-feedback">Please fill out this field with valid input.</div>
                         </div>
-                        <p class="text-uppercase main-color m-2 font-caveat">
+                        <p class="text-uppercase fw-bold main-color m-2 font-caveat">
                             password
                         </p>
                         <div class="form-floating">
@@ -336,7 +337,7 @@
                             <li>At least one special character</li>
                             <li>At least 8 characters in length, but no more than 32.</li>
                         </ul>
-                        <p class="text-uppercase main-color m-2 font-caveat">
+                        <p class="text-uppercase fw-bold main-color m-2 font-caveat">
                             RELATED CLASS
                         </p>
                         <select id="class-selection-stu" class="form-select fw-light shadow-sm" style="height:58px;" required>
@@ -346,17 +347,110 @@
                         <p class="text-center text-dark m-3 font-caveat fs-3">more account can be created later on :)</p>
                     </div>
 
-                    <button form="registration-form" type="submit" class="btn third-bg-color font-caveat shadow mx-auto mt-3" style="width:6vw">Submit</button>
+                    <button form="registration-form" type="submit" class="btn third-bg-color font-caveat shadow mx-auto mt-3 fs-4" >Submit</button>
                 </div>
             </div>
         </section>
     </form>
+    <script src="https://unpkg.com/vue@2"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="js/mingliangJS.js"></script>
 <?php 
-    // require "common/footer_admin.php";
-    // require "common/footer_student.php";
-    // require "common/footer_lecturer.php";
     require "common/footer_guest.php";
 ?>
+    <script>
+        var app = new Vue({
+            el: '#organization-field',
+            data: {
+                companyname: '',
+                isAvailable: 0,
+                responseMessage: ''
+            },
+            methods: {
+                checkCompanyName: function(){
+                    var companyname = this.companyname.trim();
+                    if(companyname != ''){
+                
+                    axios.get('backend_company_exist.php', {
+                        params: {
+                            companyname: companyname
+                        }
+                    })
+                    .then(function (response) {
+                        app.isAvailable = response.data;
+                        if(response.data == 0){
+                        app.responseMessage = "";
+                        }else{
+                        app.responseMessage = "Company Name has been used.";
+                        }
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                    });
+
+                    }else{
+                    this.responseMessage = "";
+                    }
+                }
+            }
+        })
+
+        // submit the registration form
+        const registrationForm = document.getElementById("registration-form");
+        registrationForm.noValidate = true;
+        registrationForm.addEventListener("submit",function(event){
+            event.preventDefault();
+            if (!this.checkValidity()) {
+                Swal.fire({
+                    title: "Oops...input invalid.",
+                    icon: "error",
+                    text: "There is invalid or empty input, please make sure every input is valid."
+                }) 
+                return;
+            }
+            var checkCompanyName = document.getElementById("notavailable");
+            console.log(checkCompanyName)
+            if(checkCompanyName != null){
+                Swal.fire({
+                    title: "Oops...Company name exist.",
+                    icon: "error",
+                    text: "The company name exist, please try again."
+                }) 
+                return;
+            }
+            else {
+                const form_data = Object.fromEntries(new FormData(event.target).entries());
+                fetch ("guest_registration_backend.php", {
+                    method: "POST",
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(form_data)
+                })
+                .then(function(res) {
+                    return res.json()
+                })
+                .then(function(response) {
+                    if(!response.error) {
+                        Swal.fire({
+                            title: "Completed",
+                            icon: "success",
+                            text: "Examomo system is now available for your company"
+                        }).then(function() {
+                            window.location.href = "admin_home_page.php";
+                        })
+                    }
+                    else {
+                        Swal.fire({
+                            title: "Oops...Registration failed.",
+                            icon: "error",
+                            text: response.error
+                        })
+                        return;
+                    }
+                })
+            }
+        });
+    </script>
 </body>
 </html>
