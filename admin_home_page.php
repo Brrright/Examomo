@@ -1,25 +1,9 @@
-<?php require"common/conn.php"?>
+<?php require"common/conn.php";
+  echo '<pre>' . print_r($_SESSION, TRUE) . '</pre>';
+?>
 
 <!DOCTYPE html>
 <html lang="en">
-<!-- <style>
-::-webkit-scrollbar {
-width: 5px;
-height: 5px;
-}
-
-::-webkit-scrollbar-track {
-display: none;
-}
-
-::-webkit-scrollbar-thumb {
-background:rgb(43, 94, 164); 
-border-radius: 10px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-background:rgb(43, 94, 164); }
-</style> -->
     <head>
       <?php require "common/HeadImportInfo.php" ?>
         <link rel="stylesheet" href="css/weestyle.css">
@@ -58,7 +42,7 @@ background:rgb(43, 94, 164); }
               <div class="card-body">
                 <h5 class="card-title">Students</h5>
                 <p class="card-text">Student Management Functions.</p>
-                <a href="#" class="btn btn-primary">Manage Students</a>
+                <a href="admin_student_list.php" class="btn btn-primary">Manage Students</a>
               </div>
           </div>
         </div>
@@ -68,7 +52,7 @@ background:rgb(43, 94, 164); }
             <div class="card-body">
               <h5 class="card-title">Lecturers</h5>
               <p class="card-text">Lecturer Management Functions.</p>
-              <a href="#" class="btn btn-primary">Manage Lecturers</a>
+              <a href="admin_lecturer_list.php" class="btn btn-primary">Manage Lecturers</a>
             </div>
           </div>
         </div>
@@ -78,7 +62,7 @@ background:rgb(43, 94, 164); }
             <div class="card-body">
               <h5 class="card-title">Admin</h5>
               <p class="card-text">Admin Management Functions</p>
-              <a href="#" class="btn btn-primary">Manage Admins</a>
+              <a href="admin_admin_list.php" class="btn btn-primary">Manage Admins</a>
             </div>
           </div>
         </div>
@@ -88,7 +72,7 @@ background:rgb(43, 94, 164); }
             <div class="card-body">
               <h5 class="card-title">Classes</h5>
               <p class="card-text">Class Management Functions</p>
-              <a href="#" class="btn btn-primary">Manage Classes</a>
+              <a href="admin_class_list.php" class="btn btn-primary">Manage Classes</a>
             </div>
           </div>
         </div>
@@ -98,7 +82,7 @@ background:rgb(43, 94, 164); }
             <div class="card-body">
               <h5 class="card-title">Modules</h5>
               <p class="card-text">Module Management Functions</p>
-              <a href="#" class="btn btn-primary">Manage Modules</a>
+              <a href="admin_module_list.php" class="btn btn-primary">Manage Modules</a>
             </div>
           </div>
         </div>

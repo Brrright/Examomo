@@ -32,8 +32,14 @@
     }
 
     //check company
-    $sqlCompany = "SELECT CompanyName FROM company WHERE CompanyName = '$companyName'";
-    if(!mysqli_query($con, $sqlCompany)) {
+    $sqlCompany = "SELECT CompanyID, CompanyName FROM company WHERE CompanyName = '$companyName'";
+    $companyRecord = mysqli_query($con, $sqlCompany);
+    if(mysqli_num_rows($companyRecord) == 0){
+        $response["error"] = 'Error: Company name not found';
+        echo json_encode($response);
+        return;
+    }
+    if(!$companyRecord) {
         $response["error"] = 'Error:'.mysqli_error($con);
         echo json_encode($response);
         return;
@@ -48,8 +54,14 @@
         }
         else{
             if(mysqli_num_rows($result) > 0) {
+
+                // Data matched, now start set session
+                $fetchedCompany = mysqli_fetch_array($companyRecord);
                 $data = mysqli_fetch_array($result);
                 // Set session with USER ID - adminid/stdentid/lecturerID
+                $_SESSION['companyID'] = $fetchedCompany["CompanyID"];
+                $_SESSION['companyName'] = $companyName;
+                $_SESSION['userRole'] = $role;
                 $_SESSION['userID'] = $data["$colID"];
                 $response["success"] = "Login successful";
             }

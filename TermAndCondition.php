@@ -1,5 +1,21 @@
-<h2><strong>Terms and Conditions</strong></h2>
-
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <?php 
+        require "common/HeadImportInfo.php";
+    ?>
+    <link rel="stylesheet" href="css/commonCSS.css">
+    <title>Examomo | Term and condition</title>
+</head>
+<body class="p-5">
+    <div class="logo-style text-center p-4 m-3" style="font-size:4vw">
+        <a href="guest_home_page.php" style="text-decoration:none; color:#2B5EA4;">
+            <img src="img/logo_small_no_text.png" alt="logo" style="width:6vw; padding-bottom:10px;">
+            Examomo
+        </a>
+    </div>
+    <h2><strong>Terms and Conditions</strong></h2>
+    
 <p>Welcome to Examomo!</p>
 
 <p>These terms and conditions outline the rules and regulations for the use of Examomo's Website, located at www.examomo.com.</p>
@@ -121,3 +137,7 @@
 <p>The limitations and prohibitions of liability set in this Section and elsewhere in this disclaimer: (a) are subject to the preceding paragraph; and (b) govern all liabilities arising under the disclaimer, including liabilities arising in contract, in tort and for breach of statutory duty.</p>
 
 <p>As long as the website and the information and services on the website are provided free of charge, we will not be liable for any loss or damage of any nature.</p>
+
+
+</body>
+</html>

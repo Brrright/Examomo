@@ -18,16 +18,16 @@
 
         <ul class="list-unstyled mb-0">
           <li>
-            <a href="#!" class="text-blue">Get Started</a>
+            <a href="guest_registration_page.php" class="text-blue">Get Started</a>
           </li>
           <li>
-            <a href="#!" class="text-blue">Admin login</a>
+            <a href="login_page.php?role=admin" class="text-blue">Admin login</a>
           </li>
           <li>
-            <a href="#!" class="text-blue">Lecturer login</a>
+            <a href="login_page.php?role=lecturer" class="text-blue">Lecturer login</a>
           </li>
           <li>
-            <a href="#!" class="text-blue">Student login</a>
+            <a href="login_page.php?role=student" class="text-blue">Student login</a>
           </li>
         </ul>
       </div>
@@ -70,9 +70,9 @@
     
     <p class="copyright" style="color:black" >Copyright ©2022 Exammomo</a>
 
-    <a style="margin-left: 10%; color:black" class="text-black hover-shadow" href="*">Privacy Policy</a>
+    <a style="margin-left: 10%; color:black" class="text-black hover-shadow" href="PrivacyPolicy.php">Privacy Policy</a>
 
-    <a style="margin-left: 10%; color:black" class="text-black hover-shadow" href="*">Terms and Conditions</a>
+    <a style="margin-left: 10%; color:black" class="text-black hover-shadow" href="TermAndCondition.php">Terms and Conditions</a>
 
   </div>
   <!-- Copyright -->

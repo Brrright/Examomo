@@ -1,5 +1,21 @@
-<h1>Privacy Policy for Examomo</h1>
-
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <?php 
+        require "common/HeadImportInfo.php";
+    ?>
+    <link rel="stylesheet" href="css/commonCSS.css">
+    <title>Examomo | Privacy Policy</title>
+</head>
+<body class="p-5">
+    <div class="logo-style text-center p-4 m-3" style="font-size:4vw">
+        <a href="guest_home_page.php" style="text-decoration:none; color:#2B5EA4;">
+            <img src="img/logo_small_no_text.png" alt="logo" style="width:6vw; padding-bottom:10px;">
+            Examomo
+        </a>
+    </div>
+    <h1>Privacy Policy for Examomo</h1>
+    
 <p>At Examomo, accessible from www.examomo.com, one of our main priorities is the privacy of our visitors. This Privacy Policy document contains types of information that is collected and recorded by Examomo and how we use it.</p>
 
 <p>If you have additional questions or require more information about our Privacy Policy, do not hesitate to contact us.</p>
@@ -75,8 +91,6 @@
 <p>The right to data portability – You have the right to request that we transfer the data that we have collected to another organization, or directly to you, under certain conditions.</p>
 <p>If you make a request, we have one month to respond to you. If you would like to exercise any of these rights, please contact us.</p>
 
-<h2>Children's Information</h2>
 
-<p>Another part of our priority is adding protection for children while using the internet. We encourage parents and guardians to observe, participate in, and/or monitor and guide their online activity.</p>
-
-<p>Examomo does not knowingly collect any Personal Identifiable Information from children under the age of 13. If you think that your child provided this kind of information on our website, we strongly encourage you to contact us immediately and we will do our best efforts to promptly remove such information from our records.</p>
+</body>
+</html>

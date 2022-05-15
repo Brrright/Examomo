@@ -35,7 +35,7 @@
 
 
             // module------------------------------------------------------------------------
-            $sqlModule = "INSERT INTO module (ModuleName) VALUE ('$body[moduleName]')";
+            $sqlModule = "INSERT INTO module (ModuleName, CompanyID) VALUE ('$body[moduleName]', $companyID)";
             if(!mysqli_query($con, $sqlModule)) {
                 $response["error"] = 'Error:'.mysqli_error($con);
                 echo json_encode($response);
@@ -46,7 +46,7 @@
                 $moduleID = mysqli_insert_id($con);
 
                 // module + admin------------------------------------------------------------------------
-                $sqlModule_Admin = "INSERT INTO admin_module (AdminID, ModuleID) VALUES ('$adminID', '$moduleID')";
+                $sqlModule_Admin = "INSERT INTO admin_module (AdminID, ModuleID, CompanyID) VALUES ('$adminID', '$moduleID', $companyID)";
                 if(!mysqli_query($con, $sqlModule_Admin)) {
                     $response["error"] = 'Error:'.mysqli_error($con);
                     echo json_encode($response);
@@ -60,7 +60,7 @@
 
 
                     // class------------------------------------------------------------------------
-                    $sqlClass = "INSERT INTO class (ClassName) VALUE ('$body[className]')";
+                    $sqlClass = "INSERT INTO class (ClassName, CompanyID) VALUE ('$body[className]', $companyID)";
                     if(!mysqli_query($con, $sqlClass)) {
                         $response["error"] = 'Error:'.mysqli_error($con);
                         echo json_encode($response);
@@ -71,7 +71,7 @@
                         $classID = mysqli_insert_id($con);
 
                         // class + admin------------------------------------------------------------------------
-                        $sqlClass_Admin = "INSERT INTO admin_class (AdminID, ClassID) VALUES ('$adminID', '$classID')";
+                        $sqlClass_Admin = "INSERT INTO admin_class (AdminID, ClassID, CompanyID) VALUES ('$adminID', '$classID', $companyID)";
                         if(!mysqli_query($con, $sqlClass_Admin)) {
                             $response["error"] = 'Error:'.mysqli_error($con);
                             echo json_encode($response);
@@ -81,7 +81,7 @@
                             $response["seccuessClass@Admin"] = "Class@Admin record inserted sucessfully";
 
                             // module + class------------------------------------------------------------------------
-                            $sqlClass_Module = "INSERT INTO module_class (ModuleID, ClassID) VALUES ('$moduleID', '$classID')";
+                            $sqlClass_Module = "INSERT INTO module_class (ModuleID, ClassID, CompanyID) VALUES ('$moduleID', '$classID', $companyID)";
                             if(!mysqli_query($con, $sqlClass_Module)) {
                                 $response["error"] = 'Error:'.mysqli_error($con);
                                 echo json_encode($response);
@@ -93,7 +93,7 @@
 
 
                                 // lecturer------------------------------------------------------------------------
-                                $sqlLecturer = "INSERT INTO lecturer (LecturerName, LecturerGender, LecturerEmail, LecturerPassword) VALUES ('$body[lecturerName]', '$body[lecturerGender]', '$body[lecturerEmail]', '$body[lecturerPassword]')";
+                                $sqlLecturer = "INSERT INTO lecturer (LecturerName, LecturerGender, LecturerEmail, LecturerPassword, CompanyID) VALUES ('$body[lecturerName]', '$body[lecturerGender]', '$body[lecturerEmail]', '$body[lecturerPassword]', $companyID)";
                                 if(!mysqli_query($con, $sqlLecturer)) {
                                     $response["error"] = 'Error:'.mysqli_error($con);
                                     echo json_encode($response);
@@ -104,7 +104,7 @@
                                     $lecturerID  = mysqli_insert_id($con);
 
                                     // lecturer + admin------------------------------------------------------------------------
-                                    $sqlLecturer_Admin = "INSERT INTO admin_lecturer (AdminID, LecturerID) VALUES ('$adminID','$lecturerID')";
+                                    $sqlLecturer_Admin = "INSERT INTO admin_lecturer (AdminID, LecturerID, CompanyID) VALUES ('$adminID','$lecturerID', $companyID)";
                                     if(!mysqli_query($con, $sqlLecturer_Admin)) {
                                         $response["error"] = 'Error:'.mysqli_error($con);
                                         echo json_encode($response);
@@ -114,7 +114,7 @@
                                         $response["successLecturer@admin"] = "Lecturer@admin record inserted sucessfully";
 
                                         // lecturer + module------------------------------------------------------------------------
-                                        $sqlLecturer_Module = "INSERT INTO lecturer_module (LecturerID, ModuleID) VALUES ('$lecturerID','$moduleID')";
+                                        $sqlLecturer_Module = "INSERT INTO lecturer_module (LecturerID, ModuleID, CompanyID) VALUES ('$lecturerID','$moduleID', $companyID)";
                                         if(!mysqli_query($con, $sqlLecturer_Module)) {
                                             $response["error"] = 'Error:'.mysqli_error($con);
                                             echo json_encode($response);
@@ -126,8 +126,8 @@
 
 
                                             // student------------------------------------------------------------------------
-                                            $sqlStudent = "INSERT INTO student (StudentName, StudentGender, StudentEmail, StudentPassword, ClassID)
-                                            VALUES ('$body[studentName]', '$body[studentGender]', '$body[studentEmail]', '$body[studentPassword]', '$classID')";
+                                            $sqlStudent = "INSERT INTO student (StudentName, StudentGender, StudentEmail, StudentPassword, ClassID, CompanyID)
+                                            VALUES ('$body[studentName]', '$body[studentGender]', '$body[studentEmail]', '$body[studentPassword]', '$classID', $companyID)";
                                             if(!mysqli_query($con, $sqlStudent)) {
                                                 $response["error"] = 'Error:'.mysqli_error($con);
                                                 echo json_encode($response);
@@ -138,7 +138,7 @@
                                                 $studentID = mysqli_insert_id($con);
                                                 
                                                 // student@admin------------------------------------------------------------------------
-                                                $sqlStudent_Admin = "INSERT INTO admin_student (AdminID, StudentID) VALUES ('$adminID','$studentID')";
+                                                $sqlStudent_Admin = "INSERT INTO admin_student (AdminID, StudentID, CompanyID) VALUES ('$adminID','$studentID', $companyID)";
                                                 if(!mysqli_query($con, $sqlStudent_Admin)) {
                                                     $response["error"] = 'Error:'.mysqli_error($con);
                                                     echo json_encode($response);
@@ -146,6 +146,10 @@
                                                 }
                                                 else {
                                                     $response["successStudent@Admin"] = "Student@admin record inserted sucessfully";
+                                                    $_SESSION['companyID'] = $companyID;
+                                                    $_SESSION['companyName'] = $body['organizationName'];
+                                                    $_SESSION['userID'] = $adminID;
+                                                    $_SESSION['userRole'] = "admin";
                                                 }
                                             }
                                         }

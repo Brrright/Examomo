@@ -128,7 +128,7 @@
                             module name
                         </p>
                         <div class="form-floating">
-                            <input type="text" class="form-control shadow-sm" id="mod-floatingInput" name="moduleName" placeholder="Module Name" pattern="[a-zA-Z][a-zA-Z0-9-]{5,}" required>
+                            <input type="text" class="form-control shadow-sm" id="mod-floatingInput" name="moduleName" placeholder="Module Name" pattern="[a-zA-Z][a-zA-Z0-9 ]{5,}" required>
                             <label class="text-secondary" for="mod-floatingInput">Module Name</label>
                             <div class="valid-feedback">Valid <i class="bi bi-check2-circle"></i>.</div>
                             <div class="invalid-feedback">Please fill out this field with valid input.</div>
@@ -389,7 +389,7 @@
                     });
 
                     }else{
-                    this.responseMessage = "";
+                        this.responseMessage = "";
                     }
                 }
             }

@@ -3,7 +3,7 @@
     if(isset($_SESSION['userID'])){
 		header('location:'.$_GET['role'].'_home_page.php');
 	}
-    // check role and set the Text
+    // check role and set the variable
     if (isset($_GET['role'])) {
         if ($_GET['role'] == "admin") {
             $role = "Admin";
@@ -108,7 +108,9 @@
                     Swal.fire({
                         title: "Login Successfully",
                         icon: "success",
-                        text: "Enjoy Examomo!"
+                        text: "Enjoy Examomo!",
+                        showConfirmButton: false,
+                        timer:1500
                     }).then(function() {
                         const queryString = window.location.search;
                         const urlParams = new URLSearchParams(queryString);
