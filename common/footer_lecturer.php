@@ -18,7 +18,7 @@
 
         <ul class="list-unstyled mb-0">
           <li>
-            <a href="#!" class="text-blue">Examinations</a>
+            <a href="lecturer_exam_page.php" class="text-blue">Examinations</a>
           </li>
           <li>
             <a href="#!" class="text-blue">Exam Papers</a>

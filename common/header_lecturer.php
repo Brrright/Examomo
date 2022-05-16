@@ -12,10 +12,10 @@
         <div class="collapse navbar-collapse" id="navmenu" >
             <ul class="navbar-nav ms-auto mb-2 me-5 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link" style="color:#2B5EA4;" href="#">Home</a>
+                    <a class="nav-link" style="color:#2B5EA4;" href="lecturer_home_page.php">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" style="color:#2B5EA4;" href="#">Manage Exam</a>
+                    <a class="nav-link" style="color:#2B5EA4;" href="lecturer_exam_page.php">Manage Exam</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" style="color:#2B5EA4;" href="#">Manage Exam Paper</a>

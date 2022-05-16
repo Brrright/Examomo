@@ -1,5 +1,5 @@
 <?php require"common/conn.php";
-  echo '<pre>' . print_r($_SESSION, TRUE) . '</pre>';
+  // echo '<pre>' . print_r($_SESSION, TRUE) . '</pre>';
 ?>
 
 <!DOCTYPE html>
@@ -21,14 +21,13 @@
         </div>
         <div class="col-md-6"><h3>
             <?php
-              $sql = "SELECT AdminName FROM admin WHERE AdminID = '321'";
+              $sql = "SELECT AdminName FROM admin WHERE AdminID = ".$_SESSION['userID']."";
               $result = mysqli_query($con, $sql);
 
-              while($row = mysqli_fetch_array($result)) {
-                  echo "<br>"."Welcome, ";
-                  echo $row['AdminName']."."."<br>"."<br>";
+              $row = mysqli_fetch_array($result);
+              echo "<br>"."Welcome, ";
+              echo $row['AdminName']."."."<br>"."<br>";
 
-              }
             ?></h3>
         </div>
       </div>
@@ -62,7 +61,7 @@
             <div class="card-body">
               <h5 class="card-title">Admin</h5>
               <p class="card-text">Admin Management Functions</p>
-              <a href="admin_admin_list.php" class="btn btn-primary">Manage Admins</a>
+              <a href="admin_account_list.php" class="btn btn-primary">Manage Admins</a>
             </div>
           </div>
         </div>

@@ -1,4 +1,10 @@
 <?php
+    session_start();
+
+    if (!isset($_SESSION["userID"])) {
+      echo '<script>alert("Please login before you access this page.");
+      window.location.href="guest_home_page.php";</script>';
+  }
     require "common/conn.php";
 ?>
 
@@ -13,14 +19,6 @@
     <link rel="stylesheet" href="css/bryanCSS.css">
     <link rel="stylesheet" href="css/commonCSS.css"> 
 
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-
-
     <title>Lecturer Home Page</title>
 
   </head>
@@ -33,7 +31,7 @@
   <div class = "welcomemessage">
     <!-- identify lecturer gender and name -->
     <?php
-      $sql = "SELECT LecturerName, LecturerGender FROM lecturer WHERE LecturerID = '123'";          
+      $sql = "SELECT LecturerName, LecturerGender FROM lecturer WHERE LecturerID = '".$_SESSION["userID"]."'";          
       $result = mysqli_query($con, $sql);
 
       while($row = mysqli_fetch_array($result)) {
@@ -51,7 +49,7 @@
 
   <!-- Exam function card -->
 
-  <h5 style = "text-decoration: underline;">Most Recent: <br><br></h5>
+  <h5 style = "font-family: caveat; font-weight: bold; font-size: 150%; text-decoration: underline;">Most Recent: <br><br></h5>
   <div class= "d-flex flex-wrap justify-content-around"> 
     <!-- Exam card -->
     <div class= "col-sm-6" style= "width: 25rem; height: 20rem; min-height: 30rem;">
@@ -62,7 +60,7 @@
             
             <!-- retrieve exam details based on lecturer id -->
             <?php
-              $sql = "SELECT examModule, ExamStartDateTime, ExamDescription FROM exam WHERE LecturerID = '123' AND isPublished LIKE 1 ORDER BY ExamID DESC LIMIT 1";   
+              $sql = "SELECT examModule, ExamStartDateTime, ExamEndDateTime, ExamDescription FROM exam WHERE LecturerID = '".$_SESSION["userID"]."' AND isPublished LIKE 1 ORDER BY ExamID DESC LIMIT 1";   
               $result = mysqli_query($con, $sql);
 
               while ($row = mysqli_fetch_array($result)) {
@@ -73,6 +71,9 @@
                 echo "Start Date & Time: ";
                 echo $row['ExamStartDateTime']."<br>"."<br>";
 
+                echo "End Date & Time: ";
+                echo $row['ExamEndDateTime']."<br>"."<br>";
+
                 echo "Description: ";
                 echo $row['ExamDescription']."<br>"."<br>";
                 
@@ -80,7 +81,9 @@
               
             ?>
           </p>
-          <a href="#" class="btn btn-primary">View All Exams</a>
+          <div style="text-align: center;">
+            <a href="lecturer_exam_page.php" class="btn btn-primary">View All Exams</a>
+          </div>
         </div>
       </div>
     </div>
@@ -92,7 +95,7 @@
           <h3 class="card-title-lecturerhp"><i class="bi bi-list-ul"></i> Exam Paper</h3>
           <p class="card-text-lecturerhp">
           <?php
-              $sql = "SELECT PaperName, DateCreated, PaperModule, PaperType FROM exam_paper WHERE LecturerID = '123' ORDER BY DateCreated DESC LIMIT 1";  
+              $sql = "SELECT PaperName, DateCreated, PaperModule, PaperType FROM exam_paper WHERE LecturerID = '".$_SESSION["userID"]."' ORDER BY DateCreated DESC LIMIT 1";  
               // WHERE ExamStartDateTime IN (SELECT max(ExamStartDateTime) FROM exam) 
               $result = mysqli_query($con, $sql);
               // $num_row = mysqli_fetch_rows($result);
@@ -115,19 +118,21 @@
               
             ?>
           </p>
-          <a href="#" class="btn btn-primary" id ="cardbutton">View All Exam Papers</a>
+          <div style="text-align: center;">
+            <a href="#" class="btn btn-primary" id ="cardbutton">View All Exam Papers</a>
+          </div>
         </div>
       </div>
     </div>
 
-    <!-- Completed exam card -->
+    <!-- Drafted exam card -->
     <div class= "col-sm-6" style= "width: 25rem; height: 20rem; min-height: 30rem;">
       <div class="card-lecturerhp">
         <div class="card-body-lecturerhp">
           <h3 class="card-title-lecturerhp"><i class="bi bi-file-earmark"></i> Drafted Exam</h3>
           <p class="card-text-lecturerhp">
           <?php
-              $sql = "SELECT examModule, ExamStartDateTime, ExamDescription, isPublished FROM exam WHERE LecturerID = '123' AND isPublished LIKE 0 ORDER BY ExamID DESC LIMIT 1";   
+              $sql = "SELECT examModule, ExamStartDateTime, ExamDescription, isPublished FROM exam WHERE LecturerID = '".$_SESSION["userID"]."' AND isPublished LIKE 0 ORDER BY ExamID DESC LIMIT 1";   
               $result = mysqli_query($con, $sql);
 
               while ($row = mysqli_fetch_array($result)) {
@@ -145,7 +150,9 @@
               
             ?>
           </p>
-          <a href="#" class="btn btn-primary">View All Exams</a>
+          <div style="text-align: center;">
+            <a href="lecturer_exam_page.php" class="btn btn-primary cardbtn" >View All Exams</a>
+          </div>
         </div>
       </div>
     </div>
@@ -168,7 +175,7 @@
           <div class="container-carousel">
           <h2>Examinations</h2>
           <p>Create and Organize your Examinations in Examomo</p>
-          <a href ="#" class="btn btn-lg btn-primary">
+          <a href ="lecturer_exam_page.php" class="btn btn-lg btn-primary">
             Manage Exams
           </a>
           </div>

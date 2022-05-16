@@ -100,7 +100,7 @@ function page(part, validation) {
             document.getElementById("part3").style.display = "none";
             document.getElementById("part4").style.display = "block";
             document.getElementById("part5").style.display = "none";
-            handleInputCreateElement("cls-floatingInput","option","class-selection")
+            handleInputCreateElement("mod-floatingInput","option","module-selection-lec")
         }
     
         else if (part == 5) {
@@ -166,60 +166,16 @@ function closeToast(divElementId) {
     toastDiv.removeChild(toastDiv.firstElementChild);
 }
 
-// function formResponseHandler(formid, namechecking, successMsg, destinationAfterSuccess) {
-//     const form = document.getElementById(formid);
-//     form.noValidate = true;
-//     form.addEventListener("submit",function(event){
-//         event.preventDefault();
-//         if (!this.checkValidity()) {
-//             Swal.fire({
-//                 title: "Oops...input invalid.",
-//                 icon: "error",
-//                 text: "There is invalid or empty input, please make sure every input is valid."
-//             }) 
-//             return;
-//         }
-//         if (namechecking == true) {
-//             var checkCompanyName = document.getElementById("notavailable");
-//             console.log(checkCompanyName)
-//             if(checkCompanyName != null){
-//                 Swal.fire({
-//                     title: "Oops...Company name exist.",
-//                     icon: "error",
-//                     text: "The company name exist, please try again."
-//                 }) 
-//                 return;
-//             }
-//         }
-//         const form_data = Object.fromEntries(new FormData(event.target).entries());
-//         fetch ("guest_registration_backend.php", {
-//             method: "POST",
-//             headers: {
-//                 'Content-Type': 'application/json',
-//             },
-//             body: JSON.stringify(form_data)
-//         })
-//         .then(function(res) {
-//             return res.json()
-//         })
-//         .then(function(response) {
-//             if(!response.error) {
-//                 Swal.fire({
-//                     title: "Completed",
-//                     icon: "success",
-//                     text: successMsg
-//                 }).then(function() {
-//                     window.location.href = destinationAfterSuccess;
-//                 })
-//             }
-//             else {
-//                 Swal.fire({
-//                     title: "Oops...Process failed.",
-//                     icon: "error",
-//                     text: response.error
-//                 })
-//                 return;
-//             }
-//         })
-//     });
-// }
+function updateTable(path) {
+    var xmlhttp = new XMLHttpRequest();
+    xmlhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            document.getElementById('table-body').innerHTML = this.responseText;
+        }
+    }
+    var key = document.getElementById('search-text').value;
+    console.log(key);
+    xmlhttp.open("GET", path);
+    xmlhttp.send();
+}
+

@@ -253,13 +253,13 @@
                             <li>At least 8 characters in length, but no more than 32.</li>
                         </ul>
                         <p class="text-uppercase fw-bold main-color m-2 font-caveat">
-                            RELATED CLASS
+                            RELATED MODULE
                         </p>
-                        <select id="class-selection" class="form-select fw-light shadow-sm" style="height:58px;" required>
-                            <option value="">Please select the related class</option>
+                        <select id="module-selection-lec" class="form-select fw-light shadow-sm" style="height:58px;" required>
+                            <option value="">Please select the related module</option>
     
                         </select>
-                        <p class="text-center text-dark m-3 font-caveat fs-3">more class can be linked later on :)</p>
+                        <p class="text-center text-dark m-3 font-caveat fs-3">more module can be linked later on :)</p>
                         <p class="text-center text-dark m-3 font-caveat fs-3">more account can be created later on :)</p>
                     </div>
                     <button type="button" class="btn third-bg-color font-caveat shadow mx-auto mt-3 fs-4"  onclick="page(5, true)">Next</button>

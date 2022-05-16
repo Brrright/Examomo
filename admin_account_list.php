@@ -4,9 +4,11 @@
         echo '<script>alert("Please login before you access this page.");
         window.location.href="guest_home_page.php";</script>';
     }
-    $action = "Student"; 
-    $fetched = mysqli_query($con, "SELECT *FROM student WHERE CompanyID = ".$_SESSION['companyID']."");
+
+    $action = "Admin";
+    $fetched = mysqli_query($con, "SELECT * FROM admin WHERE CompanyID = ".$_SESSION['companyID']."");
     $numOfRow = mysqli_num_rows($fetched);
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -22,7 +24,7 @@
     <?php require "common/header_admin.php";?>
     <h1 class="text-center font-caveat fw-bold mb-3"><?php echo $action;?> List</h1>
     <div class="d-flex flex-row justify-content-between mx-auto m-5" style="width:80%">
-    <input class="form-control me-2" type="text" placeholder="Search By Name" aria-label="Search" name="student_name"  id="search-text">        
+    <input class="form-control me-2" type="text" placeholder="Search By Name" aria-label="Search" name="admin_name"  id="search-text">        
         <div>
            <button class="btn btn-primary ms-3">Add new user</button>
         </div>
@@ -32,12 +34,10 @@
         <caption>List of <?php echo $action;?> : <?php echo $numOfRow;?> in Total (all record)</caption>
         <thead class="table-dark">
             <tr>
-                <th>Student ID</th>
-                <th>Student Name</th>
-                <th>Student Gender</th>
-                <th>Student Email</th>
-                <th>Student Password</th>
-                <th>Related Class</th>
+                <th>Admin ID</th>
+                <th>Admin Name</th>
+                <th>Admin Email</th>
+                <th>Admin Password</th>
                 <th>Action</th>
             </tr>
         </thead>
@@ -46,16 +46,13 @@
             <?php 
             while ($data = mysqli_fetch_array($fetched)) {
                 $row = '<tr>
-                            <td>'.$data["StudentID"].'</td>
-                            <td>'.$data["StudentName"].'</td>
-                            <td>'.$data["StudentGender"].'</td>
-                            <td>'.$data["StudentEmail"].'</td>
-                            <td>'.$data["StudentPassword"].'</td>
-                            <td>'.$data["ClassID"].'</td>
-                            <td id="'.$data["StudentID"].'">
-                                <button class="btn btn-primary" ><i class="bi bi-pencil-fill"></i></button>
-                                <button class="btn btn-danger" ><i class="bi bi-trash"></i></button>
-                                <a href="admin_edit_student.php?id='.$data["StudentID"].'">
+                            <td>'.$data["AdminID"].'</td>
+                            <td>'.$data["AdminName"].'</td>
+                            <td>'.$data["AdminEmail"].'</td>
+                            <td>'.$data["AdminPassword"].'</td>
+                            <td>
+                                <button class="btn btn-primary" id="'.$data["AdminID"].'"><i class="bi bi-pencil-fill"></i></button>
+                                <button class="btn btn-danger" id="'.$data["AdminID"].'"><i class="bi bi-trash"></i></button>
                             </td>
                         </tr>';
                 echo $row;
@@ -70,7 +67,7 @@
         const input = document.getElementById('search-text')
         input.addEventListener('keyup', function(event) {
             var key = document.getElementById('search-text').value;
-            updateTable("admin_student_list_backend.php?student_name=" + key)
+            updateTable("admin_account_list_backend.php?admin_name=" + key)
         })
 
     </script>
