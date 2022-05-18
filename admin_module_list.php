@@ -24,7 +24,7 @@
     <div class="d-flex flex-row justify-content-between mx-auto m-5" style="width:80%">
     <input class="form-control me-2" type="text" placeholder="Search By Name" aria-label="Search" name="module_name"  id="search-text">        
         <div>
-           <button class="btn btn-primary ms-3">Add new user</button>
+           <button class="btn btn-primary ms-3">Add new module</button>
         </div>
     </div>
 

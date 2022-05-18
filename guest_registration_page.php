@@ -39,7 +39,7 @@
                         Step 1 - Organization Details & Admin Account Creation
                     </p>
                     <div class="mx-auto" style="width:90%" id="organization-field">
-                        <p class="text-uppercase fw-bold main-color m-2 font-caveat">
+                        <p class="text-uppercase fw-bold main-color m-2">
                             organization name
                         </p>
                         <div class="form-floating">
@@ -49,7 +49,7 @@
                             <div class="invalid-feedback">Please fill out this field with valid input.</div>
                             <span class="text-danger" v-bind:id="[isAvailable?'notavailable':'available']">{{responseMessage}}</span>
                         </div>
-                        <p class="text-uppercase fw-bold main-color m-2 font-caveat">
+                        <p class="text-uppercase fw-bold main-color m-2 ">
                             Institution Type
                         </p>
                         <select name="institution" class="form-select fw-light shadow-sm" style="height:58px;" required>
@@ -64,7 +64,7 @@
                     </div>
                     <hr>
                     <div class="mx-auto" style="width:90%">
-                        <p class="text-uppercase fw-bold main-color m-2 font-caveat">
+                        <p class="text-uppercase fw-bold main-color m-2 ">
                         admin name
                         </p>
                         <div class="form-floating">
@@ -73,7 +73,7 @@
                             <div class="valid-feedback">Valid <i class="bi bi-check2-circle"></i>.</div>
                             <div class="invalid-feedback">Please fill out this field with valid input.</div>
                         </div>
-                        <p class="text-uppercase fw-bold main-color m-2 font-caveat">
+                        <p class="text-uppercase fw-bold main-color m-2 ">
                             admin email
                         </p>
                         <div class="form-floating">
@@ -82,7 +82,7 @@
                             <div class="valid-feedback">Valid <i class="bi bi-check2-circle"></i>.</div>
                             <div class="invalid-feedback">Please fill out this field with valid input.</div>
                         </div>
-                        <p class="text-uppercase fw-bold main-color m-2 font-caveat">
+                        <p class="text-uppercase fw-bold main-color m-2 ">
                             password
                         </p>
                         <div class="form-floating">
@@ -124,7 +124,7 @@
                         Step 2 - Module Creation
                     </p>
                     <div class="mx-auto" style="width:90%">
-                        <p class="text-uppercase fw-bold main-color m-2 font-caveat">
+                        <p class="text-uppercase fw-bold main-color m-2">
                             module name
                         </p>
                         <div class="form-floating">
@@ -160,7 +160,7 @@
                         Step 3 - Class Creation
                     </p>
                     <div class="mx-auto" style="width:90%">
-                        <p class="text-uppercase fw-bold main-color m-2 font-caveat">
+                        <p class="text-uppercase fw-bold main-color m-2">
                             class name
                         </p>
                         <div class="form-floating">
@@ -169,7 +169,7 @@
                             <div class="valid-feedback">Valid <i class="bi bi-check2-circle"></i>.</div>
                             <div class="invalid-feedback">Please fill out this field with valid input.</div>
                         </div>
-                        <p class="text-uppercase fw-bold main-color m-2 font-caveat">
+                        <p class="text-uppercase fw-bold main-color m-2">
                             RELATED MODULE
                         </p>
                         <select id="module-selection" class="form-select fw-light shadow-sm" style="height:58px;" required>
@@ -203,7 +203,7 @@
                         Step 4 - Lecturer Account Creation
                     </p>
                     <div class="mx-auto" style="width:90%">
-                        <p class="text-uppercase fw-bold main-color m-2 font-caveat">
+                        <p class="text-uppercase fw-bold main-color m-2">
                             lecturer name
                         </p>
                         <div class="form-floating">
@@ -212,7 +212,7 @@
                             <div class="valid-feedback">Valid <i class="bi bi-check2-circle"></i>.</div>
                             <div class="invalid-feedback">Please fill out this field with valid input.</div>
                         </div>
-                        <p class="text-uppercase fw-bold main-color m-2 font-caveat">
+                        <p class="text-uppercase fw-bold main-color m-2">
                             Gender
                         </p>
                         <fieldset id="lecturer-gender-radio">
@@ -227,7 +227,7 @@
                                 </div>
                             </div>
                         </fieldset>
-                        <p class="text-uppercase fw-bold main-color m-2 font-caveat">
+                        <p class="text-uppercase fw-bold main-color m-2">
                             lecturer email
                         </p>
                         <div class="form-floating">
@@ -236,7 +236,7 @@
                             <div class="valid-feedback">Valid <i class="bi bi-check2-circle"></i>.</div>
                             <div class="invalid-feedback">Please fill out this field with valid input.</div>
                         </div>
-                        <p class="text-uppercase fw-bold main-color m-2 font-caveat">
+                        <p class="text-uppercase fw-bold main-color m-2">
                             password
                         </p>
                         <div class="form-floating">
@@ -252,7 +252,7 @@
                             <li>At least one special character</li>
                             <li>At least 8 characters in length, but no more than 32.</li>
                         </ul>
-                        <p class="text-uppercase fw-bold main-color m-2 font-caveat">
+                        <p class="text-uppercase fw-bold main-color m-2">
                             RELATED MODULE
                         </p>
                         <select id="module-selection-lec" class="form-select fw-light shadow-sm" style="height:58px;" required>
@@ -288,7 +288,7 @@
                         Step 5 - Student Account Creation
                     </p>
                     <div class="mx-auto" style="width:90%">
-                        <p class="text-uppercase fw-bold main-color m-2 font-caveat">
+                        <p class="text-uppercase fw-bold main-color m-2">
                         Student name
                         </p>
                         <div class="form-floating">
@@ -297,7 +297,7 @@
                             <div class="valid-feedback">Valid <i class="bi bi-check2-circle"></i>.</div>
                             <div class="invalid-feedback">Please fill out this field with valid input.</div>
                         </div>
-                        <p class="text-uppercase fw-bold main-color m-2 font-caveat">
+                        <p class="text-uppercase fw-bold main-color m-2">
                             Gender
                         </p>
                         <fieldset id="stu-gender-radio">
@@ -312,7 +312,7 @@
                                 </div>
                             </div>
                         </fieldset>
-                        <p class="text-uppercase fw-bold main-color m-2 font-caveat">
+                        <p class="text-uppercase fw-bold main-color m-2">
                             student email
                         </p>
                         <div class="form-floating">
@@ -321,7 +321,7 @@
                             <div class="valid-feedback">Valid <i class="bi bi-check2-circle"></i>.</div>
                             <div class="invalid-feedback">Please fill out this field with valid input.</div>
                         </div>
-                        <p class="text-uppercase fw-bold main-color m-2 font-caveat">
+                        <p class="text-uppercase fw-bold main-color m-2">
                             password
                         </p>
                         <div class="form-floating">
@@ -337,7 +337,7 @@
                             <li>At least one special character</li>
                             <li>At least 8 characters in length, but no more than 32.</li>
                         </ul>
-                        <p class="text-uppercase fw-bold main-color m-2 font-caveat">
+                        <p class="text-uppercase fw-bold main-color m-2">
                             RELATED CLASS
                         </p>
                         <select id="class-selection-stu" class="form-select fw-light shadow-sm" style="height:58px;" required>

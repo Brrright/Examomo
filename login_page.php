@@ -45,7 +45,7 @@
                 <p class="logo-style text-center"><?php echo $role;?> Login</p>
             </div>
             <div class="bg-white d-flex flex-column mx-auto p-5" style="width:60%; border-radius: 15px; box-shadow: 0px 4px 4px 4px #707b8b93;">
-                <p class="text-uppercase fw-bold main-color m-2 font-caveat">
+                <p class="text-uppercase fw-bold main-color m-2">
                     Organizaiton Name
                 </p>
                 <div class="form-floating">
@@ -54,7 +54,7 @@
                     <div class="valid-feedback">Valid <i class="bi bi-check2-circle"></i>.</div>
                     <div class="invalid-feedback">Please fill out this field with valid input.</div>
                 </div>
-                <p class="text-uppercase fw-bold main-color m-2 font-caveat">
+                <p class="text-uppercase fw-bold main-color m-2">
                     <?php echo $role;?> Email
                 </p>
                 <div class="form-floating">
@@ -63,7 +63,7 @@
                     <div class="valid-feedback">Valid <i class="bi bi-check2-circle"></i>.</div>
                     <div class="invalid-feedback">Please fill out this field with valid input.</div>
                 </div>
-                <p class="text-uppercase fw-bold main-color m-2 font-caveat">
+                <p class="text-uppercase fw-bold main-color m-2">
                     password
                 </p>
                 <div class="form-floating">

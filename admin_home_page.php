@@ -1,5 +1,9 @@
 <?php require"common/conn.php";
   // echo '<pre>' . print_r($_SESSION, TRUE) . '</pre>';
+  if (!isset($_SESSION["userID"])) {
+    echo '<script>alert("Please login before you access this page.");
+    window.location.href="guest_home_page.php";</script>';
+  }
 ?>
 
 <!DOCTYPE html>

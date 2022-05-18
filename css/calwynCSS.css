@@ -3,14 +3,36 @@
     background-color: white;
 }
 
+.card-half {
+    background-color: white;
+    border-radius: 15px;
+    box-shadow: 0px 4px 4px 4px #707b8b93;
+    width: 45%;
+    min-height: 30vh;
+}
+
+.card-full {
+    background-color: white;
+    border-radius: 15px;
+    box-shadow: 0px 4px 4px 4px #707b8b93;
+    width: 90%;
+    min-height: 40vh;
+}
+
+.exam-card {
+    border-radius: 15px;
+    width:40%;
+    min-height:20vh;
+}
+
 	
 
 
 .section-full {
     position: relative;
     width: 100%;
-    min-height: 100vh;
-    padding: 100px;
+    min-height: 85vh;
+    padding: 10px;
     display: flex;
     justify-content: space-between;
     align-items: center;

@@ -17,16 +17,23 @@ if ($numOfRow === 0) {
     return;
 }
 while ($data = mysqli_fetch_array($fetched)) {
+    $className = mysqli_query($con, "SELECT ClassName FROM class WHERE ClassID =".$data['ClassID']."");
+    if (!$className) {
+        echo 'Err '. mysqli_error($con);
+        break;
+    }
+    $classNameFetched = mysqli_fetch_array($className);
     $row = '<tr>
                 <td>'.$data["StudentID"].'</td>
                 <td>'.$data["StudentName"].'</td>
                 <td>'.$data["StudentGender"].'</td>
                 <td>'.$data["StudentEmail"].'</td>
                 <td>'.$data["StudentPassword"].'</td>
-                <td>'.$data["ClassID"].'</td>
-                <td>
-                    <button class="btn btn-primary" id="'.$data["StudentID"].'"><i class="bi bi-pencil-fill"></i></button>
-                    <button class="btn btn-danger" id="'.$data["StudentID"].'"><i class="bi bi-trash"></i></button>
+                <td>'.$classNameFetched["ClassName"].'</td>
+                <td id="'.$data["StudentID"].'">
+                    <button class="btn btn-primary" ><i class="bi bi-pencil-fill"></i></button>
+                    <button class="btn btn-danger" ><i class="bi bi-trash"></i></button>
+                    <a href="admin_edit_student.php?id='.$data["StudentID"].'">
                 </td>
             </tr>';
     echo $row;

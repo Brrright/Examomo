@@ -10,18 +10,9 @@ require "common/conn.php"
     <?php
         require "common/HeadImportInfo.php"
     ?>
-
-    <link rel="stylesheet" href="css/StudentCSS.css">
+    <link rel="stylesheet" href="css/calwynCSS.css">
     <link rel="stylesheet" href="css/commonCSS.css">
-
-<!-- Meta Tags -->
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<!--Bootstrap CSS -->
-
-
-<title>Student Homepage</title>
+    <title>Student Homepage</title>
 
 </head>
 
@@ -30,15 +21,17 @@ require "common/conn.php"
         require "common/header_student.php"
     ?>
 
-<div class="card m-2 p-1 card-style shadow fw-bold" style="width: 20vw; font-style: strong">
+
+<!-- This is not how u designed in wireframe, kinda weird -->
+<div class="card m-2 p-1 card-style shadow fw-bold" style="width: 20vw; font-style: strong"> 
 <?php
       $sql = "SELECT * FROM student WHERE StudentID = '1'";
       $result = mysqli_query($con, $sql);
 
+      // *** fetching record, this will only have 1 result based on ur sql, why use while loop? just fetch it***
       while($row = mysqli_fetch_array($result)) {
           echo "<br>"."Welcome, ";
           echo $row['StudentName']."."."<br>"."<br>";
-
       }
     ?>
 </div>
