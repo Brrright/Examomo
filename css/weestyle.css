@@ -1,8 +1,8 @@
 html {min-height: 100%;}
 
-body {
+/* body {
     background-image: linear-gradient( rgb(186, 228, 242),rgb(197, 242, 184));
-  }
+  } */
 
 .card {
     margin: 0 auto;
@@ -12,8 +12,37 @@ body {
     box-shadow: 10px;
   }
 
-.admincontainer {background-color: white;
-border-radius: 15px;
-margin: 15%}
+.admincontainer {
+  background-color: white;
+  border-radius: 15px;
+  margin: 15%
+}
 
-.img {border-radius: 15px;}
+.profilecontainer {
+  background-color: white;
+  border-radius: 15px;
+  margin: 5%;
+}
+
+.img {border-radius: 15px;
+align-self: center;
+}
+
+.pill-nav a {
+  display: block;
+  color: black;
+  padding: 14px;
+  text-decoration: none;
+  font-size: 17px;
+  border-radius: 5px;
+}
+
+.pill-nav a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+.pill-nav a.active {
+  background-color: #2B5EA4;
+  color: white;
+}

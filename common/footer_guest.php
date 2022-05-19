@@ -68,7 +68,6 @@
         </div>
       </section>
     </div>
-
     <div
          class="mx-auto p-3 row justify-content-center text-lg-center" 
          style="background-color: rgba(0, 0, 0, 0.5) margin-left:0px; margin-right:0px;"

@@ -13,7 +13,7 @@
       <!--Grid column-->
 
       <!--Grid column-->
-      <div class="col " width ="20%">
+      <div style = "margin-left: 17%" class="col align-items-center" width ="20%">
         <h5 class="text-uppercase fw-bold" style="font-size:20px">Quick Links</h5>
 
         <ul class="list-unstyled mb-0">
@@ -21,7 +21,7 @@
             <a href="lecturer_exam_page.php" class="text-blue">Examinations</a>
           </li>
           <li>
-            <a href="#!" class="text-blue">Exam Papers</a>
+            <a href="lecturer_exampaper_page.php" class="text-blue">Exam Papers</a>
           </li>
           <li>
             <a href="#!" class="text-blue">Completed Exams</a>

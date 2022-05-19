@@ -12,19 +12,19 @@
         <div class="collapse navbar-collapse" id="navmenu" >
             <ul class="navbar-nav ms-auto mb-2 me-5 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link" style="color:#2B5EA4;" href="#">Home</a>
+                    <a class="nav-link" style="color:#2B5EA4;" href="admin_home_page.php">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link position-relative me-3" style="color:#2B5EA4;" href="#">
+                    <a class="nav-link position-relative me-3" style="color:#2B5EA4;" href="admin_manage_feedback.php">
                         Feedback 
                         <span id="" class="position-absolute top-0 start-100 translate-middle badge bg-warning rounded-pill text-dark">1</span>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" style="color:#2B5EA4;" href="#">Manage Module</a>
+                    <a class="nav-link" style="color:#2B5EA4;" href="admin_module_list.php">Manage Module</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" style="color:#2B5EA4;" href="#">Manage Class</a>
+                    <a class="nav-link" style="color:#2B5EA4;" href="admin_class_list.php">Manage Class</a>
                 </li>
                 
                 <!-- Drop down Nav Item -->
@@ -33,10 +33,10 @@
                         Manage Account
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" href="#">Student</a></li>
-                        <li><a class="dropdown-item" href="#">Lecturer</a></li>
+                        <li><a class="dropdown-item" href="admin_student_list.php">Student</a></li>
+                        <li><a class="dropdown-item" href="admin_lecturer_list.php">Lecturer</a></li>
                         <li><hr class="dropdown-divider"></li>
-                        <li><a class="dropdown-item" href="#">Admin</a></li>
+                        <li><a class="dropdown-item" href="admin_account_list.php">Admin</a></li>
                     </ul>
                 </li>
                 <li class="nav-item">

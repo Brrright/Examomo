@@ -1,19 +1,18 @@
 <?php
-    session_start();
 
-    if (!isset($_SESSION["userID"])) {
-        echo '<script>alert("Please login before you access this page.");
-        window.location.href="guest_home_page.php";</script>';
-    }
-    require "common/conn.php";
+  require "common/conn.php";
+  if (!isset($_SESSION["userID"])) {
+      echo '<script>alert("Please login before you access this page.");
+      window.location.href="guest_home_page.php";</script>';
+  }
 
-    // retrieve drafted exam details
-    $draftexamsql = "SELECT ExamID, ExamName, ExamDescription FROM exam WHERE CompanyID = ".$_SESSION['companyID']." AND isPublished LIKE 0 AND LecturerID = ".$_SESSION["userID"]."";
-    $draftresult = mysqli_query($con, $draftexamsql);
+  // retrieve drafted exam details
+  $draftexamsql = "SELECT ExamID, ExamName, ExamDescription FROM exam WHERE CompanyID = ".$_SESSION['companyID']." AND isPublished LIKE 0 AND LecturerID = ".$_SESSION["userID"]."";
+  $draftresult = mysqli_query($con, $draftexamsql);
 
-    // retrieve published exam details
-    $pubexamsql = "SELECT ExamID, ExamName, ExamDescription FROM exam WHERE CompanyID = ".$_SESSION['companyID']." AND isPublished LIKE 1 AND LecturerID = ".$_SESSION["userID"]."";
-    $pubresult = mysqli_query($con, $pubexamsql);
+  // retrieve published exam details
+  $pubexamsql = "SELECT ExamID, ExamName, ExamDescription FROM exam WHERE CompanyID = ".$_SESSION['companyID']." AND isPublished LIKE 1 AND LecturerID = ".$_SESSION["userID"]."";
+  $pubresult = mysqli_query($con, $pubexamsql);
 ?>
 
 <!DOCTYPE html>
@@ -42,17 +41,25 @@
   </div>
 
   <!-- button to create new exam -->
-  <div style="text-align: right; padding-right: 160px;">
+  <div style="text-align: right; padding-right: 140px;">
     <a class="btn btn-primary" href="lecturer_create_exam.php" role="button" style="border-radius: 10px;">Create Examination</a>
   </div>
   <br>
 
-  <!-- Table listing for exam -->
-  <div class= "d-flex flex-wrap justify-content-center" style="min-height: 550px;">
+<!-- Table listing for exam -->
+<div class= "row px-auto justify-content-center" style="min-height: 450px; margin: auto;">
     
     <!-- table for drafted exam -->
-    <div class ="bg-draftexam" style="background-color: whitesmoke; border-radius: 10px; border: 3px solid #73AD21; box-shadow: 1px 1px darkseagreen; margin-right: 50px;">
-    <table class="table table-striped" style="width: 550px;">
+    <div class="col-xl-5">
+    <div class ="shadow p-3 mb-5 bg-draftexam" style="background-color: white; border-radius: 10px; margin: 10px auto;">
+    <table class="table table-striped" style="100%">
+      <colgroup>
+        <col span="1" style="width: 10%;">
+        <col span="1" style="width: 20%;">
+        <col span="1" style="width: 40%;">
+        <col span="1" style="width: 15%;">
+        <col span="1" style="width: 15%;">
+      </colgroup>
       <thead>
         <p class="text-uppercase fw-bold main-color m-2 font-caveat lead">Drafted Exams</p>
         <tr>
@@ -72,7 +79,7 @@
                 <td>'.$data["ExamName"].'</td>
                 <td>'.$data["ExamDescription"].'</td>
                 <td><a href="lecturer_edit_exam.php?id= '.$data["ExamID"].'" class="btn btn-primary"><i class="bi bi-pencil-square"></i></a></td>
-                <td><a href="lecturer_delete_exam_backend.php?id= '.$data["ExamID"].'" class="btn btn-primary delete-confirm"><i class="bi bi-trash"></i></a></td>
+                <td><a href="lecturer_delete_exam_backend.php?id= '.$data["ExamID"].'" class="btn btn-danger delete-confirm"><i class="bi bi-trash"></i></a></td>
                 </tr>';
                 echo $drafttable;
             }
@@ -80,11 +87,20 @@
       </tbody>
     </table>
     </div>
-    <br><br>
+    </div>
+    
 
     <!-- table for published exam -->
-    <div class ="bg-pubexam" style="background-color: white; border-radius: 10px; border: 3px solid #73AD21; box-shadow: 1px 1px darkseagreen; margin-left: 50px;">
-    <table class="table table-striped" style="width: 550px;">
+    <div class="col-xl-5">
+    <div class ="shadow p-3 mb-5 bg-pubexam" style="background-color: white; border-radius: 10px; margin: 10px auto;">
+    <table class="table table-striped" style="100%">
+    <colgroup>
+        <col span="1" style="width: 10%;">
+        <col span="1" style="width: 20%;">
+        <col span="1" style="width: 40%;">
+        <col span="1" style="width: 15%;">
+        <col span="1" style="width: 15%;">
+      </colgroup>
     <thead>
     <p class="text-uppercase fw-bold main-color m-2 font-caveat lead">Published Exams</p>
       <tr>
@@ -104,13 +120,14 @@
               <td>'.$data["ExamName"].'</td>
               <td>'.$data["ExamDescription"].'</td>
               <td><a href="lecturer_edit_exam.php?id= '.$data["ExamID"].'" class="btn btn-primary"><i class="bi bi-pencil-square"></i></a></td>
-              <td><a href="lecturer_delete_exam_backend.php?id= '.$data["ExamID"].'" class="btn btn-primary delete-confirm"><i class="bi bi-trash"></i></a></td>
+              <td><a href="lecturer_delete_exam_backend.php?id= '.$data["ExamID"].'" class="btn btn-danger delete-confirm"><i class="bi bi-trash"></i></a></td>
               </tr>';
               echo $pubtable;
           }
         ?>
     </tbody>
     </table>
+        </div>
     </div>
   </div>
 

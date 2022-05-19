@@ -15,71 +15,94 @@
     <?php 
         require "common/HeadImportInfo.php";
     ?>
+    <link rel="stylesheet" href="css/weestyle.css">
     <link rel="stylesheet" href="css/commonCSS.css">
     <link rel="stylesheet" href="css/mingliangCSS.css">
+
     <title><?php echo $action;?> | <?php echo $action;?> List</title>
 </head>
 <body>
     <?php require "common/header_admin.php";?>
     <h1 class="text-center font-caveat fw-bold mb-3"><?php echo $action;?> List</h1>
-    <div class="d-flex flex-row justify-content-between mx-auto m-5" style="width:80%">
-    <input class="form-control me-2" type="text" placeholder="Search By Name" aria-label="Search" name="class_name"  id="search-text">        
-        <div>
-           <button class="btn btn-primary ms-3">Add new class</button>
+    <div class="container p-0">
+        <div class="row g-0">
+            <div class="col-sm-2">
+                <div class="profilecontainer my-4 shadow p-3 mb-5 font-caveat">
+                    <div class="pill-nav">
+                        <a class="active">View Class List</a>
+                        <br>
+                        <a href="admin_add_class.php">Add Classes</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-10">
+                <div class="profilecontainer my-4 shadow p-3 mb-5">
+                    <div class="d-flex flex-row justify-content-between mx-auto m-0" style="width:80%">
+                        <input class="form-control me-2" type="text" placeholder="Search By Name" aria-label="Search" name="class_name"  id="search-text">
+                    </div>
+                <br>
+                <table class="table table-hover mx-auto align-middle " style="width:95%" id="table-app">
+                    <caption>List of <?php echo $action;?> : <?php echo $numOfRow;?> in Total (all record)</caption>
+                        <colgroup>
+                            <col span="1" style="width: 10%;">
+                            <col span="1" style="width: 35%;">
+                            <col span="1" style="width: 35%;">
+                            <col span="1" style="width: 20%;">
+                        </colgroup>
+                        <thead>
+                            <tr>
+                                <th>Class ID</th>
+                                <th>Class Name</th>
+                                <th>Related Module</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <!-- <table-list></table-list> -->
+                        <tbody id="table-body">
+                            <?php 
+                            while ($data = mysqli_fetch_array($fetched)) {
+                                $module_class = mysqli_query($con, "SELECT * FROM module_class WHERE CompanyID = ".$_SESSION['companyID']." AND ClassID = '.$data[ClassID].'");
+                                if(!$module_class) {
+                                    echo 'Err' .mysqli_error($con);
+                                    break;
+                                }
+
+                                $listOfModuleID = array();
+                                while ($data_for_module_class = mysqli_fetch_array($module_class)) {
+                                    $ModuleID = $data_for_module_class["ModuleID"];
+                                    array_push($listOfModuleID, $ModuleID);
+                                }
+
+                                $moduleRecord =  mysqli_query($con, "SELECT ModuleName FROM module WHERE CompanyID =  ".$_SESSION['companyID']."");
+                                if(!$moduleRecord) {
+                                    echo 'Error:'.mysqli_error($con);
+                                    break;
+                                }
+
+                                $moduleString = "";
+                                while ($dataModule = mysqli_fetch_array($moduleRecord)) {
+                                    $moduleString = $moduleString.$dataModule["ModuleName"]."<br>" ;
+                                }
+
+                                $row = '<tr>
+                                            <td>'.$data["ClassID"].'</td>
+                                            <td>'.$data["ClassName"].'</td>
+                                            <td> '.$moduleString.'</td>
+                                            <td id="'.$data["ClassID"].'">
+                                                <button class="btn btn-primary" ><i class="bi bi-pencil-fill"></i></button>
+                                                <button class="btn btn-danger"><i class="bi bi-trash"></i></button>
+                                            </td>
+                                        </tr>';
+                                echo $row;
+                            }
+                            ?>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
     </div>
-
-    <table class="table table-light table-hover mx-auto align-middle " style="width:90%" id="table-app">
-        <caption>List of <?php echo $action;?> : <?php echo $numOfRow;?> in Total (all record)</caption>
-        <thead>
-            <tr>
-                <th>Class ID</th>
-                <th>Class Name</th>
-                <th>Related Module</th>
-                <th>Action</th>
-            </tr>
-        </thead>
-        <!-- <table-list></table-list> -->
-        <tbody id="table-body">
-            <?php 
-            while ($data = mysqli_fetch_array($fetched)) {
-                $module_class = mysqli_query($con, "SELECT * FROM module_class WHERE CompanyID = ".$_SESSION['companyID']." AND ClassID = '.$data[ClassID].'");
-                if(!$module_class) {
-                    echo 'Err' .mysqli_error($con);
-                    break;
-                }
-
-                $listOfModuleID = array();
-                while ($data_for_module_class = mysqli_fetch_array($module_class)) {
-                    $ModuleID = $data_for_module_class["ModuleID"];
-                    array_push($listOfModuleID, $ModuleID);
-                }
-
-                $moduleRecord =  mysqli_query($con, "SELECT ModuleName FROM module WHERE CompanyID =  ".$_SESSION['companyID']."");
-                if(!$moduleRecord) {
-                    echo 'Error:'.mysqli_error($con);
-                    break;
-                }
-
-                $moduleString = "";
-                while ($dataModule = mysqli_fetch_array($moduleRecord)) {
-                    $moduleString = $moduleString.$dataModule["ModuleName"]."<br>" ;
-                }
-
-                $row = '<tr>
-                            <td>'.$data["ClassID"].'</td>
-                            <td>'.$data["ClassName"].'</td>
-                            <td> '.$moduleString.'</td>
-                            <td id="'.$data["ClassID"].'">
-                                <button class="btn btn-primary" ><i class="bi bi-pencil-fill"></i></button>
-                                <button class="btn btn-danger"><i class="bi bi-trash"></i></button>
-                            </td>
-                        </tr>';
-                echo $row;
-            }
-            ?>
-        </tbody>
-    </table>
 
     <?php require "common/footer_admin.php";?>
 
@@ -92,5 +115,6 @@
         })
 
     </script>
+    <script src="js/jquery.tabledit.js"></script>
 </body>
 </html>

@@ -1,18 +1,41 @@
 <?php
-
+    require "common/conn.php";
     // identify if user logged in
-    session_start();
-
     if (!isset($_SESSION["userID"])) {
         echo '<script>alert("Please login before you access this page.");
         window.location.href="guest_home_page.php";</script>';
     }
-    require "common/conn.php";
+?>
 
+<?php
     // get exam paper selection
-    $paperid= "SELECT PaperID, PaperName, PaperModule FROM exam_paper WHERE LecturerID = '".$_SESSION["userID"]."'";
+    $paperid= "SELECT PaperID, PaperName, PaperType, ModuleID FROM exam_paper WHERE LecturerID = '".$_SESSION["userID"]."'";
     $result = mysqli_query($con, $paperid);
 ?>
+
+<?php
+    // get module info
+    $moduleid ="SELECT ModuleID, ModuleName FROM module WHERE CompanyID =".$_SESSION['companyID']."";
+    $mresult = mysqli_query($con, $moduleid);
+    
+?>
+
+<?php
+    $selectpaper ="SELECT exam_paper.PaperID, exam_paper.PaperName, exam_paper.PaperType, module.ModuleID FROM exam_paper INNER JOIN module ON exam_paper.ModuleID = module.ModuleID WHERE exam_paper.LecturerID = '".$_SESSION["userID"]."'";
+    $spaper = mysqli_query($con, $selectpaper);
+    // $paperarray = mysqli_fetch_array($spaper);
+?>
+
+
+
+<!-- <script>
+    function getmodule() {
+        var m = document.getElementById("moduleselect");
+        var getmod = m.value;
+        // var sltmodule = value;
+        console.log(getmod);
+    }
+</script> -->
 
 <!DOCTYPE html>
 
@@ -22,28 +45,12 @@
         require "common/HeadImportInfo.php" 
     ?>
 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
     <link rel="stylesheet" href="css/bryanCSS.css">
     <link rel="stylesheet" href="css/commonCSS.css"> 
 
     <title>Lecturer Manage Exam</title>
-
-    <script>
-    (function() {
-        'use strict';
-        window.addEventListener('load', function() {
-        var forms = document.getElementsByClassName("needs-validation");
-        var validation = Array.prototype.filter.call(forms, function(form) {
-            form.addEventListener("submit", function(event) {
-                if (!form.checkValidity() === false){
-                    event.preventDefault();
-                    event.stopPropagation();
-                }
-                form.classList.add("was-validated");           
-            }, false);
-        });
-        }, false);
-    })();
-    </script>
 
   </head>
 <body>
@@ -52,7 +59,7 @@
 <?php require "common/header_lecturer.php"?>
 
 <!-- Exam Creation Form -->
-<form action ="lecturer_create_exam_backend.php" method ="post" id="examcreate">
+<form class="was-validated" action ="lecturer_create_exam_backend.php" method ="post" id="examcreate">
 
 <div class="bg d-flex mx-auto flex-column p-5 m-5" style="background-color: #E2F8DB; width: 70%; border-radius: 10px; box-shadow: 3px 3px darkseagreen;">
     <div class="examform">
@@ -62,19 +69,22 @@
         <p class="text-uppercase fw-bold main-color m-2 font-caveat">
             Module Name
         </p>
-        <div class="form-floating mb-3">
-            <input type="text" class="form-control" id="floatingInput" name="Modulename" placeholder="ModuleName" required>
-            <label for="floatingInput">Module Name</label> 
-        </div>
-        <div class = "invalid-feedback">
-            Must have Module name
-        </div>  
+        <select name="Moduleid" class="form-select fw-light shadow-sm" style="height:58px;" id="moduleselect"  required>
+            <option value="">Please select a Module</option>
+            <!-- get previous selected module -->
+            <?php
+                while ($mdata = mysqli_fetch_array($mresult)) {
+                    $moduleoption ='<option value ='.$mdata["ModuleID"].'>'.$mdata["ModuleName"].'</option>';
+                    echo $moduleoption;
+            }
+            ?>
+        </select>
 
         <p class="text-uppercase fw-bold main-color m-2 font-caveat">
             Exam Name
         </p>
         <div class="form-floating mb-3">
-            <input type="text" class="form-control" id="floatingInput" name="Examname" placeholder="ExamName" required>
+            <input type="text" class="form-control is-invalid" id="floatingInput" name="Examname" pattern="[a-zA-Z0-9\s]{1,}" placeholder="ExamName" required>
             <label for="floatingInput">Exam Name</label> 
         </div>
 
@@ -82,40 +92,47 @@
             Exam Description
         </p>
         <div class="form-floating mb-3">
-            <input type="text" class="form-control" id="floatingInput" name= "Examdesc"placeholder="ExamDescription" required>
+            <input type="text" class="form-control is-invalid" id="floatingInput" name= "Examdesc"placeholder="ExamDescription" maxlength="100" required>
             <label for="floatingInput">Exam Description</label> 
         </div>
 
+        <div class="row g-5">
+        <div class="col-sm-6">
         <p class="text-uppercase fw-bold main-color m-2 font-caveat">
             Exam Starting Date & Time
         </p>
         <div class="form datetime">
-            <input type="datetime-local" placeholder="ExamDateTime" name="Examstarttime" required>
+            <input type="datetime-local" placeholder="ExamDateTime" name="Examstarttime" style="width: 100%;" required>
+        </div>
         </div>
         <br>
 
+        <div class="col-sm-6">
         <p class="text-uppercase fw-bold main-color m-2 font-caveat">
             Exam Ending Date & Time
         </p>
         <div class="form datetime">
-            <input type="datetime-local" placeholder="ExamDateTime" name="Examendtime" required>
+            <input type="datetime-local" placeholder="ExamDateTime" name="Examendtime" style="width: 100%;" required>
+        </div>
+        </div>
         </div>
         <br>
 
         <p class="text-uppercase fw-bold main-color m-2 font-caveat">
             Exam Paper
         </p>
-        <select name="Exampaper" class="form-select fw-light shadow-sm" style="height:58px; PopupHeight: auto;" required>
-            <option>Please select an Exam paper</option>
+        
+        <select name="Exampaper" id="paperselect" class="form-select fw-light shadow-sm" style="height:58px; PopupHeight: auto;" required>
+            <option value="">Please select an Exam paper</option>
             <?php
-                while ($data = mysqli_fetch_array($result)) {
-                    $paperoption ='<option value ='.$data["PaperID"].'>'.$data["PaperName"].' - '.$data["PaperModule"].'</option>';
+                while ($paperdata = mysqli_fetch_array($result)) {
+                    $paperoption ='<option value ='.$paperdata["PaperID"].'>'.$paperdata["PaperName"].' - '.$paperdata["PaperType"].'</option>';
                     echo $paperoption;
                 }
             ?>
         </select>
         <br>
-        <h5 style ="font-family: caveat; text-align: right;">*Please ensure Exam paper is created before publishing exam :)</h5>
+        <h5 style ="font-family: caveat; color: #2B5EA4; font-weight: bold; text-align: right;">*Please ensure Exam paper is created before publishing exam :)</h5>
         <br>
         
         <div class= "d-flex flex-wrap justify-content-around">
@@ -136,6 +153,43 @@
 
 </form>
 
+<!-- <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script type ="text/javascript" src='jquery-3.3.1.min.js'></script>
+<script>
+    $(document).ready(function()){
+        $(#moduleselect).on('change', function()) {
+            var mod = $(this).val();
+
+
+            $.ajax({
+                type: 'POST',
+                data: {ajax: 1, mod: mod},
+                success: function(response){
+                    $('#response').text('module: ' + response);
+                }
+            });
+        }
+    }
+</script> -->
+
+<!-- <script>
+var options=""; //store the dynamic options
+$("#moduleselect").on('change',function(){
+    var value=$(this).val(); //get its selected value
+    alert(value);
+    while($paperarray = mysqli_fetch_array($spaper)){
+        // options="<option>Select Your Name</option>"
+        if(value==$paperarray['ModuleID'])
+        {
+            options='<option value ='.$paperdata["PaperID"].'>'.$paperdata["PaperName"].' - '.$paperdata["PaperType"].'</option>';
+            $("#paperselect").html(options);
+        }
+        else
+            $("#paperselect").find('option').remove() //if first default text option is selected empty the select
+        }
+});
+</script> -->
+
 <!-- javascript to clear all fields in form -->
 <script>
     function resetform() {
@@ -143,32 +197,10 @@
     }
 </script>
 
-
-<!-- javascript for form validation
-<script>
-    $('submit').click(function() {
-
-        var name = $("Examname").val();
-        var module = $("Modulename").val();
-        var desc = $("Examdesc").val();
-        var start = $("Examstarttime").val();
-        var end = $("Examendtime").val();
-        var paper = $("Exampaper").val();
-
-        if(name =='' || module =='' || desc =='' || start =='' || end =='' || paper =='') {
-
-        Swal.fire({
-            icon: 'error',
-            title: 'Oops...',
-            text: 'Something went wrong!',
-            footer: '<a href="">Why do I have this issue?</a>'
-            })
-        };
-    });
-</script> -->
-
 <!-- footer -->
-<?php include "./common/footer_lecturer.php" ?>
+<?php 
+
+include "./common/footer_lecturer.php" ?>
 </body>
 
 </html>

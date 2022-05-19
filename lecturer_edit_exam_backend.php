@@ -1,10 +1,10 @@
 <?php
-    session_start();
     require "common/conn.php";
 
     // pass lecturer id and submission status
     $id = $_SESSION['userID'];
     $submit = $_POST['submit'];
+    $comid = $_SESSION['companyID'];
 
     // retrive examid from from
     $examid = $_POST['examid'];
@@ -29,9 +29,10 @@
         ExamStartDateTime = '$_POST[Examstarttime]',
         ExamEndDateTime = '$_POST[Examendtime]',
         isPublished = $publish,
-        examModule = '$_POST[Modulename]',
         LecturerID = $id,
-        PaperID = '$_POST[Exampaper]'
+        PaperID = '$_POST[Exampaper]',
+        CompanyID = $comid,
+        ModuleID = '$_POST[Moduleid]'
         WHERE ExamID = '$examid'";
 
 

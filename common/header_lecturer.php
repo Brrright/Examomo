@@ -18,7 +18,7 @@
                     <a class="nav-link" style="color:#2B5EA4;" href="lecturer_exam_page.php">Manage Exam</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" style="color:#2B5EA4;" href="#">Manage Exam Paper</a>
+                    <a class="nav-link" style="color:#2B5EA4;" href="lecturer_exampaper_page.php">Manage Exam Paper</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link position-relative me-3" style="color:#2B5EA4;" href="#">

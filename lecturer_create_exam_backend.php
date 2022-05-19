@@ -1,5 +1,5 @@
 <?php
-    session_start();
+
     require "common/conn.php";
 
     // pass lecturer id and submission status
@@ -21,8 +21,8 @@
         return;
     }
 
-    $sql ="INSERT INTO exam (ExamName, ExamDescription, ExamStartDateTime, ExamEndDateTime, isPublished, examModule, LecturerID, PaperID, CompanyID) 
-    VALUES('$_POST[Examname]', '$_POST[Examdesc]', '$_POST[Examstarttime]', '$_POST[Examendtime]', $publish,'$_POST[Modulename]', $id, '$_POST[Exampaper]', $company)";
+    $sql ="INSERT INTO exam (ExamName, ExamDescription, ExamStartDateTime, ExamEndDateTime, isPublished, ModuleID, LecturerID, PaperID, CompanyID) 
+    VALUES('$_POST[Examname]', '$_POST[Examdesc]', '$_POST[Examstarttime]', '$_POST[Examendtime]', $publish,'$_POST[Moduleid]', $id, '$_POST[Exampaper]', $company)";
     
     if (!mysqli_query($con,$sql)) {
         die('Error: ' . mysqli_error($con));

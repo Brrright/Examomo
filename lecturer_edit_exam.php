@@ -1,17 +1,24 @@
 <?php
 
     // identify if user logged in
-    session_start();
-
+    require "common/conn.php";
     if (!isset($_SESSION["userID"])) {
         echo '<script>alert("Please login before you access this page.");
         window.location.href="guest_home_page.php";</script>';
     }
-    require "common/conn.php";
+?>
 
+<?php
     // get exam paper selection
-    $paperid= "SELECT PaperID, PaperName, PaperModule FROM exam_paper WHERE CompanyID =".$_SESSION["companyID"]." AND LecturerID =".$_SESSION["userID"]."";
+    $paperid= "SELECT PaperID, PaperName, PaperType, ModuleID FROM exam_paper WHERE LecturerID =".$_SESSION["userID"]."";
     $result = mysqli_query($con, $paperid);
+
+?>
+
+<?php
+    // get module info
+    $moduleid ="SELECT ModuleID, ModuleName FROM module WHERE CompanyID =".$_SESSION['companyID']."";
+    $mresult = mysqli_query($con, $moduleid);
     
 ?>
 
@@ -46,7 +53,7 @@
 <?php require "common/header_lecturer.php"?>
 
 <!-- Exam Creation Form -->
-<form class="createexamform" action ="lecturer_edit_exam_backend.php" method ="post" id="examcreate">
+<form class="was-validated createexamform" action ="lecturer_edit_exam_backend.php" method ="post" id="examcreate">
 
 <!-- send exam id to backend -->
 <input type="hidden" name="examid" value="<?php echo $examid; ?>" />
@@ -59,16 +66,28 @@
         <p class="text-uppercase fw-bold main-color m-2 font-caveat">
             Module Name
         </p>
-        <div class="form-floating mb-3">
-            <input type="text" class="form-control" id="floatingInput" name="Modulename" placeholder="ExamName" required value = "<?php echo $row['examModule']?>">
-            <label for="floatingInput">Module Name</label> 
-        </div>
+        <select name="Moduleid" class="form-select fw-light shadow-sm" style="height:58px;" id="moduleselect" required>
+
+            <!-- get previous selected module -->
+            <?php
+                while ($mdata = mysqli_fetch_array($mresult)) {
+                if ($row['ModuleID'] == $mdata['ModuleID']){
+                    echo '<option value ='.$mdata["ModuleID"].' selected>'.$mdata["ModuleName"].'</option>';                   
+                }
+                
+                else {
+                    echo'<option value ='.$mdata["ModuleID"].'>'.$mdata["ModuleName"].'</option>';                    
+                }
+            }
+            ?>
+            
+        </select>
 
         <p class="text-uppercase fw-bold main-color m-2 font-caveat">
             Exam Name
         </p>
         <div class="form-floating mb-3">
-            <input type="text" class="form-control" id="floatingInput" name="Examname" placeholder="ExamName" required value = "<?php echo $row['ExamName']?>">
+            <input type="text" class="form-control" id="floatingInput" name="Examname" placeholder="ExamName" pattern="[a-zA-Z0-9\s]{1,}" required value = "<?php echo $row['ExamName']?>">
             <label for="floatingInput">Exam Name</label> 
         </div>
 
@@ -80,19 +99,25 @@
             <label for="floatingInput">Exam Description</label> 
         </div>
 
+        <div class="row g-5">
+        <div class="col-sm-6">
         <p class="text-uppercase fw-bold main-color m-2 font-caveat">
             Exam Starting Date & Time
         </p>
         <div class="form datetime">
-            <input type="datetime-local" placeholder="ExamDateTime" name="Examstarttime" required value = "<?php echo $starttime; ?>">
+            <input type="datetime-local" placeholder="ExamDateTime" name="Examstarttime" style="width: 100%;" required value = "<?php echo $starttime; ?>">
+        </div>
         </div>
         <br>
 
+        <div class="col-sm-6">
         <p class="text-uppercase fw-bold main-color m-2 font-caveat">
             Exam Ending Date & Time
         </p>
         <div class="form datetime">
-            <input type="datetime-local" placeholder="ExamDateTime" name="Examendtime" required value = "<?php echo $endtime; ?>">
+            <input type="datetime-local" placeholder="ExamDateTime" name="Examendtime" style="width: 100%;" required value = "<?php echo $endtime; ?>">
+        </div>
+        </div>
         </div>
         <br>
 
@@ -103,22 +128,20 @@
 
             <!-- get previous selected exam paper -->
             <?php
-                while ($data = mysqli_fetch_array($result)) {
-
-                    if ($data['PaperID'] == $row['PaperID']){
-                        echo '<option value ='.$data["PaperID"].' selected>'.$data["PaperName"].' - '.$data["PaperModule"].'</option>';                   
-                    }
-                    
-                    else {
-                        echo'<option value ='.$data["PaperID"].'>'.$data["PaperName"].' - '.$data["PaperModule"].'</option>';                    
-                    }
+            while ($data = mysqli_fetch_array($result)) {
+                if ($data['PaperID'] == $row['PaperID']){
+                    echo '<option value ='.$data["PaperID"].' selected>'.$data["PaperName"].' - '.$data["PaperType"].'</option>';                   
                 }
-
+                
+                else {
+                    echo'<option value ='.$data["PaperID"].'>'.$data["PaperName"].' - '.$data["PaperType"].'</option>';                    
+                }
+            }
             ?>
             
         </select>
         <br>
-        <h5 style ="font-family: caveat; text-align: right;">*Please ensure Exam paper is created before publishing exam :)</h5>
+        <h5 style ="font-family: caveat; color: #2B5EA4; font-weight: bold; text-align: right;">*Please ensure Exam paper is created before publishing exam :)</h5>
         <br>
         
         <div class= "d-flex flex-wrap justify-content-around">

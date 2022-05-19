@@ -1,86 +1,90 @@
-
-<footer class="text-black text-center text-lg-start font-caveat fw-bold" >
-  <hr class="footer-line">
-  <!-- Grid container -->
-  <div class="footer-container  d-flex justify-content-evenly">
-    <!--Grid row-->
-    <div class="row">
-      <!--Grid column-->
-      <div class="col ">
-        <img src="img/logo_big_no_text.png"
-        class ="w-100"/>
-      </div>
-      <!--Grid column-->
-
-      <!--Grid column-->
-      <div style = "margin-left: 17%" class="col" width ="20%">
-        <h5 class="text-uppercase fw-bold" style="font-size:20px">Quick Links</h5>
-
-        <ul class="list-unstyled mb-0">
-          <li>
-            <a href="#!" class="text-blue">Manage Students</a>
-          </li>
-          <li>
-            <a href="#!" class="text-blue">Manage Lecturers</a>
-          </li>
-          <li>
-            <a href="#!" class="text-blue">Manage Admins</a>
-          </li>
-          <li>
-            <a href="#!" class="text-blue">Manage Classes</a>
-          </li>
-          <li>
-            <a href="#!" class="text-blue">Manage Modules</a>
-          </li>
-        </ul>
-      </div>
-      <!--Grid column-->
-
-      <!--Grid column-->
-      <div class="col-md " width="20%">
-        <h5 class="text-uppercase fw-bold" style="font-size:20px">Social Media</h5>
-
-        <section class="mb-4">
-      <!-- Facebook -->
-          <div class="fb hover-shadow" role="button">
-            <a href="#" class="bi-facebook"></a> Examomo
+<footer class="text-center text-lg-start text-dark  bg-transparent">
+    <div class="container p-4 pb-0 d-flex">
+      <section class="pt-4 pb-4">
+        <div class="row">
+            <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mt-3 d-flex justify-content-center">
+                <div class="mx-auto">
+                    <img src="img/logo_big_with_text.png" alt="logo" style="width:234px; height:234px;">
+                </div>
+            </div>
+          <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3">
+            <h6 class="logo-style mb-4 font-weight-bold">
+              Examomo
+            </h6>
+            <p class="text-justify">
+            An online examination platform that ensures the honesty of students’ work while providing the necessary functions to conduct examinations and sufficient quality-of-life features for the students.
+            </p>
           </div>
-          <br>
 
-      <!-- Instagram -->
-          <div class="ig hover-shadow" role="button">
-            <a href="#" class="bi-instagram"></a> Examomo
+          <hr class="w-100 clearfix d-md-none" />
+          <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mt-3 ">
+            <h6 class="text-uppercase mb-4 font-weight-bold">Quick Links</h6>
+            <p>
+              <a href="admin_student_list.php" class="text-decoration-none text-black">Manage Students</a>
+            </p>
+            <p>
+              <a href="admin_lecturer_list.php" class="text-decoration-none text-black">Manage Lecturers</a>
+            </p>
+            <p>
+              <a href="admin_account_list.php" class="text-decoration-none text-black">Manage Admins</a>
+            </p>
+            <p>
+              <a href="admin_class_list.php" class="text-decoration-none text-black">Manage Classes</a>
+            </p>
+            <p>
+              <a href="admin_module_list.php" class="text-decoration-none text-black">Manage Modules</a>
+            </p>
           </div>
-          <br>
 
-      <!-- Gmail -->
-          <div class="gm hover-shadow" role="button">
-            <a href="#" class="bi-google"></a> Examomo@gmail.com 
+          <hr class="w-100 clearfix d-md-none" />
+
+          <hr class="w-100 clearfix d-md-none" />
+
+
+          <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mt-3">
+            <h6 class="text-uppercase mb-4 font-weight-bold">Follow us</h6>
+            <div>
+                <a
+                   class="btn btn-primary btn-floating m-1 bi-facebook"
+                   style="background-color: #3b5998"
+                   href="#!"
+                   role="button"
+                   ></a> Facebook
+            </div>
+            <div>
+                <a
+                   class="btn btn-primary btn-floating m-1 bi-instagram"
+                   style="background-color: #ac2bac"
+                   href="#!"
+                   role="button"
+                   ></a> Instagram
+            </div>
+            <div>
+                <a
+                   class="btn btn-primary btn-floating m-1 bi-google"
+                   style="background-color: #dd4b39"
+                   href="#!"
+                   role="button"
+                   ></a> Google
+            </div>
           </div>
-          <br>
-
-        </section>
-
-      </div>
-      <!--Grid column-->
+        </div>
+      </section>
     </div>
-    <!--Grid row-->
-  </div>
-  <!-- Grid container -->
 
-  <!-- Copyright -->
-  <div class="text-center p-3 shadow-lg">
-      
-    <p class="copyright" style="color:black" >Copyright ©2022 Exammomo</a>
+    <div
+         class="mx-auto p-3 row justify-content-center text-lg-center" 
+         style="background-color: rgba(0, 0, 0, 0.5) margin-left:0px; margin-right:0px;"
+         >
+        <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4">
+          ©2022 Copyright Examomo
+        </div>
+        <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4">
+          <a color:black" class="text-black hover-shadow text-reset" href="PrivacyPolicy.php">Privacy Policy</a>
+        </div>
+        <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4">
+          <a color:black" class="text-black hover-shadow text-reset" href="TermAndCondition.php">Terms and Conditions</a>
+        </div>
 
-    <a style="margin-left: 10%; color:black" class="text-black hover-shadow" href="*">Privacy Policy</a>
-
-    <a style="margin-left: 10%; color:black" class="text-black hover-shadow" href="*">Terms and Conditions</a>
-
-  </div>
-  <!-- Copyright -->
-</footer>
-
-<?php mysqli_close($con);?>
-
-</html>
+    </div>
+  </footer>
