@@ -34,7 +34,7 @@ align-self: center;
   padding: 14px;
   text-decoration: none;
   font-size: 17px;
-  border-radius: 5px;
+  border-radius: 10px;
 }
 
 .pill-nav a:hover {
@@ -45,4 +45,62 @@ align-self: center;
 .pill-nav a.active {
   background-color: #2B5EA4;
   color: white;
+}
+
+.chatbox {
+  border: 2px solid #dedede;
+  background-color: #f1f1f1;
+  border-radius: 5px;
+  padding: 10px;
+  margin: 10px 0;
+}
+
+.adminbox {
+  border-color: #ccc;
+  background-color: #ddd;
+}
+
+.chatbox::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+.chatbox img {
+  float: left;
+  max-width: 60px;
+  width: 100%;
+  margin-right: 20px;
+  border-radius: 50%;
+}
+
+.chatbox img.right {
+  float: right;
+  margin-left: 20px;
+  margin-right:0;
+}
+
+.time-right {
+  float: right;
+  color: #aaa;
+}
+
+.time-left {
+  float: left;
+  color: #999;
+}
+
+.enquirybox{
+  background-color: white;
+  border-radius: 15px;
+  margin: 5%;
+  max-height: 90%;
+}
+
+.enquirybox a.active {
+  background-color: #2B5EA4;
+}
+
+.scrollarea {
+  overflow-y: scroll;
 }

@@ -46,7 +46,7 @@
             </div>
             <div class="bg-white d-flex flex-column mx-auto p-5" style="width:60%; border-radius: 15px; box-shadow: 0px 4px 4px 4px #707b8b93;">
                 <p class="text-uppercase fw-bold main-color m-2">
-                    Organizaiton Name
+                    Organization Name
                 </p>
                 <div class="form-floating">
                     <input type="text" class="form-control shadow-sm sec-template" id="comNameInput" name="company_name" placeholder="Organization Name" pattern="[a-zA-Z][a-zA-Z ]{5,}" required>

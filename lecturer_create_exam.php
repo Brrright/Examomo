@@ -5,37 +5,17 @@
         echo '<script>alert("Please login before you access this page.");
         window.location.href="guest_home_page.php";</script>';
     }
-?>
 
-<?php
     // get exam paper selection
     $paperid= "SELECT PaperID, PaperName, PaperType, ModuleID FROM exam_paper WHERE LecturerID = '".$_SESSION["userID"]."'";
     $result = mysqli_query($con, $paperid);
-?>
 
-<?php
     // get module info
     $moduleid ="SELECT ModuleID, ModuleName FROM module WHERE CompanyID =".$_SESSION['companyID']."";
     $mresult = mysqli_query($con, $moduleid);
-    
+
 ?>
 
-<?php
-    $selectpaper ="SELECT exam_paper.PaperID, exam_paper.PaperName, exam_paper.PaperType, module.ModuleID FROM exam_paper INNER JOIN module ON exam_paper.ModuleID = module.ModuleID WHERE exam_paper.LecturerID = '".$_SESSION["userID"]."'";
-    $spaper = mysqli_query($con, $selectpaper);
-    // $paperarray = mysqli_fetch_array($spaper);
-?>
-
-
-
-<!-- <script>
-    function getmodule() {
-        var m = document.getElementById("moduleselect");
-        var getmod = m.value;
-        // var sltmodule = value;
-        console.log(getmod);
-    }
-</script> -->
 
 <!DOCTYPE html>
 
@@ -69,7 +49,7 @@
         <p class="text-uppercase fw-bold main-color m-2 font-caveat">
             Module Name
         </p>
-        <select name="Moduleid" class="form-select fw-light shadow-sm" style="height:58px;" id="moduleselect"  required>
+        <select name="Moduleid" class="form-select fw-light shadow-sm" style="height:58px;" id="moduleselect" onChange="GainRelatedExamPaper()" required>
             <option value="">Please select a Module</option>
             <!-- get previous selected module -->
             <?php
@@ -122,15 +102,10 @@
             Exam Paper
         </p>
         
-        <select name="Exampaper" id="paperselect" class="form-select fw-light shadow-sm" style="height:58px; PopupHeight: auto;" required>
-            <option value="">Please select an Exam paper</option>
-            <?php
-                while ($paperdata = mysqli_fetch_array($result)) {
-                    $paperoption ='<option value ='.$paperdata["PaperID"].'>'.$paperdata["PaperName"].' - '.$paperdata["PaperType"].'</option>';
-                    echo $paperoption;
-                }
-            ?>
+        <select name="Exampaper" id="paperselect" class="form-select fw-light shadow-sm" style="height:58px; PopupHeight: auto;" required disabled>
+            <option value="">Please select an Exam paper <b>[select a module to activate]</b></option>
         </select>
+        
         <br>
         <h5 style ="font-family: caveat; color: #2B5EA4; font-weight: bold; text-align: right;">*Please ensure Exam paper is created before publishing exam :)</h5>
         <br>
@@ -139,11 +114,9 @@
             <div>
                 <button class="btn third-bg-color font-caveat shadow mx-auto mt-3 fs-4" type="submit" name= "submit" value = "draft" onclick="return confirm('Are you sure to draft exam?')">Save as Draft</button>
             </div>
-
             <div>
                 <button class="btn third-bg-color font-caveat shadow mx-auto mt-3 fs-4" type="reset" onclick ="resetform()">Clear All</button>
             </div>
-
             <div>
                 <button class="btn third-bg-color font-caveat shadow mx-auto mt-3 fs-4" type="submit" name= "submit" value = "publish" onclick="return confirm('Are you sure to publish exam?')">Publish</button>
             </div>
@@ -153,45 +126,30 @@
 
 </form>
 
-<!-- <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-<script type ="text/javascript" src='jquery-3.3.1.min.js'></script>
-<script>
-    $(document).ready(function()){
-        $(#moduleselect).on('change', function()) {
-            var mod = $(this).val();
 
-
-            $.ajax({
-                type: 'POST',
-                data: {ajax: 1, mod: mod},
-                success: function(response){
-                    $('#response').text('module: ' + response);
-                }
-            });
-        }
-    }
-</script> -->
-
-<!-- <script>
-var options=""; //store the dynamic options
-$("#moduleselect").on('change',function(){
-    var value=$(this).val(); //get its selected value
-    alert(value);
-    while($paperarray = mysqli_fetch_array($spaper)){
-        // options="<option>Select Your Name</option>"
-        if(value==$paperarray['ModuleID'])
-        {
-            options='<option value ='.$paperdata["PaperID"].'>'.$paperdata["PaperName"].' - '.$paperdata["PaperType"].'</option>';
-            $("#paperselect").html(options);
-        }
-        else
-            $("#paperselect").find('option').remove() //if first default text option is selected empty the select
-        }
-});
-</script> -->
 
 <!-- javascript to clear all fields in form -->
+
+<script src="js/mingliangJS.js"></script>
 <script>
+    function GainRelatedExamPaper() {
+        var selection = document.getElementById('moduleselect');
+        var selectedOption = selection.options[selection.selectedIndex].value;
+
+        var paperSelection = document.getElementById('paperselect');
+        if (selectedOption == "") {
+            updateTable("lecturer_get_paper_from_module.php?moduleID="+"nodata",'paperselect');
+            paperSelection.setAttribute('disabled','');
+            return;
+        }
+
+        // console.log(selectedOption);
+        updateTable("lecturer_get_paper_from_module.php?moduleID="+selectedOption, 'paperselect');
+
+        // remove paperselect's disabled
+        paperSelection.removeAttribute('disabled');
+    }
+
     function resetform() {
         document.getElementById("examcreate").reset();
     }

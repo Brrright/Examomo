@@ -4,6 +4,10 @@
     echo '<script>alert("Please login before you access this page.");
     window.location.href="guest_home_page.php";</script>';
   }
+  if ($_SESSION["userRole"] != "admin") {
+    echo '<script>alert("You have not access to this page.");
+    window.location.href="guest_home_page.php";</script>';
+  }
 ?>
 
 <!DOCTYPE html>

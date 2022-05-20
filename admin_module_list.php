@@ -100,7 +100,7 @@
         const input = document.getElementById('search-text')
         input.addEventListener('keyup', function(event) {
             var key = document.getElementById('search-text').value;
-            updateTable("admin_module_list_backend.php?module_name=" + key)
+            updateTable("admin_module_list_backend.php?module_name=" + key,  'table-body')
         })
 
     </script>

@@ -5,6 +5,11 @@
     require("common/conn.php");
 
     $body = json_decode(file_get_contents("php://input"), true);
+    if($body["organizationName"] == "") {
+        $response["error"] = 'Error: no data';
+        echo json_encode($response);
+        return;
+    }
     $response = [];
 
     // company------------------------------------------------------------------------

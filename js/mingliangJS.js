@@ -166,15 +166,15 @@ function closeToast(divElementId) {
     toastDiv.removeChild(toastDiv.firstElementChild);
 }
 
-function updateTable(path) {
+function updateTable(path, parentElement) {
     var xmlhttp = new XMLHttpRequest();
     xmlhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
-            document.getElementById('table-body').innerHTML = this.responseText;
+            document.getElementById(parentElement).innerHTML = this.responseText;
         }
     }
-    var key = document.getElementById('search-text').value;
-    console.log(key);
+    // var key = document.getElementById('search-text').value;
+    // console.log(key);
     xmlhttp.open("GET", path);
     xmlhttp.send();
 }
