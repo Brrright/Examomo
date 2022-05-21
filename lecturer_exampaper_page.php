@@ -6,6 +6,11 @@
         window.location.href="guest_home_page.php";</script>';
     }
 
+    if ($_SESSION["userRole"] != "lecturer") {
+      echo '<script>alert("You have not access to this page.");
+      window.location.href="guest_home_page.php";</script>';
+    }
+
     // retrieve drafted exam details
     $draftpapersql = "SELECT exam_paper.PaperID, exam_paper.PaperName, module.ModuleName FROM exam_paper INNER JOIN module ON exam_paper.ModuleID = module.ModuleID WHERE exam_paper.CompanyID = ".$_SESSION['companyID']." AND exam_paper.PaperName LIKE '%(drafted)%' AND exam_paper.LecturerID = ".$_SESSION["userID"]."";
     $draftpaper = mysqli_query($con, $draftpapersql);
@@ -106,7 +111,7 @@
         <col span="1" style="width: 10%;">
       </colgroup>
     <thead>
-    <p class="text-uppercase fw-bold main-color m-2 font-caveat lead">Created Exam Papers</p>
+    <p class="text-uppercase fw-bold main-color m-2 font-caveat lead">Published Exam Papers</p>
       <tr>
       <th scope="col">ID</th>
           <th scope="col">Name</th>

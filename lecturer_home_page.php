@@ -6,6 +6,10 @@
     window.location.href="guest_home_page.php";</script>';
   }
 
+  if ($_SESSION["userRole"] != "lecturer") {
+    echo '<script>alert("You have not access to this page.");
+    window.location.href="guest_home_page.php";</script>';
+  }
 ?>
 
 <!DOCTYPE html>
@@ -186,41 +190,6 @@
           </div>
         </div>
       </div>
-  
-      <!-- Exam paper card -->
-      <div class= "col-sm-6" style= "width: 25rem; margin-bottom: 40px;">
-        <div class="card-lecturerhp">
-          <div class="card-body-lecturerhp">
-            <h3 class="card-title-lecturerhp"><i class="bi bi-list-ul"></i> Exam Paper</h3>
-            <p class="card-text-lecturerhp" style="color: #2B5EA4;">
-            <?php
-                $sql = "SELECT exam_paper.PaperName, exam_paper.DateCreated, module.ModuleName, exam_paper.PaperType FROM exam_paper INNER JOIN module ON exam_paper.ModuleID = module.ModuleID WHERE exam_paper.LecturerID = '".$_SESSION["userID"]."' ORDER BY exam_paper.DateCreated DESC LIMIT 1";  
-                $result = mysqli_query($con, $sql);
-  
-                while ($row = mysqli_fetch_array($result)) {
-
-                  echo "<br>"."Paper Name: ";
-                  echo $row['PaperName']."<br>"."<br>";
-  
-                  echo "Creation Date: ";
-                  echo $row['DateCreated']."<br>"."<br>";
-  
-                  echo "Module Name: ";
-                  echo $row['ModuleName']."<br>"."<br>";
-                  
-                  echo "Type: ";
-                  echo $row['PaperType']."<br>"."<br>";
-                  
-                }
-                
-                ?>
-            </p>
-            <div style="text-align: center;">
-              <a href="lecturer_exampaper_page.php" class="btn btn-primary" id ="cardbutton">View All Exam Papers</a>
-            </div>
-          </div>
-        </div>
-      </div>
 
       <!-- Completed exam card -->
       <div class= "col-sm-6" style= "width: 25rem; margin-bottom: 40px;">
@@ -252,6 +221,41 @@
             </p>
             <div style="text-align: center;">
               <a href="#" class="btn btn-primary" id ="cardbutton">View All Completed Exams</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+            <!-- Exam paper card -->
+            <div class= "col-sm-6" style= "width: 25rem; margin-bottom: 40px;">
+        <div class="card-lecturerhp">
+          <div class="card-body-lecturerhp">
+            <h3 class="card-title-lecturerhp"><i class="bi bi-list-ul"></i> Exam Paper</h3>
+            <p class="card-text-lecturerhp" style="color: #2B5EA4;">
+            <?php
+                $sql = "SELECT exam_paper.PaperName, exam_paper.DateCreated, module.ModuleName, exam_paper.PaperType FROM exam_paper INNER JOIN module ON exam_paper.ModuleID = module.ModuleID WHERE exam_paper.LecturerID = '".$_SESSION["userID"]."' ORDER BY exam_paper.DateCreated DESC LIMIT 1";  
+                $result = mysqli_query($con, $sql);
+  
+                while ($row = mysqli_fetch_array($result)) {
+
+                  echo "<br>"."Paper Name: ";
+                  echo $row['PaperName']."<br>"."<br>";
+  
+                  echo "Creation Date: ";
+                  echo $row['DateCreated']."<br>"."<br>";
+  
+                  echo "Module Name: ";
+                  echo $row['ModuleName']."<br>"."<br>";
+                  
+                  echo "Type: ";
+                  echo $row['PaperType']."<br>"."<br>";
+                  
+                }
+                
+                ?>
+            </p>
+            <div style="text-align: center;">
+              <a href="lecturer_exampaper_page.php" class="btn btn-primary" id ="cardbutton">View All Exam Papers</a>
             </div>
           </div>
         </div>

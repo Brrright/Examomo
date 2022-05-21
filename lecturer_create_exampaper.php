@@ -5,6 +5,11 @@
         window.location.href="guest_home_page.php";</script>';
     }
 
+    if ($_SESSION["userRole"] != "lecturer") {
+        echo '<script>alert("You have not access to this page.");
+        window.location.href="guest_home_page.php";</script>';
+    }
+
 ?>
 
 <?php
@@ -39,7 +44,7 @@
             Create Examination Paper
         </p>
 
-        <p class="text-uppercase fw-bold main-color m-2 font-caveat">
+        <p class="text-uppercase fw-bold main-color m-2">
             Paper Name
         </p>
 
@@ -48,7 +53,7 @@
             <label for="floatingInput">Paper Name</label>
         </div>
 
-        <p class="text-uppercase fw-bold main-color m-2 font-caveat">
+        <p class="text-uppercase fw-bold main-color m-2">
             Module Name
         </p>
 
@@ -63,7 +68,7 @@
             ?>
         </select>
 
-        <p class="text-uppercase fw-bold main-color m-2 font-caveat">
+        <p class="text-uppercase fw-bold main-color m-2">
             Paper Type
         </p>
 

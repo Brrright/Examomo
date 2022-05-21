@@ -18,16 +18,16 @@
 
         <ul class="list-unstyled mb-0">
           <li>
-            <a href="#!" class="text-blue">Exams</a>
+            <a href="student_home_page.php" class="text-blue">Exams</a>
           </li>
           <li>
-            <a href="#!" class="text-blue">Results</a>
+            <a href="student_results.php" class="text-blue">Results</a>
           </li>
           <li>
-            <a href="#!" class="text-blue">Feedback</a>
+            <a href="student_feedback_page.php" class="text-blue">Feedback</a>
           </li>
           <li>
-            <a href="#!" class="text-blue">FAQ</a>
+            <a href="student_FAQ.php" class="text-blue">FAQ</a>
           </li>
         </ul>
       </div>

@@ -2,6 +2,7 @@
     require "common/conn.php";
     $adminID = $_SESSION['userID'];
     $companyID = $_SESSION['companyID'];
+    $moduleID = $_POST['moduleid'];
 
     $sqlClass = "INSERT INTO class (ClassName, CompanyID) VALUE ('$_POST[className]', $companyID)";
     if(!mysqli_query($con, $sqlClass)) {
@@ -22,7 +23,6 @@
         }
         else {
             // module + class------------------------------------------------------------------------
-            $moduleID = mysqli_insert_id($con);
             $sqlClass_Module = "INSERT INTO module_class (ModuleID, ClassID, CompanyID) VALUES ('$moduleID', '$classID', $companyID)";
             if(!mysqli_query($con, $sqlClass_Module)) {
                 $response["error"] = 'Error:'.mysqli_error($con);

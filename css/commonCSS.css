@@ -67,7 +67,7 @@
     background:rgb(43, 94, 164); 
 }
 
-body, html {
+body {
     background-image: linear-gradient( rgb(187, 221, 240),rgb(138, 248, 187) ,rgb(211, 250, 213));
     background-repeat: no-repeat;
     background-size: cover;

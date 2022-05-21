@@ -4,6 +4,11 @@
         echo '<script>alert("Please login before you access this page.");
         window.location.href="guest_home_page.php";</script>';
     }
+
+    if ($_SESSION["userRole"] != "lecturer") {
+        echo '<script>alert("You have not access to this page.");
+        window.location.href="guest_home_page.php";</script>';
+    }
 ?>
 
 <?php
@@ -53,7 +58,7 @@
             Edit Examination Paper
         </p>
 
-        <p class="text-uppercase fw-bold main-color m-2 font-caveat">
+        <p class="text-uppercase fw-bold main-color m-2">
             Paper Name
         </p>
 
@@ -62,7 +67,7 @@
             <label for="floatingInput">Paper Name</label>
         </div>
 
-        <p class="text-uppercase fw-bold main-color m-2 font-caveat">
+        <p class="text-uppercase fw-bold main-color m-2">
             Module Name
         </p>
         <select name="Moduleid" class="form-select fw-light shadow-sm" style="height:58px;" id="moduleselect" required>
@@ -82,7 +87,7 @@
             
         </select>
 
-        <p class="text-uppercase fw-bold main-color m-2 font-caveat">
+        <p class="text-uppercase fw-bold main-color m-2">
             Paper Type
         </p>
 
@@ -96,15 +101,15 @@
 
         <div class= "d-flex flex-wrap justify-content-around">
             <div>
-                <button class="btn third-bg-color font-caveat shadow mx-auto mt-3 fs-4" type="submit" name= "submit" value = "draft" onclick="return confirm('Are you sure to draft exam paper?')">Save as Draft</button>
+                <button class="btn third-bg-color font-caveat shadow mx-auto mt-3 fs-4" type="submit" name= "submit" value = "draft" onclick="return confirm('Are you sure to draft exam paper?')">Mark as Draft</button>
             </div>
 
             <div>
-                <button class="btn third-bg-color font-caveat shadow mx-auto mt-3 fs-4" type="reset">Reset</button>
+                <button class="btn third-bg-color font-caveat shadow mx-auto mt-3 fs-4" type="reset">Discard Changes</button>
             </div>
 
             <div>
-                <button class="btn third-bg-color font-caveat shadow mx-auto mt-3 fs-4" type="submit" name= "submit" value = "create" onclick="return confirm('Are you sure to create exam paper?')">Create Paper</button>
+                <button class="btn third-bg-color font-caveat shadow mx-auto mt-3 fs-4" type="submit" name= "submit" value = "create" onclick="return confirm('Are you sure to create exam paper?')">Save as published</button>
             </div>
         </div>
     </div> 

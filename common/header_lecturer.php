@@ -15,10 +15,10 @@
                     <a class="nav-link" style="color:#2B5EA4;" href="lecturer_home_page.php">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" style="color:#2B5EA4;" href="lecturer_exam_page.php">Manage Exam</a>
+                    <a class="nav-link" style="color:#2B5EA4;" href="lecturer_exam_page.php"><i class="bi bi-calendar3-event"></i> Manage Exam</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" style="color:#2B5EA4;" href="lecturer_exampaper_page.php">Manage Exam Paper</a>
+                    <a class="nav-link" style="color:#2B5EA4;" href="lecturer_exampaper_page.php"><i class="bi bi-newspaper"></i> Manage Exam Paper</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link position-relative me-3" style="color:#2B5EA4;" href="#">

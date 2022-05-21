@@ -82,7 +82,7 @@
             Exam Starting Date & Time
         </p>
         <div class="form datetime">
-            <input type="datetime-local" placeholder="ExamDateTime" name="Examstarttime" style="width: 100%;" required>
+            <input type="datetime-local" placeholder="ExamDateTime" name="Examstarttime" id="Startdatetime" style="width: 100%; height: 58px;" required onchange="checkDate()"/>
         </div>
         </div>
         <br>
@@ -92,7 +92,7 @@
             Exam Ending Date & Time
         </p>
         <div class="form datetime">
-            <input type="datetime-local" placeholder="ExamDateTime" name="Examendtime" style="width: 100%;" required>
+            <input type="datetime-local" placeholder="ExamDateTime" name="Examendtime" id="Enddatetime" style="width: 100%; height: 58px;" required onchange="checkDate()"/>
         </div>
         </div>
         </div>
@@ -127,7 +127,6 @@
 </form>
 
 
-
 <!-- javascript to clear all fields in form -->
 
 <script src="js/mingliangJS.js"></script>
@@ -153,6 +152,22 @@
     function resetform() {
         document.getElementById("examcreate").reset();
     }
+
+    function checkDate() {
+        var dateString = document.getElementById('Startdatetime').value;
+        var dateString2 = document.getElementById('Enddatetime').value;
+        var DateStart = new Date(dateString);
+        var DateEnd = new Date(dateString2);
+        if (DateEnd < DateStart) {
+            alert("End date time cannot be less than Start date time.");
+            document.getElementById("Startdatetime").value = null;
+            document.getElementById("Enddatetime").value = null;
+            return false;
+    
+        }
+        return true;
+    }
+
 </script>
 
 <!-- footer -->

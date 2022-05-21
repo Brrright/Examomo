@@ -50,7 +50,7 @@
               <p class="text-uppercase fw-bold main-color m-2">
                   RELATED MODULE
               </p>
-              <select id="module-selection" class="form-select fw-light shadow-sm" style="height:58px;" required>
+              <select name ="moduleid" id="module-selection" class="form-select fw-light shadow-sm" style="height:58px;" required>
                   <option value="">Please select the related module</option>
                   <?php
                     while ($data = mysqli_fetch_array($result)) {

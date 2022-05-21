@@ -12,22 +12,22 @@
         <div class="collapse navbar-collapse" id="navmenu">
             <ul class="navbar-nav ms-auto mb-2 me-5 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link" style="color:#2B5EA4;" href="#">Home</a>
+                    <a class="nav-link" style="color:#2B5EA4;" href="student_home_page.php">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" style="color:#2B5EA4;" href="#">Exam</a>
+                    <a class="nav-link" style="color:#2B5EA4;" href="student_exam_list.php">Exam</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" style="color:#2B5EA4;" href="#">Result</a>
+                    <a class="nav-link" style="color:#2B5EA4;" href="student_view_result.php">Result</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link position-relative me-3" style="color:#2B5EA4;" href="#">
+                    <a class="nav-link position-relative me-3" style="color:#2B5EA4;" href="student_feedback_page.php">
                         Feedback 
                         <span id="" class="position-absolute top-0 start-100 translate-middle badge bg-warning rounded-pill text-dark">1</span>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" style="color:#2B5EA4;" href="#">FAQ</a>
+                    <a class="nav-link" style="color:#2B5EA4;" href="student_FAQ.php">FAQ</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" style="color:#2B5EA4;" href="#"><span style="width:30px; height:30px" class="bi bi-person-circle"></span>Profile</a>
