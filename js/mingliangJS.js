@@ -173,8 +173,6 @@ function updateTable(path, parentElement) {
             document.getElementById(parentElement).innerHTML = this.responseText;
         }
     }
-    // var key = document.getElementById('search-text').value;
-    // console.log(key);
     xmlhttp.open("GET", path);
     xmlhttp.send();
 }

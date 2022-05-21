@@ -2,8 +2,8 @@
 "common/conn.php";
 // havent replied
 $sentsql = "SELECT feedback.FeedbackID, feedback.FeedbackContent, feedback.FeedbackStatus, feedback.FeedbackDateTime, student.StudentName, student.StudentEmail 
-                FROM feedback INNER JOIN student ON feedback.StudentID = student.StudentID 
-                WHERE feedback.StudentID = ".$_SESSION["userID"]." AND feedback.CompanyID = ".$_SESSION["companyID"]." AND feedback.FeedbackStatus LIKE 0 ORDER BY feedback.FeedbackDateTime DESC";
+            FROM feedback INNER JOIN student ON feedback.StudentID = student.StudentID 
+            WHERE feedback.StudentID = ".$_SESSION["userID"]." AND feedback.CompanyID = ".$_SESSION["companyID"]." AND feedback.FeedbackStatus LIKE 0 ORDER BY feedback.FeedbackDateTime DESC";
 
 $sentresult = mysqli_query($con, $sentsql);
 $numOfRow = mysqli_num_rows($sentresult);
@@ -88,46 +88,46 @@ $numOfRow2 = mysqli_num_rows($repliedresult);
                 </div>
             </div>
             <div class="col-sm-9">  
-                    <div class="enquirybox my-4 shadow p-3 mb-5" id="feedback-content">
-                        <div class="chatbox">
-                            <div class="row" id="student-feedback-content">
-                                <div class="col-2">
-                                    <img src="img/admin/students.png" alt="...">
-                                </div>
-                                <div class="col-10">
-                                    <div style="width:80px;height:30px;" class="bg-light"> 
-                                        
-                                    </div>
-                                    <br>
-                                    <div style="width:100%;height:40px;" class="bg-light">
-                                        
-                                    </div>
-                                    <div>
-                                    <span class="time-right" >xx:xx</span>
-                                    </div>
-                                </div>
+                <div class="enquirybox my-4 shadow p-3 mb-5" id="feedback-content">
+                    <div class="chatbox">
+                        <div class="row" id="student-feedback-content">
+                            <div class="col-2">
+                                <img src="img/admin/students.png" alt="...">
                             </div>
-                        </div>
-                        <div class="chatbox">
-                            <div class="row" id="admin-feedback-content">
-                                <div class="col-2">
-                                    <img src="img/admin/admin.png" alt="...">
+                            <div class="col-10">
+                                <div style="width:80px;height:30px;" class="bg-light"> 
+                                    
                                 </div>
-                                <div class="col-10">
-                                    <div style="width:80px;height:30px;" class="bg-light"> 
-                                        
-                                    </div>
-                                    <br>
-                                    <div style="width:100%;height:40px;" class="bg-light">
-                                        
-                                    </div>
-                                    <div>
-                                    <span class="time-right" >xx:xx</span>
-                                    </div>
+                                <br>
+                                <div style="width:100%;height:40px;" class="bg-light">
+                                    
+                                </div>
+                                <div>
+                                <span class="time-right" >xx:xx</span>
                                 </div>
                             </div>
                         </div>
                     </div>
+                    <div class="chatbox">
+                        <div class="row" id="admin-feedback-content">
+                            <div class="col-2">
+                                <img src="img/admin/admin.png" alt="...">
+                            </div>
+                            <div class="col-10">
+                                <div style="width:80px;height:30px;" class="bg-light"> 
+                                    
+                                </div>
+                                <br>
+                                <div style="width:100%;height:40px;" class="bg-light">
+                                    
+                                </div>
+                                <div>
+                                <span class="time-right" >xx:xx</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -135,11 +135,7 @@ $numOfRow2 = mysqli_num_rows($repliedresult);
     <script src="js/mingliangJS.js"></script>
     <script>
         function changeContent(id) {
-            // make path
             var path = "student_feedback_onclick_backend.php?id=" +id;
-            
-            // remove div's element
-            // update Table
             updateTable(path, 'feedback-content')
         }
     </script>

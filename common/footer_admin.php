@@ -20,6 +20,9 @@
           <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mt-3 ">
             <h6 class="text-uppercase mb-4 font-weight-bold">Quick Links</h6>
             <p>
+              <a href="admin_feedback_page.php" class="text-decoration-none text-black">Manage Feedback</a>
+            </p>
+            <p>
               <a href="admin_student_list.php" class="text-decoration-none text-black">Manage Students</a>
             </p>
             <p>

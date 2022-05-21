@@ -4,7 +4,7 @@
     $companyID = $_SESSION['companyID'];
 
     $sql ="INSERT INTO admin (AdminName, AdminEmail, AdminPassword, CompanyID)
-    VALUES('$_POST[AdminName]', '$_POST[AdminEmail]', '$_POST[AdminPassword]', $companyID)";
+    VALUES('$_POST[adminName]', '$_POST[adminEmail]', '$_POST[adminPassword]', $companyID)";
 
     if(!mysqli_query($con, $sql)) {
         $response["error"] = 'Error:'.mysqli_error($con);
@@ -13,7 +13,7 @@
     }
         else {
             echo '<script>alert("Admin created successfully.");
-            // window.location.href = "admin_add_admin.php";
-            // </script>';
+            window.location.href = "admin_add_admin.php";
+            </script>';
             } 
 ?>

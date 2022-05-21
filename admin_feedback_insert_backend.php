@@ -1,8 +1,7 @@
 <?php
     require "common/conn.php";
-
+    if(!$_POST)
     // identify if user logged in
-    require "common/conn.php";
     if (!isset($_SESSION["userID"])) {
         echo '<script>alert("Please login before you access this page.");
         window.location.href="guest_home_page.php";</script>';
@@ -16,7 +15,7 @@
     // get user id and company id from session
     $id = $_SESSION['userID'];
     $comid = $_SESSION['companyID'];
-    $fb_id = $_POST['fb-id'];
+    $fbID = $_POST["fbID"];
     $status = 1;
 
     // get current datetime
@@ -24,15 +23,12 @@
     $date_now = date('Y-m-d H:i:s');
 
     //insert student created
-    $sql = "UPDATE feedback SET
-    FeedbackStatus = $status,
-    FeedbackReply = '$_POST[fb-reply]',
-    RepliedDateTime = '$date_now',
-    WHERE FeedbackID = '$fb_id'";
+    $sql = "UPDATE feedback SET FeedbackStatus = $status, FeedbackReply = '$_POST[content]', RepliedDateTime = '$date_now'
+    WHERE FeedbackID = $fbID";
 
     // error message when no query found
     if (!mysqli_query($con,$sql)) {
-        die('Error: ' . mysqli_error($con));
+        die('Error: '. mysqli_error($con));
     }
 
     //redirect after display message
