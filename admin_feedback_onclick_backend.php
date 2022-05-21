@@ -12,6 +12,7 @@
           window.location.href="guest_home_page.php";</script>';
           return;
       }
+      
       //use post to get the module ID selected
       if(isset($_GET['id'])) {
         $feedbackID = $_GET['id'];

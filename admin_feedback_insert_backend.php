@@ -33,8 +33,8 @@
 
     //redirect after display message
     else {
-    echo '<script>alert("Your feedback is created successfully.");
-    window.location.href = "";
-    </script>';
+        echo '<script>alert("Your feedback is created successfully.");
+        window.location.href = "";
+        </script>';
     }
 ?>

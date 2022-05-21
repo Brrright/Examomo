@@ -6,10 +6,6 @@
       <?php require "common/HeadImportInfo.php" ?>
         <link rel="stylesheet" href="css/weestyle.css">
         <link rel="stylesheet" href="css/commonCSS.css">
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     </head>
 <body>      
   <?php require "common/header_admin.php"  ?>
@@ -28,14 +24,15 @@
       <div class="col-sm-10">
         <form class="was-validated" action ="admin_add_module_backend.php" method ="post">
           <div class="profilecontainer my-4 p-4 shadow p-3 mb-5 font-caveat">
-            <div class="form-floating">
-              <input type="text" class="form-control shadow-sm" id="mod-floatingInput" name="moduleName" placeholder="Module Name" pattern="[a-zA-Z][a-zA-Z0-9 ]{5,}" required>
+            <div class="form-floating" id="name-field">
+              <input type="text" v-model="name" @keyup="checkName()" class="form-control shadow-sm" id="mod-floatingInput" name="moduleName" placeholder="Module Name" pattern="[a-zA-Z][a-zA-Z0-9 ]{5,}" required>
                 <label class="text-secondary" for="mod-floatingInput">Module Name</label>
                   <div class="valid-feedback">Valid <i class="bi bi-check2-circle"></i>.</div>
                   <div class="invalid-feedback">Please fill out this field with valid input.</div>
+                  <span class="text-danger" v-bind:id="[isAvailable?'notavailable':'available']">{{responseMessage}}</span>
                   <br>
                     <div class= "d-flex flex-wrap justify-content-around">
-                    <button type="submit" value="submit" class="btn btn-primary" style="border:none;">Submit</button>
+                    <button id="submit-btn" type="submit" value="submit" class="btn btn-primary" style="border:none;">Submit</button>
                     </div>      
             </div>
           </div>
@@ -43,5 +40,53 @@
       </div>
     </div>
   <?php require "common/footer_admin.php"  ?>
+  <script src="https://unpkg.com/vue@2"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="js/mingliangJS.js"></script>
+    <script>
+        var app = new Vue({
+            el: '#name-field',
+            data: {
+                name: '',
+                isAvailable: 0,
+                responseMessage: ''
+            },
+            methods: {
+                checkName: function(){
+                    var name = this.name.trim();
+                    if(name != ''){
+                
+                    axios.get('backend_check_name.php?action=module', {
+                        params: {
+                          name: name
+                        }
+                    })
+                    .then(function (response) {
+                        app.isAvailable = response.data;
+                        if(response.data == 0){
+                        app.responseMessage = "";
+                        document.getElementById("submit-btn").disabled = false;
+                        }else{
+                        app.responseMessage = "Name Has been used.";
+                        }
+                    })
+                    .then(function() {
+                      var checkEmail = document.getElementById("notavailable");
+                      if (checkEmail != null) {
+                        document.getElementById("submit-btn").disabled = true;
+                      }
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                    });
+
+                    }else{
+                        this.responseMessage = "";
+                        
+                    }
+                }
+            }
+        })
+    </script>
 </body>
 </html>

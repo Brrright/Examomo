@@ -29,7 +29,7 @@
                     <div class="pill-nav">
                         <a class="active">View Lecturer List</a>
                         <br>
-                        <a href="#news">Add Lecturers</a>
+                        <a href="admin_add_lecturer.php">Add Lecturers</a>
                     </div>
                 </div>
             </div>

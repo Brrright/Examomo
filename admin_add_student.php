@@ -22,7 +22,7 @@
     </head>
 <body>      
   <?php require "common/header_admin.php"  ?>
-  <center><h1 style="font-family: 'Caveat';">Add Students</h1></center>
+  <center><h1 style="font-family: 'Caveat';">Add Student Account</h1></center>
   <div class="container">
     <div class="row g-0">
       <div class="col-sm-2">
@@ -66,11 +66,12 @@
                         <p class="text-uppercase fw-bold main-color m-2">
                             student email
                         </p>
-                        <div class="form-floating">
-                            <input type="email" class="form-control shadow-sm" id="stu-email-floatingInput" name="studentEmail" placeholder="Student Email" required>
+                        <div class="form-floating" id="email-field">
+                            <input type="email" v-model="email" @keyup="checkEmail()" class="form-control shadow-sm" id="stu-email-floatingInput" name="studentEmail" placeholder="Student Email" required>
                             <label class="text-secondary" for="stu-email-floatingInput">Student Email</label>
                             <div class="valid-feedback">Valid <i class="bi bi-check2-circle"></i>.</div>
                             <div class="invalid-feedback">Please fill out this field with valid input.</div>
+                            <span class="text-danger" v-bind:id="[isAvailable?'notavailable':'available']">{{responseMessage}}</span>
                         </div>
                         <p class="text-uppercase fw-bold main-color m-2">
                             password
@@ -103,7 +104,7 @@
                     </div>
                     <br>
                     <div class= "d-flex flex-wrap justify-content-around">
-                    <button type="submit" value="submit" class="btn btn-primary" style="border:none;">Submit</button>
+                    <button id="submit-btn" type="submit" value="submit" class="btn btn-primary" style="border:none;">Submit</button>
                     </div>
                   </div>
             </div>
@@ -114,5 +115,53 @@
     </div>
   </div>
   <?php require "common/footer_admin.php"  ?>
+  <script src="https://unpkg.com/vue@2"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="js/mingliangJS.js"></script>
+    <script>
+        var app = new Vue({
+            el: '#email-field',
+            data: {
+                email: '',
+                isAvailable: 0,
+                responseMessage: ''
+            },
+            methods: {
+                checkEmail: function(){
+                    var email = this.email.trim();
+                    if(email != ''){
+                
+                    axios.get('backend_check_email.php?role=student', {
+                        params: {
+                            email: email
+                        }
+                    })
+                    .then(function (response) {
+                        app.isAvailable = response.data;
+                        if(response.data == 0){
+                        app.responseMessage = "";
+                        document.getElementById("submit-btn").disabled = false;
+                        }else{
+                        app.responseMessage = "Email Has been used.";
+                        }
+                    })
+                    .then(function() {
+                      var checkEmail = document.getElementById("notavailable");
+                      if (checkEmail != null) {
+                        document.getElementById("submit-btn").disabled = true;
+                      }
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                    });
+
+                    }else{
+                        this.responseMessage = "";
+                        
+                    }
+                }
+            }
+        })
+    </script>
 </body>
 </html>
