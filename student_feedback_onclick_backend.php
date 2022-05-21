@@ -1,6 +1,5 @@
 <?php
-    "common/conn.php";
-   
+    require "common/conn.php";
       // identify if user logged in
       if (!isset($_SESSION["userID"])) {
           echo '<script>alert("Please login before you access this page.");
@@ -38,6 +37,12 @@
     }
 
     while ($rfeedback = mysqli_fetch_array($sentresult)) {
+        if ($rfeedback["FeedbackReply"] == null) {
+            $feedbackreply = "(no reply yet)";
+        }
+        else {
+            $feedbackreply = $rfeedback["FeedbackReply"];
+        }
 
         $content = '<div class="chatbox">
                         <div class="row" id="student-feedback-content">
@@ -67,7 +72,7 @@
                                     <p>ADMIN</p>
                                 </div>
                                 <div>
-                                    <p>'.$rfeedback["FeedbackReply"].'</p>
+                                    <p>'.$feedbackreply.'</p>
                                 </div>
                                 <div>
                                     <span class="time-right">'.$rfeedback["RepliedDateTime"].'</span>

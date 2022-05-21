@@ -54,7 +54,7 @@ $numOfRow2 = mysqli_num_rows($repliedresult);
 
                                     //replied feedback will be displayed first
                                     while ($rfeedback = mysqli_fetch_array($repliedresult)) {
-                                        $repliedEnquiryList = '<button class="list-group-item list-group-item-action py-3" onclick="updateTable(student_feedback_onclick_backend.php?id='.$rfeedback["FeedbackID"].', "feedback-content")">
+                                        $repliedEnquiryList = '<button class="list-group-item list-group-item-action py-3" id="list-id-'.$rfeedback["FeedbackID"].'" onclick="changeContent('.$rfeedback["FeedbackID"].')">
                                         <div class="d-flex w-100 align-items-center justify-content-between">
                                         <small class="text-muted"> Replied at '.$rfeedback["RepliedDateTime"].'</small>
                                         </div>
@@ -69,7 +69,7 @@ $numOfRow2 = mysqli_num_rows($repliedresult);
                                     echo '<p class="fw-bold text-center main-color mt-1">Sent (Haven\'t get replied)</p>';
                                     // unreplied feedback will be display afterwards
                                     while($sfeedback = mysqli_fetch_array($sentresult)){
-                                        $enquirylist = '<button class="list-group-item list-group-item-action py-3" onclick="updateTable(student_feedback_onclick_backend.php?id='.$sfeedback["FeedbackID"].', "feedback-content")">
+                                        $enquirylist = '<button class="list-group-item list-group-item-action py-3" id="list-id-'.$sfeedback["FeedbackID"].'" onclick="changeContent('.$sfeedback["FeedbackID"].')">
                                         <div class="d-flex w-100 align-items-center justify-content-between">
                                         
                                         <strong class="mb-1">'.$sfeedback["StudentName"].'</strong>
@@ -136,7 +136,11 @@ $numOfRow2 = mysqli_num_rows($repliedresult);
     <script>
         function changeContent(id) {
             // make path
-            // make class active (the list)
+            var path = "student_feedback_onclick_backend.php?id=" +id;
+            
+            // remove div's element
+            // update Table
+            updateTable(path, 'feedback-content')
         }
     </script>
 </body>
