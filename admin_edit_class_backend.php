@@ -22,10 +22,10 @@
     foreach ($modules as $modID) {
 
         $sql = "UPDATE class SET ClassName = '$_POST[classname]' WHERE ClassID = '$classid'";
-        $sql ="UPDATE class INNER JOIN module_class ON class.ClassID = module_class.ClassID SET
-            class.ClassName = '$_POST[classname]',
-            module_class.ModuleID = '$modID'
-            WHERE class.ClassID = '$classid'";
+        // $sql ="UPDATE class INNER JOIN module_class ON class.ClassID = module_class.ClassID SET
+        //     class.ClassName = '$_POST[classname]',
+        //     module_class.ModuleID = '$modID'
+        //     WHERE class.ClassID = '$classid'";
 
         $sql2 = "UPDATE module_class SET ModuleID = '$modID' WHERE ClassID = '$classid'";
     
