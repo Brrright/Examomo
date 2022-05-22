@@ -15,7 +15,7 @@
     // get user id and company id from session
     $id = $_SESSION['userID'];
     $comid = $_SESSION['companyID'];
-    $fbID = $_POST["fbID"];
+    $fbID = $_POST['fbID'];
     $status = 1;
 
     // get current datetime
@@ -24,7 +24,7 @@
 
     //insert student created
     $sql = "UPDATE feedback SET FeedbackStatus = $status, FeedbackReply = '$_POST[content]', RepliedDateTime = '$date_now'
-    WHERE FeedbackID = $fbID";
+    WHERE FeedbackID = '$fbID'";
 
     // error message when no query found
     if (!mysqli_query($con,$sql)) {
@@ -33,8 +33,8 @@
 
     //redirect after display message
     else {
-        echo '<script>alert("Your feedback is created successfully.");
-        window.location.href = "";
+        echo '<script>alert("Feedback replied successfully.");
+        window.location.href = "admin_feedback_page.php";
         </script>';
     }
 ?>

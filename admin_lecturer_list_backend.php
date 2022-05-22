@@ -33,7 +33,7 @@ while ($data = mysqli_fetch_array($fetched)) {
         // print_r($listOfModuleID);
 
     // USING MODULE ID FETCHED, GET EACH MODULE NAME
-    $moduleRecord = mysqli_query($con, "SELECT ModuleName FROM module WHERE CompanyID =  ".$_SESSION['companyID']."");
+    $moduleRecord = mysqli_query($con, "SELECT * FROM module WHERE CompanyID =  ".$_SESSION['companyID']."");
     if(!$moduleRecord) {
         echo 'Error:'.mysqli_error($con);
         break;
@@ -42,8 +42,15 @@ while ($data = mysqli_fetch_array($fetched)) {
     // CONCATENATE MODULE NAME IN A STRING
     // echo $numOfModule;
     $moduleString = "";
+    $numberOfRecord = count($listOfModuleID);
+    $numOfModule = mysqli_num_rows($moduleRecord);
     while ($dataModule = mysqli_fetch_array($moduleRecord)) {
-        $moduleString = $moduleString.$dataModule["ModuleName"]."<br>" ;
+        for ($x= 0; $x < $numberOfRecord; $x++) {
+            if($dataModule["ModuleID"] == $listOfModuleID[$x]) {
+
+                $moduleString = $moduleString.$dataModule["ModuleName"]."<br>" ;
+            }
+        }
     }
         $row = '<tr>
         <td>'.$data["LecturerID"].'</td>

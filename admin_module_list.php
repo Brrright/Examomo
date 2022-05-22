@@ -53,7 +53,7 @@
                     <tbody id="table-body">
                         <?php 
                         while ($data = mysqli_fetch_array($fetched)) {
-                            $module_class = mysqli_query($con, "SELECT * FROM module_class WHERE CompanyID = ".$_SESSION['companyID']." AND ModuleID = '.$data[ModuleID].'");
+                            $module_class = mysqli_query($con, "SELECT * FROM module_class WHERE CompanyID = ".$_SESSION['companyID']." AND ModuleID = ".$data['ModuleID']."");
                             if(!$module_class) {
                                 echo 'Err' .mysqli_error($con);
                                 break;
@@ -65,23 +65,31 @@
                                 array_push($listOfClassID, $classID);
                             }
 
-                            $classRecord = mysqli_query($con, "SELECT ClassName FROM class WHERE CompanyID =  ".$_SESSION['companyID']."");
+                            $classRecord = mysqli_query($con, "SELECT * FROM class WHERE CompanyID =  ".$_SESSION['companyID']."");
                             if(!$classRecord) {
                                 echo 'Error:'.mysqli_error($con);
                                 break;
                             }
                             
                             $classString = "";
+                            $numberOfRecord = count($listOfClassID);
                             while ($dataClass = mysqli_fetch_array($classRecord)) {
-                                $classString = $classString.$dataClass["ClassName"]."<br>";
+                                for ($x= 0; $x < $numberOfRecord; $x++) {
+                                    if($dataClass["ClassID"] == $listOfClassID[$x]) {
+                                        $classString = $classString.$dataClass["ClassName"]."<br>";
+                                    }
+                                }
+                            }
+                            if ($classString == "") {
+                                $classString = "(No related class)";
                             }
                             $row = '<tr>
                                         <td>'.$data["ModuleID"].'</td>
                                         <td>'.$data["ModuleName"].'</td>
                                         <td> '.$classString.'</td>
-                                        <td id="'.$data["ModuleID"].'">
-                                            <button class="btn btn-primary" ><i class="bi bi-pencil-fill"></i></button>
-                                            <button class="btn btn-danger" ><i class="bi bi-trash"></i></button>
+                                        <td>
+                                            <a href = "admin_edit_module.php?id='.$data["ModuleID"].'"<button class="btn btn-primary"><i class="bi bi-pencil-fill"></i></button></a>
+                                            <a href ="admin_delete_module_backend?id='.$data["ModuleID"].'"<button class="btn btn-danger delete-confirm"><i class="bi bi-trash"></i></button></a>
                                         </td>
                                     </tr>';
                             echo $row;

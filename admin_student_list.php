@@ -70,10 +70,9 @@
                                         <td>'.$data["StudentEmail"].'</td>
                                         <td>'.$data["StudentPassword"].'</td>
                                         <td>'.$classNameFetched["ClassName"].'</td>
-                                        <td id="'.$data["StudentID"].'">
-                                            <button class="btn btn-primary" ><i class="bi bi-pencil-fill"></i></button>
-                                            <button class="btn btn-danger" ><i class="bi bi-trash"></i></button>
-                                            <a href="admin_edit_student.php?id='.$data["StudentID"].'">
+                                        <td>
+                                            <a href="admin_edit_student.php?id='.$data["StudentID"].'"<button class="btn btn-primary"><i class="bi bi-pencil-fill"></i></a>
+                                            <a href="admin_delete_student.php?id='.$data["StudentID"].'"<button class="btn btn-danger delete-confirm"><i class="bi bi-trash"></i></button></a>
                                         </td>
                                     </tr>';
                             echo $row;
@@ -92,7 +91,7 @@
         const input = document.getElementById('search-text')
         input.addEventListener('keyup', function(event) {
             var key = document.getElementById('search-text').value;
-            updateTable("admin_student_list_backend.php?student_name=" + key,  'table-body')
+            updateTable("admin_student_list_backend.php?student_name=" + key)
         })
 
     </script>

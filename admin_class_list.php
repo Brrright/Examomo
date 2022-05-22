@@ -58,40 +58,53 @@
                                 <th>Action</th>
                             </tr>
                         </thead>
-                        <!-- <table-list></table-list> -->
                         <tbody id="table-body">
                             <?php 
                             while ($data = mysqli_fetch_array($fetched)) {
-                                $module_class = mysqli_query($con, "SELECT * FROM module_class WHERE CompanyID = ".$_SESSION['companyID']." AND ClassID = '.$data[ClassID].'");
+                                $module_class = mysqli_query($con, "SELECT * FROM module_class WHERE CompanyID = ".$_SESSION['companyID']." AND ClassID = ".$data['ClassID']."");
                                 if(!$module_class) {
                                     echo 'Err' .mysqli_error($con);
                                     break;
                                 }
-
+                                // echo mysqli_num_rows($module_class);
                                 $listOfModuleID = array();
                                 while ($data_for_module_class = mysqli_fetch_array($module_class)) {
                                     $ModuleID = $data_for_module_class["ModuleID"];
                                     array_push($listOfModuleID, $ModuleID);
                                 }
+                                // print_r($listOfModuleID);
 
-                                $moduleRecord =  mysqli_query($con, "SELECT ModuleName FROM module WHERE CompanyID =  ".$_SESSION['companyID']."");
+                                $moduleRecord =  mysqli_query($con, "SELECT * FROM module WHERE CompanyID =  ".$_SESSION['companyID']."");
                                 if(!$moduleRecord) {
                                     echo 'Error:'.mysqli_error($con);
                                     break;
                                 }
 
                                 $moduleString = "";
+                                $numberOfRecord = count($listOfModuleID);
+                                $numOfModule = mysqli_num_rows($moduleRecord);
+                                // echo "num of id related: ".$numberOfRecord;
+                                // echo "<br>num of id fetched: ".$numOfModule;
                                 while ($dataModule = mysqli_fetch_array($moduleRecord)) {
-                                    $moduleString = $moduleString.$dataModule["ModuleName"]."<br>" ;
+                                    // echo "<br>";
+                                    for ($x= 0; $x < $numberOfRecord; $x++) {
+                                        if($dataModule["ModuleID"] == $listOfModuleID[$x]) {
+                                            // echo $dataModule["ModuleID"];
+                                            // echo $listOfModuleID[$x];
+                                            // echo "...<br>";
+                                            $moduleString = $moduleString.$dataModule["ModuleName"]."<br>" ;
+                                        }
+                                    }
                                 }
+                                // echo "bye<br>";
 
                                 $row = '<tr>
                                             <td>'.$data["ClassID"].'</td>
                                             <td>'.$data["ClassName"].'</td>
                                             <td> '.$moduleString.'</td>
-                                            <td id="'.$data["ClassID"].'">
-                                                <button class="btn btn-primary" ><i class="bi bi-pencil-fill"></i></button>
-                                                <button class="btn btn-danger"><i class="bi bi-trash"></i></button>
+                                            <td>
+                                                <a href = "admin_edit_class.php?id='.$data["ClassID"].'" <button class="btn btn-primary"><i class="bi bi-pencil-fill"></i></button></a>
+                                                <a href ="admin_delete_class_backend?id='.$data["ClassID"].'"<button class="btn btn-danger delete-confirm"><i class="bi bi-trash"></i></button></a>
                                             </td>
                                         </tr>';
                                 echo $row;
@@ -115,6 +128,5 @@
         })
 
     </script>
-    <script src="js/jquery.tabledit.js"></script>
 </body>
 </html>

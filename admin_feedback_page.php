@@ -40,7 +40,8 @@ $numOfRow2 = mysqli_num_rows($repliedresult);
                                     echo '<br><span class="text-center fw-light">No enquiries Found</span><br>';
                                 }
                                 // unreplied feedback will be display first
-                                echo '<p class="fw-bold text-center main-color mt-1">New feedback <br>(Haven\'t replied)</p>';
+                                else{
+                                echo '<p class="fw-bold text-center main-color m-1" style="background-color: #ddd;">New Feedback</p>';
                                 while($sfeedback = mysqli_fetch_array($sentresult)){
 
                                     $enquirylist = '<button class="list-group-item list-group-item-action py-3" onclick="changeContent('.$sfeedback["FeedbackID"].')">
@@ -52,12 +53,12 @@ $numOfRow2 = mysqli_num_rows($repliedresult);
                                     </div>
                                     <div class="col-10 mb-1 small text-nowrap" style="overflow: hidden;text-overflow: ellipsis;width: 90%;">'.$sfeedback["FeedbackContent"].'</div>
                                     </button>';
+                                    
                                     echo $enquirylist;
                                 }
-                                
-                                echo '<p class="fw-bold text-center main-color mt-1">Replied</p>';
 
                                 //replied feedback will be displayed afterwards for admin
+                                echo '<p class="fw-bold text-center main-color m-1" style="background-color: #ddd;">Replied</p>';
                                 while ($rfeedback = mysqli_fetch_array($repliedresult)) {
                                     $repliedEnquiryList = '<button class="list-group-item list-group-item-action py-3" onclick="changeContent('.$rfeedback["FeedbackID"].')">
                                     <div class="d-flex w-100 align-items-center justify-content-between">
@@ -68,8 +69,9 @@ $numOfRow2 = mysqli_num_rows($repliedresult);
                                     </div>
                                     <div class="col-10 mb-1 small text-nowrap" style="overflow: hidden;text-overflow: ellipsis;width: 90%;">'.$rfeedback["FeedbackReply"].'</div>
                                 </button>';
+                                
                                 echo $repliedEnquiryList;
-                                }
+                                }}
 
                             ?>
                             </div>                        

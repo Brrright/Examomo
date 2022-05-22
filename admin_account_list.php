@@ -69,8 +69,8 @@
                                         <td>'.$data["AdminEmail"].'</td>
                                         <td>'.$data["AdminPassword"].'</td>
                                         <td>
-                                            <button class="btn btn-primary" id="'.$data["AdminID"].'"><i class="bi bi-pencil-fill"></i></button>
-                                            <button class="btn btn-danger" id="'.$data["AdminID"].'"><i class="bi bi-trash"></i></button>
+                                            <a href ="admin_edit_account.php?id='.$data["AdminID"].'" <button class="btn btn-primary"><i class="bi bi-pencil-fill"></i></button></a>
+                                            <a href ="admin_delete_account_backend?id='.$data["AdminID"].'"<button class="btn btn-danger delete-confirm"><i class="bi bi-trash"></i></button></a>
                                         </td>
                                     </tr>';
                             echo $row;

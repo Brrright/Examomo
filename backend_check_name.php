@@ -18,7 +18,7 @@
 
         $fetchedName = mysqli_real_escape_string($con,$_GET['name']);
 
-        $result = mysqli_query($con, "SELECT * FROM ".$tablename." WHERE ".$nameCol." = '".$fetchedName."'");
+        $result = mysqli_query($con, "SELECT * FROM ".$tablename." WHERE ".$nameCol." = '".$fetchedName."' AND CompanyID = ".$_SESSION['companyID']."");
         if(mysqli_num_rows($result) > 0){
             $isfound = 1; 
         }

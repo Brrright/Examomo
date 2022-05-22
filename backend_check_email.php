@@ -22,7 +22,7 @@
 
         $emailname = mysqli_real_escape_string($con,$_GET['email']);
 
-        $result = mysqli_query($con, "SELECT * FROM ".$tablename." WHERE ".$emailCol." = '".$emailname."'");
+        $result = mysqli_query($con, "SELECT * FROM ".$tablename." WHERE ".$emailCol." = '".$emailname."' AND CompanyID = ".$_SESSION['companyID']."");
         if(mysqli_num_rows($result) > 0){
             $isfound = 1; 
         }

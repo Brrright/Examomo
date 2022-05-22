@@ -52,7 +52,7 @@
                     <li>Support MCQ and structure question</li>
                     <li>Switch tab detection</li>
                     <li>Minimize browser detection</li>
-                    <li>Constantly answer saving</li>
+                    <li>Constant answer saving</li>
                 </ul>
             </div>
             <img src="img/guest/guest_examination.png" alt="exam picture" class="responsive-img" width="300px"; height="300px";>
@@ -93,7 +93,7 @@
                 <ul class="guest-ads-content">
                     <li>List of Upcoming Exam (Calender view)</li>
                     <li>Take exam</li>
-                    <li>Constantly answer saving</li>
+                    <li>Constant answer saving</li>
                     <li>View result list</li>
                     <li>Personal profile</li>
                     <li>Provide feedback to admin</li>
@@ -138,7 +138,7 @@
                         <ul>
                             <li class="card-text">List of Upcoming Exam (Calender view)</li>
                             <li class="card-text">Take exam</li>
-                            <li class="card-text">Constantly answer saving</li>
+                            <li class="card-text">Constant answer saving</li>
                             <li class="card-text">View result list</li>
                             <li class="card-text">Personal profile</li>
                             <li class="card-text">Provide feedback to admin</li>

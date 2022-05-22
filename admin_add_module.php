@@ -23,7 +23,10 @@
       </div>
       <div class="col-sm-10">
         <form class="was-validated" action ="admin_add_module_backend.php" method ="post">
-          <div class="profilecontainer my-4 p-4 shadow p-3 mb-5 font-caveat">
+          <div class="profilecontainer my-4 p-4 shadow p-3 mb-5">
+            <p class="text-uppercase fw-bold main-color m-2  ">
+                module name
+            </p>
             <div class="form-floating" id="name-field">
               <input type="text" v-model="name" @keyup="checkName()" class="form-control shadow-sm" id="mod-floatingInput" name="moduleName" placeholder="Module Name" pattern="[a-zA-Z][a-zA-Z0-9 ]{5,}" required>
                 <label class="text-secondary" for="mod-floatingInput">Module Name</label>

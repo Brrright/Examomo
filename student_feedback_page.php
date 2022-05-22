@@ -50,9 +50,9 @@ $numOfRow2 = mysqli_num_rows($repliedresult);
                                     if ($numOfRow+$numOfRow2 === 0) {
                                         echo '<br><span class="text-center fw-light ">No enquiries Found</span><br>';
                                     }
-                                    echo '<p class="fw-bold text-center main-color mt-1">Replied</p>';
-
+                                    else{
                                     //replied feedback will be displayed first
+                                    echo '<p class="fw-bold text-center main-color m-1" style="background-color: #ddd;">Replied</p>';
                                     while ($rfeedback = mysqli_fetch_array($repliedresult)) {
                                         $repliedEnquiryList = '<button class="list-group-item list-group-item-action py-3" id="list-id-'.$rfeedback["FeedbackID"].'" onclick="changeContent('.$rfeedback["FeedbackID"].')">
                                         <div class="d-flex w-100 align-items-center justify-content-between">
@@ -63,11 +63,12 @@ $numOfRow2 = mysqli_num_rows($repliedresult);
                                         </div>
                                         <div class="col-10 mb-1 small text-nowrap" style="overflow: hidden;text-overflow: ellipsis;width: 90%;">'.$rfeedback["FeedbackReply"].'</div>
                                     </button>';
+                                    
                                     echo $repliedEnquiryList;
                                     }
 
-                                    echo '<p class="fw-bold text-center main-color mt-1">Sent (Haven\'t get replied)</p>';
                                     // unreplied feedback will be display afterwards
+                                    echo '<p class="fw-bold text-center main-color m-1" style="background-color: #ddd;">Sent</p>';
                                     while($sfeedback = mysqli_fetch_array($sentresult)){
                                         $enquirylist = '<button class="list-group-item list-group-item-action py-3" id="list-id-'.$sfeedback["FeedbackID"].'" onclick="changeContent('.$sfeedback["FeedbackID"].')">
                                         <div class="d-flex w-100 align-items-center justify-content-between">
@@ -79,11 +80,9 @@ $numOfRow2 = mysqli_num_rows($repliedresult);
                                         <div class="col-10 mb-1 small text-nowrap" style="overflow: hidden;text-overflow: ellipsis;width: 90%;">'.$sfeedback["FeedbackContent"].'</div>
                                     </button>';
                                     echo $enquirylist;
-                                    }
+                                    }}
                                 ?>
                                 </div>
-
-                            
                     </div>
                 </div>
             </div>
