@@ -15,6 +15,7 @@
     <?php
         require "common/HeadImportInfo.php"
     ?>
+    <link rel="stylesheet" href="css/weestyle.css">
     <link rel="stylesheet" href="css/calwynCSS.css">
     <link rel="stylesheet" href="css/commonCSS.css">
     <title>Student Homepage</title>
@@ -22,44 +23,49 @@
 <body>
     <?php require "common/header_student.php";?>
     <div class="section-full d-flex flex-column">
-        <div class="d-flex flex-row justify-content-between mx-auto mb-5" style="width:85%; height:40%">
-            <div class="card-half">
-                <p class="font-caveat fs-3 text-center">
+        <div class="d-flex flex-row justify-content-between mx-auto" style="width:85%; height:40%">
+            <div class="card-half p-4 shadow p-3 mb-5">
+                <p class="font-caveat fs-3 text-center main-color">
                     profile
                 </p>
-                <div class="card mb-3 mx-auto" style="width:90%">
                     <div class="row g-0">
                         <div class="col-md-4">
-                        <img src="img/icon/person.png" class="img-fluid rounded-start" alt="...">
+                        <img src="img/admin/students.png" class="img-fluid rounded-start" alt="...">
                         </div>
                         <div class="col-md-8">
-                        <div class="card-body">
+                        <div class="stubox mx-3">
                             <h5 class="card-title">Student details</h5>
                             <?php
-                            while($row = mysqli_fetch_array($fetched)) {
+                            $row = mysqli_fetch_array($fetched);
                                 echo "Student ID    :".$row['StudentID']."<br>";
                                 echo "Student Name  :".$row['StudentName']."<br>";
                                 echo "Class Name    :".$row['ClassName']."<br>";
-                            }
-
-                            // <p class="card-text">Class</p>
-                            // <p class="card-text"><small class="text-muted">Asia pacific?</small></p>
                             ?>
+                        </div>
+                        <br>
+                        <div class="row g-0 mx-3">
+                            <div class="col-md-6">
+                            <button href="#" class="stubtn"><span>View Exams</span></button>
+                            </div>
+                            <br>
+                            <div class="col-md-6">
+                            <button href="#" class="stubtn"><span>View Results</span></button>
+                            </div>
                         </div>
                         </div>
                     </div>
-                </div>
             </div>
-            <div class="card-half">
-                <p class="font-caveat fs-3 text-center">
+            <div class="card-half p-4 shadow p-3 mb-5">
+                <p class="font-caveat fs-3 text-center main-color">
                     calender
                 </p>
                 
             </div>
         </div>
-        <div class="card-full p-3">
-            <div class="d-flex flex-row mx-auto justify-content-betweeen align-items-center" style="width:80%">
-                <p class="font-caveat fs-3 m-4"  style="width:40%">
+        <div class="d-flex flex-row justify-content-between mx-auto mb-5" style="width:85%;">
+        <div class="card-full p-4 shadow p-3 mb-5" style="width:100%;">
+            <div class="d-flex flex-row mx-auto justify-content-betweeen align-items-center" style="width:70%">
+                <p class="font-caveat fs-3 m-4 main-color"  style="width:40%">
                     Upcoming Exams
                 </p>
                 <div style="width:40%"></div>
@@ -75,6 +81,7 @@
                     DATE
                 </div>
             </div>
+        </div>
         </div>
         
     </div>
