@@ -112,5 +112,15 @@
         })
 
     </script>
+    <!-- javascript to display confirmation when click delete button -->
+    <script type="text/javascript">
+        var elems = document.getElementsByClassName('delete-confirm');
+        var confirmIt = function (e) {
+            if (!confirm('Are you sure to delete this module?')) e.preventDefault();
+        };
+        for (var i = 0, l = elems.length; i < l; i++) {
+            elems[i].addEventListener('click', confirmIt, false);
+        }
+    </script>
 </body>
 </html>

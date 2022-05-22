@@ -6,6 +6,7 @@
     // get module info
     $moduleid ="SELECT ModuleID, ModuleName FROM module WHERE CompanyID =".$_SESSION['companyID']."";
     $result = mysqli_query($con, $moduleid);
+
     
 ?>
 
@@ -48,16 +49,20 @@
               <p class="text-uppercase fw-bold main-color m-2">
                   RELATED MODULE
               </p>
-              <select name ="moduleid" id="module-selection" class="form-select fw-light shadow-sm" style="height:58px;" required>
-                  <option value="">Please select the related module</option>
+
                   <?php
-                    while ($data = mysqli_fetch_array($result)) {
-                        $modulelist ='<option value ='.$data["ModuleID"].'>'.$data["ModuleName"].'</option>';
-                        echo $modulelist;
-                  }
+                    if (mysqli_num_rows($result) > 0) {
+                      foreach ($result as $mod){
                   ?>
-              </select>
-            </div>
+                  <input type="checkbox" name="moduleselect[]" value= <?php echo $mod['ModuleID'];?> > <?php echo $mod['ModuleName']; ?></input>
+                  <?php
+                      }
+                    } 
+                    else{
+                        echo "No Module Found";
+                    }
+                  ?>
+             </div>
             <br>
           <div class= "d-flex flex-wrap justify-content-around">
             <button id="submit-btn" type="submit" value="submit" class="btn btn-primary" style="border:none;">Submit</button>

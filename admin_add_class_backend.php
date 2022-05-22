@@ -2,38 +2,34 @@
     require "common/conn.php";
     $adminID = $_SESSION['userID'];
     $companyID = $_SESSION['companyID'];
-    $moduleID = $_POST['moduleid'];
+    $modules = $_POST['moduleselect'];
 
     $sqlClass = "INSERT INTO class (ClassName, CompanyID) VALUE ('$_POST[className]', $companyID)";
     if(!mysqli_query($con, $sqlClass)) {
-        $response["error"] = 'Error:'.mysqli_error($con);
-        echo json_encode($response);
+        echo 'Error:'.mysqli_error($con);
 
     }
     else {
-        $response["successClass"] = "Class record inserted sucessfully";
         $classID = mysqli_insert_id($con);
 
         // class + admin------------------------------------------------------------------------
         $sqlClass_Admin = "INSERT INTO admin_class (AdminID, ClassID, CompanyID) VALUES ('$adminID', '$classID', $companyID)";
         if(!mysqli_query($con, $sqlClass_Admin)) {
-            $response["error"] = 'Error:'.mysqli_error($con);
-            echo json_encode($response);
-
+            echo 'Error:'.mysqli_error($con);
         }
         else {
             // module + class------------------------------------------------------------------------
-            $sqlClass_Module = "INSERT INTO module_class (ModuleID, ClassID, CompanyID) VALUES ('$moduleID', '$classID', $companyID)";
-            if(!mysqli_query($con, $sqlClass_Module)) {
-                $response["error"] = 'Error:'.mysqli_error($con);
-                echo json_encode($response);
-
+            foreach ($modules as $modID) {
+                $sqlClass_Module = "INSERT INTO module_class (ModuleID, ClassID, CompanyID) VALUES ('$modID', '$classID', $companyID)";
+                if(!mysqli_query($con, $sqlClass_Module)) {
+                    echo 'Error:'.mysqli_error($con);
+                    return;
+                }
             }
-            else {
+            
             echo '<script>alert("Student created successfully.");
             window.location.href = "admin_add_class.php";
             </script>';
-            } 
         }
     }
 ?>

@@ -70,7 +70,7 @@
                                         <td>'.$data["AdminPassword"].'</td>
                                         <td>
                                             <a href ="admin_edit_account.php?id='.$data["AdminID"].'" <button class="btn btn-primary"><i class="bi bi-pencil-fill"></i></button></a>
-                                            <a href ="admin_delete_account_backend?id='.$data["AdminID"].'"<button class="btn btn-danger delete-confirm"><i class="bi bi-trash"></i></button></a>
+                                            <a href ="admin_delete_admin?id='.$data["AdminID"].'"<button class="btn btn-danger delete-confirm"><i class="bi bi-trash"></i></button></a>
                                         </td>
                                     </tr>';
                             echo $row;
@@ -92,6 +92,16 @@
             updateTable("admin_account_list_backend.php?admin_name=" + key,  'table-body')
         })
 
+    </script>
+    <!-- javascript to display confirmation when click delete button -->
+    <script type="text/javascript">
+        var elems = document.getElementsByClassName('delete-confirm');
+        var confirmIt = function (e) {
+            if (!confirm('Are you sure to delete this module?')) e.preventDefault();
+        };
+        for (var i = 0, l = elems.length; i < l; i++) {
+            elems[i].addEventListener('click', confirmIt, false);
+        }
     </script>
 </body>
 </html>

@@ -1,6 +1,18 @@
 <?php
     require "common/conn.php";
 
+    // identify if user logged in
+    require "common/conn.php";
+    if (!isset($_SESSION["userID"])) {
+        echo '<script>alert("Please login before you access this page.");
+        window.location.href="guest_home_page.php";</script>';
+    }
+
+    if ($_SESSION["userRole"] != "lecturer") {
+        echo '<script>alert("You have not access to this page.");
+        window.location.href="guest_home_page.php";</script>';
+    }
+
     // pass lecturer id and submission status
     $id = $_SESSION['userID'];
     $submit = $_POST['submit'];
@@ -23,17 +35,18 @@
         return;
     }
 
-    $sql ="UPDATE exam SET
-        ExamName = '$_POST[Examname]',
-        ExamDescription = '$_POST[Examdesc]',
-        ExamStartDateTime = '$_POST[Examstarttime]',
-        ExamEndDateTime = '$_POST[Examendtime]',
-        isPublished = $publish,
-        LecturerID = $id,
-        PaperID = '$_POST[Exampaper]',
-        CompanyID = $comid,
-        ModuleID = '$_POST[Moduleid]'
-        WHERE ExamID = '$examid'";
+    $sql ="UPDATE exam, exam_class SET
+        exam.ExamName = '$_POST[Examname]',
+        exam.ExamDescription = '$_POST[Examdesc]',
+        exam.ExamStartDateTime = '$_POST[Examstarttime]',
+        exam.ExamEndDateTime = '$_POST[Examendtime]',
+        exam.isPublished = $publish,
+        exam.LecturerID = $id,
+        exam.PaperID = '$_POST[Exampaper]',
+        exam.CompanyID = $comid,
+        exam.ModuleID = '$_POST[Moduleid]',
+        exam_class.ClassID = '$_POST[Classid]'
+        WHERE exam.ExamID = '$examid' AND exam_class.ExamID = '$examid'";
 
 
     if (!mysqli_query($con,$sql)) {

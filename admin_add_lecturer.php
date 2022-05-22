@@ -1,4 +1,7 @@
-<?php require"common/conn.php"
+<?php 
+    require "common/conn.php";
+
+    $mod_details = mysqli_query($con, "SELECT * FROM module WHERE CompanyID = ".$_SESSION['companyID']."");
 ?>
 
 <!DOCTYPE html>
@@ -24,7 +27,7 @@
         </div>
       </div>
       <div class="col-sm-10">  
-      <form class="was-validated" action ="admin_add_student_backend.php" method ="post">
+      <form class="was-validated" action ="admin_add_lecturer_backend.php" method ="post">
         <div class="profilecontainer my-4 p-4 shadow p-3 mb-5  ">
         <div class="mx-auto" style="width:90%">
               <p class="text-uppercase fw-bold main-color m-2  ">
@@ -81,6 +84,22 @@
               <p class="text-uppercase fw-bold main-color m-2  ">
                   RELATED MODULE
               </p>
+                <?php
+                if (mysqli_num_rows($mod_details) > 0){
+                    foreach ($mod_details as $mod)
+                    {
+                        ?>
+                            <input type="checkbox" name="moduleselect[]" value= <?php echo $mod['ModuleID']; ?>><?php echo $mod['ModuleName']; ?></input>
+                        <?php
+                    }
+                }
+                
+                else
+                {
+                    echo "No Module Found";
+                }
+                
+                ?>
               <div class="d-flex flex-wrap justify-content-around">
               <button id="submit-btn" type="submit" value="submit" class="btn btn-primary" style="border:none;">Submit</button>
               </div>

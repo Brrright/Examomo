@@ -11,20 +11,24 @@
         echo '<script>alert("You have not access to this page.");
         window.location.href="guest_home_page.php";</script>';
     }
-?>
 
-<?php
     // get exam paper selection
     $paperid= "SELECT PaperID, PaperName, PaperType, ModuleID FROM exam_paper WHERE LecturerID =".$_SESSION["userID"]."";
     $result = mysqli_query($con, $paperid);
 
-?>
 
-<?php
     // get module info
     $moduleid ="SELECT ModuleID, ModuleName FROM module WHERE CompanyID =".$_SESSION['companyID']."";
     $mresult = mysqli_query($con, $moduleid);
     
+    // get class details
+    $classid ="SELECT class.ClassID, class.ClassName FROM lecturer_module 
+        INNER JOIN module_class ON lecturer_module.ModuleID = module_class.ModuleID
+        INNER JOIN class ON module_class.ClassID = class.ClassID
+        WHERE lecturer_module.CompanyID =".$_SESSION['companyID']." AND lecturer_module.LecturerID =".$_SESSION['userID']."";
+    $cresult = mysqli_query($con, $classid);
+
+    // get 
 ?>
 
 <!DOCTYPE html>
@@ -46,12 +50,19 @@
 <!-- get selected exam details -->
 <?php
     $examid = $_GET['id'];
-    $records = "SELECT * FROM exam WHERE ExamID ='$examid'";
+    $records = "SELECT * FROM exam
+                INNER JOIN exam_class ON exam.ExamID = exam_class.ExamID 
+                WHERE exam.ExamID ='$examid'";
     $editexamresult = mysqli_query($con, $records);
     while($row = mysqli_fetch_array($editexamresult)){
         $starttime = date("Y-m-d\TH:i:s", strtotime($row['ExamStartDateTime']));
         $endtime = date("Y-m-d\TH:i:s", strtotime($row['ExamEndDateTime']));
-
+        $modid = $row['ModuleID'];
+        $class = $row['ClassID'];
+        $examname = $row['ExamName'];
+        $examdesc = $row['ExamDescription'];
+        $paperselect = $row['PaperID'];
+    }
 ?>
 
 <!-- header -->
@@ -76,7 +87,7 @@
             <!-- get previous selected module -->
             <?php
                 while ($mdata = mysqli_fetch_array($mresult)) {
-                if ($row['ModuleID'] == $mdata['ModuleID']){
+                if ($modid == $mdata['ModuleID']){
                     echo '<option value ='.$mdata["ModuleID"].' selected>'.$mdata["ModuleName"].'</option>';                   
                 }
                 
@@ -88,11 +99,30 @@
             
         </select>
 
+        <p class="text-uppercase fw-bold main-color m-2 font-caveat">
+            Class Name
+        </p>
+        <select name="Classid" class="form-select fw-light shadow-sm" style="height:58px;" id="classselect" required>
+            <option value="">Please select a Class</option>
+            <!-- get previous selected class -->
+            <?php
+                while ($cdata = mysqli_fetch_array($cresult)) {
+                    if ($class == $cdata['ClassID']){
+                        echo '<option value ='.$cdata["ClassID"].' selected>'.$cdata["ClassName"].'</option>';
+                    }
+
+                    else {
+                        echo '<option value ='.$cdata["ClassID"].'>'.$cdata["ClassName"].'</option>';
+                    }
+                }
+            ?>
+        </select>
+
         <p class="text-uppercase fw-bold main-color m-2">
             Exam Name
         </p>
         <div class="form-floating mb-3">
-            <input type="text" class="form-control" id="floatingInput" name="Examname" placeholder="ExamName" pattern="[a-zA-Z0-9\s]{1,}" required value = "<?php echo $row['ExamName']?>">
+            <input type="text" class="form-control" id="floatingInput" name="Examname" placeholder="ExamName" pattern="[a-zA-Z0-9\s]{1,}" required value = "<?php echo $examname; ?>">
             <label for="floatingInput">Exam Name</label> 
         </div>
 
@@ -100,7 +130,7 @@
             Exam Description
         </p>
         <div class="form-floating mb-3">
-            <input type="text" class="form-control" id="floatingInput" name= "Examdesc"placeholder="ExamDescription" required value = "<?php echo $row['ExamDescription']?>">
+            <input type="text" class="form-control" id="floatingInput" name= "Examdesc"placeholder="ExamDescription" required value = "<?php echo $examdesc; ?>">
             <label for="floatingInput">Exam Description</label> 
         </div>
 
@@ -133,7 +163,7 @@
             <!-- get previous selected exam paper -->
             <?php
             while ($data = mysqli_fetch_array($result)) {
-                if ($data['PaperID'] == $row['PaperID']){
+                if ($data['PaperID'] == $paperselect){
                     echo '<option value ='.$data["PaperID"].' selected>'.$data["PaperName"].' - '.$data["PaperType"].'</option>';                   
                 }
                 
@@ -189,7 +219,7 @@
 
 <!-- footer -->
 <?php 
-}
+
 include "./common/footer_lecturer.php" ?>
 </body>
 

@@ -13,20 +13,45 @@
     // get module id received from module list
     $Classid = $_GET['id'];
 
+    
     $moduleid ="SELECT ModuleID, ModuleName FROM module WHERE CompanyID =".$_SESSION['companyID']."";
     $moduleresult = mysqli_query($con, $moduleid);
+    if(!$moduleresult) {
+        echo "err" .mysqli_error($con);
+        return;
+    }
 
     //sql to get student details
-    $sql = "SELECT class.ClassID, class.ClassName, module.ModuleName
+    $sql = "SELECT class.ClassID, class.ClassName, module.ModuleID, module.ModuleName
             FROM class INNER JOIN module ON class.CompanyID = module.CompanyID
             WHERE class.ClassID = $Classid";
 
     $result = mysqli_query($con, $sql);
+    if(!$result) {
+        echo "err" .mysqli_error($con);
+        return;
+    }
 
     while($row = mysqli_fetch_array($result)){
         $cID= $row['ClassID'];
         $cName= $row['ClassName'];
+        $module_class = mysqli_query($con, "SELECT * FROM module_class WHERE CompanyID = ".$_SESSION['companyID']." AND ClassID = ".$row['ClassID']."");
+            if(!$module_class) {
+                echo 'Err' .mysqli_error($con);
+                break;
+            }
+
+        $moduleIDList = array();
+        while ($data_for_module_class = mysqli_fetch_array($module_class)) {
+            $ModuleID = $data_for_module_class["ModuleID"];
+            array_push($moduleIDList, $ModuleID);
+        }
     }
+
+
+
+
+    print_r($moduleIDList);
 
 ?>
 
@@ -55,21 +80,26 @@
         <label class="text-secondary" for="stu-floatingInput">Class Name</label>
         </div>
         <p class="text-uppercase fw-bold main-color m-2">Related Module</p>
-    <select name="adminmodule" id="class-selection-stu" class="form-select fw-light shadow-sm" style="height:58px;" required>
-        <?php
-            while ($modulerow = mysqli_fetch_array($moduleresult)){
-                if ($modulerow['ModuleID'] == $cmodule){
-                    echo '<option value = '.$modulerow['ModuleID'].' selected>'.$Modulerow['ModuleName'].'</option>';              
-                }
-                else{
-                    echo '<option value = '.$modulerow['ModuleID'].'>'.$modulerow['ModuleName'].'</option>';
-                }
-            }
-        ?>
-    </select>
+                <?php
+                    if (mysqli_num_rows($result) > 0) {
+                        $numberOfRecord = count($moduleIDList); //get length
+                      foreach ($result as $mod){
+
+                  ?>
+                  <input type="checkbox" name="moduleselect[]" <?php for ($x= 0; $x < $numberOfRecord; $x++) { if($mod["ModuleID"] == $moduleIDList[$x]) { ?>checked="true" <?php }} ?> value= <?php echo $mod['ModuleID'];   ?> > <?php echo $mod['ModuleName']; ?></input>
+                  <?php
+                        }
+                    }
+                    else{
+                        echo "No Module Found";
+                    }
+                  ?>
+    </div>
     <br>
     <button type="submit" value="submit" class="stubtn" style="border:none;">Submit</button>
     
 </form>
+</div>
+</div>
 </body>
 </html>

@@ -14,6 +14,13 @@
     $moduleid ="SELECT ModuleID, ModuleName FROM module WHERE CompanyID =".$_SESSION['companyID']."";
     $mresult = mysqli_query($con, $moduleid);
 
+    // get class details
+    $classid ="SELECT class.ClassID, class.ClassName FROM lecturer_module 
+                INNER JOIN module_class ON lecturer_module.ModuleID = module_class.ModuleID
+                INNER JOIN class ON module_class.ClassID = class.ClassID
+                WHERE lecturer_module.CompanyID =".$_SESSION['companyID']." AND lecturer_module.LecturerID =".$_SESSION['userID']."";
+    $cresult = mysqli_query($con, $classid);
+
 ?>
 
 
@@ -57,6 +64,20 @@
                     $moduleoption ='<option value ='.$mdata["ModuleID"].'>'.$mdata["ModuleName"].'</option>';
                     echo $moduleoption;
             }
+            ?>
+        </select>
+
+        <p class="text-uppercase fw-bold main-color m-2 font-caveat">
+            Class Name
+        </p>
+        <select name="Classid" class="form-select fw-light shadow-sm" style="height:58px;" id="classselect" required>
+            <option value="">Please select a Class</option>
+            <!-- get previous selected class -->
+            <?php
+                while ($cdata = mysqli_fetch_array($cresult)) {
+                    $classoption ='<option value ='.$cdata["ClassID"].'>'.$cdata["ClassName"].'</option>';
+                    echo $classoption;
+                }
             ?>
         </select>
 

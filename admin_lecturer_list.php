@@ -100,7 +100,7 @@
                                 <td> '.$moduleString.'</td>
                                 <td id="'.$data["LecturerID"].'">
                                     <button class="btn btn-primary"><i class="bi bi-pencil-fill"></i></button>
-                                    <button class="btn btn-danger"><i class="bi bi-trash"></i></button>
+                                    <a href="admin_delete_lecturer_backend.php?id'.$data["LecturerID"].'" class="btn btn-danger delete-confirm"><i class="bi bi-trash"></i></a>
                                 </td>
                                 </tr>';
                                 echo $row;
@@ -122,7 +122,17 @@
             var key = document.getElementById('search-text').value;
             updateTable("admin_lecturer_list_backend.php?lecturer_name=" + key, 'table-body')
         })
-
+        
+    </script>
+    <!-- javascript to display confirmation when click delete button -->
+    <script type="text/javascript">
+        var elems = document.getElementsByClassName('delete-confirm');
+        var confirmIt = function (e) {
+            if (!confirm('Are you sure to delete this module?')) e.preventDefault();
+        };
+        for (var i = 0, l = elems.length; i < l; i++) {
+            elems[i].addEventListener('click', confirmIt, false);
+        }
     </script>
 </body>
 </html>
