@@ -51,6 +51,7 @@
 
 
 
+    print_r($moduleIDList);
 
 ?>
 

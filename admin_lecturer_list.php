@@ -99,8 +99,8 @@
                                 <td>'.$data["LecturerPassword"].'</td>
                                 <td> '.$moduleString.'</td>
                                 <td id="'.$data["LecturerID"].'">
-                                    <button class="btn btn-primary"><i class="bi bi-pencil-fill"></i></button>
-                                    <a href="admin_delete_lecturer_backend.php?id'.$data["LecturerID"].'" class="btn btn-danger delete-confirm"><i class="bi bi-trash"></i></a>
+                                    <a href="admin_edit_lecturer.php?id='.$data["LecturerID"].'" class="btn btn-primary"><i class="bi bi-pencil-fill"></i></a>
+                                    <a href="admin_delete_lecturer_backend.php?id='.$data["LecturerID"].'" class="btn btn-danger delete-confirm"><i class="bi bi-trash"></i></a>
                                 </td>
                                 </tr>';
                                 echo $row;

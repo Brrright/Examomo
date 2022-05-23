@@ -11,42 +11,51 @@
         window.location.href="guest_home_page.php";</script>';
     }
 
-
-    // retrive class id 
-    $classid = $_POST['classid'];
-    
-    // get company id & selected modules'id
+    // pass company id
     $comid = $_SESSION['companyID'];
+
+    // retrive module id 
+    // $moduleid = $_POST['moduleid'];
+
+    $lectid = $_POST['lecturerid'];
+
     if(!isset( $_POST['moduleselect'])) {
-        echo '<script>alert("A class must have at least one related module");window.location.href = "admin_edit_class.php?id='.$classid.'"</script>';
+        echo '<script>alert("A Lecturer must have at least one related module");window.location.href = "admin_edit_lecturer.php?id='.$lectid.'"</script>';
         return;
     }
-    $modules = $_POST['moduleselect']; //list
 
-
-    $sqlDelete = "DELETE FROM module_class WHERE ClassID = '$classid'";
+    $modselect = $_POST['moduleselect'];
+    $sqlDelete = "DELETE FROM lecturer_module WHERE LecturerID = '$lectid'";
     $resultDelete = mysqli_query($con, $sqlDelete);
     if (!$resultDelete) {
         echo 'Err from deleting all record: '.mysqli_error($con);
         return;
     }
-    foreach ($modules as $modID) {
-        $sqlClass_Module = "INSERT INTO module_class (ModuleID, ClassID, CompanyID) VALUES ('$modID', '$classid', $comid)";
+    foreach ($modselect as $modID) {
+        $sqlClass_Module = "INSERT INTO lecturer_module (LecturerID, ModuleID, CompanyID) VALUES ('$lectid', '$modID', $comid)";
         if(!mysqli_query($con, $sqlClass_Module)) {
             echo 'Error: inseting new moduleclass'.mysqli_error($con);
             return;
         }
     }
 
-    //update new class name to the existing class that is selected
-    $sql = "UPDATE class SET ClassName = '$_POST[classname]' WHERE ClassID = '$classid'";
+    $sql ="UPDATE lecturer SET
+        LecturerName = '$_POST[lecturername]',
+        LecturerGender = '$_POST[lecturergender]',
+        LecturerEmail = '$_POST[lecturermail]',
+        LecturerPassword = '$_POST[lecturerpass]'
+        WHERE LecturerID = '$lectid'";
+
+
     if (!mysqli_query($con,$sql)) {
         echo 'Error: updating classname'.mysqli_error($con);
         return;
     }
-    
-    echo '<script>alert("Class details updated successfully.");
-    window.location.href = "admin_class_list.php";
+
+    else {
+    echo '<script>alert("Lecturer details updated successfully.");
+    window.location.href = "admin_lecturer_list.php";
     </script>';
+    }
 
 ?>

@@ -16,7 +16,7 @@
     $lecturerid = $_GET['id'];
 
     //check the student answer table to see connection
-    $checkstan = "SELECT LecturerID FROM lecturer WHERE LecturerID = $lecturerid";
+    $checkstan = "SELECT LecturerID FROM student_answer WHERE LecturerID = $lecturerid";
     $checkstanrow = mysqli_query($con,$checkstan);
     $checkstannow = mysqli_num_rows($checkstanrow);
 
