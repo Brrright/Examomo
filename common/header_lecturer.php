@@ -27,7 +27,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" style="color:#2B5EA4;" href="#"><span style="width:30px; height:30px" class="bi bi-person-circle"></span>Profile</a>
+                    <a class="nav-link" style="color:#2B5EA4;" href="lecturer_profile_page"><span style="width:30px; height:30px" class="bi bi-person-circle"></span>Profile</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" style="color:#2B5EA4; "href="logout.php">Logout</a>

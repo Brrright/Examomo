@@ -69,7 +69,7 @@
         </p>
 
         <div class="input-group mb-3">
-            <img src="https://www.beelights.gr/assets/images/empty-image.png" id="file-img-preview" style="height: 400px; width: 100%; margin-bottom: 20px;">
+            <img src="https://www.beelights.gr/assets/images/empty-image.png" id="file-img-preview" style="height: 10vw; width: 10vh; margin-bottom: 20px;">
             <input type="file" class="form-control" name="mcq-image" id="file-input" accept="image/png, image/gif, image/jpeg" onchange="showPreview(event);">
             <button type="button" onclick="imgremove()">Remove</button>
         </div>
@@ -133,28 +133,28 @@
         </div>
 
     </div>
-    </form>
-    </div>
+</div>
 
 <div class="col-xl-5">
 
 <div class="bg d-flex mx-auto flex-column p-5 m-5" style="background-color: white; width: 90%; border-radius: 10px; box-shadow: 3px 3px darkseagreen; height: 600px; position: relative;">
-
+    
     <div></div>
     <div class= "d-flex flex-wrap" style="position: absolute; bottom: 0; padding-bottom: 40px;">
         
         <div>
             <button class="btn third-bg-color font-caveat shadow mx-auto mt-3 fs-4" type="submit" name= "submit" onclick="return confirm('Do you wish to save current question?')">Add Question</button>
-
-        <div>
-            <a href="lecturer_exampaper_page.php"><button class="btn third-bg-color font-caveat shadow mx-auto mt-3 fs-4 fin-mcq-confirm">Finish</button></a>
+            
+            <div>
+                <a href="lecturer_exampaper_page.php"><button class="btn third-bg-color font-caveat shadow mx-auto mt-3 fs-4 fin-mcq-confirm">Finish</button></a>
+            </div>
         </div>
+        
     </div>
-
-</div>
-
+    
 </div>
 </div>
+</form>
 
 
     
