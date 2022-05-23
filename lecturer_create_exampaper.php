@@ -48,9 +48,10 @@
             Paper Name
         </p>
 
-        <div class="form-floating mb-3">
-            <input type="text" class="form-control is-invalid" id="floatingInput" name="papername" placeholder="Paper Name" pattern="[a-zA-Z0-9\s]{1,}" required>
+        <div class="form-floating mb-3" id="name-field">
+            <input type="text" v-model="name" @keyup="checkName()" class="form-control is-invalid" id="floatingInput" name="papername" placeholder="Paper Name" pattern="[a-zA-Z0-9\s]{1,}" required>
             <label for="floatingInput">Paper Name</label>
+            <span class="text-danger" v-bind:id="[isAvailable?'notavailable':'available']">{{responseMessage}}</span>
         </div>
 
         <p class="text-uppercase fw-bold main-color m-2">
@@ -102,7 +103,52 @@
 
     
     
-<!-- footer -->
 <?php include "./common/footer_lecturer.php" ?>
+<script src="js/mingliangJS.js"></script>
+<script src="https://unpkg.com/vue@2"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script>
+    var app = new Vue({
+        el: '#name-field',
+        data: {
+            name: '',
+            isAvailable: 0,
+            responseMessage: ''
+        },
+        methods: {
+            checkName: function(){
+                var name = this.name.trim();
+                if(name != ''){
+            
+                axios.get('backend_check_name.php?action=exampaper', {
+                    params: {
+                        name: name
+                    }
+                })
+                .then(function (response) {
+                    app.isAvailable = response.data;
+                    if(response.data == 0){
+                    app.responseMessage = "";
+                    
+                    }else{
+                    app.responseMessage = "Note: Name Has been used, it is allowed but please take note.";
+                    }
+                })
+                .then(function() {
+                    var checkEmail = document.getElementById("notavailable");
+                    if (checkEmail != null) {
+                    }
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+
+                }else{
+                    this.responseMessage = "";
+                }
+            }
+        }
+    })
+</script>
 </body>
 </html>

@@ -20,7 +20,7 @@
     $sql = mysqli_query($con, $delete);
     
     if (!mysqli_query($con,$delete)) {
-    die('Error: ' . mysqli_error($con));
+        echo 'Error: ' . mysqli_error($con);
     }
 
     else {

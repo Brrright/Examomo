@@ -16,6 +16,7 @@
       <?php require "common/HeadImportInfo.php" ?>
         <link rel="stylesheet" href="css/weestyle.css">
         <link rel="stylesheet" href="css/commonCSS.css">
+        <title>Examomo | Admin Home Page</title>
     </head>
 <body>      
   <?php require "common/header_admin.php"  ?>

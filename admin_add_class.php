@@ -23,7 +23,7 @@
   <center><h1 style="font-family: 'Caveat';">Add Classes</h1></center>
   <div class="container">
     <div class="row g-0">
-      <div class="col-sm-3">
+      <div class="col-sm-2">
         <div class="profilecontainer my-4 shadow p-3 mb-5 font-caveat">
           <div class="pill-nav">
             <a href="admin_class_list.php">View Class List</a>
@@ -32,7 +32,7 @@
           </div>
         </div>
       </div>
-      <div class="col-sm-9"> 
+      <div class="col-sm-10"> 
         <form class="was-validated" action ="admin_add_class_backend.php" method ="post"> 
           <div class="profilecontainer my-4 p-4 shadow p-3 mb-5">
             <div class="mx-auto" style="width:90%">
@@ -54,7 +54,9 @@
                     if (mysqli_num_rows($result) > 0) {
                       foreach ($result as $mod){
                   ?>
+                  <div>
                   <input type="checkbox" name="moduleselect[]" value= <?php echo $mod['ModuleID'];?> > <?php echo $mod['ModuleName']; ?></input>
+                  </div>
                   <?php
                       }
                     } 

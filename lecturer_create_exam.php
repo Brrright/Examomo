@@ -15,10 +15,7 @@
     $mresult = mysqli_query($con, $moduleid);
 
     // get class details
-    $classid ="SELECT class.ClassID, class.ClassName FROM lecturer_module 
-                INNER JOIN module_class ON lecturer_module.ModuleID = module_class.ModuleID
-                INNER JOIN class ON module_class.ClassID = class.ClassID
-                WHERE lecturer_module.CompanyID =".$_SESSION['companyID']." AND lecturer_module.LecturerID =".$_SESSION['userID']."";
+    $classid = "SELECT * FROM class WHERE CompanyID = ".$_SESSION['companyID']."";
     $cresult = mysqli_query($con, $classid);
 
 ?>
@@ -84,9 +81,10 @@
         <p class="text-uppercase fw-bold main-color m-2 font-caveat">
             Exam Name
         </p>
-        <div class="form-floating mb-3">
-            <input type="text" class="form-control is-invalid" id="floatingInput" name="Examname" pattern="[a-zA-Z0-9\s]{1,}" placeholder="ExamName" required>
+        <div class="form-floating mb-3"  id="name-field">
+            <input type="text" v-model="name" @keyup="checkName()" class="form-control is-invalid" id="floatingInput" name="Examname" pattern="[a-zA-Z0-9\s]{1,}" placeholder="ExamName" required>
             <label for="floatingInput">Exam Name</label> 
+            <span class="text-danger" v-bind:id="[isAvailable?'notavailable':'available']">{{responseMessage}}</span>
         </div>
 
         <p class="text-uppercase fw-bold main-color m-2 font-caveat">
@@ -133,13 +131,10 @@
         
         <div class= "d-flex flex-wrap justify-content-around">
             <div>
-                <button class="btn third-bg-color font-caveat shadow mx-auto mt-3 fs-4" type="submit" name= "submit" value = "draft" onclick="return confirm('Are you sure to draft exam?')">Save as Draft</button>
+                <button class="btn third-bg-color font-caveat shadow mx-auto mt-3 fs-4" id="submit-btn1" type="submit" name= "submit" value = "draft" onclick="return confirm('Are you sure to draft exam?')">Save as Draft</button>
             </div>
             <div>
-                <button class="btn third-bg-color font-caveat shadow mx-auto mt-3 fs-4" type="reset" onclick ="resetform()">Clear All</button>
-            </div>
-            <div>
-                <button class="btn third-bg-color font-caveat shadow mx-auto mt-3 fs-4" type="submit" name= "submit" value = "publish" onclick="return confirm('Are you sure to publish exam?')">Publish</button>
+                <button class="btn third-bg-color font-caveat shadow mx-auto mt-3 fs-4" id="submit-btn2" type="submit" name= "submit" value = "publish" onclick="return confirm('Are you sure to publish exam?')">Publish</button>
             </div>
         </div>
     </div>
@@ -151,6 +146,8 @@
 <!-- javascript to clear all fields in form -->
 
 <script src="js/mingliangJS.js"></script>
+<script src="https://unpkg.com/vue@2"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script>
     function GainRelatedExamPaper() {
         var selection = document.getElementById('moduleselect');
@@ -190,10 +187,54 @@
     }
 
 </script>
+<script>
+    var app = new Vue({
+        el: '#name-field',
+        data: {
+            name: '',
+            isAvailable: 0,
+            responseMessage: ''
+        },
+        methods: {
+            checkName: function(){
+                var name = this.name.trim();
+                if(name != ''){
+            
+                axios.get('backend_check_name.php?action=exam', {
+                    params: {
+                        name: name
+                    }
+                })
+                .then(function (response) {
+                    app.isAvailable = response.data;
+                    if(response.data == 0){
+                    app.responseMessage = "";
+                    document.getElementById("submit-btn1").disabled = false;
+                    document.getElementById("submit-btn2").disabled = false;
+                    }else{
+                    app.responseMessage = "Name Has been used.";
+                    }
+                })
+                .then(function() {
+                    var checkEmail = document.getElementById("notavailable");
+                    if (checkEmail != null) {
+                    document.getElementById("submit-btn1").disabled = true;
+                    document.getElementById("submit-btn2").disabled = true;
+                    }
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
 
-<!-- footer -->
+                }else{
+                    this.responseMessage = "";
+                    
+                }
+            }
+        }
+    })
+</script>
 <?php 
-
 include "./common/footer_lecturer.php" ?>
 </body>
 

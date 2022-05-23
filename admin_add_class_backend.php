@@ -28,7 +28,7 @@
             }
             
             echo '<script>alert("Student created successfully.");
-            window.location.href = "admin_add_class.php";
+            window.location.href = "admin_class_list.php";
             </script>';
         }
     }

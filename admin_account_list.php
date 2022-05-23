@@ -69,7 +69,7 @@
                                         <td>'.$data["AdminEmail"].'</td>
                                         <td>'.$data["AdminPassword"].'</td>
                                         <td>
-                                            <a href ="admin_edit_account.php?id='.$data["AdminID"].'" <button class="btn btn-primary"><i class="bi bi-pencil-fill"></i></button></a>
+                                            <a href ="admin_edit_admin.php?id='.$data["AdminID"].'" <button class="btn btn-primary"><i class="bi bi-pencil-fill"></i></button></a>
                                             <a href ="admin_delete_admin?id='.$data["AdminID"].'"<button class="btn btn-danger delete-confirm"><i class="bi bi-trash"></i></button></a>
                                         </td>
                                     </tr>';
@@ -97,7 +97,7 @@
     <script type="text/javascript">
         var elems = document.getElementsByClassName('delete-confirm');
         var confirmIt = function (e) {
-            if (!confirm('Are you sure to delete this module?')) e.preventDefault();
+            if (!confirm('Are you sure to delete this Admin Account?')) e.preventDefault();
         };
         for (var i = 0, l = elems.length; i < l; i++) {
             elems[i].addEventListener('click', confirmIt, false);

@@ -10,7 +10,7 @@
       <?php require "common/HeadImportInfo.php" ?>
         <link rel="stylesheet" href="css/weestyle.css">
         <link rel="stylesheet" href="css/commonCSS.css">
-
+        <title>Admin|Add Lecturer</title>
     </head>
 <body>      
   <?php require "common/header_admin.php"  ?>
@@ -89,7 +89,10 @@
                     foreach ($mod_details as $mod)
                     {
                         ?>
-                            <input type="checkbox" name="moduleselect[]" value= <?php echo $mod['ModuleID']; ?>><?php echo $mod['ModuleName']; ?></input>
+                            <div>
+                            <input type="checkbox" name="moduleselect[]" value= <?php echo $mod['ModuleID']; ?>>
+                            <label><?php echo $mod['ModuleName']; ?></label>
+                            </div>
                         <?php
                     }
                 }

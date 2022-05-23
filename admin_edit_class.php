@@ -85,7 +85,9 @@
                       foreach ($result as $mod){
 
                   ?>
-                  <input type="checkbox" name="moduleselect[]" <?php for ($x= 0; $x < $numberOfRecord; $x++) { if($mod["ModuleID"] == $moduleIDList[$x]) { ?>checked="true" <?php }} ?> value= <?php echo $mod['ModuleID'];   ?> > <?php echo $mod['ModuleName']; ?></input>
+                  <div>
+                  <input type="checkbox" name="moduleselect[]" <?php for ($x= 0; $x < $numberOfRecord; $x++) { if($mod["ModuleID"] == $moduleIDList[$x]) { ?>checked="true" <?php }} ?> value= <?php echo $mod['ModuleID'];   ?> ></input>
+                  <label><?php echo $mod['ModuleName']; ?></label>
                   <?php
                         }
                     }
@@ -95,8 +97,9 @@
                   ?>
     </div>
     <br>
+    <div class="d-flex flex-wrap justify-content-around">
     <button type="submit" value="submit" class="stubtn" style="border:none;">Submit</button>
-    
+    </div>
 </form>
 </div>
 </div>

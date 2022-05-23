@@ -22,10 +22,7 @@
     $mresult = mysqli_query($con, $moduleid);
     
     // get class details
-    $classid ="SELECT class.ClassID, class.ClassName FROM lecturer_module 
-        INNER JOIN module_class ON lecturer_module.ModuleID = module_class.ModuleID
-        INNER JOIN class ON module_class.ClassID = class.ClassID
-        WHERE lecturer_module.CompanyID =".$_SESSION['companyID']." AND lecturer_module.LecturerID =".$_SESSION['userID']."";
+    $classid = "SELECT * FROM class WHERE CompanyID = ".$_SESSION['companyID']."";
     $cresult = mysqli_query($con, $classid);
 
     // get 
@@ -121,8 +118,8 @@
         <p class="text-uppercase fw-bold main-color m-2">
             Exam Name
         </p>
-        <div class="form-floating mb-3">
-            <input type="text" class="form-control" id="floatingInput" name="Examname" placeholder="ExamName" pattern="[a-zA-Z0-9\s]{1,}" required value = "<?php echo $examname; ?>">
+        <div class="form-floating mb-3" id="name-field">
+            <input type="text"class="form-control" id="floatingInput" name="Examname" placeholder="ExamName" pattern="[a-zA-Z0-9\s]{1,}" required value = "<?php echo $examname; ?>">
             <label for="floatingInput">Exam Name</label> 
         </div>
 
@@ -130,7 +127,7 @@
             Exam Description
         </p>
         <div class="form-floating mb-3">
-            <input type="text" class="form-control" id="floatingInput" name= "Examdesc"placeholder="ExamDescription" required value = "<?php echo $examdesc; ?>">
+            <input type="text" class="form-control" id="floatingInput" name= "Examdesc" placeholder="ExamDescription" required value = "<?php echo $examdesc; ?>">
             <label for="floatingInput">Exam Description</label> 
         </div>
 
@@ -166,7 +163,6 @@
                 if ($data['PaperID'] == $paperselect){
                     echo '<option value ='.$data["PaperID"].' selected>'.$data["PaperName"].' - '.$data["PaperType"].'</option>';                   
                 }
-                
                 else {
                     echo'<option value ='.$data["PaperID"].'>'.$data["PaperName"].' - '.$data["PaperType"].'</option>';                    
                 }
@@ -180,15 +176,10 @@
         
         <div class= "d-flex flex-wrap justify-content-around">
             <div>
-                <button class="btn third-bg-color font-caveat shadow mx-auto mt-3 fs-4" type="submit" name= "submit" value = "draft" onclick="return confirm('Are you sure to draft exam?')">Mark as Draft</button>
+                <button class="btn third-bg-color font-caveat shadow mx-auto mt-3 fs-4" id="submit-btn1" type="submit" name= "submit" value = "draft" onclick="return confirm('Are you sure to draft exam?')">Mark as Draft</button>
             </div>
-
             <div>
-                <button class="btn third-bg-color font-caveat shadow mx-auto mt-3 fs-4" type="reset" onclick="resetform()">Discard Changes</button>
-            </div>
-
-            <div>
-                <button class="btn third-bg-color font-caveat shadow mx-auto mt-3 fs-4" type="submit" name= "submit" value = "publish" onclick="return confirm('Are you sure to publish exam?')">Save as published</button>
+                <button class="btn third-bg-color font-caveat shadow mx-auto mt-3 fs-4" id="submit-btn2" type="submit" name= "submit" value = "publish" onclick="return confirm('Are you sure to publish exam?')">Save as published</button>
             </div>
         </div>
     </div>
@@ -196,6 +187,9 @@
 
 </form>
 
+<script src="js/mingliangJS.js"></script>
+<script src="https://unpkg.com/vue@2"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <!-- javascript to reset all fields in form -->
 <script>
     function resetform() {
@@ -216,10 +210,7 @@
         return true;
     }
 </script>
-
-<!-- footer -->
 <?php 
-
 include "./common/footer_lecturer.php" ?>
 </body>
 

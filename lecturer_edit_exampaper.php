@@ -58,11 +58,13 @@
             Edit Examination Paper
         </p>
 
+        <a href="" class="btn btn-primary mx-auto" style="width:30%">EDIT QUESTION</a> <br>
+
         <p class="text-uppercase fw-bold main-color m-2">
             Paper Name
         </p>
 
-        <div class="form-floating mb-3">
+        <div class="form-floating mb-3"  id="name-field">
             <input type="text" class="form-control is-invalid" id="floatingInput" name="papername" placeholder="Paper Name" pattern="[a-zA-Z0-9\s]{1,}" required value = "<?php echo preg_replace($remove,'',$papername)?>">
             <label for="floatingInput">Paper Name</label>
         </div>

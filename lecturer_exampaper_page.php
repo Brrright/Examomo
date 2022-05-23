@@ -42,7 +42,9 @@
 
   
   <div style="text-align: left; padding-left: 170px;">
-    <h3 style="font-family: caveat; color: rgb(19, 13, 135); font-weight: bold;">Manage Examination Paper</h5>
+    <h3 style=" color: rgb(19, 13, 135); font-weight: bold;">Manage Examination Paper</h5>
+    <!-- <h3 style="font-family: caveat; color: rgb(19, 13, 135); font-weight: bold;">Manage Examination Paper</h5> -->
+
   </div>
 
   <!-- button to create new exam -->
@@ -58,21 +60,19 @@
     <div class="col-xl-5">
     <div class ="shadow p-3 mb-5 bg-drafted" style="background-color: whitesmoke; border-radius: 10px; margin: 10px auto;">
     <table class="table table-striped" style="100%">
-      <colgroup>
+      <!-- <colgroup>
         <col span="1" style="width: 10%;">
         <col span="1" style="width: 30%;">
         <col span="1" style="width: 30%;">
         <col span="1" style="width: 10%;">
         <col span="1" style="width: 10%;">
-        <col span="1" style="width: 10%;">
-      </colgroup>
+      </colgroup> -->
       <thead>
-        <p class="text-uppercase fw-bold main-color m-2 font-caveat lead">Drafted Exam Papers</p>
+        <p class="text-uppercase fw-bold main-color m-2 lead">Drafted Exam Papers</p>
         <tr>
           <th scope="col">ID</th>
           <th scope="col">Name</th>
           <th scope="col">Module</th>
-          <th scope="col">Add</th>
           <th scope="col">Edit</th>
           <th scope="col">Delete</th>
         </tr>
@@ -85,7 +85,6 @@
                 <th scope="row">'.$data["PaperID"].'</th>
                 <td>'.$data["PaperName"].'</td>
                 <td>'.$data["ModuleName"].'</td>
-                <td><a href="?id= '.$data["PaperID"].'" class="btn btn-primary"><i class="bi bi-plus-circle"></i></a></td>
                 <td><a href="lecturer_edit_exampaper.php?id= '.$data["PaperID"].'" class="btn btn-primary"><i class="bi bi-pencil-square"></i></a></td>
                 <td><a href="lecturer_delete_exampaper_backend.php?id= '.$data["PaperID"].'" class="btn btn-danger delete-confirm"><i class="bi bi-trash"></i></a></td>
                 </tr>';
@@ -102,21 +101,12 @@
     <div class="col-xl-5">
     <div class ="shadow p-3 mb-5 bg-created" style="background-color: white; border-radius: 10px; margin: 10px auto;">
     <table class="table table-striped" style="100%">
-      <colgroup>
-        <col span="1" style="width: 10%;">
-        <col span="1" style="width: 30%;">
-        <col span="1" style="width: 30%;">
-        <col span="1" style="width: 10%;">
-        <col span="1" style="width: 10%;">
-        <col span="1" style="width: 10%;">
-      </colgroup>
     <thead>
-    <p class="text-uppercase fw-bold main-color m-2 font-caveat lead">Published Exam Papers</p>
+    <p class="text-uppercase fw-bold main-color m-2 lead">Published Exam Papers</p>
       <tr>
       <th scope="col">ID</th>
           <th scope="col">Name</th>
           <th scope="col">Module</th>
-          <th scope="col">Add</th>
           <th scope="col">Edit</th>
           <th scope="col">Delete</th>
       </tr>
@@ -129,7 +119,6 @@
               <th scope="row">'.$data["PaperID"].'</th>
               <td>'.$data["PaperName"].'</td>
               <td>'.$data["ModuleName"].'</td>
-              <td><a href="?id= '.$data["PaperID"].'" class="btn btn-primary"><i class="bi bi-plus-circle"></i></a></td>
               <td><a href="lecturer_edit_exampaper.php?id= '.$data["PaperID"].'" class="btn btn-primary"><i class="bi bi-pencil-square"></i></a></td>
               <td><a href="lecturer_delete_exampaper_backend.php?id= '.$data["PaperID"].'" class="btn btn-danger delete-confirm"><i class="bi bi-trash"></i></a></td>
               </tr>';

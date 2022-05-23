@@ -1,20 +1,30 @@
 <?php
     require "common/conn.php";
+
+    if (!isset($_GET["id"])) {
+        echo '<script>alert("You have not selected an exam paper.");
+        window.location.href="lecturer_exampaper_page.php";</script>';
+    }
+
     if (!isset($_SESSION["userID"])) {
         echo '<script>alert("Please login before you access this page.");
+        window.location.href="guest_home_page.php";</script>';
+    }
+
+    if ($_SESSION["userRole"] != "lecturer") {
+        echo '<script>alert("You have no access to this page.");
         window.location.href="guest_home_page.php";</script>';
     }
     
     // get paper id after exam paper creation
     $paperid = $_GET['id'];
+
+    
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <?php 
         require "common/HeadImportInfo.php" 
@@ -58,8 +68,10 @@
             Insert Image (Optional)
         </p>
 
-        <div class="mb-3">
-            <input type="file" class="form-control" name="mcq-image" accept="image/png, image/gif, image/jpeg">
+        <div class="input-group mb-3">
+            <img src="https://www.beelights.gr/assets/images/empty-image.png" id="file-img-preview" style="height: 400px; width: 100%; margin-bottom: 20px;">
+            <input type="file" class="form-control" name="mcq-image" id="file-input" accept="image/png, image/gif, image/jpeg" onchange="showPreview(event);">
+            <button type="button" onclick="imgremove()">Remove</button>
         </div>
 
         <p class="text-uppercase fw-bold main-color m-2 font-caveat">
@@ -97,6 +109,14 @@
             <input type="text" class="form-control is-invalid" id="floatingInput" name="mcq-option" placeholder="Option 4" required>
             <label for="floatingInput">Option 4</label>
         </div>
+        
+        <p class="text-uppercase fw-bold main-color m-2 font-caveat">
+            Given Marks
+        </p>
+
+        <div class="form-floating mb-3">
+            <input type="number" class="form-control is-invalid" id="floatingInput" name="givenmarks" placeholder="Given Marks" min="1" required>
+        </div>
 
         <p class="text-uppercase fw-bold main-color m-2 font-caveat">
             Correct Answer
@@ -124,7 +144,7 @@
     <div class= "d-flex flex-wrap" style="position: absolute; bottom: 0; padding-bottom: 40px;">
         
         <div>
-            <button class="btn third-bg-color font-caveat shadow mx-auto mt-3 fs-4" type="submit" name= "submit" value = "" onclick="return confirm('Do you wish to save current question?')">Add Question</button>
+            <button class="btn third-bg-color font-caveat shadow mx-auto mt-3 fs-4" type="submit" name= "submit" onclick="return confirm('Do you wish to save current question?')">Add Question</button>
 
         <div>
             <a href="lecturer_exampaper_page.php"><button class="btn third-bg-color font-caveat shadow mx-auto mt-3 fs-4 fin-mcq-confirm">Finish</button></a>
@@ -148,6 +168,24 @@
     }
 </script>
 
+<!-- javascript to preview image -->
+<script>
+    function showPreview(event){
+        if(event.target.files.length > 0){
+            var src = URL.createObjectURL(event.target.files[0]);
+            var preview = document.getElementById("file-img-preview");
+            preview.src = src;
+            preview.style.display = "block";
+        }
+    }
+
+    
+    function imgremove(){
+        document.getElementById('file-img-preview').src ="https://www.beelights.gr/assets/images/empty-image.png";
+        var inputfile = document.getElementById("file-input");
+        inputfile.value ="";
+    }
+</script>
 
 <!-- footer -->
 <?php include "./common/footer_lecturer.php"?>

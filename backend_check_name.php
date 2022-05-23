@@ -11,6 +11,14 @@
             $tablename = "class";
             $nameCol = "ClassName";
         }
+        else if($_GET["action"] == "exam") {
+            $tablename = "exam";
+            $nameCol = "ExamName";
+        }
+        else if($_GET["action"] == "exampaper") {
+            $tablename = "exam_paper";
+            $nameCol = "PaperName";
+        }
         else {
             echo "error, action is not found";
             return;
