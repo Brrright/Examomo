@@ -1,4 +1,12 @@
-<?php require"common/conn.php"?>
+<?php require "common/conn.php";
+  $sql= "SELECT lecturer.LecturerID, lecturer.LecturerName, lecturer.LecturerGender, lecturer.LecturerEmail, lecturer.LecturerPassword, company.CompanyName, module.ModuleName 
+         FROM lecturer INNER JOIN company ON lecturer.CompanyID = company.CompanyID
+         INNER JOIN lecturer_module ON lecturer.LecturerID = lecturer_module.LecturerID
+         INNER JOIN module ON lecturer_module.ModuleID = module.ModuleID
+         WHERE lecturer.LecturerID = ".$_SESSION["userID"]." AND lecturer.CompanyID = ".$_SESSION["companyID"]."";
+
+$result = mysqli_query($con, $sql);
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -12,14 +20,50 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     </head>
 <body>      
-  <?php require "common/header_admin.php"  ?>
-  <center><h1 style="font-family: 'Caveat';">Examomo Profile Page</h1></center>
-  <div class="profilecontainer my-4 p-6 shadow p-3 mb-5 font-caveat mx-auto">
-        <div class="col-md-6">
-        <center><img src="img/admin/lecturer.png" class="img-thumbnail" style="border-radius: 15px;width:40%;height:40%;" alt="..."><center>
+  <?php require "common/header_lecturer.php"  ?>
+  <center><h1 style="font-family: 'Caveat';">Lecturer Profile Page</h1></center>
+  <div class="container">
+  <div class="profilecontainer my-1 p-6 shadow p-3 mb-5 mx-auto">
+  <div class="row g-0">
+  <div class="col-sm-7 my-auto">
+  <div class="text-start" style="font-size: 20px;">
+    <?php
+        $row = mysqli_fetch_array($result);
+
+        $info = '
+        <p class="text-uppercase fw-bold main-color m-2">
+            Lecturer Details
+        </p>
+        <h6 class="text-uppercase fw-bold m-2">
+        Lecturer Name : '.$row["LecturerName"].'
+        </h6>
+
+        <h6 class="text-uppercase fw-bold m-2">
+        Lecturer Gender : '.$row["LecturerGender"].'
+        </h6>
+
+        <h6 class="text-uppercase fw-bold m-2">
+        Lecturer Email : '.$row["LecturerEmail"].'
+        </h6>
+
+        <h6 class="text-uppercase fw-bold m-2">
+        Lecturer Password : ••••••••
+        </h6>
+          <br>
+        <h6 class="text-uppercase fw-bold m-2">
+        Company Name : '.$row['CompanyName'].'
+        </h6>
+          <br>';
+
+        echo $info;
+      ?>
+  </div>
         </div>
-        <p style="font-family: 'Caveat';">Put ur lapsap here</p>
-        </div>
-      </div>
-  </div> 
+    <div class="col-sm-5">
+      <img src="img/admin/lecturer.png" class="img-fluid rounded-end" style="border-radius: 50%;" alt="...">
+    </div>
+  </div>
+</div>
+<?php require "common/footer_lecturer.php";?>
 </body>
+</html>

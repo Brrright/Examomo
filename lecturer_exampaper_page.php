@@ -12,11 +12,11 @@
     }
 
     // retrieve drafted exam details
-    $draftpapersql = "SELECT exam_paper.PaperID, exam_paper.PaperName, module.ModuleName FROM exam_paper INNER JOIN module ON exam_paper.ModuleID = module.ModuleID WHERE exam_paper.CompanyID = ".$_SESSION['companyID']." AND exam_paper.PaperName LIKE '%(drafted)%' AND exam_paper.LecturerID = ".$_SESSION["userID"]."";
+    $draftpapersql = "SELECT exam_paper.PaperID, exam_paper.PaperName, exam_paper.PaperType, module.ModuleName FROM exam_paper INNER JOIN module ON exam_paper.ModuleID = module.ModuleID WHERE exam_paper.CompanyID = ".$_SESSION['companyID']." AND exam_paper.PaperName LIKE '%(drafted)%' AND exam_paper.LecturerID = ".$_SESSION["userID"]."";
     $draftpaper = mysqli_query($con, $draftpapersql);
 
     // retrieve published exam details
-    $pubpapersql = "SELECT exam_paper.PaperID, exam_paper.PaperName, module.ModuleName FROM exam_paper INNER JOIN module ON exam_paper.ModuleID = module.ModuleID WHERE exam_paper.CompanyID = ".$_SESSION['companyID']." AND exam_paper.PaperName NOT LIKE '%(drafted)%' AND exam_paper.LecturerID = ".$_SESSION["userID"]."";
+    $pubpapersql = "SELECT exam_paper.PaperID, exam_paper.PaperName, exam_paper.PaperType, module.ModuleName FROM exam_paper INNER JOIN module ON exam_paper.ModuleID = module.ModuleID WHERE exam_paper.CompanyID = ".$_SESSION['companyID']." AND exam_paper.PaperName NOT LIKE '%(drafted)%' AND exam_paper.LecturerID = ".$_SESSION["userID"]."";
     $pubpaper = mysqli_query($con, $pubpapersql);
 ?>
 
@@ -73,6 +73,7 @@
           <th scope="col">ID</th>
           <th scope="col">Name</th>
           <th scope="col">Module</th>
+          <th scope="col">Type</th>
           <th scope="col">Edit</th>
           <th scope="col">Delete</th>
         </tr>
@@ -85,6 +86,7 @@
                 <th scope="row">'.$data["PaperID"].'</th>
                 <td>'.$data["PaperName"].'</td>
                 <td>'.$data["ModuleName"].'</td>
+                <td>'.$data["PaperType"].'</td>
                 <td><a href="lecturer_edit_exampaper.php?id= '.$data["PaperID"].'" class="btn btn-primary"><i class="bi bi-pencil-square"></i></a></td>
                 <td><a href="lecturer_delete_exampaper_backend.php?id= '.$data["PaperID"].'" class="btn btn-danger delete-confirm"><i class="bi bi-trash"></i></a></td>
                 </tr>';
@@ -107,6 +109,7 @@
       <th scope="col">ID</th>
           <th scope="col">Name</th>
           <th scope="col">Module</th>
+          <th scope="col">Type</th>
           <th scope="col">Edit</th>
           <th scope="col">Delete</th>
       </tr>
@@ -119,6 +122,7 @@
               <th scope="row">'.$data["PaperID"].'</th>
               <td>'.$data["PaperName"].'</td>
               <td>'.$data["ModuleName"].'</td>
+              <td>'.$data["PaperType"].'</td>
               <td><a href="lecturer_edit_exampaper.php?id= '.$data["PaperID"].'" class="btn btn-primary"><i class="bi bi-pencil-square"></i></a></td>
               <td><a href="lecturer_delete_exampaper_backend.php?id= '.$data["PaperID"].'" class="btn btn-danger delete-confirm"><i class="bi bi-trash"></i></a></td>
               </tr>';

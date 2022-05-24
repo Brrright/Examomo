@@ -12,6 +12,10 @@
         window.location.href="guest_home_page.php";</script>';
     }
 
+    // get current datetime
+    date_default_timezone_set('Asia/Kuala_Lumpur');
+    $date_clicked = date('Y-m-d H:i:s');
+
     // get exam paper selection
     $paperid= "SELECT PaperID, PaperName, PaperType, ModuleID FROM exam_paper WHERE LecturerID =".$_SESSION["userID"]."";
     $result = mysqli_query($con, $paperid);
@@ -22,10 +26,11 @@
     $mresult = mysqli_query($con, $moduleid);
     
     // get class details
-    $classid = "SELECT * FROM class WHERE CompanyID = ".$_SESSION['companyID']."";
+    $classid ="SELECT ClassID, ClassName
+                FROM class
+                WHERE CompanyID =".$_SESSION['companyID']."";
     $cresult = mysqli_query($con, $classid);
 
-    // get 
 ?>
 
 <!DOCTYPE html>
@@ -59,6 +64,11 @@
         $examname = $row['ExamName'];
         $examdesc = $row['ExamDescription'];
         $paperselect = $row['PaperID'];
+
+        if ($endtime <= $date_clicked){
+            echo '<script>alert("Cannot edit an ended exam.");
+            window.location.href="lecturer_exam_page.php";</script>';
+        }
     }
 ?>
 
@@ -84,7 +94,7 @@
             <!-- get previous selected module -->
             <?php
                 while ($mdata = mysqli_fetch_array($mresult)) {
-                if ($modid == $mdata['ModuleID']){
+                if ($classid == $mdata['ModuleID']){
                     echo '<option value ='.$mdata["ModuleID"].' selected>'.$mdata["ModuleName"].'</option>';                   
                 }
                 
@@ -118,8 +128,8 @@
         <p class="text-uppercase fw-bold main-color m-2">
             Exam Name
         </p>
-        <div class="form-floating mb-3" id="name-field">
-            <input type="text"class="form-control" id="floatingInput" name="Examname" placeholder="ExamName" pattern="[a-zA-Z0-9\s]{1,}" required value = "<?php echo $examname; ?>">
+        <div class="form-floating mb-3">
+            <input type="text" class="form-control" id="floatingInput" name="Examname" placeholder="ExamName" pattern="[a-zA-Z0-9\s]{1,}" required value = "<?php echo $examname; ?>">
             <label for="floatingInput">Exam Name</label> 
         </div>
 
@@ -127,7 +137,7 @@
             Exam Description
         </p>
         <div class="form-floating mb-3">
-            <input type="text" class="form-control" id="floatingInput" name= "Examdesc" placeholder="ExamDescription" required value = "<?php echo $examdesc; ?>">
+            <input type="text" class="form-control" id="floatingInput" name= "Examdesc"placeholder="ExamDescription" required value = "<?php echo $examdesc; ?>">
             <label for="floatingInput">Exam Description</label> 
         </div>
 
@@ -163,6 +173,7 @@
                 if ($data['PaperID'] == $paperselect){
                     echo '<option value ='.$data["PaperID"].' selected>'.$data["PaperName"].' - '.$data["PaperType"].'</option>';                   
                 }
+                
                 else {
                     echo'<option value ='.$data["PaperID"].'>'.$data["PaperName"].' - '.$data["PaperType"].'</option>';                    
                 }
@@ -176,10 +187,15 @@
         
         <div class= "d-flex flex-wrap justify-content-around">
             <div>
-                <button class="btn third-bg-color font-caveat shadow mx-auto mt-3 fs-4" id="submit-btn1" type="submit" name= "submit" value = "draft" onclick="return confirm('Are you sure to draft exam?')">Mark as Draft</button>
+                <button class="btn third-bg-color font-caveat shadow mx-auto mt-3 fs-4 stubtn" type="submit" name= "submit" value = "draft" onclick="return confirm('Are you sure to draft exam?')">Mark as Draft</button>
             </div>
+
             <div>
-                <button class="btn third-bg-color font-caveat shadow mx-auto mt-3 fs-4" id="submit-btn2" type="submit" name= "submit" value = "publish" onclick="return confirm('Are you sure to publish exam?')">Save as published</button>
+                <button class="btn third-bg-color font-caveat shadow mx-auto mt-3 fs-4 stubtn" type="reset" onclick="resetform()">Discard Changes</button>
+            </div>
+
+            <div>
+                <button class="btn third-bg-color font-caveat shadow mx-auto mt-3 fs-4 stubtn" type="submit" name= "submit" value = "publish" onclick="return confirm('Are you sure to publish exam?')">Save as published</button>
             </div>
         </div>
     </div>
@@ -187,9 +203,6 @@
 
 </form>
 
-<script src="js/mingliangJS.js"></script>
-<script src="https://unpkg.com/vue@2"></script>
-<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <!-- javascript to reset all fields in form -->
 <script>
     function resetform() {
@@ -210,7 +223,10 @@
         return true;
     }
 </script>
+
+<!-- footer -->
 <?php 
+
 include "./common/footer_lecturer.php" ?>
 </body>
 

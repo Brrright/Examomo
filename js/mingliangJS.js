@@ -177,3 +177,59 @@ function updateTable(path, parentElement) {
     xmlhttp.send();
 }
 
+function AnimatedPopUp(titleMsg, content) {
+    Swal.fire({
+        title: titleMsg,
+        text: content,
+        showClass: {
+          popup: 'animate__animated animate__fadeInDown'
+        },
+        hideClass: {
+          popup: 'animate__animated animate__fadeOutUp'
+        }
+      })  
+}
+
+function ConfirmAction(titleMsg, content) {
+    Swal.fire({
+        title: titleMsg,
+        text: content,
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes!'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          Swal.fire(
+            'Deleted!',
+            'Your file has been deleted. (TEMPLATE!!! PLEASE UPDATE LATER, STILL TRYING)',
+            'success'
+          )
+          return true;
+        }
+      })
+}
+
+function ConfirmMsg() {
+    Swal.fire({
+    title: 'Save & Publish Exam?',
+    text: "This action will publish this exam, the information cannot be updated unless it is save as draft again!",
+    icon: 'info',
+    showCancelButton: true,
+    confirmButtonColor: '#3085d6',
+    cancelButtonColor: '#d33',
+    confirmButtonText: 'Yes, Save and publish it!'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            Swal.fire(
+                'Saved!',
+                'Exam is published.',
+                'success'
+                )
+        return true;
+        }
+        return false;
+    })
+}
+

@@ -6,12 +6,21 @@
       window.location.href="guest_home_page.php";</script>';
   }
 
+  if ($_SESSION["userRole"] != "lecturer") {
+    echo '<script>alert("You have not access to this page.");
+    window.location.href="guest_home_page.php";</script>';
+  }
+
+  // get current datetime
+  date_default_timezone_set('Asia/Kuala_Lumpur');
+  $date_clicked = date('Y-m-d H:i:s');
+
   // retrieve drafted exam details
-  $draftexamsql = "SELECT ExamID, ExamName, ExamDescription FROM exam WHERE CompanyID = ".$_SESSION['companyID']." AND isPublished LIKE 0 AND LecturerID = ".$_SESSION["userID"]."";
+  $draftexamsql = "SELECT ExamID, ExamName, ExamDescription FROM exam WHERE CompanyID = ".$_SESSION['companyID']." AND isPublished LIKE 0 AND LecturerID = ".$_SESSION["userID"]." AND ExamEndDateTime >= '$date_clicked'";
   $draftresult = mysqli_query($con, $draftexamsql);
 
   // retrieve published exam details
-  $pubexamsql = "SELECT ExamID, ExamName, ExamDescription FROM exam WHERE CompanyID = ".$_SESSION['companyID']." AND isPublished LIKE 1 AND LecturerID = ".$_SESSION["userID"]."";
+  $pubexamsql = "SELECT ExamID, ExamName, ExamDescription FROM exam WHERE CompanyID = ".$_SESSION['companyID']." AND isPublished LIKE 1 AND LecturerID = ".$_SESSION["userID"]." AND ExamEndDateTime >= '$date_clicked'";
   $pubresult = mysqli_query($con, $pubexamsql);
 ?>
 

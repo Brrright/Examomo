@@ -103,15 +103,15 @@
 
         <div class= "d-flex flex-wrap justify-content-around">
             <div>
-                <button class="btn third-bg-color font-caveat shadow mx-auto mt-3 fs-4" type="submit" name= "submit" value = "draft" onclick="return confirm('Are you sure to draft exam paper?')">Mark as Draft</button>
+                <button class="btn third-bg-color font-caveat shadow mx-auto mt-3 fs-4 stubtn" type="submit" name= "submit" value = "draft" onclick="return confirm('Are you sure to draft exam paper?')">Mark as Draft</button>
             </div>
 
             <div>
-                <button class="btn third-bg-color font-caveat shadow mx-auto mt-3 fs-4" type="reset">Discard Changes</button>
+                <button class="btn third-bg-color font-caveat shadow mx-auto mt-3 fs-4 stubtn" type="reset">Discard Changes</button>
             </div>
 
             <div>
-                <button class="btn third-bg-color font-caveat shadow mx-auto mt-3 fs-4" type="submit" name= "submit" value = "create" onclick="return confirm('Are you sure to create exam paper?')">Save as published</button>
+                <button class="btn third-bg-color font-caveat shadow mx-auto mt-3 fs-4 stubtn" type="submit" name= "submit" value = "create" onclick="return confirm('Are you sure to create exam paper?')">Save as published</button>
             </div>
         </div>
     </div> 

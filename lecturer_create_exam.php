@@ -131,10 +131,10 @@
         
         <div class= "d-flex flex-wrap justify-content-around">
             <div>
-                <button class="btn third-bg-color font-caveat shadow mx-auto mt-3 fs-4" id="submit-btn1" type="submit" name= "submit" value = "draft" onclick="return confirm('Are you sure to draft exam?')">Save as Draft</button>
+                <button class="btn third-bg-color font-caveat shadow mx-auto mt-3 fs-4 stubtn" id="submit-btn1" type="submit" name= "submit" value = "draft" onclick="return confirm('Are you sure to draft exam?')">Save as Draft</button>
             </div>
             <div>
-                <button class="btn third-bg-color font-caveat shadow mx-auto mt-3 fs-4" id="submit-btn2" type="submit" name= "submit" value = "publish" onclick="return confirm('Are you sure to publish exam?')">Publish</button>
+                <button class="btn third-bg-color font-caveat shadow mx-auto mt-3 fs-4 stubtn" id="submit-btn2" type="submit" name= "submit" value = "publish" onclick="return confirm('Are you sure to publish exam?')">Publish</button>
             </div>
         </div>
     </div>
@@ -149,6 +149,7 @@
 <script src="https://unpkg.com/vue@2"></script>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script>
+
     function GainRelatedExamPaper() {
         var selection = document.getElementById('moduleselect');
         var selectedOption = selection.options[selection.selectedIndex].value;
@@ -181,7 +182,6 @@
             document.getElementById("Startdatetime").value = null;
             document.getElementById("Enddatetime").value = null;
             return false;
-    
         }
         return true;
     }

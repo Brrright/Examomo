@@ -110,7 +110,7 @@ align-self: center;
   background: #2B5EA4;
   padding: 10px;
   border-radius: 15px;
-  display: block;
+  display: inline;
   border: none;
   transition: all 0.4s ease 0s;
 }

@@ -87,15 +87,15 @@
 
         <div class= "d-flex flex-wrap justify-content-around">
             <div>
-                <button class="btn third-bg-color font-caveat shadow mx-auto mt-3 fs-4" type="submit" name= "submit" value = "draft" onclick="return confirm('Are you sure to draft exam paper?')">Save as Draft</button>
+                <button class="btn third-bg-color font-caveat shadow mx-auto mt-3 fs-4 stubtn" type="submit" name= "submit" value = "draft" onclick="return confirm('Are you sure to draft exam paper?')">Save as Draft</button>
             </div>
 
             <div>
-                <button class="btn third-bg-color font-caveat shadow mx-auto mt-3 fs-4" type="submit" name="submit" value="addques">Save & Add Questions</button>
+                <button class="btn third-bg-color font-caveat shadow mx-auto mt-3 fs-4 stubtn" type="submit" name="submit" value="addques">Save & Add Questions</button>
             </div>
 
             <div>
-                <button class="btn third-bg-color font-caveat shadow mx-auto mt-3 fs-4" type="submit" name= "submit" value = "create" onclick="return confirm('Are you sure to create exam paper?')">Create Paper</button>
+                <button class="btn third-bg-color font-caveat shadow mx-auto mt-3 fs-4 stubtn" type="submit" name= "submit" value = "create" onclick="return confirm('Are you sure to create exam paper?')">Create Paper</button>
             </div>
         </div>
     </div> 

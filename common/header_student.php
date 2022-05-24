@@ -35,29 +35,7 @@
                 <li class="nav-item">
                     <a class="nav-link" style="color:#2B5EA4;" href="logout.php">Logout</a>
                 </li>
-
-                
-
-                <!-- Drop down Nav Item -->
-                <!-- <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        Manage Account
-                    </a>
-                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" href="#">Student</a></li>
-                        <li><a class="dropdown-item" href="#">Lecturer</a></li>
-                        <li><hr class="dropdown-divider"></li>
-                        <li><a class="dropdown-item" href="#">Admin</a></li>
-                    </ul>
-                </li> -->
             </ul>
-
-
-            <!-- Search bar -->
-            <!-- <form class="d-flex">
-            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success" type="submit">Search</button>
-            </form> -->
         </div>
     </div>
 </nav>

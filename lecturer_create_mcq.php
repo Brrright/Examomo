@@ -68,8 +68,8 @@
             Insert Image (Optional)
         </p>
 
+        <img src="https://www.beelights.gr/assets/images/empty-image.png" id="file-img-preview" style="height: 25vw; width: 40vh;" class="m-5 mx-auto">
         <div class="input-group mb-3">
-            <img src="https://www.beelights.gr/assets/images/empty-image.png" id="file-img-preview" style="height: 10vw; width: 10vh; margin-bottom: 20px;">
             <input type="file" class="form-control" name="mcq-image" id="file-input" accept="image/png, image/gif, image/jpeg" onchange="showPreview(event);">
             <button type="button" onclick="imgremove()">Remove</button>
         </div>
@@ -143,7 +143,7 @@
     <div class= "d-flex flex-wrap" style="position: absolute; bottom: 0; padding-bottom: 40px;">
         
         <div>
-            <button class="btn third-bg-color font-caveat shadow mx-auto mt-3 fs-4" type="submit" name= "submit" onclick="return confirm('Do you wish to save current question?')">Add Question</button>
+            <a href="lecturer_create_mcq_backend.php" class="btn third-bg-color font-caveat shadow mx-auto mt-3 fs-4" type="submit" name= "submit" onclick="return confirm('Do you wish to save current question?')">Add Question</a>
             
             <div>
                 <a href="lecturer_exampaper_page.php"><button class="btn third-bg-color font-caveat shadow mx-auto mt-3 fs-4 fin-mcq-confirm">Finish</button></a>
@@ -155,9 +155,6 @@
 </div>
 </div>
 </form>
-
-
-    
 <script>
     var elems = document.getElementsByClassName('fin-mcq-confirm');
     var confirmIt = function (e) {
