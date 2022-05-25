@@ -16,11 +16,11 @@
   $date_clicked = date('Y-m-d H:i:s');
 
   // retrieve drafted exam details
-  $draftexamsql = "SELECT ExamID, ExamName, ExamDescription FROM exam WHERE CompanyID = ".$_SESSION['companyID']." AND isPublished LIKE 0 AND LecturerID = ".$_SESSION["userID"]." AND ExamEndDateTime >= '$date_clicked'";
+  $draftexamsql = "SELECT ExamID, ExamName, ExamDescription, PaperID FROM exam WHERE CompanyID = ".$_SESSION['companyID']." AND isPublished LIKE 0 AND LecturerID = ".$_SESSION["userID"]." AND ExamEndDateTime >= '$date_clicked'";
   $draftresult = mysqli_query($con, $draftexamsql);
 
   // retrieve published exam details
-  $pubexamsql = "SELECT ExamID, ExamName, ExamDescription FROM exam WHERE CompanyID = ".$_SESSION['companyID']." AND isPublished LIKE 1 AND LecturerID = ".$_SESSION["userID"]." AND ExamEndDateTime >= '$date_clicked'";
+  $pubexamsql = "SELECT ExamID, ExamName, ExamDescription, PaperID FROM exam WHERE CompanyID = ".$_SESSION['companyID']." AND isPublished LIKE 1 AND LecturerID = ".$_SESSION["userID"]." AND ExamEndDateTime >= '$date_clicked'";
   $pubresult = mysqli_query($con, $pubexamsql);
 ?>
 
@@ -75,6 +75,7 @@
           <th scope="col">ID</th>
           <th scope="col">Name</th>
           <th scope="col">Description</th>
+          <th scope="col">Paper</th>
           <th scope="col">Edit</th>
           <th scope="col">Delete</th>
         </tr>
@@ -87,6 +88,7 @@
                 <th scope="row">'.$data["ExamID"].'</th>
                 <td>'.$data["ExamName"].'</td>
                 <td>'.$data["ExamDescription"].'</td>
+                <td><a href="lecturer_edit_exampaper.php?id= '.$data["PaperID"].'" class="btn btn-primary"><i class="bi bi-pencil-square"></i></a></td>
                 <td><a href="lecturer_edit_exam.php?id= '.$data["ExamID"].'" class="btn btn-primary"><i class="bi bi-pencil-square"></i></a></td>
                 <td><a href="lecturer_delete_exam_backend.php?id= '.$data["ExamID"].'" class="btn btn-danger delete-confirm"><i class="bi bi-trash"></i></a></td>
                 </tr>';

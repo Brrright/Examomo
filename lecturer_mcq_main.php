@@ -145,7 +145,7 @@
                             </p>
                     
                             <div class="form-floating mb-3">
-                                <textarea class="form-control is-invalid" id="floatingInput" name="mcq_title" style="min-height:40px;" placeholder="Question Title" required></textarea>
+                                <textarea class="form-control is-invalid" id="floatingInput" name="mcq_title" style="min-height:100px;" placeholder="Question Title" required></textarea>
                                 <label for="floatingInput">Question Title</label>
                             </div>
                     

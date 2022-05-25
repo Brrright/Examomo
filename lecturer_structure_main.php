@@ -51,7 +51,7 @@
     <?php require "common/header_lecturer.php"?>
 
     <br>
-    <center><h1 style="font-family: 'Caveat'; font-weight: bold; color: #2B5EA4;">Create Multiple Choice Question</h1></center> 
+    <center><h1 style="font-family: 'Caveat'; font-weight: bold; color: #2B5EA4;">Create Structure Question</h1></center> 
     
     <div class= "row" style="min-height: 450px; margin: auto;">
         <!-- panel for question creation form -->
@@ -60,7 +60,7 @@
                 <div class="bg d-flex mx-auto flex-column p-5 m-5 shadow p-3 mb-5" style="background-color: white; width: 90%; border-radius: 10px;">
                     <!-- pass paper id to backend -->
 
-                    <input type="hidden" name="paper-id" value="<?php echo $paperid;?> "/>
+                    <input type="hidden" name="paper_id" value="<?php echo $paperid;?> "/>
                     <div id="question-content">
                         <?php 
                             if($rowcount > 0) { 
@@ -102,7 +102,7 @@
                             </p>
                     
                             <div class="form-floating mb-3">
-                                <textarea class="form-control is-invalid" id="floatingInput" name="structure_title" style="min-height:40px;" placeholder="Question Title" required></textarea>
+                                <textarea class="form-control is-invalid" id="floatingInput" name="structure_title" style="min-height:100px;" placeholder="Question Title" required></textarea>
                                 <!-- <label for="floatingInput">Question Title</label> -->
                             </div>
                     
@@ -131,27 +131,42 @@
 
         <div class="col-xl-5">   
         <div class="sticky pt-5">
-            <div id="2-button" class="d-flex mx-auto flex-wrap shadow p-3 mb-2 ele-not-showing" style="background-color: white; width: 80%; border-radius: 15px; ">
+            <?php 
+            if($rowcount == 0) {
+                echo '<div id="2-button" class="d-flex mx-auto flex-wrap shadow p-3 mb-2" style="background-color: white; width: 80%; border-radius: 15px; ">
                 <button class="stubtn shadow mx-auto" id="save-add-btn" type="submit">Save & Add Question</button>
                 <!-- <button class="stubtn shadow mx-auto" type="submit" name= "submit" value="submit">Save & Add Question</button> -->
                 
                 <button class="stubtn shadow mx-auto fin-mcq-confirm" id="save-finish-btn" type="submit" name="isEnd" value="true">Save & Finish</button>
                 <!-- <a href="lecturer_exampaper_page.php" class="stubtn shadow mx-auto fin-mcq-confirm" type="submit" value="submit">Save & Finish</a> -->
-            </div>
+            </div>';
+            }
+            else {
+                echo '<div id="2-button" class="d-flex mx-auto flex-wrap shadow p-3 mb-2 ele-not-showing" style="background-color: white; width: 80%; border-radius: 15px; ">
+                <button class="stubtn shadow mx-auto" id="save-add-btn" type="submit">Save & Add Question</button>
+                
+                <button class="stubtn shadow mx-auto fin-mcq-confirm" id="save-finish-btn" type="submit" name="isEnd" value="true">Save & Finish</button>
+            </div>';
+            }
+            ?>
+            
 
             
     </form>
             <!-- <div  class="d-flex mx-auto flex-wrap shadow p-3 mb-2 ele-showing" style="background-color: white; width: 70%; border-radius: 15px;"> -->
-                        <a id="1-button" href="lecturer_exampaper_page.php" class="mb-2 ele-showing stubtn shadow fin-mcq-confirm text-center w-50">Finish</a>
-            <!-- </div> -->
-
+            <?php  
+            if(!$rowcount == 0) {
+                echo '<a id="1-button" href="lecturer_exampaper_page.php" class="mb-2 ele-showing stubtn shadow fin-mcq-confirm text-center w-50 mt-3">Finish</a>';   
+            }
+            ?>
+           
             <!-- move -->
             <div class="bg d-flex flex-wrap mx-auto flex-row p-5 m-5 shadow p-3 mb-5" id="pagination-part" style="background-color: white; width: 90%; border-radius: 15px; height: auto; position: relative;">
                 <?php 
                 $x = 1;
                 if($rowcount > 0) { 
                     while($data = mysqli_fetch_array($result2)) {
-                        $button = '<button class="btn btn-outline-secondary me-3" onclick="changeContent(\'filled\','.$data["PaperID"].','.$data["MQuestionID"].')">'.$x.'</button>';
+                        $button = '<button class="btn btn-outline-secondary me-3" onclick="changeContent(\'filled\','.$data["PaperID"].','.$data["SQuestionID"].')">'.$x.'</button>';
                         $x++;
                         echo $button;
                     }
@@ -169,9 +184,20 @@
 
 <script src="js/mingliangJS.js"></script>
     <script>
-        function changeContent(id) {
-            var path = "lecturer_structure_filled_form.php?id=" +id;
-            updateTable(path, 'question-content')
+        function changeContent(form,id,qid) {
+            document.getElementById('2-button').setAttribute("class", "d-flex mx-auto flex-wrap shadow p-3 mb-2 ele-showing");
+            document.getElementById('1-button').setAttribute("class", "ele-not-showing");
+
+            if (form == "empty") {
+                var path = "lecturer_structure_filled_form.php?id="+id;
+            }
+            else if(form == "filled") {
+                var path = "lecturer_structure_filled_form.php?id=" +id+"&question_id="+qid;
+            }
+            else {
+                alert("no form specified");
+            }
+            updateTable(path, 'question-content');
         }
     </script>
     

@@ -1,7 +1,5 @@
 <?php
    require "common/conn.php";
-
-   require "common/conn.php";
    if (!isset($_POST)) {
        echo '<script>alert("You have not selected an exam paper.");
        window.location.href="lecturer_exampaper_page.php";</script>';
@@ -39,13 +37,20 @@
                 // echo json_encode($response);
 
             }
+            else {
+                if (isset($_POST["isEnd"])) {
+                    echo '<script>alert("One question updated successfully.");
+                            window.location.href = "lecturer_exampaper_page.php";
+                            </script>';
+                }
                 else {
                     echo '<script>alert("One question updated successfully.");
                     window.location.href = "lecturer_structure_main.php?id='.$PaperID.'";
                     </script>';
-                    } 
+                } 
 
-                }
+            }
+        }
         // update with image
         else{
             $upload_dir = "img/questionimg/";
@@ -78,12 +83,19 @@
 
             }
                 else {
-                    echo '<script>alert("One question updated successfully.");
-                    window.location.href = "lecturer_structure_main.php?id='.$PaperID.'";
-                    </script>';
-                    } 
+                    if (isset($_POST["isEnd"])) {
+                        echo '<script>alert("One question updated successfully.");
+                                window.location.href = "lecturer_exampaper_page.php";
+                                </script>';
+                    }
+                    else {
+                        echo '<script>alert("One question updated successfully.");
+                        window.location.href = "lecturer_mcqlecturer_structure_main_main.php?id='.$PaperID.'";
+                        </script>';
+                    }
 
                 }
+            }
         
     }
 

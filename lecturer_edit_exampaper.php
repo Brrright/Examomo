@@ -58,7 +58,7 @@
             Edit Examination Paper
         </p>
 
-        <a href="lecturer_mcq_main.php?id=<?php echo $paperid; ?>" class="btn btn-primary mx-auto" style="width:30%">EDIT QUESTION</a> <br>
+        <a href="lecturer_question_redirect.php?id=<?php echo $paperid; ?>&type=<?php echo $papertype;?>" class="btn btn-primary mx-auto" style="width:30%">EDIT QUESTION</a> <br>
 
         <p class="text-uppercase fw-bold main-color m-2">
             Paper Name

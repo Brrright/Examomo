@@ -1,6 +1,5 @@
 <?php
     require "common/conn.php";
-    require "common/HeadImportInfo.php";
 
     if (!isset($_GET["id"])) {
         echo '<script>alert("You have not selected an exam paper.");
