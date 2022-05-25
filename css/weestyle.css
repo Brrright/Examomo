@@ -122,3 +122,29 @@ align-self: center;
   box-shadow: 5px 40px -10px rgba(0,0,0,0.57);
   transition: all 0.4s ease 0s;
 }
+
+.input-icons i {
+  position: absolute;
+}
+
+.input-icons {
+  width: 100%;
+}
+
+.icon {
+  padding: 10px;
+  min-width: 40px;
+}
+
+.input-field {
+  width: 100%;
+  padding: 10px;
+  text-align: center;
+  border-radius: 15px;
+}
+
+.welcomemessage {
+  font-size: 24px;
+  color: #2B5EA4;
+  vertical-align:middle;
+}
