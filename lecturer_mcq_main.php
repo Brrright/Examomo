@@ -226,18 +226,36 @@
 
     <div class="col-xl-5">   
         <div class="sticky pt-5">
-            <div id="2-button" class="d-flex mx-auto flex-wrap shadow p-3 mb-2 ele-not-showing" style="background-color: white; width: 80%; border-radius: 15px; ">
+            <?php 
+            if($rowcount == 0) {
+                echo '<div id="2-button" class="d-flex mx-auto flex-wrap shadow p-3 mb-2" style="background-color: white; width: 80%; border-radius: 15px; ">
                 <button class="stubtn shadow mx-auto" id="save-add-btn" type="submit">Save & Add Question</button>
                 <!-- <button class="stubtn shadow mx-auto" type="submit" name= "submit" value="submit">Save & Add Question</button> -->
                 
                 <button class="stubtn shadow mx-auto fin-mcq-confirm" id="save-finish-btn" type="submit" name="isEnd" value="true">Save & Finish</button>
                 <!-- <a href="lecturer_exampaper_page.php" class="stubtn shadow mx-auto fin-mcq-confirm" type="submit" value="submit">Save & Finish</a> -->
-            </div>
+            </div>';
+            }
+            else {
+                echo '<div id="2-button" class="d-flex mx-auto flex-wrap shadow p-3 mb-2 ele-not-showing" style="background-color: white; width: 80%; border-radius: 15px; ">
+                <button class="stubtn shadow mx-auto" id="save-add-btn" type="submit">Save & Add Question</button>
+                
+                <button class="stubtn shadow mx-auto fin-mcq-confirm" id="save-finish-btn" type="submit" name="isEnd" value="true">Save & Finish</button>
+            </div>';
+            }
+            ?>
+            
 
             
     </form>
             <!-- <div  class="d-flex mx-auto flex-wrap shadow p-3 mb-2 ele-showing" style="background-color: white; width: 70%; border-radius: 15px;"> -->
-                        <a id="1-button" href="lecturer_exampaper_page.php" class="mb-2 ele-showing stubtn shadow fin-mcq-confirm text-center w-50">Finish</a>
+            <?php  
+            if(!$rowcount == 0) {
+                echo '<a id="1-button" href="lecturer_exampaper_page.php" class="mb-2 ele-showing stubtn shadow fin-mcq-confirm text-center w-50 mt-3">Finish</a>';   
+            }
+            ?>
+           
+         
             <!-- </div> -->
 
             <!-- move -->

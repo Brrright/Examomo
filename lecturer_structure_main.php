@@ -20,7 +20,7 @@
     $paperid = $_GET['id'];
     $sql = "SELECT * FROM question_structure WHERE PaperID = $paperid";
     $sql2 = "SELECT * FROM question_structure WHERE PaperID = $paperid";
-    result = mysqli_query($con, $sql);
+    $result = mysqli_query($con, $sql);
     $result2 = mysqli_query($con, $sql);
 
     if(!$result) {
