@@ -46,7 +46,7 @@
 <div class= "row" style="min-height: 450px; margin: auto;">
 <!-- panel for question creation form -->
 <div class="col-xl-7">
-    <form class="was-validated" action="lecturer_structure_insert_backend.php" method="post">
+    <form class="was-validated" action="lecturer_structure_insert_backend.php" method="post" enctype="multipart/form-data">
     <div class="bg d-flex mx-auto flex-column p-5 m-5" style="background-color: #E2F8DB; width: 90%; border-radius: 10px; box-shadow: 3px 3px darkseagreen;">
 
         <!-- pass paper id to backend -->

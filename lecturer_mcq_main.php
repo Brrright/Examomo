@@ -58,7 +58,6 @@
 <div class= "row" style="min-height: 450px; margin: auto;">
 <!-- panel for question creation form -->
     <div class="col-xl-7" >
-        <!-- <form class="was-validated" id="question-form"> -->
         <form class="was-validated" action="lecturer_mcq_insert_backend.php" method="post" id="question-form" enctype="multipart/form-data">
         <div class="bg d-flex mx-auto flex-column p-5 m-5 shadow p-3 mb-5" style="background-color: white; width: 90%; border-radius: 10px;">
 
@@ -247,14 +246,14 @@
                 $x = 1;
                 if($rowcount > 0) { 
                     while($data = mysqli_fetch_array($result2)) {
-                        $button = '<button class="btn btn-secondary rounded-circle me-3" onclick="changeContent(\'filled\','.$data["PaperID"].','.$data["MQuestionID"].')">'.$x.'</button>';
+                        $button = '<button class="btn btn-outline-secondary me-3" onclick="changeContent(\'filled\','.$data["PaperID"].','.$data["MQuestionID"].')">'.$x.'</button>';
                         $x++;
                         echo $button;
                     }
-                    echo '<button class="btn btn-secondary rounded-circle me-3"  onclick="changeContent(\'empty\','.$paperid.',null)"> '.$x.' </button>';
+                    echo '<button class="btn btn-outline-secondary me-3"  onclick="changeContent(\'empty\','.$paperid.',null)"> '.$x.'(new) </button>';
                 }
                 else {
-                    echo  "<button> 1 </button>";
+                    echo  "<button class=\"btn btn-outline-secondary me-3\"> 1 </button>";
                 }
                 ?>
             </div>

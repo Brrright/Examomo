@@ -19,12 +19,13 @@
     
     // get paper id after exam paper creation
     $paperid = $_GET['id'];
+    $quesid = $_GET['question_id'];
 
     $pattern = "'[a-zA-Z0-9\s.^`~!@#$%\^&*()_+={}|[\]\\:';><?,./\x22]*'";
 
     $sql ="SELECT SQuestionID, Question, QuestionImage, Mark
             FROM question_structure
-            WHERE PaperID = $paperid";
+            WHERE PaperID = '$paperid' AND SQuestionID = '$quesid'";
     
     $result = mysqli_query($con, $sql);
     $rowcount = mysqli_num_rows($result);
@@ -42,11 +43,14 @@
     <div class= "row" style="min-height: 450px; margin: auto;">
     <!-- panel for question creation form -->
     <div class="col-xl-7">
-        <form class="was-validated" action="lecturer_structure_insert_backend.php" method="post">
+        <form class="was-validated" action="lecturer_structure_insert_backend.php" method="post" enctype="multipart/form-data">
         <div class="bg d-flex mx-auto flex-column p-5 m-5" style="background-color: #E2F8DB; width: 90%; border-radius: 10px; box-shadow: 3px 3px darkseagreen;">
     
             <!-- pass paper id to backend -->
             <input type="hidden" name="paper_id" value="<?=$paperid ?>"/>
+
+            <!-- pass question id to backend -->
+            <input type="hidden" name="question_id" value="<?=$quesid ?>"/>
     
             <p class="fs-3 fw-bold font-caveat main-color m-3 p-3 text-center" style="text-shadow:0px 2px #707b8b93;">
                 Question Number: 
@@ -65,6 +69,11 @@
                 Insert Image (Optional)
             </p>
     
+            <div class="input-group mb-3">
+                <img src = '<?=$Image ?>' id="file-img-preview" style="height: 400px; width: 100%; margin-bottom: 20px;">
+                <input type="file" class="form-control" name="structure_image" id="file-input" accept="image/png, image/gif, image/jpeg" onchange="showPreview(event);">
+                <button type="button" onclick="imgremove()">Remove</button>
+            </div>
             
             <p class="text-uppercase fw-bold main-color m-2 font-caveat">
                 Given Marks
