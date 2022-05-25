@@ -23,7 +23,6 @@
     ?>
 
     <?php ob_start(); ?>
-    <div class= "row" style="min-height: 450px; margin: auto;">
     <!-- panel for question creation form -->
 
     

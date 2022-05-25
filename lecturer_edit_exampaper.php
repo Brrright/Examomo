@@ -58,7 +58,7 @@
             Edit Examination Paper
         </p>
 
-        <a href="lecturer_mcq_main.php?id=<?php echo $paperid; ?>" class="btn btn-primary mx-auto" style="width:30%">EDIT QUESTION</a> <br>
+        <a href="lecturer_question_redirect.php?id=<?php echo $paperid; ?>&type=<?php echo $papertype?>" class="btn btn-primary mx-auto editconfirm" style="width:30%">EDIT QUESTION</a> <br>
 
         <p class="text-uppercase fw-bold main-color m-2">
             Paper Name
@@ -123,4 +123,14 @@
 include "./common/footer_lecturer.php"
 ?>
 </body>
+<script type="text/javascript">
+
+    var elems = document.getElementsByClassName('editconfirm');
+    var confirmIt = function (e) {
+        if (!confirm('Saving current changes is required before editing questions. Are you sure to proceed?')) e.preventDefault();
+    };
+    for (var i = 0, l = elems.length; i < l; i++) {
+        elems[i].addEventListener('click', confirmIt, false);
+    }
+</script>
 </html>

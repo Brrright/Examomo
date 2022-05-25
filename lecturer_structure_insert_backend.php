@@ -36,16 +36,22 @@
 
             if(!mysqli_query($con, $sql)) {
                 echo 'Error:'.mysqli_error($con);
-                // echo json_encode($response);
 
             }
-                else {
+            else {
+                if (isset($_POST["isEnd"])) {
                     echo '<script>alert("One question updated successfully.");
-                    window.location.href = "lecturer_structure_main.php?id='.$PaperID.'";
-                    </script>';
-                    } 
-
+                            window.location.href = "lecturer_exampaper_page.php";
+                            </script>';
                 }
+                else {
+                    echo '<script>alert("One question created successfully.");
+                        window.location.href = "lecturer_structure_main.php?id='.$PaperID.'";
+                        </script>';
+                }
+            } 
+
+        }
         // update with image
         else{
             $upload_dir = "img/questionimg/";
@@ -53,7 +59,6 @@
 
             $i = 1;
             while (file_exists($target_file)) {
-
                 $target_file = $upload_dir .$i. basename($_FILES["structure_image"]["name"]);
                 $i++;
             }
@@ -74,16 +79,20 @@
 
             if(!mysqli_query($con, $sql)) {
                 echo 'Error:'.mysqli_error($con);
-                // echo json_encode($response);
-
             }
-                else {
+            else {
+                if (isset($_POST["isEnd"])) {
                     echo '<script>alert("One question updated successfully.");
-                    window.location.href = "lecturer_structure_main.php?id='.$PaperID.'";
-                    </script>';
-                    } 
-
+                            window.location.href = "lecturer_exampaper_page.php";
+                            </script>';
                 }
+                else {
+                    echo '<script>alert("One question created successfully.");
+                        window.location.href = "lecturer_structure_main.php?id='.$PaperID.'";
+                        </script>';
+                }
+            }
+        }
         
     }
 
@@ -106,13 +115,20 @@
 
             }
                 else {
-                    echo '<script>alert("One question created successfully.");
-                    window.location.href = "lecturer_structure_main.php?id='.$PaperID.'";
-                    </script>';
-                    } 
+                    if (isset($_POST["isEnd"])) {
+                        echo '<script>alert("One question updated successfully.");
+                                window.location.href = "lecturer_exampaper_page.php";
+                                </script>';
+                    }
+                    else {
+    
+                        echo '<script>alert("One question created successfully.");
+                        window.location.href = "lecturer_structure_main.php?id='.$PaperID.'";
+                        </script>';
+                    }
 
             }
-
+        }
         // insert new with file
         else{
             $upload_dir = "img/questionimg/";
@@ -140,12 +156,19 @@
                 // echo json_encode($response);
 
             }
+            else {
+                if (isset($_POST["isEnd"])) {
+                    echo '<script>alert("One question updated successfully.");
+                            window.location.href = "lecturer_exampaper_page.php";
+                            </script>';
+                }
                 else {
+
                     echo '<script>alert("One question created successfully.");
                     window.location.href = "lecturer_structure_main.php?id='.$PaperID.'";
                     </script>';
-                    } 
-
                 }
+            }
+        }
     }
 ?>
