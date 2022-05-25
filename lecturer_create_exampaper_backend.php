@@ -51,10 +51,10 @@
         // redirect to add questions page
         if ($_POST['submit'] =="addques" ) {
             if($_POST['papertype'] == 'MCQ'){
-                header("Location: lecturer_create_mcq.php?id=".$row['PaperID']);
+                header("Location: lecturer_mcq_main.php?id=".$row['PaperID']);
             }
             else {
-                header("Location: lecturer_create_structured.php?id=".$row['PaperID']);
+                header("Location: lecturer_structure_main.php?id=".$row['PaperID']);
             }
         }
     }

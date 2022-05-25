@@ -4,6 +4,11 @@ if (!isset($_SESSION["userID"])) {
     window.location.href="guest_home_page.php";</script>';
 }
 
+if ($_SESSION["userRole"] != "admin") {
+    echo '<script>alert("You have no access to this page.");
+    window.location.href="guest_home_page.php";</script>';
+}
+
 require  "common/conn.php";
 if(isset($_GET['class_name'])) {
     $class_name = $_GET['class_name'];

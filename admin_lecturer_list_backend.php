@@ -3,6 +3,11 @@ if (!isset($_SESSION["userID"])) {
     echo '<script>alert("Please login before you access this page.");
     window.location.href="guest_home_page.php";</script>';
 }
+
+if ($_SESSION["userRole"] != "admin") {
+    echo '<script>alert("You have no access to this page.");
+    window.location.href="guest_home_page.php";</script>';
+}
 require  "common/conn.php";
 if(isset($_GET['lecturer_name'])) {
     $lecturer_name = $_GET['lecturer_name'];

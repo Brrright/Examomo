@@ -20,7 +20,7 @@
     </head>
 <body>      
   <?php require "common/header_admin.php"  ?>
-  <div class="admincontainer my-4 p-6 shadow p-3 mb-5 font-caveat">
+  <div class="admincontainer my-4 p-6 shadow p-3 mb-5">
       <div class="row">
         <div class="col-md-4">
           <img
@@ -28,14 +28,24 @@
             class="hover-zoom img-fluid shadow-2-strong"
           />
         </div>
-        <div class="col-md-6"><h3>
+        <div class="col-md-6 my-auto"><h3>
             <?php
-              $sql = "SELECT AdminName FROM admin WHERE AdminID = ".$_SESSION['userID']."";
+              $sql = "SELECT admin.AdminName, company.CompanyName, company.InstitutionType FROM admin 
+                      INNER JOIN company ON admin.CompanyID = company.CompanyID
+                      WHERE AdminID = ".$_SESSION['userID']."";
               $result = mysqli_query($con, $sql);
 
               $row = mysqli_fetch_array($result);
-              echo "<br>"."Welcome, ";
-              echo $row['AdminName']."."."<br>"."<br>";
+
+              $data = '
+                      <div class="welcomemessage">
+                      Welcome, '.$row["AdminName"].'<br><br>
+                      Organization Name : '.$row["CompanyName"].'<br><br>
+                      Organization Type : '.$row["InstitutionType"].'
+                      </div>
+                      ';
+
+              echo $data;
 
             ?></h3>
         </div>

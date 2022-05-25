@@ -4,6 +4,11 @@
         echo '<script>alert("Please login before you access this page.");
         window.location.href="guest_home_page.php";</script>';
     }
+
+    if ($_SESSION["userRole"] != "admin") {
+        echo '<script>alert("You have no access to this page.");
+        window.location.href="guest_home_page.php";</script>';
+    }
     $action = "Lecturer";
     $fetched = mysqli_query($con, "SELECT * FROM lecturer WHERE CompanyID = ".$_SESSION['companyID']."");
     $numOfRow = mysqli_num_rows($fetched);
