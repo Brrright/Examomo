@@ -30,6 +30,7 @@
     if(!$result2) {
         echo 'err when fetching structure question'. mysqli_error($con);
     }
+    
     $rowcount = mysqli_num_rows($result);
 ?>
 
@@ -55,7 +56,7 @@
     
     <div class= "row" style="min-height: 450px; margin: auto;">
         <!-- panel for question creation form -->
-        <div class="col-xl-7" id="question-content">
+        <div class="col-xl-7">
             <form class="was-validated" action="lecturer_structure_insert_backend.php" method="post" id="question-form" enctype="multipart/form-data">
                 <div class="bg d-flex mx-auto flex-column p-5 m-5 shadow p-3 mb-5" style="background-color: white; width: 90%; border-radius: 10px;">
                     <!-- pass paper id to backend -->
@@ -129,16 +130,14 @@
                 </div>
         </div>
 
-        <div class="col-xl-5">   
+    <div class="col-xl-5">   
         <div class="sticky pt-5">
             <?php 
             if($rowcount == 0) {
                 echo '<div id="2-button" class="d-flex mx-auto flex-wrap shadow p-3 mb-2" style="background-color: white; width: 80%; border-radius: 15px; ">
                 <button class="stubtn shadow mx-auto" id="save-add-btn" type="submit">Save & Add Question</button>
-                <!-- <button class="stubtn shadow mx-auto" type="submit" name= "submit" value="submit">Save & Add Question</button> -->
                 
                 <button class="stubtn shadow mx-auto fin-mcq-confirm" id="save-finish-btn" type="submit" name="isEnd" value="true">Save & Finish</button>
-                <!-- <a href="lecturer_exampaper_page.php" class="stubtn shadow mx-auto fin-mcq-confirm" type="submit" value="submit">Save & Finish</a> -->
             </div>';
             }
             else {
@@ -149,18 +148,15 @@
             </div>';
             }
             ?>
-            
 
             
     </form>
-            <!-- <div  class="d-flex mx-auto flex-wrap shadow p-3 mb-2 ele-showing" style="background-color: white; width: 70%; border-radius: 15px;"> -->
             <?php  
-            if(!$rowcount == 0) {
-                echo '<a id="1-button" href="lecturer_exampaper_page.php" class="mb-2 ele-showing stubtn shadow fin-mcq-confirm text-center w-50 mt-3">Finish</a>';   
-            }
+                if(!$rowcount == 0) {
+                    echo '<a id="1-button" href="lecturer_exampaper_page.php" class="mb-2 ele-showing stubtn shadow fin-mcq-confirm text-center w-50 mt-3">Finish</a>';   
+                }
             ?>
-           
-            <!-- move -->
+
             <div class="bg d-flex flex-wrap mx-auto flex-row p-5 m-5 shadow p-3 mb-5" id="pagination-part" style="background-color: white; width: 90%; border-radius: 15px; height: auto; position: relative;">
                 <?php 
                 $x = 1;
@@ -189,7 +185,7 @@
             document.getElementById('1-button').setAttribute("class", "ele-not-showing");
 
             if (form == "empty") {
-                var path = "lecturer_structure_filled_form.php?id="+id;
+                var path = "lecturer_structure_empty_form.php?id="+id;
             }
             else if(form == "filled") {
                 var path = "lecturer_structure_filled_form.php?id=" +id+"&question_id="+qid;
@@ -204,7 +200,7 @@
 <script>
     var elems = document.getElementsByClassName('fin-mcq-confirm');
     var confirmIt = function (e) {
-        if (!confirm('Are you sure to conclude paper questions?')) e.preventDefault();
+        if (!confirm('Are you sure to conclude paper questions? If you are not able to conclude it, please click the last question\'s button and click "save and finish" button')) e.preventDefault();
     };
     for (var i = 0, l = elems.length; i < l; i++) {
         elems[i].addEventListener('click', confirmIt, false);

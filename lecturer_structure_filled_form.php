@@ -39,23 +39,24 @@
 
     ?>
     <?php ob_start(); ?>
+    <!-- panel for question creation form -->
             <!-- pass question id to backend -->
             <input type="hidden" name="question_id" value="<?=$quesid ?>"/>
     
-            <p class="fs-3 fw-bold font-caveat main-color m-3 p-3 text-center" style="text-shadow:0px 2px #707b8b93;">
+            <p class="fs-3 fw-bold main-color m-3 p-3 text-center" style="text-shadow:0px 2px #707b8b93;">
                 Question Number: 
             </p>
     
-            <p class="text-uppercase fw-bold main-color m-2 font-caveat">
+            <p class="text-uppercase fw-bold main-color m-2">
                 Question Title
             </p>
     
             <div class="form-floating mb-3">
-                <textarea class="form-control is-invalid" id="floatingInput" name="structure_title" placeholder="Question Title" required ><?=$Title ?></textarea>
+                <textarea class="form-control is-invalid" id="floatingInput" name="structure_title" style="min-height:100px;" placeholder="Question Title" required ><?=$Title ?></textarea>
                 <label for="floatingInput">Question Title</label>
             </div>
     
-            <p class="text-uppercase fw-bold main-color m-2 font-caveat">
+            <p class="text-uppercase fw-bold main-color m-2">
                 Insert Image (Optional)
             </p>
     
@@ -64,15 +65,18 @@
                 <input type="file" class="form-control" name="structure_image" id="file-input" accept="image/png, image/gif, image/jpeg" onchange="showPreview(event);">
                 <button type="button" onclick="imgremove()">Remove</button>
             </div>
+            <p class="text-center" style="color: #aaa;">
+                "The image will remain the same unless it get removed or updated."
+            </p>
             
-            <p class="text-uppercase fw-bold main-color m-2 font-caveat">
+            <p class="text-uppercase fw-bold main-color m-2">
                 Given Marks
             </p>
     
             <div class="form-floating mb-3">
                 <input type="number" class="form-control is-invalid" id="floatingInput" name="givenmarks" placeholder="Given Marks" min="1" required value ="<?=$Marks ?>">
             </div>
-
+    
 <?php
     $structure_filled = ob_get_contents();
     ob_end_clean();
