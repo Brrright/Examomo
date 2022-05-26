@@ -65,7 +65,7 @@
                     <div id="question-content">
                         <?php 
                             if($rowcount > 0) { 
-                                echo '<p class="fs-2 fw-bold p-3" style="color: #2B5EA4;">
+                                echo '<p class="fs-2 fw-bold p-3" style="color: #2B5EA4;" id="no-alert">
                                     Question Number: <em class="fs-5" style="color: black; font-weight: normal;">(Select a question...)</em>
                                 </p>
                                 
@@ -151,11 +151,6 @@
 
             
     </form>
-            <?php  
-                if(!$rowcount == 0) {
-                    echo '<a id="1-button" href="lecturer_exampaper_page.php" class="mb-2 ele-showing stubtn shadow fin-mcq-confirm text-center w-50 mt-3">Finish</a>';   
-                }
-            ?>
 
             <div class="bg d-flex flex-wrap mx-auto flex-row p-5 m-5 shadow p-3 mb-5" id="pagination-part" style="background-color: white; width: 90%; border-radius: 15px; height: auto; position: relative;">
                 <?php 
@@ -173,6 +168,11 @@
                 }
                 ?>
             </div>
+            <?php  
+                if(!$rowcount == 0) {
+                    echo '<a id="1-button" href="lecturer_exampaper_page.php" class="mb-2 ele-showing stubtn shadow fin-mcq-confirm text-center w-50 mt-3">Finish</a>';   
+                }
+            ?>
         </div>
     </div>
 
@@ -181,19 +181,52 @@
 <script src="js/mingliangJS.js"></script>
     <script>
         function changeContent(form,id,qid) {
-            document.getElementById('2-button').setAttribute("class", "d-flex mx-auto flex-wrap shadow p-3 mb-2 ele-showing");
-            document.getElementById('1-button').setAttribute("class", "ele-not-showing");
-
-            if (form == "empty") {
-                var path = "lecturer_structure_empty_form.php?id="+id;
-            }
-            else if(form == "filled") {
-                var path = "lecturer_structure_filled_form.php?id=" +id+"&question_id="+qid;
+            const checkAlert = !!document.getElementById('no-alert');
+            console.log(checkAlert)
+            if (checkAlert == false) {
+                console.log(checkAlert)
+                Swal.fire({
+                title: 'Do you save the changes',
+                text: "Please save the changes first (if you have made any) before you go to another question. Are you sure you have save the current changes?",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes'
+                }).then((result) => {
+                if (result.isConfirmed) {
+                    document.getElementById('2-button').setAttribute("class", "d-flex mx-auto flex-wrap shadow p-3 mb-2 ele-showing");
+                    document.getElementById('1-button').setAttribute("class", "ele-not-showing");
+    
+                    if (form == "empty") {
+                        var path = "lecturer_structure_empty_form.php?id="+id;
+                    }
+                    else if(form == "filled") {
+                        var path = "lecturer_structure_filled_form.php?id=" +id+"&question_id="+qid;
+                    }
+                    else {
+                        alert("no form specified");
+                    }
+                    updateTable(path, 'question-content');
+                }
+                }) 
             }
             else {
-                alert("no form specified");
+                document.getElementById('2-button').setAttribute("class", "d-flex mx-auto flex-wrap shadow p-3 mb-2 ele-showing");
+                    document.getElementById('1-button').setAttribute("class", "ele-not-showing");
+    
+                    if (form == "empty") {
+                        var path = "lecturer_structure_empty_form.php?id="+id;
+                    }
+                    else if(form == "filled") {
+                        var path = "lecturer_structure_filled_form.php?id=" +id+"&question_id="+qid;
+                    }
+                    else {
+                        alert("no form specified");
+                    }
+                    updateTable(path, 'question-content');
             }
-            updateTable(path, 'question-content');
+            
         }
     </script>
     

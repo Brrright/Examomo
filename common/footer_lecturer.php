@@ -20,13 +20,13 @@
           <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mt-3 ">
             <h6 class="text-uppercase mb-4 font-weight-bold">Quick Links</h6>
             <p>
-              <a href="admin_feedback_page.php" class="text-decoration-none text-black">Examinations</a>
+              <a href="lecturer_exam_page.php" class="text-decoration-none text-black">Examinations</a>
             </p>
             <p>
-              <a href="admin_student_list.php" class="text-decoration-none text-black">Exam Papers</a>
+              <a href="lecturer_exampaper_page.php" class="text-decoration-none text-black">Exam Papers</a>
             </p>
             <p>
-              <a href="admin_lecturer_list.php" class="text-decoration-none text-black">Completed Exams</a>
+              <a href="lecturer_completed_exam_list.php" class="text-decoration-none text-black">Completed Exams</a>
             </p>
           </div>
 
