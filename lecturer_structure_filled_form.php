@@ -1,6 +1,5 @@
 <?php
     require "common/conn.php";
-    require "common/HeadImportInfo.php";
 
     if (!isset($_GET["id"])) {
         echo '<script>alert("You have not selected an exam paper.");
@@ -45,8 +44,12 @@
             <input type="hidden" name="question_id" value="<?=$quesid ?>"/>
     
             <p class="fs-3 fw-bold main-color m-3 p-3 text-center" style="text-shadow:0px 2px #707b8b93;">
-                Question Number: 
+                Question Details
             </p>
+
+            <div class="d-flex flex-row-reverse">
+                <a href="lecturer_structure_delete_backend.php?paper=<?=$paperid ?>&id=<?=$quesid?>" onclick="return confirm('Are you sure to delete this question?')" class="btn btn-danger"><i class="bi bi-trash"></i></a>
+            </div>
     
             <p class="text-uppercase fw-bold main-color m-2">
                 Question Title
@@ -79,7 +82,7 @@
             </div>
     
 <?php
-    $mcq_filled = ob_get_contents();
+    $structure_filled = ob_get_contents();
     ob_end_clean();
-    echo $mcq_filled;
+    echo $structure_filled;
 ?>
