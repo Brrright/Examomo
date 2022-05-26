@@ -9,7 +9,7 @@
     echo '<script>alert("You have not access to this page.");
     window.location.href="guest_home_page.php";</script>';
   }
-  $fetched = mysqli_query($con, "SELECT ExamName,ExamStartDateTime,ExamEndDateTime FROM exam WHERE CompanyID = ".$_SESSION['companyID']." AND LecturerID = ".$_SESSION['userID']." AND ExamEndDateTime > curtime()");
+  $fetched = mysqli_query($con, "SELECT * FROM exam WHERE CompanyID = ".$_SESSION['companyID']." AND LecturerID = ".$_SESSION['userID']." AND ExamEndDateTime > curtime()");
   $numOfRow = mysqli_num_rows($fetched);
 ?>
 
@@ -39,7 +39,7 @@
         </div>
     </div>
         <div class="profilecontainer my-4 shadow p-3 mb-5">
-          <table class="table table-hover mx-auto align-middle " style="width:95%" id="table-app">
+          <table class="table table-hover mx-auto align-middle" style="width:95%" id="table-app">
                       <caption>List of Completed Exams : <?php echo $numOfRow;?> in Total (all record)</caption>
                       <thead>
                           <tr>
@@ -60,7 +60,7 @@
                         $row = '<tr>
                                   <td>'.$data["ExamName"].'</td>
                                   <td>Start : '.$data["ExamStartDateTime"].'<br>End   : '.$data["ExamEndDateTime"].'</td>
-                                  <td> <a href=""><button class="btn stubtn">View</button></a></td>
+                                  <td> <a href="lecturer_completed_student_list.php?id='.$data["ExamID"].'"><button class="btn stubtn">View</button></a></td>
                                 </tr>';
                               echo $row;
                         }

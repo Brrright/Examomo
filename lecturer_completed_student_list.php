@@ -19,25 +19,27 @@
 
 
   // sql for student details who took exam
-  $studentfetch= "SELECT student.StudentID, student.StudentName, class.ClassName, class.ClassID
+  $studentfetch= "SELECT student.StudentID, student.StudentName, student.StudentEmail, class.ClassName, class.ClassID, exam_paper.PaperName, module.ModuleName
                   FROM exam 
                   INNER JOIN student ON student.CompanyID = exam.CompanyID
                   INNER JOIN exam_class ON exam_class.ExamID = exam.ExamID
                   INNER JOIN class ON class.ClassID = exam_class.ClassID
+                  INNER JOIN exam_paper ON exam.PaperID = exam_paper.PaperID
+                  INNER JOIN module ON exam.ModuleID = module.ModuleID
                   WHERE exam.LecturerID = ".$_SESSION['userID']." AND exam.ExamID = ".$_GET['id']." AND student.ClassID = exam_class.ClassID";
 
   $isfetched = mysqli_query($con, $studentfetch);
+  $numOfRow = mysqli_num_rows($isfetched);
 
 
   // sql for list of students
-  $fetched = "SELECT student.StudentName 
-              FROM exam
-              INNER JOIN exam_class ON exam_class.ExamID = exam.ExamID
-              INNER JOIN student ON student.CompanyID = exam.CompanyID
-              WHERE exam.ExamID =".$_GET['id']." AND student.ClassID = exam_class.ClassID";
+  // $fetched = "SELECT student.StudentName 
+  //             FROM exam
+  //             INNER JOIN exam_class ON exam_class.ExamID = exam.ExamID
+  //             INNER JOIN student ON student.CompanyID = exam.CompanyID
+  //             WHERE exam.ExamID =".$_GET['id']." AND student.ClassID = exam_class.ClassID";
   
-  $dataarray = mysqli_query($con, $fetched);
-  $numOfRow = mysqli_num_rows($dataarray);
+  // $dataarray = mysqli_query($con, $fetched);
 
 ?>
 
@@ -71,9 +73,11 @@
                     <caption>List of Students taking the exam : <?php echo $numOfRow;?> in Total (all record)</caption>
                     <thead>
                         <tr>
-                            <th>Student ID</th>
-                            <th>Student Name</th>
-                            <th>Action</th>
+                          <th>Student Name & Email</th>
+                          <th>Class</th>
+                          <th>Exam Paper</th>
+                          <th>Module</th>
+                          <th>Action</th>
                         </tr>
                     </thead>
                     <tbody id="table-body">
@@ -86,9 +90,11 @@
                       }
                       while ($data2 = mysqli_fetch_array($isfetched)) {
                       $row = '<tr>
-                                <td>'.$data2["StudentID"].'</td>
-                                <td>'.$data2["StudentName"].'</td>
-                                <td> <a href="" class="stubtn">View</a></td>
+                                <td>'.$data2["StudentName"].' <br> '.$data2["StudentEmail"].'</td>
+                                <td>'.$data2["ClassName"].'</td>
+                                <td>'.$data2["PaperName"].'</td>
+                                <td>'.$data2["ModuleName"].'</td>
+                                <td> <a href="#" class="stubtn">View</a></td>
                               </tr>';
                             echo $row;
                       }
@@ -100,10 +106,13 @@
 <?php include "./common/footer_lecturer.php" ?>
 <script src="js/mingliangJS.js"></script>
     <script>
+      const queryString = window.location.search;
+      const urlParams = new URLSearchParams(queryString);
+      const p_id = urlParams.get('id');
         const input = document.getElementById('search-text')
         input.addEventListener('keyup', function(event) {
             var key = document.getElementById('search-text').value;
-            updateTable("lecturer_completed_exam_list_backend.php?exam_name=" + key,  'table-body')
+            updateTable("lecturer_completed_student_list_backend.php?student_name=" + key + "&p_id="+p_id,  'table-body')
         })
 
     </script>

@@ -15,6 +15,7 @@
 if(isset($_GET['admin_name'])) {
     $admin_name = $_GET['admin_name'];
 }
+
 $fetched = mysqli_query($con, "SELECT * FROM admin WHERE CompanyID = ".$_SESSION['companyID']." AND AdminName LIKE'%$admin_name%'");
 $numOfRow = mysqli_num_rows($fetched);
 

@@ -44,9 +44,13 @@
     <?php ob_start(); ?>
             <input type="hidden" name="question_id" value="<?=$quesid?>">
             <p class="fs-2 fw-bold p-3" style="color: #2B5EA4;">
-                Question Number: 
+                Question Details
             </p>
-    
+
+            <div class="d-flex flex-row-reverse">
+                <a href="lecturer_mcq_delete_backend.php?paper=<?=$paperid ?>&id=<?=$quesid?>" onclick="return confirm('Are you sure to delete this question?')" class="btn btn-danger"><i class="bi bi-trash"></i></a>
+            </div>
+
             <p class="text-uppercase fw-bold main-color m-2  ">
                 Question Title
             </p>
