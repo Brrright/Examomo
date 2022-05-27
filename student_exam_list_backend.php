@@ -9,8 +9,10 @@
     echo '<script>alert("You have not access to this page.");
     window.location.href="guest_home_page.php";</script>';
   }
-
-$req = "SELECT * FROM ((module INNER JOIN student ON module.CompanyID = student.CompanyID) INNER JOIN exam ON module.ModuleID = exam.ModuleID) WHERE StudentID =".$_SESSION['userID']."";
+  if(isset($_GET['exam_name'])) {
+    $exam_name = $_GET['exam_name'];
+}
+$req = "SELECT * FROM ((module INNER JOIN student ON module.CompanyID = student.CompanyID) INNER JOIN exam ON module.ModuleID = exam.ModuleID) WHERE StudentID =".$_SESSION['userID']." AND ExamName LIKE'%$exam_name%'";
 $fetched = mysqli_query($con,$req);
 $numOfRow = mysqli_num_rows($fetched);
 

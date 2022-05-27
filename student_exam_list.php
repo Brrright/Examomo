@@ -10,12 +10,17 @@ if ($_SESSION["userRole"] != "student") {
   window.location.href="guest_home_page.php";</script>';
 }
 
-$req = "SELECT * FROM ((module INNER JOIN student ON module.CompanyID = student.CompanyID) INNER JOIN exam ON module.ModuleID = exam.ModuleID) WHERE StudentID =".$_SESSION['userID']."";
+$req = "SELECT * FROM (((module 
+INNER JOIN student ON module.CompanyID = student.CompanyID) 
+INNER JOIN exam ON module.ModuleID = exam.ModuleID)
+INNER JOIN exam_paper ON exam.PaperID = exam_paper.PaperID) 
+WHERE StudentID =".$_SESSION['userID']." ORDER BY exam.ExamEndDateTime DESC";
 $fetched = mysqli_query($con,$req);
 $numOfRow = mysqli_num_rows($fetched);
 
 date_default_timezone_set('Asia/Kuala_Lumpur');
 $date_now = date('Y-m-d H:i:s');
+// echo $date_now;
 ?>
 
 <!DOCTYPE html>
@@ -28,10 +33,6 @@ $date_now = date('Y-m-d H:i:s');
 
     <link rel="stylesheet" href="css/weestyle.css">
     <link rel="stylesheet" href="css/commonCSS.css">
-
-<!-- Meta Tags -->
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <!--Bootstrap CSS -->
 
@@ -78,7 +79,7 @@ $date_now = date('Y-m-d H:i:s');
                             <td>'.$data["ExamName"].'</td>
                             <td>'.$data["ExamStartDateTime"].'</td>
                             <td>'.$data["ExamEndDateTime"].'</td>
-                            <td><button type="button"  id='.$data["ExamID"].' class="btn btn-success" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                            <td><button type="button"  id='.$data["ExamID"].' class="btn btn-success" onclick="toogleModal('.$data["ExamID"].', \''.$data["PaperType"].'\' , false)" >
                             Completed
                           </button></td>
                         
@@ -89,7 +90,7 @@ $date_now = date('Y-m-d H:i:s');
                     <td>'.$data["ExamName"].'</td>
                     <td>'.$data["ExamStartDateTime"].'</td>
                     <td>'.$data["ExamEndDateTime"].'</td>
-                    <td><button type="button"  id='.$data["ExamID"].' class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                    <td><button type="button"  id='.$data["ExamID"].' class="btn btn-secondary" onclick="toogleModal('.$data["ExamID"].', \''.$data["PaperType"].'\', false)" >
                             Not Started
                           </button></td>
                 
@@ -100,7 +101,7 @@ $date_now = date('Y-m-d H:i:s');
                     <td>'.$data["ExamName"].'</td>
                     <td>'.$data["ExamStartDateTime"].'</td>
                     <td>'.$data["ExamEndDateTime"].'</td>
-                    <td><button type="button"  id='.$data["ExamID"].' class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                    <td><button type="button"  id='.$data["ExamID"].' class="btn btn-warning" onclick="toogleModal('.$data["ExamID"].', \''.$data["PaperType"].'\', true)" >
                             Ongoing
                           </button></td>
                 
@@ -112,63 +113,82 @@ $date_now = date('Y-m-d H:i:s');
         </tbody>
       </table>
     </div>
-<!-- Modal -->
-<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="staticBackdropLabel">Exam Details</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-    <div class="modal-body" action = "student_examdetails_onload.php">
-      <form method="get">
-        <?php
-
-        $fetch = "SELECT * FROM ((exam INNER JOIN lecturer ON exam.LecturerID = lecturer.LecturerID) INNER JOIN exam_paper ON exam.PaperID = exam_paper.PaperID) WHERE ExamID =$examid";
-        $modaldetails = mysqli_query($con, $fetch);
-
-
-        while ($details = mysqli_fetch_array($modaldetails)) {
-        $modal = '  <p class="fw-bold m-2">
-                      Exam Name : '.$details["ExamName"].'
-                    </p>
-                    <p class="fw-bold m-2">
-                      Exam Description : '.$details["ExamDescription"].'
-                    </p>
-                    <p class="fw-bold m-2">
-                      Exam Starts at : '.$details["ExamStartDateTime"].'
-                    </p>
-                    <p class="fw-bold m-2">
-                      Exam Ends at : '.$details["ExamEndDateTime"].'
-                    </p>
-                    <p class="fw-bold m-2">
-                      Lecturer Name : '.$details["LecturerName"].'
-                    </p>
-                    <p class="fw-bold m-2">
-                      Paper Type : '.$details["PaperType"].'
-                    </p>';
-                  
-                    echo $modal;
-        }
-        ?>
-      </form>
-    </div>
-    <div class="modal-footer">
-      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-      <button type="button" class="btn btn-primary main-bg-color">Take Exam</button>
-    </div>
-    </div>
-  </div>
-</div>
 
 <?php require "common/footer_student.php"?>
 <script src="js/mingliangJS.js"></script>
     <script>
-        const input = document.getElementById('search-text')
-        input.addEventListener('keyup', function(event) {
-            var key = document.getElementById('search-text').value;
-            updateTable("student_exam_list_backend.php?exam_name=" + key,  'table-body')
-        })
+      function toogleModal(id, type, allow) {
+        fetch("student_exam_list_details.php?id="+id)
+        .then(response => response.text())
+        .then(function(response) {
+                if(!response.error) {
+                  if(allow == false) {
+                    Swal.fire({
+                      confirmButtonText: 'Back',
+                      html: response,
+                      width: 600,
+                      padding: '3em',
+                      background: '#fff url()',
+                      backdrop: `
+                        rgba(0,0,123,0.4)
+                        url("img/PYh.gif")
+                        left top
+                        no-repeat
+                      `,
+                      imageUrl: 'img/logo_big_no_text',
+                      imageWidth: 300,
+                      imageHeight: 280,
+                      imageAlt: 'Custom image',
+                      title: '(Not able to take the exam now) Exam details ID '+id,
+                      showClass: {
+                        popup: 'animate__animated animate__fadeInDown'
+                      },
+                      hideClass: {
+                        popup: 'animate__animated animate__fadeOutUp'
+                      }
+                    })
+                  }
+                  else {
+                    Swal.fire({
+                    showCancelButton: true,
+                    confirmButtonText: 'Take Exam',
+                    cancelButtonText: 'Cancel',
+                    html: response,
+                    width: 600,
+                    padding: '3em',
+                    background: '#fff url()',
+                    backdrop: `
+                      rgba(0,0,0,0.4)
+                      url("img/5Q0v.gif")
+                      left bottom
+                      no-repeat
+                    `,
+                    imageUrl: 'img/logo_big_no_text',
+                    imageWidth: 300,
+                    imageHeight: 280,
+                    imageAlt: 'Custom image',
+                    title: 'Exam details ID '+id,
+                    showClass: {
+                      popup: 'animate__animated animate__fadeInDown'
+                    },
+                    hideClass: {
+                      popup: 'animate__animated animate__fadeOutUp'
+                    }
+                  }).then((result) => {
+                      if (result.isConfirmed) {
+                        window.location.href="student_question_redirect.php?type="+type+"&id="+id;
+                      } 
+                  })
+                }
+              }
+            })
+      }
+
+      const input = document.getElementById('search-text');
+      input.addEventListener('keyup', function(event) {
+          var key = document.getElementById('search-text').value;
+          updateTable("student_exam_list_backend.php?exam_name=" + key,  'table-body')
+      })
 
     </script>
 </body>
