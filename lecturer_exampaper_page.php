@@ -54,7 +54,7 @@
   <br>
 
   <!-- Table listing for exam paper-->
-  <div class= "row px-auto justify-content-center" style="min-height: 450px; margin: auto;">
+  <div class= "row px-auto justify-content-center" style="min-height: 80vh; margin: auto;">
     
     <!-- table for drafted exam -->
     <div class="col-xl-5">

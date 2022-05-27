@@ -29,6 +29,8 @@
   </head>
   <body>
   <?php require "common/header_lecturer.php"?>
+  <div style="min-height: 80vh">
+
   <center><h1 style="font-family: 'Caveat';">Completed Exam</h1></center>
   <div class="profilecontainer my-4 shadow p-3 mb-5">
     <div class="d-flex flex-row justify-content-between mx-auto m-0">
@@ -39,7 +41,7 @@
         </div>
     </div>
         <div class="profilecontainer my-4 shadow p-3 mb-5">
-          <table class="table table-hover mx-auto align-middle" style="width:95%" id="table-app">
+          <table class="table table-hover mx-auto align-middle" style="width:95%;" id="table-app">
                       <caption>List of Completed Exams : <?php echo $numOfRow;?> in Total (all record)</caption>
                       <thead>
                           <tr>
@@ -68,6 +70,8 @@
                         </tbody>
           </table>
         </div>
+</div>
+
 
 <?php include "./common/footer_lecturer.php" ?>
 <script src="js/mingliangJS.js"></script>
