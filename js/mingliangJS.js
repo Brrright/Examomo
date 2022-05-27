@@ -233,3 +233,70 @@ function ConfirmMsg() {
     })
 }
 
+function toogleModal(id, type, allow) {
+    fetch("student_exam_list_details.php?id="+id)
+    .then(response => response.text())
+    .then(function(response) {
+            if(!response.error) {
+              if(allow == false) {
+                Swal.fire({
+                  confirmButtonText: 'Back',
+                  html: response,
+                  width: 600,
+                  padding: '3em',
+                  background: '#fff url()',
+                  backdrop: `
+                    rgba(0,0,123,0.4)
+                    url("img/PYh.gif")
+                    left top
+                    no-repeat
+                  `,
+                  imageUrl: 'img/logo_big_no_text',
+                  imageWidth: 300,
+                  imageHeight: 280,
+                  imageAlt: 'Custom image',
+                  title: '(Not able to take the exam now) Exam details ID '+id,
+                  showClass: {
+                    popup: 'animate__animated animate__fadeInDown'
+                  },
+                  hideClass: {
+                    popup: 'animate__animated animate__fadeOutUp'
+                  }
+                })
+              }
+              else {
+                Swal.fire({
+                showCancelButton: true,
+                confirmButtonText: 'Take Exam',
+                cancelButtonText: 'Cancel',
+                html: response,
+                width: 600,
+                padding: '3em',
+                background: '#fff url()',
+                backdrop: `
+                  rgba(0,0,0,0.4)
+                  url("img/5Q0v.gif")
+                  left bottom
+                  no-repeat
+                `,
+                imageUrl: 'img/logo_big_no_text',
+                imageWidth: 300,
+                imageHeight: 280,
+                imageAlt: 'Custom image',
+                title: 'Exam details ID '+id,
+                showClass: {
+                  popup: 'animate__animated animate__fadeInDown'
+                },
+                hideClass: {
+                  popup: 'animate__animated animate__fadeOutUp'
+                }
+              }).then((result) => {
+                  if (result.isConfirmed) {
+                    window.location.href="student_question_redirect.php?type="+type+"&id="+id;
+                  } 
+              })
+            }
+          }
+        })
+  }
+

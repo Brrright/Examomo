@@ -27,7 +27,7 @@
 
     
             <p class="fs-3 fw-bold   main-color m-3 p-3 text-center" style="text-shadow:0px 2px #707b8b93;">
-                Question Number: 
+                Question Details: 
             </p>
     
             <p class="text-uppercase fw-bold main-color m-2  ">

@@ -1,17 +1,17 @@
 <?php
     require "common/conn.php";
-    // if (!isset($_POST)) {
-    //     echo '<script>alert("You have not selected an exam paper.");
-    //     window.location.href="student_mcq_empty_form.php";</script>';
-    // }
-    // if (!isset($_SESSION["userID"])) {
-    //     echo '<script>alert("Please login before you access this page.");
-    //     window.location.href="guest_home_page.php";</script>';
-    // }
-    // if ($_SESSION["userRole"] != "student") {
-    //     echo '<script>alert("You have no access to this page.");
-    //     window.location.href="guest_home_page.php";</script>';
-    // }
+    if (!isset($_POST)) {
+        echo '<script>alert("You have not selected an exam paper.");
+        window.location.href="student_mcq_empty_form.php";</script>';
+    }
+    if (!isset($_SESSION["userID"])) {
+        echo '<script>alert("Please login before you access this page.");
+        window.location.href="guest_home_page.php";</script>';
+    }
+    if ($_SESSION["userRole"] != "student") {
+        echo '<script>alert("You have no access to this page.");
+        window.location.href="guest_home_page.php";</script>';
+    }
 
     $body = json_decode(file_get_contents("php://input"), true);
     $response = [];
@@ -37,7 +37,7 @@
     }
 
     $existsql ="SELECT * FROM student_answer
-                WHERE MQuestionID = $questionID";
+                WHERE MQuestionID = $questionID AND StudentID = $studentID";
     $existquery =mysqli_query($existsql);
 
     //insert new answer records
@@ -114,4 +114,6 @@
             }
         }
     }
+    echo json_encode($response);
+
 ?>

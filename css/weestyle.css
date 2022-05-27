@@ -148,3 +148,92 @@ align-self: center;
   color: #2B5EA4;
   vertical-align:middle;
 }
+
+.bar {
+  border: 1px solid #aaa;
+  border-radius: 15px;
+  background: #65ee78cb;
+  width: 100%;
+  text-align: center;
+  color: #2B5EA4;
+}
+
+.barlabel {
+  border-top: 2px solid black;
+  background: #aaa;
+  bottom: 0;
+  width: 100%;
+  text-shadow: 1px 1px 0px black;
+  color: white;
+}
+
+
+.area{
+  background: -webkit-linear-gradient(top left, #50a3a2 0%, #53e3a6 100%);
+  color:white;
+  text-align:center;
+  border-radius: 15px;
+  transition: all 0.4s ease 0s;
+}
+
+
+.area:hover{
+  background: -webkit-linear-gradient(top left, #50a3a2 0%, #53e3a6 100%);
+  color:white;
+  text-align:center;
+  border-radius: 15px;
+  letter-spacing: 2px;
+  transition: all 0.4s ease 0s;
+}
+
+/* Animation */
+
+.parallax > use {
+  animation: move-forever 25s cubic-bezier(.55,.5,.45,.5)     infinite;
+}
+.parallax > use:nth-child(1) {
+  animation-delay: -2s;
+  animation-duration: 7s;
+}
+.parallax > use:nth-child(2) {
+  animation-delay: -3s;
+  animation-duration: 10s;
+}
+.parallax > use:nth-child(3) {
+  animation-delay: -4s;
+  animation-duration: 13s;
+}
+.parallax > use:nth-child(4) {
+  animation-delay: -5s;
+  animation-duration: 20s;
+}
+@keyframes move-forever {
+  0% {
+   transform: translate3d(-90px,0,0);
+  }
+  100% { 
+    transform: translate3d(85px,0,0);
+  }
+}
+/*Shrinking for mobile*/
+@media (max-width: 768px) {
+  .waves {
+    height:40px;
+    min-height:40px;
+  }
+  .content {
+    height:20vh;
+  }
+}
+
+.progressbar {
+  background: -webkit-linear-gradient(top left, #50a3a2 0%, #53e3a6 100%);
+  border-radius: 15px;
+  padding: 3px;
+  width:80%;
+}
+.progressbar>div {
+  background-color: white;
+  height: 20px;
+  border-radius: 10px;
+}

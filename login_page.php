@@ -93,6 +93,7 @@
                 return;
             }
             const form_data = Object.fromEntries(new FormData(event.target).entries());
+            // console.log(form_data)
             fetch ("login_backend.php", {
                 method: "POST",
                 headers: {
