@@ -12,7 +12,7 @@
   if(isset($_GET['exam_name'])) {
     $exam_name = $_GET['exam_name'];
 }
-$req = "SELECT * FROM ((module INNER JOIN student ON module.CompanyID = student.CompanyID) INNER JOIN exam ON module.ModuleID = exam.ModuleID) WHERE StudentID =".$_SESSION['userID']." AND ExamName LIKE'%$exam_name%'";
+$req = "SELECT * FROM ((module INNER JOIN student ON module.CompanyID = student.CompanyID) INNER JOIN exam ON module.ModuleID = exam.ModuleID) WHERE StudentID =".$_SESSION['userID']." AND ExamName LIKE'%$exam_name%' ORDER BY exam.ExamEndDateTime DESC";
 $fetched = mysqli_query($con,$req);
 $numOfRow = mysqli_num_rows($fetched);
 
