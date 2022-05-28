@@ -68,10 +68,9 @@
     if ($numOfExisting == 0){
         $response["hey"] = "i reach insert new record";
         if ($studentanswer == $correct){
-            $response["hey"] = "i reach insert COREK new record";
             $sqlcorrect ="INSERT INTO student_answer 
                         (Answer, markReceived, MQuestionID, SQuestionID, StudentID, LecturerID, CompanyID, ExamID, PaperID)
-                        VALUES ('$studentanswer', '$correct', '$questionID', NULL, '$studentID', NULL, '$companyID', '$examid', '$PaperID')";
+                        VALUES ('$studentanswer', '$marks', '$questionID', NULL, '$studentID', NULL, '$companyID', '$examid', '$PaperID')";
 
             // error message when no query found
             $resultcorrect = mysqli_query($con, $sqlcorrect);
@@ -103,7 +102,7 @@
         if ($studentanswer == $correct){
             $sqlcorrect ="UPDATE student_answer SET
                         Answer = $studentanswer,
-                        markReceived = $correct,
+                        markReceived = $marks,
                         SQuestionID = NULL,
                         LecturerID = NULL,
                         CompanyID = $companyID,

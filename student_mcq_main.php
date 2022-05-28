@@ -136,13 +136,14 @@
                             $x++;
                             echo $button;
                         }
+                        echo '<div class="d-flex justify-content-end"><button id="save-btn" type="submit" class="btn btn-primary "> Save </button></div>';
                     }
                     else {
                         echo  "No question created OwO";
                     }
                     ?>
                 </div>
-                <button class="mb-2 ele-showing stubtn shadow text-center w-50 mt-3" onclick="toogleModal()">Finish</button>
+                <button type="submit" id="finish-btn" class="mb-2 ele-showing stubtn shadow text-center w-50 mt-3" onclick="toogleModal()">Finish</button>
             </div>
         </div>
     </form>
@@ -153,7 +154,7 @@
 <script>
     
 
-    function toogleModal(id, type, allow) {
+    function toogleModal() {
         Swal.fire({
             title: 'Wait a second, are you sure?',
             text: "You won't be able to attend this exam again  !",
@@ -172,7 +173,8 @@
             confirmButtonText: 'Yes, I have done the exam!'
         }).then((result) => {
         if (result.isConfirmed) {
-            window.location.href="student_exam_list.php";
+            const questionForm = document.getElementById("finish-btn");
+            // window.location.href="student_exam_list.php";
         }
         })                
       }

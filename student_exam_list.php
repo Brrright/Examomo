@@ -148,7 +148,7 @@ function durationformater($timeDiff){
                             <td>'.$start.'</td>
                             <td>'.$end.'</td>
                             <td>'.$value.'</td>
-                            <td><button type="button"  id='.$data["ExamID"].' class="btn btn-success" onclick="toogleModal('.$data["PaperID"].', \''.$data["PaperType"].'\' , false)" >
+                            <td><button type="button"  id='.$data["ExamID"].' class="btn btn-success" onclick="toogleModal('.$data["ExamID"].','.$data["PaperID"].', \''.$data["PaperType"].'\' , false)" >
                               Completed
                             </button></td>
                         
@@ -160,7 +160,7 @@ function durationformater($timeDiff){
                     <td>'.$start.'</td>
                     <td>'.$end.'</td>
                     <td>'.$value.'</td>
-                    <td><button type="button"  id='.$data["ExamID"].' class="btn btn-secondary" onclick="toogleModal('.$data["PaperID"].', \''.$data["PaperType"].'\', false)" >
+                    <td><button type="button"  id='.$data["ExamID"].' class="btn btn-secondary" onclick="toogleModal('.$data["ExamID"].', '.$data["PaperID"].', \''.$data["PaperType"].'\', false)" >
                       Not Started
                     </button></td>
                 
@@ -172,7 +172,7 @@ function durationformater($timeDiff){
                     <td>'.$start.'</td>
                     <td>'.$end.'</td>
                     <td>'.$value.'</td>
-                    <td><button type="button"  id='.$data["ExamID"].' class="btn btn-warning" onclick="toogleModal('.$data["PaperID"].', \''.$data["PaperType"].'\', true)" >
+                    <td><button type="button"  id='.$data["ExamID"].' class="btn btn-warning" onclick="toogleModal('.$data["ExamID"].', '.$data["PaperID"].', \''.$data["PaperType"].'\', true)" >
                       Ongoing
                     </button></td>
                 
@@ -188,8 +188,8 @@ function durationformater($timeDiff){
 <?php require "common/footer_student.php"?>
 <script src="js/mingliangJS.js"></script>
     <script>
-      function toogleModal(id, type, allow) {
-        fetch("student_exam_list_details.php?id="+id)
+      function toogleModal(eid, pid, type, allow) {
+        fetch("student_exam_list_details.php?id="+eid)
         .then(response => response.text())
         .then(function(response) {
                 if(!response.error) {
@@ -207,8 +207,8 @@ function durationformater($timeDiff){
                         no-repeat
                       `,
                       imageUrl: 'img/logo_big_no_text',
-                      imageWidth: 300,
-                      imageHeight: 280,
+                      imageWidth: 200,
+                      imageHeight: 180,
                       imageAlt: 'Custom image',
                       title: '(Not able to take the exam now) Exam details (' + type + ')',
                       showClass: {
@@ -235,10 +235,10 @@ function durationformater($timeDiff){
                       no-repeat
                     `,
                     imageUrl: 'img/logo_big_no_text',
-                    imageWidth: 300,
-                    imageHeight: 280,
+                    imageWidth: 200,
+                    imageHeight: 180,
                     imageAlt: 'Custom image',
-                    title: '(Not able to take the exam now) Exam details (' + type + ')',
+                    title: 'Exam details (' + type + ')',
                     showClass: {
                       popup: 'animate__animated animate__fadeInDown'
                     },
@@ -247,7 +247,7 @@ function durationformater($timeDiff){
                     }
                   }).then((result) => {
                       if (result.isConfirmed) {
-                        window.location.href="student_question_redirect.php?type="+type+"&id="+id;
+                        window.location.href="student_question_redirect.php?type="+type+"&id="+pid;
                       } 
                   })
                 }
