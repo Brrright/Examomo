@@ -20,7 +20,7 @@
     $response = [];
     
     if(!isset($body['mcq_answer'])) {
-        $response["error"] = "no need save, no answer specified";
+        $response["error"] = "0";
         echo json_encode($response);
         return;
     }

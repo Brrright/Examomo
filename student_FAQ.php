@@ -102,7 +102,7 @@ if ($_SESSION["userRole"] != "student") {
       </h2>
       <div id="panelsStayOpen-collapseFive" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingFive">
         <div class="accordion-body">
-        Students are only given ONE attempt for any examination. If by chance a student were to miss or finish an attempt before they are satisfied, they will not be able to take that examination again. The student will have to contact either their lecturer via external means or send their troubles to the admin using the feedback function.
+        Students are able to attempt the exam any number of times as long as the exam is ongoing. If a student were to exit the exam too early before they wanted to, they can take same exam and all their answers will still be present and editable.
         </div>
       </div>
     </div>

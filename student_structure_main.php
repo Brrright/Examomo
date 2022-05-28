@@ -1,3 +1,40 @@
+<?php 
+        require "common/conn.php";
+        require "common/HeadImportInfo.php";
+        if (!isset($_GET["id"])) {
+            echo '<script>alert("You have not selected an exam paper.");
+            window.location.href="lecturer_exampaper_page.php";</script>';
+        }
+    
+        if (!isset($_SESSION["userID"])) {
+            echo '<script>alert("Please login before you access this page.");
+            window.location.href="guest_home_page.php";</script>';
+        }
+    
+        if ($_SESSION["userRole"] != "student") {
+            echo '<script>alert("You have no access to this page.");
+            window.location.href="guest_home_page.php";</script>';
+        }
+
+
+        // get paper id after exam paper creation
+        $paperid = $_GET['id'];
+        $sql = "SELECT * FROM question_structure WHERE PaperID = $paperid";
+        $sql2 = "SELECT * FROM question_structure WHERE PaperID = $paperid";
+
+        $result = mysqli_query($con, $sql);
+        $result2 = mysqli_query($con, $sql);
+
+        if(!$result) {
+            echo 'err when fetching structure question'. mysqli_error($con);
+        }
+
+        if(!$result2) {
+            echo 'err when fetching structure question'. mysqli_error($con);
+
+        }
+        $rowcount = mysqli_num_rows($result);
+    ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -21,47 +58,46 @@
     <div class= "row" style="min-height: 450px; margin: auto;">
         <!-- panel for question creation form -->
         <div class="col-xl-7">
-            <form class="was-validated" action="lecturer_structure_insert_backend.php" method="post" id="question-form" enctype="multipart/form-data">
+            <form class="was-validated" id="question-form">
                 <div class="bg d-flex mx-auto flex-column p-5 m-5 shadow p-3 mb-5" style="background-color: white; width: 90%; border-radius: 10px;">
-                    <!-- pass paper id to backend -->
-
                     <div id="question-content">
-                                <p class="fs-2 fw-bold p-3" style="color: #2B5EA4;">
-                                    Question Number: <em class="fs-5" style="color: black; font-weight: normal;">(Select a question...)</em>
-                                </p>
-                                
-                                <p class="text-uppercase fw-bold main-color m-2" style="color: #aaa;">
-                                    Question Title
-                                </p>
-                                
-                                    <div class="form-floating mb-3">
-                                        <div style="width:100%;height:40px;" class="bg-light"></div>
-                                    </div>
-                                
-                                <p class="text-uppercase fw-bold main-color m-2" style="color: #aaa;">
-                                    Image (Optional)
-                                </p>
-                                
-                                    <div class="form-floating mb-3">
-                                        <div style="width:100%;height:40px;" class="bg-light"></div>
-                                    </div>
-                                
-                                <p class="text-uppercase fw-bold main-color m-2" style="color: #aaa;">
-                                    Answer:
-                                </p>
+                        <!-- --------------------------------------------------------------------- -->
+                        <p class="fs-2 fw-bold p-3" style="color: #2B5EA4;">
+                            Question Number: <em class="fs-5" style="color: black; font-weight: normal;">(Select a question...)</em>
+                        </p>
+                        
+                        <p class="text-uppercase fw-bold main-color m-2" style="color: #aaa;">
+                            Question Title
+                        </p>
+                        
+                            <div class="form-floating mb-3">
+                                <div style="width:100%;height:40px;" class="bg-light"></div>
+                            </div>
+                        
+                        <p class="text-uppercase fw-bold main-color m-2" style="color: #aaa;">
+                            Image (Optional)
+                        </p>
+                        
+                            <div class="form-floating mb-3">
+                                <div style="width:100%;height:40px;" class="bg-light"></div>
+                            </div>
+                        
+                        <p class="text-uppercase fw-bold main-color m-2" style="color: #aaa;">
+                            Answer:
+                        </p>
 
-                                    <div class="form-floating mb-3">
-                                        <div style="width:100%;height:40px;" class="bg-light"></div>
-                                    </div>
+                            <div class="form-floating mb-3">
+                                <div style="width:100%;height:40px;" class="bg-light"></div>
+                            </div>
 
-                                <p class="text-uppercase fw-bold main-color m-2" style="color: #aaa;">
-                                    Given Marks
-                                </p>
-                                
-                                    <div class="form-floating mb-3">
-                                        <div style="width:100%;height:40px;" class="bg-light"></div>
-                                    </div>
-                           
+                        <p class="text-uppercase fw-bold main-color m-2" style="color: #aaa;">
+                            Given Marks
+                        </p>
+                        
+                        <div class="form-floating mb-3">
+                            <div style="width:100%;height:40px;" class="bg-light"></div>
+                        </div>    
+                        <!-- --------------------------------------------------------------------- -->
                     </div>
                 </div>
         </div>

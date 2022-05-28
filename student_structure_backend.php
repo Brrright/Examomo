@@ -28,7 +28,7 @@
                 FROM question_structure
                 INNER JOIN exam ON question_structure.PaperID = exam.PaperID
                 WHERE question_structure.SQuestionID = ".$questionID." AND question_structure.PaperID = ".$PaperID."";
-    $answerquery = mysqli_query($con, $answerquery);
+    $answerquery = mysqli_query($con, $answersql);
     while ($answerrow = mysqli_fetch_array($answerquery)){
         $marks = $answerrow['Mark'];
         $examid = $answerrow['ExamID'];
@@ -36,10 +36,12 @@
 
     $existsql ="SELECT * FROM student_answer
                 WHERE SQuestionID = $questionID";
-    $existquery =mysqli_query($existsql);
+    $existquery =mysqli_query($con, $existsql);
+
+    $numOfExisting = mysqli_num_rows($existquery);
 
     //insert new answer records
-    if (mysqli_num_rows($existsquery = 0)){
+    if ($numOfExisting == 0){
         
         $sqlcorrect ="INSERT INTO student_answer 
                     (Answer, markReceived, MQuestionID, SQuestionID, StudentID, LecturerID, CompanyID, ExamID, PaperID)

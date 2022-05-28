@@ -253,6 +253,9 @@
                 if(!response.error) {
                     window.location.href="student_exam_list.php";
                 }
+                else if(response.error == 0) {
+                    window.location.href="student_exam_list.php";
+                }
                 else {
                     console.log(response.error)
                 }
