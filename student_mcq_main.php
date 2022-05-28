@@ -131,12 +131,12 @@
                     <?php 
                     $x = 1;
                     if($rowcount > 0) { 
+                        echo '<button type="submit" id="save-btn" name="why" value="why" class="btn btn-primary me-3" style="display:none"> Save </button>';
                         while($data = mysqli_fetch_array($result2)) {
                             $button = '<button type="submit" name="question-'.$data["MQuestionID"].'" value="question-'.$data["MQuestionID"].'" id="SWITCH'.$data["PaperID"].'-'.$data["MQuestionID"].'" class="btn btn-outline-secondary me-3">'.$x.'</button>';
                             $x++;
                             echo $button;
                         }
-                        echo '<div class="d-flex justify-content-end"><button id="save-btn" type="submit" class="btn btn-primary "> Save </button></div>';
                     }
                     else {
                         echo  "No question created OwO";
@@ -157,7 +157,7 @@
     function toogleModal() {
         Swal.fire({
             title: 'Wait a second, are you sure?',
-            text: "You won't be able to attend this exam again  !",
+            text: "You can always join back when the exam is still ongoing !",
             icon: 'warning',
             padding: '3em',
             background: '#fff url() ',
@@ -173,7 +173,8 @@
             confirmButtonText: 'Yes, I have done the exam!'
         }).then((result) => {
         if (result.isConfirmed) {
-            const questionForm = document.getElementById("finish-btn");
+            const saveBtn = document.getElementById("save-btn");
+            saveBtn.click()
             // window.location.href="student_exam_list.php";
         }
         })                
@@ -198,6 +199,7 @@
     const questionForm = document.getElementById("questionFormID");
     questionForm.addEventListener("submit", function(event){
         event.preventDefault();
+
         if(clickedID.substring(0,6)=="SWITCH") {
             var splitID = clickedID.substring(6).split("-");
             var paperID = splitID[0];
@@ -208,6 +210,7 @@
                 // console.log(clickedID) //SWITCH14-20
                 changeContent(paperID, questionID)
             }else {
+                console.log("submitting")
                 const form_data = Object.fromEntries(new FormData(event.target).entries());
                 fetch("student_mcq_backend.php", {
                     method: "POST",
@@ -228,7 +231,38 @@
                     }
                 })
             }
+        } else if (clickedID == "save-btn") {
+            if(document.getElementById("no-submit")) {
+                // no need submit the current form (its blank)
+                // console.log(clickedID) //SWITCH14-20
+                window.location.href="student_exam_list.php";
+            }
+            console.log("submitting")
+            const form_data = Object.fromEntries(new FormData(event.target).entries());
+            fetch("student_mcq_backend.php", {
+                method: "POST",
+                header: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(form_data)
+            })
+            .then(function(res) {
+                return res.json()
+            })
+            .then(function(response) {
+                if(!response.error) {
+                    window.location.href="student_exam_list.php";
+                }
+                else {
+                    console.log(response.error)
+                }
+            })
         }
+        else {
+            return;
+        }
+        
+        // }
     })
 
  
