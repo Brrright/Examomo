@@ -58,11 +58,11 @@
     <div class= "row" style="min-height: 450px; margin: auto;">
         <!-- panel for question creation form -->
         <div class="col-xl-7">
-            <form class="was-validated" id="question-form">
+            <form class="was-validated" id="questionFormID">
                 <div class="bg d-flex mx-auto flex-column p-5 m-5 shadow p-3 mb-5" style="background-color: white; width: 90%; border-radius: 10px;">
                     <div id="question-content">
                         <!-- --------------------------------------------------------------------- -->
-                        <p class="fs-2 fw-bold p-3" style="color: #2B5EA4;">
+                        <p class="fs-2 fw-bold p-3" style="color: #2B5EA4;"  id="no-submit">
                             Question Number: <em class="fs-5" style="color: black; font-weight: normal;">(Select a question...)</em>
                         </p>
                         
@@ -86,9 +86,9 @@
                             Answer:
                         </p>
 
-                            <div class="form-floating mb-3">
-                                <div style="width:100%;height:40px;" class="bg-light"></div>
-                            </div>
+                        <div class="form-floating mb-3">
+                            <div style="width:100%;height:40px;" class="bg-light"></div>
+                        </div>
 
                         <p class="text-uppercase fw-bold main-color m-2" style="color: #aaa;">
                             Given Marks
@@ -104,51 +104,147 @@
 
         <div class="col-xl-5">   
             <div class="sticky pt-5">
-
-                <div id="2-button" class="d-flex mx-auto flex-wrap shadow p-3 mb-2" style="background-color: white; width: 80%; border-radius: 15px; ">
-                    <button class="stubtn shadow mx-auto" id="save-add-btn" type="submit">Previous Question</button>
-                    
-                    <button class="stubtn shadow mx-auto fin-mcq-confirm" id="save-finish-btn" type="submit" name="isEnd" value="true">Next Question</button>
+                <div class="bg d-flex flex-wrap mx-auto flex-row p-5  shadow p-3 mb-5" id="pagination-part" style="background-color: white; width: 90%; border-radius: 15px; height: auto; position: relative;">
+                    <?php 
+                    $x = 1;
+                    if($rowcount > 0) { 
+                        echo '<button type="submit" id="save-btn" name="why" value="why" class="btn btn-primary me-3" style="display:none"> Save </button>';
+                        while($data = mysqli_fetch_array($result2)) {
+                            $button = '<button type="submit" name="question-'.$data["SQuestionID"].'" value="question-'.$data["SQuestionID"].'" id="SWITCH'.$data["PaperID"].'-'.$data["SQuestionID"].'" class="btn btn-outline-secondary me-3">'.$x.'</button>';
+                            $x++;
+                            echo $button;
+                        }
+                    }
+                    else {
+                        echo  "No question created OwO";
+                    }
+                    ?>
                 </div>
-           
-                <div class="bg d-flex flex-wrap mx-auto flex-row p-3 m-5 shadow p-3 mb-5" style="background-color: white; width: 90%; border-radius: 15px; height: auto; position: relative;">
-                    <p class="text-uppercase fw-bold" style="color: #aaa;">
-                        Questions :
-                    </p>
-
-                    <div class="d-flex flex-wrap mx-auto flex-row m-5" id="pagination-part" style="background-color: white; width: 90%; border-radius: 15px; height: auto; position: relative;">    
-                        <!-- <button class="btn btn-outline-secondary me-3" onclick="changeContent(\'filled\','.$data["PaperID"].','.$data["MQuestionID"].')">'.$x.'</button>';
-                                
-                        <button class="btn btn-outline-secondary me-3"  onclick="changeContent(\'empty\','.$paperid.',null)"> '.$x.'(new) </button>
-
-                        <button class="btn btn-outline-secondary me-3"> 1 </button> -->
-                        <a id="1-button" href="#" class="ele-showing stubtn shadow fin-mcq-confirm text-center w-50 mt-3">Finish Exam</a>
-                    </div>
-                    
-                </div>
+                <button type="submit" id="finish-btn" class="mb-2 ele-showing stubtn shadow text-center w-50 mt-3" onclick="confirmExit()">Finish</button>
             </div>
         </div>
-</div>
-
-</div>
+            </form>
+    </div>
 
 <script src="js/mingliangJS.js"></script>
     <script>
-        function changeContent(form,id,qid) {
-            document.getElementById('2-button').setAttribute("class", "d-flex mx-auto flex-wrap shadow p-3 mb-2 ele-showing");
-            document.getElementById('1-button').setAttribute("class", "ele-not-showing");
-
-            if (form == "empty") {
-                var path = "lecturer_structure_empty_form.php?id="+id;
-            }
-            else if(form == "filled") {
-                var path = "lecturer_structure_filled_form.php?id=" +id+"&question_id="+qid;
-            }
-            else {
-                alert("no form specified");
-            }
-            updateTable(path, 'question-content');
+         function confirmExit() {
+        Swal.fire({
+            title: 'Wait a second, are you sure?',
+            text: "You can always join back when the exam is still ongoing !",
+            icon: 'warning',
+            padding: '3em',
+            background: '#fff url() ',
+            backdrop: `
+            rgba(0,0,0,0.4)
+            `,
+            imageUrl: 'img/Vho.gif',
+            imageWidth: 300,
+            imageHeight: 280,
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, I have done the exam!'
+        }).then((result) => {
+        if (result.isConfirmed) {
+            const saveBtn = document.getElementById("save-btn");
+            saveBtn.click()
+            // window.location.href="student_exam_list.php";
         }
+        })                
+      }
+
+    var clickedID = "";
+    const onClick = (event) => {
+        clickedID = event.srcElement.id;
+        if(clickedID.substring(0,6)=="SWITCH") {
+            var splitID = clickedID.substring(6).split("-");
+            var paperID = splitID[0];
+            var questionID = splitID[1];
+            if (event.target.nodeName === 'BUTTON') {
+                changeContent(paperID, questionID)
+            }
+        }
+        
+    }
+
+    window.addEventListener('click', onClick);
+
+    const questionForm = document.getElementById("questionFormID");
+    questionForm.addEventListener("submit", function(event){
+        event.preventDefault();
+        if(clickedID.substring(0,6)=="SWITCH") {
+            var splitID = clickedID.substring(6).split("-");
+            var paperID = splitID[0];
+            var questionID = splitID[1];
+            // console.log(splitID)
+            if(document.getElementById("no-submit")) {
+                // no need submit the current form (its blank)
+                // console.log(clickedID) //SWITCH14-20
+                changeContent(paperID, questionID)
+            }else {
+                console.log("submitting")
+                const form_data = Object.fromEntries(new FormData(event.target).entries());
+                fetch("student_structure_backend.php", {
+                    method: "POST",
+                    header: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(form_data)
+                })
+                .then(function(res) {
+                    return res.json()
+                })
+                .then(function(response) {
+                    if(!response.error) {
+                        changeContent(paperID,questionID)
+                    }
+                    else {
+                        console.log(response.error)
+                    }
+                })
+            }
+        } else if (clickedID == "save-btn") {
+            if(document.getElementById("no-submit")) {
+                // no need submit the current form (its blank)
+                // console.log(clickedID) //SWITCH14-20
+                window.location.href="student_exam_list.php";
+            }
+            console.log("submitting")
+            const form_data = Object.fromEntries(new FormData(event.target).entries());
+            fetch("student_structure_backend.php", {
+                method: "POST",
+                header: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(form_data)
+            })
+            .then(function(res) {
+                return res.json()
+            })
+            .then(function(response) {
+                if(!response.error) {
+                    window.location.href="student_exam_list.php";
+                }
+                else if(response.error == 0) {
+                    window.location.href="student_exam_list.php";
+                }
+                else {
+                    console.log(response.error)
+                }
+            })
+        }
+        else {
+            return;
+        }
+    })
+
+ 
+    function changeContent(id,qid) {
+        var path = "student_structure_form?id=" +id+"&question_id="+qid;
+        updateTable(path, 'question-content');
+    }
+
     </script>
     
 <script>

@@ -143,7 +143,7 @@
                     }
                     ?>
                 </div>
-                <button type="submit" id="finish-btn" class="mb-2 ele-showing stubtn shadow text-center w-50 mt-3" onclick="toogleModal()">Finish</button>
+                <button type="submit" id="finish-btn" class="mb-2 ele-showing stubtn shadow text-center w-50 mt-3" onclick="confirmExit()">Finish</button>
             </div>
         </div>
     </form>
@@ -154,7 +154,7 @@
 <script>
     
 
-    function toogleModal() {
+    function confirmExit() {
         Swal.fire({
             title: 'Wait a second, are you sure?',
             text: "You can always join back when the exam is still ongoing !",
@@ -264,8 +264,6 @@
         else {
             return;
         }
-        
-        // }
     })
 
  
