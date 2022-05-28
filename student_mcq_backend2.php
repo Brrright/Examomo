@@ -1,5 +1,4 @@
 <?php
-
     if (!isset($_POST)) {
         echo '<script>alert("You have not selected an exam paper.");
         window.location.href="student_exam_list.php";</script>';
@@ -16,14 +15,10 @@
 
     require("common/conn.php");
     
+    echo "hihi";
+    echo $response["error"] ="what is going on";
     $body = json_decode(file_get_contents("php://input"), true);
     $response = [];
-    
-    if(!isset($body['mcq_answer'])) {
-        $response["error"] = "no need save, no answer specified";
-        echo json_encode($response);
-        return;
-    }
 
     $studentID = $_SESSION['userID'];
     $companyID = $_SESSION['companyID'];
@@ -32,6 +27,9 @@
     $questionID = $body['question_id'];
     $studentanswer = $body['mcq_answer'];
 
+    if(!isset($body['mcq_answer'])) {
+        return;
+    }
 
     $wronganswer = 0;
 
@@ -40,7 +38,7 @@
                 INNER JOIN exam ON question_multiple_choice.PaperID = exam.PaperID
                 WHERE question_multiple_choice.MQuestionID = ".$questionID." AND question_multiple_choice.PaperID = ".$PaperID."";
 
-    $answerquery = mysqli_query($con, $answersql);
+    $answerquery = mysqli_query($con, $answerquery);
     if(!$answerquery) {
         $response["error"] = 'Error:'.mysqli_error($con);
         echo json_encode($response);
@@ -54,19 +52,12 @@
 
     $existsql ="SELECT * FROM student_answer
                 WHERE MQuestionID = $questionID AND StudentID = $studentID";
-    $existquery =mysqli_query($con, $existsql);
-
-    if(!$existquery) {
-        $response["error"] = 'Error when fetching student answer: '.mysqli_error($con);
-        echo json_encode($response);
-        return;
-    }
-
-    $numOfExisting = mysqli_num_rows($existquery);
+    $existquery =mysqli_query($existsql);
+    $numOfExisting = mysqli_num_rows($existsquery);
 
     //insert new answer records
     if ($numOfExisting == 0){
-        $response["hey"] = "i reach insert new record";
+
         if ($studentanswer == $correct){
             $sqlcorrect ="INSERT INTO student_answer 
                         (Answer, markReceived, MQuestionID, SQuestionID, StudentID, LecturerID, CompanyID, ExamID, PaperID)
@@ -75,7 +66,7 @@
             // error message when no query found
             $resultcorrect = mysqli_query($con, $sqlcorrect);
             if(!$resultcorrect) {
-                $response["error"] = 'Error when inserting student answer (correct):'.mysqli_error($con);
+                $response["error"] = 'Error:'.mysqli_error($con);
                 echo json_encode($response);
                 return;
             }
@@ -89,7 +80,7 @@
             // error message when no query found
             $resultwrong = mysqli_query($con, $sqlwrong);
             if(!$resultwrong) {
-                $response["error"] = 'Error  when inserting student answer (wrong):'.mysqli_error($con);
+                $response["error"] = 'Error:'.mysqli_error($con);
                 echo json_encode($response);
                 return;
             }
@@ -98,7 +89,6 @@
 
     //update answer records
     else {
-        $response["hey"] = "i reach update new record";
         if ($studentanswer == $correct){
             $sqlcorrect ="UPDATE student_answer SET
                         Answer = $studentanswer,
@@ -113,7 +103,7 @@
             // error message when no query found
             $resultcorrect = mysqli_query($con, $sqlcorrect);
             if(!$resultcorrect) {
-                $response["error"] = 'Error when updating student answer (correct):'.mysqli_error($con);
+                $response["error"] = 'Error:'.mysqli_error($con);
                 echo json_encode($response);
                 return;
             }
@@ -133,7 +123,7 @@
             // error message when no query found
             $resultwrong = mysqli_query($con, $sqlwrong);
             if(!$resultwrong) {
-                $response["error"] = 'Error when updating student answer (wrong) :'.mysqli_error($con);
+                $response["error"] = 'Error:'.mysqli_error($con);
                 echo json_encode($response);
                 return;
             }

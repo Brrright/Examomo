@@ -46,7 +46,7 @@
 
   
   <div style="text-align: left; padding-left: 170px;">
-    <h3 style="font-family: caveat; color: rgb(19, 13, 135); font-weight: bold;">Manage Examination</h5>
+    <h3 style=" color: rgb(19, 13, 135); font-weight: bold;">Upcoming Exam Management </h5>
   </div>
 
   <!-- button to create new exam -->

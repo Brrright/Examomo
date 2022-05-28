@@ -54,9 +54,9 @@
 
 <div class= "row" style="min-height: 450px; margin: auto;">
 <!-- panel for question creation form -->
-    <div class="col-xl-7" >
+    <div class="col-xl-7">
+        <form class="was-validated" id="questionFormID">
             <div class="bg d-flex mx-auto flex-column p-5 m-5 shadow p-3 mb-5" style="background-color: white; width: 90%; border-radius: 10px;">
-                <input type="hidden" name="paper_id" value="<?php echo $paperid;?>">
                 <div id="question-content">
                     <!-- --------------------------------------------------------------------- -->
                     <p class="fs-2 fw-bold p-3" style="color: #2B5EA4;" id="no-submit">
@@ -75,9 +75,10 @@
                         Insert Image (Optional)
                     </p>
 
-                        <div style="width:100%;height:40px;" class="bg-light"></div>
-                        
-    <form class="was-validated" id="questionFormID">
+                    <div style="width:100%;height:40px;" class="bg-light"></div>
+                    
+                    <input type="hidden" name="paper_id" value="<?php echo $paperid;?>">
+
                     <p class="text-uppercase fw-bold main-color m-2" style="color: #aaa;">
                         Option 1
                     </p>
@@ -118,56 +119,73 @@
                     <div class="mb-3">
                         <div style="width:100%;height:70px;" class="bg-light"></div>
                     </div>
-                <!-- ------------------------------------------------------------------------ -->
+                    
+
+                        <!-- ------------------------------------------------------------------------ -->
                 </div>
             </div>
-    </div>
-
-    <div class="col-xl-5">   
-        <div class="sticky pt-5">
-            <div class="bg d-flex flex-wrap mx-auto flex-row p-5  shadow p-3 mb-5" id="pagination-part" style="background-color: white; width: 90%; border-radius: 15px; height: auto; position: relative;">
-                <?php 
-                $x = 1;
-                if($rowcount > 0) { 
-                    while($data = mysqli_fetch_array($result2)) {
-                        $button = '<button type="submit" id="SWITCH'.$data["PaperID"].'-'.$data["MQuestionID"].'" class="btn btn-outline-secondary me-3">'.$x.'</button>';
-                        $x++;
-                        echo $button;
-                    }
-                }
-                else {
-                    echo  "No question created OwO";
-                }
-                ?>
-            </div>
-            <a href="student_exam_list.php" class="mb-2 ele-showing stubtn shadow fin-mcq-confirm text-center w-50 mt-3">Finish</a>
         </div>
-    </div>
+        <div class="col-xl-5">   
+            <div class="sticky pt-5">
+                <div class="bg d-flex flex-wrap mx-auto flex-row p-5  shadow p-3 mb-5" id="pagination-part" style="background-color: white; width: 90%; border-radius: 15px; height: auto; position: relative;">
+                    <?php 
+                    $x = 1;
+                    if($rowcount > 0) { 
+                        while($data = mysqli_fetch_array($result2)) {
+                            $button = '<button type="submit" name="question-'.$data["MQuestionID"].'" value="question-'.$data["MQuestionID"].'" id="SWITCH'.$data["PaperID"].'-'.$data["MQuestionID"].'" class="btn btn-outline-secondary me-3">'.$x.'</button>';
+                            $x++;
+                            echo $button;
+                        }
+                    }
+                    else {
+                        echo  "No question created OwO";
+                    }
+                    ?>
+                </div>
+                <button class="mb-2 ele-showing stubtn shadow text-center w-50 mt-3" onclick="toogleModal()">Finish</button>
+            </div>
+        </div>
     </form>
 </div>
 
 
 <script src="js/mingliangJS.js"></script>
 <script>
+    
+
+    function toogleModal(id, type, allow) {
+        Swal.fire({
+            title: 'Wait a second, are you sure?',
+            text: "You won't be able to attend this exam again  !",
+            icon: 'warning',
+            padding: '3em',
+            background: '#fff url() ',
+            backdrop: `
+            rgba(0,0,0,0.4)
+            `,
+            imageUrl: 'img/Vho.gif',
+            imageWidth: 300,
+            imageHeight: 280,
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, I have done the exam!'
+        }).then((result) => {
+        if (result.isConfirmed) {
+            window.location.href="student_exam_list.php";
+        }
+        })                
+      }
+
     var clickedID = "";
     const onClick = (event) => {
-        event.preventDefault();
         clickedID = event.srcElement.id;
         if(clickedID.substring(0,6)=="SWITCH") {
             var splitID = clickedID.substring(6).split("-");
             var paperID = splitID[0];
             var questionID = splitID[1];
             if (event.target.nodeName === 'BUTTON') {
-                console.log(splitID)
-                console.log(clickedID)
-                if(document.getElementById("no-submit")) {
-                    // no need submit the current form (its blank)
-                    // console.log(clickedID) //SWITCH14-20
-                        changeContent(paperID, questionID)
-                }
-                else {
-                    submitForm(paperID, questionID)
-                }
+                changeContent(paperID, questionID)
             }
         }
         
@@ -188,40 +206,30 @@
                 // console.log(clickedID) //SWITCH14-20
                 changeContent(paperID, questionID)
             }else {
-                console.log("NEED SUBMIT"+splitID)
+                const form_data = Object.fromEntries(new FormData(event.target).entries());
+                fetch("student_mcq_backend.php", {
+                    method: "POST",
+                    header: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(form_data)
+                })
+                .then(function(res) {
+                    return res.json()
+                })
+                .then(function(response) {
+                    if(!response.error) {
+                        changeContent(paperID,questionID)
+                    }
+                    else {
+                        console.log(response.error)
+                    }
+                })
             }
         }
     })
 
-    function submitForm(p_id, q_id) {
-        var form = document.getElementById('questionFormID');
-        // console.log(form)
-        // var formData = new FormData(form)
-        var form_data = Object.fromEntries(new FormData(form).entries());
-        console.log(form_data)
-        
-        // need submit the form
-        fetch("student_mcq_backend.php", {
-            method: "POST",
-            header: {
-                'Content-Type': 'application/json',
-                'Accept': 'application/json'
-            },
-            body: JSON.stringify(form_data)
-        })
-        .then(function(res) {
-            return response => response.json()
-        })
-        .then(function(response) {
-            if(!response.error) {
-                changeContent(p_id,q_id)
-            }
-            else {
-                console.log(response.error)
-            }
-        })
-    }
-        
+ 
     function changeContent(id,qid) {
         var path = "student_mcq_form?id=" +id+"&question_id="+qid;
         updateTable(path, 'question-content');

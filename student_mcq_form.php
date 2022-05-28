@@ -16,11 +16,24 @@
     $paperid = $_GET['id'];
     $quesid = $_GET['question_id'];
 
-    $sql ="SELECT MQuestionID, Question, QuestionImage, AnswerDescription, Mark 
+    $sql ="SELECT *
     FROM question_multiple_choice
     WHERE PaperID = $paperid AND MQuestionID = $quesid";
 
+$sql2 = "SELECT * FROM question_multiple_choice WHERE PaperID = $paperid";
+
+
 $result = mysqli_query($con, $sql);
+$result2 = mysqli_query($con, $sql);
+
+if(!$result) {
+    echo 'err when fetching mcq question'. mysqli_error($con);
+}
+
+if(!$result2) {
+    echo 'err when fetching mcq question'. mysqli_error($con);
+
+}
 $rowcount = mysqli_num_rows($result);
 
 while ($row = mysqli_fetch_array($result)){
@@ -40,7 +53,6 @@ $existquery = mysqli_query($con, $existsql);
     if (mysqli_num_rows($existquery) == 0){
     ob_start(); 
 ?>
-            <input type="hidden" name="question_id" value="<?=$quesid?>">
 
             <p class="fs-2 fw-bold p-3" style="color: #2B5EA4;">
                 Question Details (empty)
@@ -62,13 +74,14 @@ $existquery = mysqli_query($con, $existsql);
                 <img src = '<?=$Image ?>' id="file-img-preview" style="height: 400px; width: 100%; margin-bottom: 20px;">
             </div>
     
-            <form class="was-validated" id="questionFormID">
+            <input type="hidden" name="question_id" value="<?=$quesid?>">
+            <input type="hidden" name="paper_id" value="<?php echo $paperid;?>">
             <div class="form-check">
                 <input type="radio" name="mcq_answer" id="flexRadioDefault1" value="0">
                     <label class="form-check-label" for="flexRadioDefault1">
                         <?=$AnswerString[0] ?>
                     </label>
-                </div>
+            </div>
 
             <div class="form-check">
                 <input type="radio" name="mcq_answer" id="flexRadioDefault2" value="1">
@@ -89,7 +102,7 @@ $existquery = mysqli_query($con, $existsql);
                     <label class="form-check-label" for="flexRadioDefault4">
                         <?=$AnswerString[3] ?>
                     </label>
-            </div>
+            </div>           
 
 <?php
     $mcq_empty_question = ob_get_contents();
@@ -101,7 +114,6 @@ $existquery = mysqli_query($con, $existsql);
     $existrow = mysqli_fetch_array($existquery);
     ob_start(); 
 ?>
-            <input type="hidden" name="question_id" value="<?=$quesid?>">
 
             <p class="fs-2 fw-bold p-3" style="color: #2B5EA4;">
                 Question Details (filled)
@@ -123,36 +135,37 @@ $existquery = mysqli_query($con, $existsql);
                 <img src = '<?=$Image ?>' id="file-img-preview" style="height: 400px; width: 100%; margin-bottom: 20px;">
             </div>
 
-            <form class="was-validated" id="questionFormID">
-            <div class="form-check">
-                <input type="radio" name="mcq_answer" id="flexRadioDefault1" value="0" <?php echo ($existrow['Answer'] =='0')? 'checked':'' ?>>
-                    <label class="form-check-label" for="flexRadioDefault1">
-                        <?=$AnswerString[0] ?>
-                    </label>
+                <input type="hidden" name="paper_id" value="<?php echo $paperid;?>">
+
+                <input type="hidden" name="question_id" value="<?=$quesid?>">
+
+                <div class="form-check">
+                    <input type="radio" name="mcq_answer" id="flexRadioDefault1" value="0" <?php echo ($existrow['Answer'] =='0')? 'checked':'' ?>>
+                        <label class="form-check-label" for="flexRadioDefault1">
+                            <?=$AnswerString[0] ?>
+                        </label>
+                    </div>
+
+                <div class="form-check">
+                    <input type="radio" name="mcq_answer" id="flexRadioDefault2" value="1" <?php echo ($existrow['Answer'] =='1')? 'checked':'' ?>>
+                        <label class="form-check-label" for="flexRadioDefault2">
+                            <?=$AnswerString[1] ?>
+                        </label>
                 </div>
 
-            <div class="form-check">
-                <input type="radio" name="mcq_answer" id="flexRadioDefault2" value="1" <?php echo ($existrow['Answer'] =='1')? 'checked':'' ?>>
-                    <label class="form-check-label" for="flexRadioDefault2">
-                        <?=$AnswerString[1] ?>
-                    </label>
-            </div>
+                <div class="form-check">
+                    <input type="radio" name="mcq_answer" id="flexRadioDefault3" value="2" <?php echo ($existrow['Answer'] =='2')? 'checked':'' ?>>
+                        <label class="form-check-label" for="flexRadioDefault3">
+                            <?=$AnswerString[2] ?>
+                        </label>
+                </div>
 
-            <div class="form-check">
-                <input type="radio" name="mcq_answer" id="flexRadioDefault3" value="2" <?php echo ($existrow['Answer'] =='2')? 'checked':'' ?>>
-                    <label class="form-check-label" for="flexRadioDefault3">
-                        <?=$AnswerString[2] ?>
-                    </label>
-            </div>
-
-            <div class="form-check">
-                <input type="radio" name="mcq_answer" id="flexRadioDefault4" value="3" <?php echo ($existrow['Answer'] =='3')? 'checked':'' ?>>
-                    <label class="form-check-label" for="flexRadioDefault4">
-                        <?=$AnswerString[3] ?>
-                    </label>
-            </div>
-
-
+                <div class="form-check">
+                    <input type="radio" name="mcq_answer" id="flexRadioDefault4" value="3" <?php echo ($existrow['Answer'] =='3')? 'checked':'' ?>>
+                        <label class="form-check-label" for="flexRadioDefault4">
+                            <?=$AnswerString[3] ?>
+                        </label>
+                </div>
 <?php
     $mcq_empty_question = ob_get_contents();
     ob_end_clean();

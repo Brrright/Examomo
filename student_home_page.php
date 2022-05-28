@@ -39,9 +39,9 @@
     <div class="section-full d-flex flex-column">
         <div class="d-flex flex-row justify-content-between mx-auto" style="width:85%; height:40%">
             <div class="card-half p-4 shadow p-3 mb-5">
-                <p class="font-caveat fs-3 text-center main-color">
-                    profile
-                </p>
+                <center><p class="fs-3 main-color m-0" style="font-family:Poppins;">
+                    Profile
+                </p></center>
                     <div class="row g-0">
                         <div class="col-md-4">
                         <img src="img/admin/students.png" class="img-fluid rounded-start" alt="...">
@@ -89,7 +89,8 @@
                     $resultnumber = mysqli_num_rows($resultfetched);
 
                     if ($resultnumber === 0) {
-                        echo 'No Results Found';
+                        $noresult = '<p class="fs-3 text-center" style="color:white;font-family:Poppins;">No Results Found</p>';
+                        echo $noresult;
                     }
                     else{
                         while ($resultrow = mysqli_fetch_array($resultfetched)){
@@ -99,7 +100,7 @@
                         }
                         
                         $averagemark = array_sum($marks)/$resultnumber;
-                        $resultpanel = '<p class="font-caveat fs-3 text-center" style="color:white;">
+                        $resultpanel = '<p class="fs-3 text-center" style="color:white;font-family:Poppins;"">
                         Your Exam Performance<br><span>'.$averagemark.'%</span></p>';
 
                         echo $resultpanel;
@@ -125,7 +126,21 @@
                 
                 </div>
                 <div class="progressbar mx-auto m-2">
-                    <div style="width:<?php echo $averagemark?>%;"></div>
+                    <div style="width:<?php 
+                     $req = "SELECT * FROM student 
+                     -- INNER JOIN class ON student.ClassID = class.ClassID
+                     INNER JOIN result ON student.StudentID = result.StudentID
+                     -- INNER JOIN question_multiple_choice ON question_multiple_choice.PaperID = result.PaperID
+                     -- INNER JOIN question_structure ON question_structure.PaperID = result.PaperID
+                     WHERE student.StudentID = ".$_SESSION['userID']."";
+
+                    $resultfetched = mysqli_query($con,$req);
+                    $resultnumber = mysqli_num_rows($resultfetched);
+                    
+                    if ($resultnumber === 0) {
+                        echo 0;
+                    }
+                    else{echo $averagemark;}?>%;"></div>
                     </div>
                 </a>
     </div >
@@ -138,7 +153,7 @@
                     Upcoming Exams
                 </p>
                 <div style="width:40%"></div>
-                <a href="student_exam_list.php"><button class="stubtn" style="width:100%; height:90%">View all</button></a>
+                <a href="student_exam_list.php" style="text-decoration:none;"><button class="stubtn" style="width:100%; height:90%">View all</button></a>
             </div>
             <div class="d-flex flex-row justify-content-around m-3 mx-auto" style="width:80%; height:30%">
                 <?php 

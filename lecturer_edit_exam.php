@@ -89,7 +89,7 @@
         <p class="text-uppercase fw-bold main-color m-2">
             Module Name
         </p>
-        <select name="Moduleid" class="form-select fw-light shadow-sm" style="height:58px;" id="moduleselect" required>
+        <select name="Moduleid" class="form-select fw-light shadow-sm" style="height:58px;" id="moduleselect" onChange="GainRelatedExamPaper()" required>
 
             <!-- get previous selected module -->
             <?php
@@ -204,7 +204,26 @@
 </form>
 
 <!-- javascript to reset all fields in form -->
+<script src="js/mingliangJS.js"></script>
+
 <script>
+    function GainRelatedExamPaper() {
+        var selection = document.getElementById('moduleselect');
+        var selectedOption = selection.options[selection.selectedIndex].value;
+
+        var paperSelection = document.getElementById('paperselect');
+        if (selectedOption == "") {
+            updateTable("lecturer_get_paper_from_module.php?moduleID="+"nodata",'paperselect');
+            paperSelection.setAttribute('disabled','');
+            return;
+        }
+
+        // console.log(selectedOption);
+        updateTable("lecturer_get_paper_from_module.php?moduleID="+selectedOption, 'paperselect');
+
+        // remove paperselect's disabled
+        paperSelection.removeAttribute('disabled');
+    }
     function resetform() {
         document.getElementById("examcreate").reset();
     }
