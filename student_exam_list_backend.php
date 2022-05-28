@@ -114,7 +114,7 @@ if ($numOfRow === 0) {
           <td>'.$start.'</td>
           <td>'.$end.'</td>
           <td>'.$value.'</td>
-          <td><button type="button"  id='.$data["ExamID"].' class="btn btn-success" onclick="toogleModal('.$data["ExamID"].','.$data["PaperID"].', \''.$data["PaperType"].'\' , false)" >
+          <td><button type="button"  id='.$data["ExamID"].' class="btn btn-secondary" onclick="toogleModal('.$data["ExamID"].','.$data["PaperID"].', \''.$data["PaperType"].'\' , false)" >
           Not Started
           </button></td>
 
@@ -126,7 +126,7 @@ if ($numOfRow === 0) {
           <td>'.$start.'</td>
           <td>'.$end.'</td>
           <td>'.$value.'</td>
-          <td><button type="button"  id='.$data["ExamID"].' class="btn btn-success" onclick="toogleModal('.$data["ExamID"].','.$data["PaperID"].', \''.$data["PaperType"].'\' , true)" >
+          <td><button type="button"  id='.$data["ExamID"].' class="btn btn-warning" onclick="toogleModal('.$data["ExamID"].','.$data["PaperID"].', \''.$data["PaperType"].'\' , true)" >
           Ongoing
           </button></td>
 
