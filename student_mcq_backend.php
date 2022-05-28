@@ -68,6 +68,7 @@
     if ($numOfExisting == 0){
         $response["hey"] = "i reach insert new record";
         if ($studentanswer == $correct){
+            $response["hey"] = "i reach insert COREK new record";
             $sqlcorrect ="INSERT INTO student_answer 
                         (Answer, markReceived, MQuestionID, SQuestionID, StudentID, LecturerID, CompanyID, ExamID, PaperID)
                         VALUES ('$studentanswer', '$correct', '$questionID', NULL, '$studentID', NULL, '$companyID', '$examid', '$PaperID')";

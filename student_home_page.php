@@ -18,7 +18,7 @@
     $fetchexam ="SELECT exam.ExamName, exam.ExamStartDateTime, exam.ExamEndDateTime FROM student
                 INNER JOIN exam_class ON student.ClassID = exam_class.ClassID
                 INNER JOIN exam ON exam_class.ExamID = exam.ExamID
-                WHERE student.StudentID = ".$_SESSION["userID"]." AND ExamStartDateTime >= '$date_clicked' AND isPublished LIKE 1 ORDER BY ExamStartDateTime DESC LIMIT 2";
+                WHERE student.StudentID = ".$_SESSION["userID"]." AND ExamEndDateTime >= '$date_clicked' AND isPublished LIKE 1 ORDER BY ExamStartDateTime DESC LIMIT 2";
     $examquery = mysqli_query($con, $fetchexam);
     $examrow = mysqli_num_rows($examquery);
 
@@ -116,7 +116,7 @@
                     <path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
                     </defs>
                     <g class="parallax">
-                    <use xlink:href="#gentle-wave" x="48" y="0" fill="rgba(255,255,255,0.7" />
+                    <use xlink:href="#gentle-wave" x="48" y="0" fill="rgba(255,255,255,0.7)" />
                     <use xlink:href="#gentle-wave" x="48" y="2" fill="rgba(255,255,255,0.5)" />
                     <use xlink:href="#gentle-wave" x="48" y="4" fill="rgba(255,255,255,0.3)" />
                     <use xlink:href="#gentle-wave" x="48" y="6" fill="#fff" />
@@ -158,7 +158,7 @@
             <div class="d-flex flex-row justify-content-around m-3 mx-auto" style="width:80%; height:30%">
                 <?php 
                     if ($examrow === 0) {
-                        echo '<div class="main-bg-color exam-card p-4 text-white">
+                        echo '<div class=" p-4 ">
                                 No upcoming exams available.
                             </div>';                   
                     }
