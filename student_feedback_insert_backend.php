@@ -2,7 +2,6 @@
     require "common/conn.php";
 
     // identify if user logged in
-    require "common/conn.php";
     if (!isset($_SESSION["userID"])) {
         echo '<script>alert("Please login before you access this page.");
         window.location.href="guest_home_page.php";</script>';
@@ -12,7 +11,6 @@
         echo '<script>alert("You have not access to this page.");
         window.location.href="guest_home_page.php";</script>';
     }
-
     // get user id and company id from session
     $id = $_SESSION['userID'];
     $comid = $_SESSION['companyID'];
@@ -28,7 +26,7 @@
 
     // error message when no query found
     if (!mysqli_query($con,$sql)) {
-        die('Error: ' . mysqli_error($con));
+        echo 'Error: ' . mysqli_error($con);
     }
 
     //redirect after display message
@@ -37,4 +35,5 @@
     window.location.href = "student_feedback_page.php";
     </script>';
     }
+
 ?>

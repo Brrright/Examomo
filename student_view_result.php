@@ -1,41 +1,188 @@
 <?php
-require "common/conn.php";
-if (!isset($_SESSION["userID"])) {
-    echo '<script>alert("Please login before you access this page.");
-    window.location.href="guest_home_page.php";</script>';
-}
+    require "common/conn.php";
+    if (!isset($_SESSION["userID"])) {
+        echo '<script>alert("Please login before you access this page.");
+        window.location.href="guest_home_page.php";</script>';
+    }
+
+    if ($_SESSION["userRole"] != "student") {
+        echo '<script>alert("You have not access to this page.");
+        window.location.href="guest_home_page.php";</script>';
+      }
+
+      // get current datetime
+    date_default_timezone_set('Asia/Kuala_Lumpur');
+    $date_clicked = date('Y-m-d H:i:s');
+
+    // sql for exam details
+    $fetchexam ="SELECT exam.ExamName, exam.ExamStartDateTime, exam.ExamEndDateTime FROM student
+                INNER JOIN exam_class ON student.ClassID = exam_class.ClassID
+                INNER JOIN exam ON exam_class.ExamID = exam.ExamID
+                WHERE student.StudentID = ".$_SESSION["userID"]." AND ExamStartDateTime >= '$date_clicked' AND isPublished LIKE 1 ORDER BY ExamStartDateTime DESC LIMIT 2";
+    $examquery = mysqli_query($con, $fetchexam);
+    $examrow = mysqli_num_rows($examquery);
+
+    $req = "SELECT * FROM student
+            INNER JOIN result ON student.StudentID = result.StudentID
+            WHERE student.StudentID = ".$_SESSION['userID']."";
+
+    $resultfetched = mysqli_query($con,$req);
+    $resultnumber = mysqli_num_rows($resultfetched);
+    
 ?>
+<?php
+    $examlist = "SELECT * FROM student 
+                INNER JOIN result ON student.StudentID = result.StudentID
+                WHERE student.StudentID = ".$_SESSION['userID']."";
 
+    $resultfetched = mysqli_query($con,$req);
+    $resultnumber = mysqli_num_rows($resultfetched);
+
+    if ($resultnumber === 0) {
+        echo 'No Results Found';
+    }
+    else{
+        while ($resultrow = mysqli_fetch_array($resultfetched)){
+            $totalmark = $resultrow['TotalMark'];
+            $marks[] = $totalmark;
+        }
+        
+        $averagemark = array_sum($marks)/$resultnumber;
+        
+        $piemark = $averagemark*1.8;
+    } 
+?>
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
     <?php
         require "common/HeadImportInfo.php"
     ?>
-
-    <link rel="stylesheet" href="css/StudentCSS.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <link rel="stylesheet" href="css/weestyle.css">
+    <link rel="stylesheet" href="css/calwynCSS.css">
     <link rel="stylesheet" href="css/commonCSS.css">
+    <title>View Results</title>
 
-<!-- Meta Tags -->
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+.circle-wrap .circle .mask.full,
+.circle-wrap .circle .fill {
+  animation: fill ease-in-out 3s;
+  transform: rotate(<?php echo $piemark?>deg);
+}
 
-<!--Bootstrap CSS -->
-
-
-<title>Student Result</title>
-
+    @keyframes fill {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(<?php echo $piemark?>deg);
+  }
+}
+</style>
 </head>
-
 <body>
-    
-    <?php
-        require "common/header_student.php"
+    <?php require "common/header_student.php";?>
+    <section>
+    <div class="container">
+    <div class="profilecontainer my-4 shadow p-2 mb-5">
+        <div class="container" style="border-radius:15px;">
+            <?php 
+                $req = "SELECT StudentName FROM student 
+                INNER JOIN result ON student.StudentID = result.StudentID
+                WHERE student.StudentID = ".$_SESSION['userID']."";
 
-    ?>
+                $resultfetched = mysqli_query($con,$req);
+                $resultnumber = mysqli_num_rows($resultfetched);
+                $resultrow = mysqli_fetch_array($resultfetched);
+                
+                $test = '<center>
+                            <p class="fs-3 main-color m-0 " style="font-family:Poppins;">'.$resultrow["StudentName"].' - Results Page</p>
+                        </center>';
+                echo $test; 
+            ?>
+        </div>
+    </div>
+    </div>
+    </section>
+    <div class="container" style="width:85%; height:80%;">
+        <div class="row">
+            <div class="col-xl-6 mx-auto">
+                <div class="card p-3 shadow p-3 mb-5" style="height:100%;">
+                    <center><p class="fs-3 main-color m-0" style="font-family:Poppins;">Exam Results</p></center>
+                <?php
+                    $fetching = "SELECT * FROM result INNER JOIN exam ON result.ExamID =  exam.ExamID WHERE result.StudentID = ".$_SESSION['userID']."";
+                    $resultquery = mysqli_query($con, $fetching);
 
-<?php require "common/footer_student.php"?>
+                        while ($result = mysqli_fetch_array($resultquery)){
+                            $resultlist = '<div class="pill-nav">
+                                <a class="active fs-4" style="font-family:Poppins;">'.$result["ExamName"].' - '.$result["TotalMark"].'%</a>
+                            </div>';
+                            echo $resultlist;
+                            }
+                    ?>        
+                </div>
+            </div>
 
+            <div class="col-xl-6">
+                <div class="card p-3 shadow p-3 mb-0" style="width:100%;border-radius:15px;height:100%; overflow:hidden;">
+                    <center><p class="fs-3 main-color m-0" style="font-family:Poppins;">Average Performance</p></center>
+                        <div class="colorpanel" style="border-radius:15px;height:100%;max-height:100%; overflow:hidden;">
+                            <div class="area">
+                                <div class="pie">
+                                    <div class="circle-wrap my-auto">
+                                        <div class="circle">
+                                            <div class="mask full">
+                                                <div class="fill"></div>
+                                            </div>
+                                        
+                                            <div class="mask half">
+                                                <div class="fill"></div>
+                                            </div>
+                                        
+                                            <div class="inside-circle">
+                                                <span class="count" style="font-family:Poppins;"><?php echo $averagemark?></span>
+                                                <span class="count2" style="font-family:Poppins;">%</span>
+                                            </div>
+
+                                        </div>       
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="mb-0">
+                                <svg class="waves mb-0" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                                viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
+                                <defs>
+                                <path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
+                                </defs>
+                                <g class="parallax">
+                                <use xlink:href="#gentle-wave" x="48" y="0" fill="rgba(255,255,255,0.7" />
+                                <use xlink:href="#gentle-wave" x="48" y="2" fill="rgba(255,255,255,0.5)" />
+                                <use xlink:href="#gentle-wave" x="48" y="4" fill="rgba(255,255,255,0.3)" />
+                                <use xlink:href="#gentle-wave" x="48" y="6" fill="#fff" />
+                                </g>
+                                </svg>
+                            </div>
+                    </div>
+                </div >
+            </div>
+            </div>
+        </div>
+        
+    <?php require "common/footer_student.php";?>
 </body>
 </html>
+<script>
+    $('.count').each(function () {
+        $(this).prop('Counter',0).animate({
+            Counter: $(this).text()
+        }, {
+            duration: 4000,
+            easing: 'swing',
+            step: function (now) {
+                $(this).text(Math.ceil(now));
+            }
+        });
+    });
+</script>

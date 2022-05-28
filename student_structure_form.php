@@ -45,7 +45,7 @@
             <input type="hidden" name="paper_id" value="<?=$paperid?>">
     
             <p class="fs-3 fw-bold main-color m-3 p-3 text-center" style="text-shadow:0px 2px #707b8b93;">
-                Question Details (empty)
+                Question Details
             </p>
             <p class="text-uppercase fw-bold  m-2  text-end">
                 Marks Given: <?=$Marks ?>
@@ -59,7 +59,7 @@
             </div>
 
             <div class="input-group mb-3">
-                <img src = '<?=$Image ?>' id="file-img-preview" style="height: 400px; width: 100%; margin-bottom: 20px;">
+                <img src = '<?=$Image ?>' id="file-img-preview" style="height: 400px; width: 100%; margin-bottom: 20px;" onerror="this.style.display='none'">
             </div>
 
             <div class="form-floating mb-3">
@@ -89,7 +89,7 @@
             <input type="hidden" name="paper_id" value="<?=$paperid?>">
     
             <p class="fs-3 fw-bold main-color m-3 p-3 text-center" style="text-shadow:0px 2px #707b8b93;">
-                Question Details (filled)
+                Question Details
             </p>
             <p class="text-uppercase fw-bold  m-2  text-end">
                 Marks Given: <?=$Marks ?>
@@ -104,7 +104,7 @@
             </div>
 
             <div class="input-group mb-3">
-                <img src = '<?=$Image ?>' id="file-img-preview" style="height: 400px; width: 100%; margin-bottom: 20px;">
+                <img src = '<?=$Image ?>' id="file-img-preview" style="height: 400px; width: 100%; margin-bottom: 20px;" onerror="this.style.display='none'">
             </div>
 
             <div class="form-floating mb-3">

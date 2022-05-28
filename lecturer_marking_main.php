@@ -1,9 +1,8 @@
 <?php 
         require "common/conn.php";
-        require "common/HeadImportInfo.php";
         if (!isset($_GET["id"])) {
             echo '<script>alert("You have not selected an exam paper.");
-            window.location.href="lecturer_exampaper_page.php";</script>';
+            window.location.href="lecturer_completed_exam_list.php";</script>';
         }
     
         if (!isset($_SESSION["userID"])) {
@@ -11,7 +10,7 @@
             window.location.href="guest_home_page.php";</script>';
         }
     
-        if ($_SESSION["userRole"] != "student") {
+        if ($_SESSION["userRole"] != "lecturer") {
             echo '<script>alert("You have no access to this page.");
             window.location.href="guest_home_page.php";</script>';
         }
@@ -50,10 +49,10 @@
 </head>
 <body>
     <!-- header -->
-    <?php require "common/header_student.php"?>
+    <?php require "common/header_lecturer.php"?>
 
     <br>
-    <center><h1 style="font-family: 'Caveat'; font-weight: bold; color: #2B5EA4;">Structured Questions</h1></center> 
+    <center><h1 style="font-family: 'Caveat'; font-weight: bold; color: #2B5EA4;">Mark Structured Questions</h1></center> 
     
     <div class= "row" style="min-height: 450px; margin: auto;">
         <!-- panel for question creation form -->
@@ -75,7 +74,7 @@
                             </div>
                         
                         <p class="text-uppercase fw-bold main-color m-2" style="color: #aaa;">
-                            Image (Optional)
+                            Image
                         </p>
                         
                             <div class="form-floating mb-3">
@@ -91,12 +90,20 @@
                         </div>
 
                         <p class="text-uppercase fw-bold main-color m-2" style="color: #aaa;">
-                            Given Marks
+                            Allocated Marks
                         </p>
                         
                         <div class="form-floating mb-3">
                             <div style="width:100%;height:40px;" class="bg-light"></div>
                         </div>    
+
+                        <p class="text-uppercase fw-bold main-color m-2" style="color: #aaa;">
+                            Marks Given
+                        </p>
+                        
+                        <div class="form-floating mb-3">
+                            <div style="width:100%;height:40px;" class="bg-light"></div>
+                        </div>
                         <!-- --------------------------------------------------------------------- -->
                     </div>
                 </div>
@@ -128,10 +135,11 @@
 
 <script src="js/mingliangJS.js"></script>
     <script>
-         function confirmExit() {
+        const studentID = <?php echo $_GET['stuid']; ?>;
+        function confirmExit() {
         Swal.fire({
-            title: 'Wait a second, are you sure?',
-            text: "You can always join back when the exam is still ongoing !",
+            title: 'Finished marking?',
+            text: "Are you sure to finish marking this exam paper?",
             icon: 'warning',
             padding: '3em',
             background: '#fff url() ',
@@ -144,7 +152,7 @@
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
-            confirmButtonText: 'Yes, I have done the exam!'
+            confirmButtonText: 'Yes, I have completed marking.'
         }).then((result) => {
         if (result.isConfirmed) {
             const saveBtn = document.getElementById("save-btn");
@@ -185,7 +193,7 @@
             }else {
                 console.log("submitting")
                 const form_data = Object.fromEntries(new FormData(event.target).entries());
-                fetch("student_structure_backend.php", {
+                fetch("lecturer_marking_backend.php", {
                     method: "POST",
                     header: {
                         'Content-Type': 'application/json',
@@ -208,11 +216,11 @@
             if(document.getElementById("no-submit")) {
                 // no need submit the current form (its blank)
                 // console.log(clickedID) //SWITCH14-20
-                window.location.href="student_exam_list.php";
+                window.location.href="lecturer_completed_exam_list.php";
             }
             console.log("submitting")
             const form_data = Object.fromEntries(new FormData(event.target).entries());
-            fetch("student_structure_backend.php", {
+            fetch("lecturer_marking_backend.php", {
                 method: "POST",
                 header: {
                     'Content-Type': 'application/json',
@@ -224,10 +232,10 @@
             })
             .then(function(response) {
                 if(!response.error) {
-                    window.location.href="student_exam_list.php";
+                    window.location.href="lecturer_completed_exam_list.php";
                 }
                 else if(response.error == 0) {
-                    window.location.href="student_exam_list.php";
+                    window.location.href="lecturer_completed_exam_list.php";
                 }
                 else {
                     console.log(response.error)
@@ -241,41 +249,14 @@
 
  
     function changeContent(id,qid) {
-        var path = "student_structure_form?id=" +id+"&question_id="+qid;
+        var path = "lecturer_marking_form?id=" +id+"&question_id="+qid+"&studentid="+studentID;
         updateTable(path, 'question-content');
     }
 
     </script>
     
-<script>
-    var elems = document.getElementsByClassName('fin-mcq-confirm');
-    var confirmIt = function (e) {
-        if (!confirm('Are you sure to conclude paper questions? If you are not able to conclude it, please click the last question\'s button and click "save and finish" button')) e.preventDefault();
-    };
-    for (var i = 0, l = elems.length; i < l; i++) {
-        elems[i].addEventListener('click', confirmIt, false);
-    }
-</script>
-
-<!-- javascript to preview image -->
-<script>
-    function showPreview(event){
-        if(event.target.files.length > 0){
-            var src = URL.createObjectURL(event.target.files[0]);
-            var preview = document.getElementById("file-img-preview");
-            preview.src = src;
-            preview.style.display = "block";
-        }
-    }
-
-    function imgremove(){
-        document.getElementById('file-img-preview').src ="https://www.beelights.gr/assets/images/empty-image.png";
-        var inputfile = document.getElementById("file-input");
-        inputfile.value ="";
-    }
-</script>
 
 <!-- footer -->
-<?php include "./common/footer_student.php"?>
+<?php include "common/footer_lecturer.php"?>
 </body>
 </html>

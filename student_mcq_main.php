@@ -35,9 +35,22 @@
 
         if(!$result2) {
             echo 'err when fetching mcq question'. mysqli_error($con);
-
         }
+
         $rowcount = mysqli_num_rows($result);
+
+        $sql3 = "SELECT exam.ExamEndDateTime FROM question_multiple_choice 
+                INNER JOIN exam ON question_multiple_choice.PaperID = exam.PaperID WHERE question_multiple_choice.PaperID = $paperid  AND exam.isPublished = 1";
+
+        $sqlquery = mysqli_query($con,$sql3);
+        if(!$sqlquery) {
+            echo 'err when fetching mcq and exam question'. mysqli_error($con);
+        }
+
+        $examDetails = mysqli_fetch_array($sqlquery);
+        $examEndDate = $examDetails["ExamEndDateTime"];
+        // echo $examEndDate;
+
     ?>
     <link rel="stylesheet" href="css/weestyle.css">
     <link rel="stylesheet" href="css/bryanCSS.css">
@@ -50,7 +63,21 @@
     <?php require "common/header_student.php"?>
 
     <br>
-    <center><h1 style="font-family: 'Caveat'; font-weight: bold; color: #2B5EA4;">Create Multiple Choice Question</h1></center> 
+    <div class="d-flex justify-content-evenly">
+        <div class="border border-3 rounded-pill main-color h3 p-2" id="timer"></div>
+        <h1 class="text-center" style="font-family: 'Caveat'; font-weight: bold; color: #2B5EA4;">Multiple Choice Question</h1>
+        <div class="dropdown">
+        <button type="button" class="btn btn-primary dropdown-toggle" id="addFB" data-bs-toggle="dropdown" aria-expanded="false" style="display:block; margin-right: 15%; margin-left:auto;">Add New Feedback</button>
+        <form class="dropdown-menu p-4 shadow p-3 mb-5" id="feedbackForm" aria-labelledby="addFB" style="width: 100%">
+        <!-- <form class="dropdown-menu p-4 shadow p-3 mb-5" action="student_feedback_insert_backend.php" method="POST" aria-labelledby="addFB" style="width: 60%"> -->
+            <input type="text" class="form-control shadow-sm" id="adm-floatingInput" name="content" placeholder="Enter feedback here..." required>
+            <br>
+            <div class= "d-flex flex-wrap justify-content-around">
+            <button type="submit" class="btn btn-primary" style="border:none;">Submit</button>
+            </div>
+        </form>
+    </div>
+    </div>
 
 <div class= "row" style="min-height: 450px; margin: auto;">
 <!-- panel for question creation form -->
@@ -152,7 +179,71 @@
 
 <script src="js/mingliangJS.js"></script>
 <script>
+    var countDownDate = <?php echo strtotime($examEndDate); ?> * 1000;
+    //This is the get current time or change to get clicked
+    var Timernow = <?php echo time() ?> * 1000;
+    console.log(countDownDate + " " + Timernow);
     
+    // Update the count down every 1 second
+    var Timerinterval = setInterval(function() {
+        Timernow = Timernow + 1000;
+        
+        // Find the distance between now an the count down date
+        var Timerdistance = countDownDate - Timernow;
+        
+        // Time calculations for days, hours, minutes and seconds
+        var Timerdays = Math.floor(Timerdistance / (1000 * 60 * 60 * 24));
+        var Timerhours = Math.floor((Timerdistance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        var Timerminutes = Math.floor((Timerdistance % (1000 * 60 * 60)) / (1000 * 60));
+        var Timerseconds = Math.floor((Timerdistance % (1000 * 60)) / 1000);
+
+        // Output the result in an element with id="timer"
+        document.getElementById("timer").innerHTML = Timerdays + "d " + Timerhours + "h " +
+        Timerminutes + "m " + Timerseconds + "s ";
+        
+        // If the count down is over, write some text 
+        if (Timerdistance < 0) {
+            clearInterval(Timerinterval);
+            document.getElementById("timer").innerHTML = "Time over";
+        }
+        
+    }, 1000);
+
+    const feedback_Form = document.getElementById("feedbackForm")
+    feedback_Form.addEventListener("submit", function(event){
+        event.preventDefault();
+        const form_data_object = Object.fromEntries(new FormData(event.target).entries());
+        console.log(form_data_object)
+        fetch("student_feedback_backend.php", {
+            method: "POST",
+            header: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(form_data_object)
+        })
+        .then(function(res) {
+            return res.json()
+        })
+        .then(function(response) {
+            if(!response.error) {
+                Swal.fire({
+                    title: "Feedback sent Successfully",
+                    icon: "success",
+                    text: "We will reply the feedback as soon as possible! Thanks for reporting!",
+                    showConfirmButton: false,
+                    timer:1500
+                })
+            }
+            else {
+                Swal.fire({
+                    title: "Oops...Login failed.",
+                    icon: "error",
+                    text: response.error
+                })
+                return;
+            }
+        })
+    })
 
     function confirmExit() {
         Swal.fire({

@@ -55,7 +55,7 @@ $existquery = mysqli_query($con, $existsql);
 ?>
 
             <p class="fs-2 fw-bold p-3" style="color: #2B5EA4;">
-                Question Details (empty)
+                Question Details
             </p>
 
             <p class="text-uppercase fw-bold  m-2  text-end">
@@ -71,7 +71,7 @@ $existquery = mysqli_query($con, $existsql);
             </div>
     
             <div class="input-group mb-3">
-                <img src = '<?=$Image ?>' id="file-img-preview" style="height: 400px; width: 100%; margin-bottom: 20px;">
+                <img src = '<?=$Image ?>' id="file-img-preview" style="height: 400px; width: 100%; margin-bottom: 20px;" onerror="this.style.display='none'">
             </div>
     
             <input type="hidden" name="question_id" value="<?=$quesid?>">
@@ -116,7 +116,7 @@ $existquery = mysqli_query($con, $existsql);
 ?>
 
             <p class="fs-2 fw-bold p-3" style="color: #2B5EA4;">
-                Question Details (filled)
+                Question Details
             </p>
 
             <p class="text-uppercase fw-bold  m-2  text-end">
@@ -132,7 +132,7 @@ $existquery = mysqli_query($con, $existsql);
             </div>
     
             <div class="input-group mb-3">
-                <img src = '<?=$Image ?>' id="file-img-preview" style="height: 400px; width: 100%; margin-bottom: 20px;">
+                <img src = '<?=$Image ?>' id="file-img-preview" style="height: 400px; width: 100%; margin-bottom: 20px;" onerror="this.style.display='none'">
             </div>
 
             <input type="hidden" name="paper_id" value="<?php echo $paperid;?>">
