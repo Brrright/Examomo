@@ -17,7 +17,7 @@
     $classresult = mysqli_query($con, $classid);
 
     //sql to get student details
-    $sql = "SELECT student.StudentID, student.StudentName, student.StudentGender, student.StudentEmail, student.StudentPassword, class.ClassID, class.ClassName
+    $sql = "SELECT *
             FROM student INNER JOIN class ON student.ClassID = class.ClassID
             WHERE student.StudentID = $studentid";
 
@@ -29,6 +29,7 @@
         $sGender= $row['StudentGender'];
         $smail= $row['StudentEmail'];
         $spass= $row['StudentPassword'];
+        $access = $row['isBanned'];
 ?>
 
 <!DOCTYPE html>
@@ -81,6 +82,13 @@
                     }
                 ?>
             </select>
+            <br>
+
+            <div class="form-check form-switch">
+                <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" name="access" value="empty" <?php if($access==""){?> checked="true" <?php } ?>>
+                <label class="form-check-label" for="flexSwitchCheckChecked">Allow User Access</label>
+            </div>
+
             <br>
             <div class= "d-flex flex-wrap justify-content-around">
             <button type="submit" value="submit" class="stubtn" style="border:none;">Submit</button>

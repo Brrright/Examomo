@@ -17,6 +17,24 @@
         $colEmail = "StudentEmail";
         $colPass = "StudentPassword";
         $companycheck ="CompanyID";
+
+        $checkBan = "SELECT isBanned FROM student WHERE StudentEmail = '$email'";
+        $checkBanExe = mysqli_query($con, $checkBan);
+        if(!$checkBanExe) {
+            $response["error"] = 'Error:'.mysqli_error($con);
+            echo json_encode($response);
+            return;
+        }
+        else{
+            if(mysqli_num_rows($checkBanExe) > 0) {
+                $banData = mysqli_fetch_array($checkBanExe);
+                if($banData["isBanned"] == 1){
+                    $response["error"] = 'Oh no! Your account has been banned! Please contact your school admin for any inquiries.';
+                    echo json_encode($response);
+                    return;
+                }
+            }
+        }
     }
     else if($role == "lecturer") {
         $colID = "LecturerID";

@@ -17,22 +17,54 @@
     // retrive id from form
     $studentid = $_POST['studentid'];
 
-    $sql ="UPDATE student SET
+    error_reporting(0);
+    
+    // access status
+    if ($_POST['access'] == "empty"){
+
+
+        $sql ="UPDATE student SET
         StudentName = '$_POST[studentname]',
         StudentGender = '$_POST[studentgender]',
         StudentEmail = '$_POST[studentmail]',
         StudentPassword = '$_POST[studentpass]',
-        ClassID = '$_POST[studentclass]'
+        ClassID = '$_POST[studentclass]',
+        isBanned = NULL
         WHERE StudentID = '$studentid'";
 
 
-    if (!mysqli_query($con,$sql)) {
-        die('Error: ' . mysqli_error($con));
-    }
+        if (!mysqli_query($con,$sql)) {
+            echo ('Error: ' . mysqli_error($con));
+        }
 
-    else {
-    echo '<script>alert("Student details updated successfully.");
-    window.location.href = "admin_student_list.php";
-    </script>';
+        else {
+        echo '<script>alert("Student details updated successfully.");
+        window.location.href = "admin_student_list.php";
+        </script>';
+        }
+
+    }
+    
+    if (!$_POST['access']) {
+
+        $sql ="UPDATE student SET
+            StudentName = '$_POST[studentname]',
+            StudentGender = '$_POST[studentgender]',
+            StudentEmail = '$_POST[studentmail]',
+            StudentPassword = '$_POST[studentpass]',
+            ClassID = '$_POST[studentclass]',
+            isBanned = 1
+            WHERE StudentID = '$studentid'";
+
+
+            if (!mysqli_query($con,$sql)) {
+                echo ('Error: ' . mysqli_error($con));
+            }
+
+            else {
+            echo '<script>alert("Student details updated successfully.");
+            window.location.href = "admin_student_list.php";
+            </script>';
+            }
     }
 ?>

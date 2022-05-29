@@ -7,12 +7,12 @@
     
         if (!isset($_SESSION["userID"])) {
             echo '<script>alert("Please login before you access this page.");
-            window.location.href="guest_home_page.php";</script>';
+            window.location.href="logout.php";</script>';
         }
     
         if ($_SESSION["userRole"] != "student") {
             echo '<script>alert("You have no access to this page.");
-            window.location.href="guest_home_page.php";</script>';
+            window.location.href="logout.php";</script>';
         }
 
 
@@ -152,6 +152,7 @@
     </div>
 
 <script src="js/mingliangJS.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script>
     var numOfSwitchTab = 0;
     document.addEventListener("visibilitychange", function() {
@@ -170,7 +171,7 @@
             console.log("3");
             const Toast = Swal.mixin({
             toast: true,
-            position: 'bottom-end',
+            position: 'center',
             showConfirmButton: false,
             timer: 3000,
             timerProgressBar: true,
@@ -219,7 +220,7 @@
     // Update the count down every 1 second
     var Timerinterval = setInterval(function() {
         var Timernow =  new Date().getTime();
-        console.log("end: " +countDownDate + ", now:" + Timernow);
+        // console.log("end: " +countDownDate + ", now:" + Timernow);
 
         
         // Find the distance between now an the count down date
