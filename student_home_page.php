@@ -18,10 +18,69 @@
     $fetchexam ="SELECT exam.ExamName, exam.ExamStartDateTime, exam.ExamEndDateTime FROM student
                 INNER JOIN exam_class ON student.ClassID = exam_class.ClassID
                 INNER JOIN exam ON exam_class.ExamID = exam.ExamID
-                WHERE student.StudentID = ".$_SESSION["userID"]." AND ExamEndDateTime >= '$date_clicked' AND isPublished LIKE 1 ORDER BY ExamStartDateTime DESC LIMIT 2";
+                WHERE student.StudentID = ".$_SESSION["userID"]." AND ExamEndDateTime >= '$date_clicked' AND isPublished LIKE 1 ORDER BY ExamStartDateTime DESC LIMIT 1";
     $examquery = mysqli_query($con, $fetchexam);
     $examrow = mysqli_num_rows($examquery);
 
+    function timeDiff($firstTime,$lastTime){
+        // convert to unix timestamps
+        $firstTime=strtotime($firstTime);
+        $lastTime=strtotime($lastTime);
+     
+        // perform subtraction to get the difference (in seconds) between times
+        $timeDiff=$lastTime-$firstTime;
+     
+        // return the difference
+        return $timeDiff;
+     }
+     
+     function durationformater($timeDiff){
+         //Usage :
+         // $difference = timeDiff($start,$end);
+         $years = abs(floor($timeDiff / 31536000));
+         $days = abs(floor(($timeDiff-($years * 31536000))/86400));
+         $hours = abs(floor(($timeDiff-($years * 31536000)-($days * 86400))/3600));
+         $mins = abs(floor(($timeDiff-($years * 31536000)-($days * 86400)-($hours * 3600))/60));#floor($difference / 60);
+         //     $formattedDuration = "Time Passed: " . $years . " Years, ". $days . " Days, " . $hours . " Hours, " . $mins . " Minutes.";
+         
+     
+         if ($years > 1) {
+             $disyears =  $years . "years";
+         }elseif ($years == 1){
+             $disyears =  $years . "year";
+         }else{
+             $disyears = "";
+         }
+     
+         if ($days > 1) {
+             $disdays =  $days . "days";
+         }elseif ($days == 1){
+             $disdays =  $days . "day";
+         }else{
+             $disdays = "";
+         }
+     
+     
+         if ($hours > 1) {
+             $dishours =  $hours . "hours";
+         }elseif ($hours == 1){
+             $dishours =  $hours . "hour";
+         }else{
+             $dishours = "";
+         }
+     
+         if ($mins > 1) {
+             $dismins =  $mins . "minutes";
+         }elseif ($mins == 1){
+             $dismins =  $mins . "minute";
+         }else{
+             $dismins = "";
+         }
+     
+     
+         $formattedDuration = $disyears ." ". $disdays . " " . $dishours . " " . $dismins ;
+         return $formattedDuration;
+        }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -36,9 +95,9 @@
 </head>
 <body>
     <?php require "common/header_student.php";?>
-    <div class="section-full d-flex flex-column">
+    <div class="d-flex flex-column">
         <div class="d-flex flex-row justify-content-between mx-auto" style="width:85%; height:40%">
-            <div class="card-half p-4 shadow p-3 mb-5">
+            <div class="card-half p-0 shadow p-3 mb-3">
                 <center><p class="fs-3 main-color m-0" style="font-family:Poppins;">
                     Profile
                 </p></center>
@@ -62,19 +121,77 @@
                             ?>
                         </div>
                         <br>
-                        <div class="row g-0 mx-3">
+                        <div class="row g-0 m-0">
                             <div class="col-md-6">
-                            <button href="#" class="stubtn"><span>View Exams</span></button>
+                            <center><a href="student_exam_list.php" class="stubtn"><span>View Exams</span></a></center>
                             </div>
                             <br>
                             <div class="col-md-6">
-                            <button href="#" class="stubtn"><span>View Results</span></button>
+                            <center><a href="student_view_result.php" class="stubtn"><span>View Results</span></a></center>
                             </div>
                         </div>
                         </div>
                     </div>
             </div>
-            <div class="card-half p-3 shadow p-3 mb-5">
+            <div class="card-half p-0 shadow p-3 mb-3">
+            <div class="row">
+                        <div class="col-sm-6">
+                            <p class="fs-3 main-color mx-auto" style="text-align: center; font-family:Poppins;">
+                                Upcoming Exams
+                            </p>
+                        </div>
+                    </div>
+                <center>
+                    <a href="student_exam_list.php" style="text-decoration:none; height:80%">
+                    <?php 
+                        if ($examrow === 0) {
+                            echo '<div class=" p-4 ">
+                                    No upcoming exams available.
+                                </div>';                   
+                        }
+                    
+                        while ($examrow = mysqli_fetch_array($examquery)){
+
+                            $start =  $examrow['ExamStartDateTime'];
+                            $end = $examrow['ExamEndDateTime'];
+                            
+                            $diffre = timeDiff($start, $end);
+                            $value = durationformater($diffre);
+                            echo '<div class="main-bg-color p-3 m-0 text-white shadow p-3" style="border-radius:15px;">
+                            <table style="width:100%;height:80%;">
+                            <tr>
+                                <th>Name</th>
+                                <td>: '.$examrow["ExamName"].'</td>
+                            </tr>
+                            
+                            <tr>
+                                <th>Start Time</th>
+                                <td>: '.$examrow["ExamStartDateTime"].'</td>
+                            </tr>
+                            <tr>
+                                <th>End Time</th>
+                                <td>: '.$examrow["ExamEndDateTime"].'</td>
+                            </tr>
+                            <tr>
+                                <th>Duration</th> 
+                                <td>: '.$value.'</td>
+                            </tr>
+                            </table>    
+                            </div>
+                                ';
+                        }
+                    ?>
+                    </a></center>
+                    <br>
+                    <div class="row">
+                            <center><a href="student_exam_list.php" style="text-decoration:none;"><button class="stubtn">View all</button></a></center>
+                        </div>
+                </div>
+    </div >
+                
+        </div>
+        <div class="d-flex flex-row justify-content-between mx-auto mb-5" style="width:90%;">
+            <div class="profilecontainer p-4 shadow p-3 mb-5" style="width:100%;">
             <a href="student_view_result.php" style="text-decoration: none;">
                 <div class="area">
                 <?php
@@ -140,38 +257,13 @@
                     if ($resultnumber === 0) {
                         echo 0;
                     }
-                    else{echo $averagemark;}?>%;"></div>
+                    else{echo $averagemark;}?>%;">
                     </div>
+                </div>
                 </a>
-    </div >
-                
-        </div>
-        <div class="d-flex flex-row justify-content-between mx-auto mb-5" style="width:85%;">
-        <div class="card-full p-4 shadow p-3 mb-5" style="width:100%;">
-            <div class="d-flex flex-row mx-auto justify-content-betweeen align-items-center" style="width:70%">
-                <p class="font-caveat fs-3 m-4 main-color"  style="width:40%">
-                    Upcoming Exams
-                </p>
-                <div style="width:40%"></div>
-                <a href="student_exam_list.php" style="text-decoration:none;"><button class="stubtn" style="width:100%; height:90%">View all</button></a>
-            </div>
-            <div class="d-flex flex-row justify-content-around m-3 mx-auto" style="width:80%; height:30%">
-                <?php 
-                    if ($examrow === 0) {
-                        echo '<div class=" p-4 ">
-                                No upcoming exams available.
-                            </div>';                   
-                    }
-                
-                    while ($examrow = mysqli_fetch_array($examquery)){
-                        echo '<div class="main-bg-color exam-card p-4 text-white">
-                            Name: '.$examrow["ExamName"].'<br>
-                            Start Time: '.$examrow["ExamStartDateTime"].'<br>
-                            End Time: '.$examrow["ExamEndDateTime"].'<br>
-                            </div>'; 
-                    }
-                ?>
-            </div>
+
+                    
+
         </div>
         </div>
         

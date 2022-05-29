@@ -1,8 +1,6 @@
+@import url("https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900");
 html {min-height: 100%;}
 
-/* body {
-    background-image: linear-gradient( rgb(186, 228, 242),rgb(197, 242, 184));
-  } */
 
 .card {
     margin: 0 auto;
@@ -117,6 +115,7 @@ align-self: center;
 
 .stubtn:hover {
   background: #699ee7;
+  color: white;
   letter-spacing: 1px;
   -webkit-box-shadow: 0px 5px 40px -10px rgba(0,0,0,0.57);
   box-shadow: 5px 40px -10px rgba(0,0,0,0.57);
@@ -215,16 +214,6 @@ align-self: center;
     transform: translate3d(85px,0,0);
   }
 }
-/*Shrinking for mobile*/
-@media (max-width: 768px) {
-  .waves {
-    height:40px;
-    min-height:40px;
-  }
-  .content {
-    height:20vh;
-  }
-}
 
 .progressbar {
   background: -webkit-linear-gradient(top left, #50a3a2 0%, #53e3a6 100%);
@@ -237,3 +226,89 @@ align-self: center;
   height: 20px;
   border-radius: 10px;
 }
+
+.colorpanel {
+	background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+	background-size: 400% 400%;
+	animation: gradient 15s ease infinite;
+	height: 100vh;
+}
+
+@keyframes gradient {
+	0% {
+		background-position: 0% 50%;
+	}
+	50% {
+		background-position: 100% 50%;
+	}
+	100% {
+		background-position: 0% 50%;
+	}
+}
+
+.circle-wrap {
+  margin: 50px auto;
+  width: 150px;
+  height: 150px;
+  background: #ffffffb0;
+  border-radius: 50%;
+}
+
+.circle-wrap .circle .mask,
+.circle-wrap .circle .fill {
+  width: 150px;
+  height: 150px;
+  position: absolute;
+  border-radius: 50%;
+}
+
+.circle-wrap .circle .mask {
+  clip: rect(0px, 150px, 150px, 75px);
+}
+
+.circle-wrap .circle .mask .fill {
+  clip: rect(0px, 75px, 150px, 0px);
+  background-color: #ffffff;
+}
+
+
+.circle-wrap .inside-circle {
+  width: 130px;
+  height: 130px;
+  border-radius: 50%;
+  color: white;
+  background: rgba(0, 0, 0, 0.26);
+  line-height: 130px;
+  text-align: center;
+  margin-top: 10px;
+  margin-left: 10px;
+  position: absolute;
+  z-index: 100;
+  font-weight: 700;
+  font-size: 25px;
+}
+
+.count
+{
+  text-align: center;
+  line-height: 130px;
+  color:white;
+  font-size:25px;
+}
+
+.count2
+{
+  text-align: center;
+  line-height: 130px;
+  color:white;
+  font-size:25px;
+}
+
+.pie
+{
+  float: left;
+  width: 100%;
+  margin-top: 6vh;
+  margin-bottom: 3vh;
+}
+

@@ -19,7 +19,6 @@ if ($_SESSION["userRole"] != "student") {
         require "common/HeadImportInfo.php"
     ?>
     <link rel="stylesheet" href="css/weestyle.css">
-    <link rel="stylesheet" href="css/StudentCSS.css">
     <link rel="stylesheet" href="css/commonCSS.css">
 
 <!-- Meta Tags -->

@@ -29,6 +29,7 @@ function timeDiff($firstTime,$lastTime){
 
   // perform subtraction to get the difference (in seconds) between times
   $timeDiff=$lastTime-$firstTime;
+  // echo $timeDiff;
 
   // return the difference
   return $timeDiff;
@@ -247,7 +248,7 @@ function durationformater($timeDiff){
                     }
                   }).then((result) => {
                       if (result.isConfirmed) {
-                        window.location.href="student_question_redirect.php?type="+type+"&id="+pid;
+                        window.location.href="student_question_redirect.php?type="+type+"&id="+pid+"&eid="+eid;
                       } 
                   })
                 }

@@ -139,6 +139,55 @@
             }
         }
     }
+    
+    // get total marks from student answer
+    $answerexistsql ="SELECT SUM(markReceived) FROM student_answer 
+                WHERE PaperID = $PaperID AND StudentID = $studentID AND ExamID = $examid";
+    $answerexistquery = mysqli_query($con, $answerexistsql);
+
+    $marksarray = mysqli_fetch_array($answerexistquery);
+    $totalmark = $marksarray[0];
+
+
+    // check if result record exist
+    $checkresultsql ="SELECT * FROM result
+                        WHERE PaperID = $PaperID AND StudentID = $studentID AND ExamID = $examid";
+    $checkresultquery = mysqli_query($con, $checkresultsql);
+
+    $numOfExisting = mysqli_num_rows($checkresultquery);
+    
+
+    // insert new result record
+    if ($numOfExisting == 0) {
+
+        $sqlresults ="INSERT INTO result 
+                    (TotalMark, PaperID, CompanyID, StudentID, ExamID)
+                    VALUES ('$totalmark', '$PaperID', '$companyID', '$studentID', '$examid')";
+
+        // error message when no query found
+        $resultquery = mysqli_query($con, $sqlresults);
+        if(!$resultquery) {
+            $response["error"] = 'Error occured when insert:'.mysqli_error($con);
+            echo json_encode($response);
+            return;
+        }
+    }
+
+    // update result record
+    else {
+        $updateresultsql ="UPDATE result SET
+                        TotalMark = '$totalmark',
+                        CompanyID = $companyID
+                        WHERE PaperID = $PaperID AND StudentID = $studentID AND ExamID = $examid";
+
+        // error message when no query found
+        $resultquery2 = mysqli_query($con, $updateresultsql);
+        if(!$resultquery2) {
+            $response["error"] = 'Error occured when update:'.mysqli_error($con);
+            echo json_encode($response);
+            return;
+        }
+    }
     echo json_encode($response);
 
 ?>

@@ -32,7 +32,7 @@
                     <a class="nav-link" style="color:#2B5EA4;" href="student_profile_page"><span style="width:30px; height:30px" class="bi bi-person-circle"></span>Profile</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" style="color:#2B5EA4;" href="logout.php">Logout</a>
+                    <a class="nav-link" id="logout-btn" style="color:#2B5EA4;" href="logout.php">Logout</a>
                 </li>
             </ul>
         </div>

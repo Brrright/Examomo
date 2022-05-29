@@ -8,7 +8,7 @@
     $id = $_SESSION['userID'];
     $comid = $_SESSION['companyID'];
     $status = 0;
-    $content = $_POST['content'];
+    $content = $body['content'];
 
     // get current datetime
     date_default_timezone_set('Asia/Kuala_Lumpur');

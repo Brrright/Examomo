@@ -16,16 +16,19 @@
         $colID = "StudentID";
         $colEmail = "StudentEmail";
         $colPass = "StudentPassword";
+        $companycheck ="CompanyID";
     }
     else if($role == "lecturer") {
         $colID = "LecturerID";
         $colEmail = "LecturerEmail";
         $colPass = "LecturerPassword";
+        $companycheck ="CompanyID";
     }
     else if($role == "admin") {
         $colID = "AdminID";
         $colEmail = "AdminEmail";
         $colPass = "AdminPassword";
+        $companycheck ="CompanyID";
     }
     else {
         $response["error"] = "role not found";
@@ -45,7 +48,9 @@
         return;
     }
     else {
-        $sqlEmailAndPassword = "SELECT * FROM $role WHERE $colEmail = '$email' AND $colPass = '$password'";
+        $sqlEmailAndPassword = "SELECT * FROM $role 
+                                INNER JOIN company ON $role.CompanyID = company.CompanyID
+                                WHERE $role.$colEmail = '$email' AND $role.$colPass = '$password' AND company.CompanyName = '$companyName'";
         $result = mysqli_query($con, $sqlEmailAndPassword);
         if(!$result) {
             $response["error"] = 'Error:'.mysqli_error($con);

@@ -18,7 +18,7 @@
                     <a class="nav-link position-relative" style="color:#2B5EA4;" href="admin_feedback_page.php">
                         Feedback 
                         <?php
-                            $fetchFeedbackStatus0 = mysqli_query($con, "SELECT * FROM feedback WHERE FeedbackStatus = 0");
+                            $fetchFeedbackStatus0 = mysqli_query($con, "SELECT * FROM feedback WHERE FeedbackStatus = 0 AND CompanyID = ".$_SESSION['companyID']."");
                             $numberGained = mysqli_num_rows($fetchFeedbackStatus0);
 
                             $gotnoti = '<span id="" class="position-absolute top-0 start-100 translate-middle badge bg-warning rounded-pill text-dark">'.$numberGained.'</span>';

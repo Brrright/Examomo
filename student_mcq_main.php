@@ -64,19 +64,18 @@
 
     <br>
     <div class="d-flex justify-content-evenly">
-        <div class="border border-3 rounded-pill main-color h3 p-2" id="timer"></div>
+        <div class="profilecontainer main-color h3 m-0 p-2" id="timer"></div>
         <h1 class="text-center" style="font-family: 'Caveat'; font-weight: bold; color: #2B5EA4;">Multiple Choice Question</h1>
         <div class="dropdown">
         <button type="button" class="btn btn-primary dropdown-toggle" id="addFB" data-bs-toggle="dropdown" aria-expanded="false" style="display:block; margin-right: 15%; margin-left:auto;">Add New Feedback</button>
-        <form class="dropdown-menu p-4 shadow p-3 mb-5" id="feedbackForm" aria-labelledby="addFB" style="width: 100%">
-        <!-- <form class="dropdown-menu p-4 shadow p-3 mb-5" action="student_feedback_insert_backend.php" method="POST" aria-labelledby="addFB" style="width: 60%"> -->
-            <input type="text" class="form-control shadow-sm" id="adm-floatingInput" name="content" placeholder="Enter feedback here..." required>
-            <br>
-            <div class= "d-flex flex-wrap justify-content-around">
-            <button type="submit" class="btn btn-primary" style="border:none;">Submit</button>
-            </div>
-        </form>
-    </div>
+            <form class="dropdown-menu p-4 shadow p-3 mb-5" id="feedbackForm" aria-labelledby="addFB" style="width: 100%">
+                <input type="text" class="form-control shadow-sm" id="adm-floatingInput" name="content" placeholder="Enter feedback here..." required>
+                <br>
+                <div class= "d-flex flex-wrap justify-content-around">
+                <button type="submit" class="btn btn-primary" style="border:none;">Submit</button>
+                </div>
+            </form>
+        </div>
     </div>
 
 <div class= "row" style="min-height: 450px; margin: auto;">
@@ -179,17 +178,78 @@
 
 <script src="js/mingliangJS.js"></script>
 <script>
+    var numOfSwitchTab = 0;
+    document.addEventListener("visibilitychange", function() {
+        // console.log(document.hidden);
+        if (document.visibilityState != "visible") {
+        numOfSwitchTab = numOfSwitchTab + 1;
+
+        if (numOfSwitchTab == 1){
+            console.log("1");
+            
+        }
+        else if (numOfSwitchTab == 2) {
+            console.log("2");
+        }
+        else if (numOfSwitchTab == 3) {
+            console.log("3");
+            const Toast = Swal.mixin({
+            toast: true,
+            position: 'bottom-end',
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+                toast.addEventListener('mouseenter', Swal.stopTimer)
+                toast.addEventListener('mouseleave', Swal.resumeTimer)
+            }
+            })
+
+            Toast.fire({
+            icon: 'warning',
+            title: 'Are you cheating?'
+            })
+        }
+        else if (numOfSwitchTab == 4) {
+            let timerInterval
+            Swal.fire({
+            icon: 'warning',
+            title: 'You break the rules!',
+            html: 'Find admin to activate your account again, Good Bye!.',
+            timer: 2000,
+            timerProgressBar: true,
+            didOpen: () => {
+                Swal.showLoading()
+                const b = Swal.getHtmlContainer().querySelector('b')
+                timerInterval = setInterval(() => {
+                b.textContent = Swal.getTimerLeft()
+                }, 100)
+            },
+            willClose: () => {
+                clearInterval(timerInterval)
+            }
+            }).then((result) => {
+            /* Read more about handling dismissals below */
+            if (result.dismiss === Swal.DismissReason.timer) {
+                window.location.href="logout.php"
+            }
+            })
+        }
+    }
+    });
+
     var countDownDate = <?php echo strtotime($examEndDate); ?> * 1000;
     //This is the get current time or change to get clicked
-    var Timernow = <?php echo time() ?> * 1000;
-    console.log(countDownDate + " " + Timernow);
     
     // Update the count down every 1 second
     var Timerinterval = setInterval(function() {
-        Timernow = Timernow + 1000;
+        var Timernow =  new Date().getTime();
+        console.log("end: " +countDownDate + ", now:" + Timernow);
+
         
         // Find the distance between now an the count down date
         var Timerdistance = countDownDate - Timernow;
+        Timerdistance = Timerdistance - 28800000;
         
         // Time calculations for days, hours, minutes and seconds
         var Timerdays = Math.floor(Timerdistance / (1000 * 60 * 60 * 24));
@@ -205,6 +265,28 @@
         if (Timerdistance < 0) {
             clearInterval(Timerinterval);
             document.getElementById("timer").innerHTML = "Time over";
+            let timerInterval
+            Swal.fire({
+            title: 'Time\'s up!',
+            html: 'Good job! I will close in <b></b> milliseconds.',
+            timer: 2000,
+            timerProgressBar: true,
+            didOpen: () => {
+                Swal.showLoading()
+                const b = Swal.getHtmlContainer().querySelector('b')
+                timerInterval = setInterval(() => {
+                b.textContent = Swal.getTimerLeft()
+                }, 100)
+            },
+            willClose: () => {
+                clearInterval(timerInterval)
+            }
+            }).then((result) => {
+            /* Read more about handling dismissals below */
+            if (result.dismiss === Swal.DismissReason.timer) {
+                window.location.href="student_exam_list.php"
+            }
+            })
         }
         
     }, 1000);
@@ -363,16 +445,6 @@
         updateTable(path, 'question-content');
     }
 
-</script>
-    
-<script>
-    var elems = document.getElementsByClassName('fin-mcq-confirm');
-    var confirmIt = function (e) {
-        if (!confirm('Are you sure to conclude paper questions? If you are not able to conclude it, please click the last question\'s button and click "save and finish" button')) e.preventDefault();
-    };
-    for (var i = 0, l = elems.length; i < l; i++) {
-        elems[i].addEventListener('click', confirmIt, false);
-    }
 </script>
 
 <!-- javascript to preview image -->
