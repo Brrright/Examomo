@@ -89,61 +89,61 @@ if ($_SESSION["userRole"] != "student") {
       </h2>
       <div id="panelsStayOpen-collapseFour" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingFour">
         <div class="accordion-body">
-        Students are not advisable to switch to other tabs during the examination process. This is because the system has an implementation whereby if a switch tab were to be detected in the process of the examination, it will give a warning to the user for the first time. If a second switch tab detection gets checked, the user will be forced to end their exams on the second detection and will have to get help from the admins through the use of the feedback function.
-        </div>
+        Students are not advisable to switch to other tabs during the examination process. This is because the system has an implementation whereby if a switch tab were to be detected in the process of the examination, it will give a warning to the user for the third attempt. If a fourth switch tab detection gets detected, the user will be forced to end their exams and will have their accounts banned.
       </div>
     </div>
     <div class="accordion-item">
       <h2 class="accordion-header" id="panelsStayOpen-headingFive">
-        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseFive" aria-expanded="false" aria-controls="panelsStayOpen-collapseFive">
-        5. How many attempts are available for each examination?
+        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseFive" aria-expanded="false" aria-controls="panelsStayOpen-collapseFour">
+        5. What happens if my account gets banned and how do I regain access?
         </button>
       </h2>
       <div id="panelsStayOpen-collapseFive" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingFive">
+        <div class="accordion-body">
+        Students who have their account banned will not be able to access the entire system. Students are required to contact their respective organization admin users to reactivate their account to gain access.
+        </div>
+      </div>
+    </div>
+    <div class="accordion-item">
+      <h2 class="accordion-header" id="panelsStayOpen-headingSix">
+        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseSix" aria-expanded="false" aria-controls="panelsStayOpen-collapseFive">
+        6. How many attempts are available for each examination?
+        </button>
+      </h2>
+      <div id="panelsStayOpen-collapseSix" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingSix">
         <div class="accordion-body">
         Students are able to attempt the exam any number of times as long as the exam is ongoing. If a student were to exit the exam too early before they wanted to, they can take same exam and all their answers will still be present and editable.
         </div>
       </div>
     </div>
     <div class="accordion-item">
-      <h2 class="accordion-header" id="panelsStayOpen-headingSix">
-        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseSix" aria-expanded="false" aria-controls="panelsStayOpen-collapseSix">
-        6. What can i do when i encounter problems during exam?
+      <h2 class="accordion-header" id="panelsStayOpen-headingSeven">
+        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseSeven" aria-expanded="false" aria-controls="panelsStayOpen-collapseSix">
+        7. What can i do when i encounter problems during exam?
         </button>
       </h2>
-      <div id="panelsStayOpen-collapseSix" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingSix">
+      <div id="panelsStayOpen-collapseSeven" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingSeven">
         <div class="accordion-body">
         The system will have a feedback function that is available for the students only. This function allows the students to communicate with the admin if there is any problems that they are facing when using the system. The students will only need to post their troubles to an admin and will get responses back in due time. These responses are all from admins and will not have an automatic responses built in. 
         </div>
       </div>
     </div>
     <div class="accordion-item">
-      <h2 class="accordion-header" id="panelsStayOpen-headingSeven">
-        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseSeven" aria-expanded="false" aria-controls="panelsStayOpen-collapseSeven">
-        7.What happens if my internet connection is disrupted during an examination?
+      <h2 class="accordion-header" id="panelsStayOpen-headingEight">
+        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseEight" aria-expanded="false" aria-controls="panelsStayOpen-collapseSeven">
+        8.What happens if my internet connection is disrupted during an examination?
         </button>
       </h2>
-      <div id="panelsStayOpen-collapseSeven" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingSeven">
+      <div id="panelsStayOpen-collapseEight" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingEight">
         <div class="accordion-body">
         If the student’s internet connection were to be disrupted during the examination, we have a save feature where by a student’s answer will be saved every time they change questions. For example, after finishing question 1 and clicking next to question 2, the question 1’s answer will be saved to the database. Unfortunately, the timer for the examination will still proceed even though disconnection happened.
         </div>
       </div>
     </div>
     <div class="accordion-item">
-      <h2 class="accordion-header" id="panelsStayOpen-headingEight">
-        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseEight" aria-expanded="false" aria-controls="panelsStayOpen-collapseEight">
-        8. Can i reschedule my exam?      </button>
-      </h2>
-      <div id="panelsStayOpen-collapseEight" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingEight">
-        <div class="accordion-body">
-        As a student, you are not able to reschedule any examination by yourself. The examinations are all set by time and are only changeable if the lecturer choose to. Only by contacting with your lecturer can a student request the change of time for any exam.
-        </div>
-      </div>
-    </div>
-    <div class="accordion-item">
       <h2 class="accordion-header" id="panelsStayOpen-headingNine">
-        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseNine" aria-expanded="false" aria-controls="panelsStayOpen-collapseNine">
-        9. What happens if i were to miss an exam?      </button>
+        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseNine" aria-expanded="false" aria-controls="panelsStayOpen-collapseEight">
+        9. Can i reschedule my exam?      </button>
       </h2>
       <div id="panelsStayOpen-collapseNine" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingNine">
         <div class="accordion-body">
@@ -153,10 +153,21 @@ if ($_SESSION["userRole"] != "student") {
     </div>
     <div class="accordion-item">
       <h2 class="accordion-header" id="panelsStayOpen-headingTen">
-        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTen" aria-expanded="false" aria-controls="panelsStayOpen-collapseTen">
-        10. When can i receive my results after taking an exam?    </button>
+        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTen" aria-expanded="false" aria-controls="panelsStayOpen-collapseNine">
+        10. What happens if i were to miss an exam?      </button>
       </h2>
       <div id="panelsStayOpen-collapseTen" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingTen">
+        <div class="accordion-body">
+        As a student, you are not able to reschedule any examination by yourself. The examinations are all set by time and are only changeable if the lecturer choose to. Only by contacting with your lecturer can a student request the change of time for any exam.
+        </div>
+      </div>
+    </div>
+    <div class="accordion-item">
+      <h2 class="accordion-header" id="panelsStayOpen-headingEleven">
+        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseEleven" aria-expanded="false" aria-controls="panelsStayOpen-collapseTen">
+        11. When can i receive my results after taking an exam?    </button>
+      </h2>
+      <div id="panelsStayOpen-collapseEleven" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingEleven">
         <div class="accordion-body">
         There are two types of results:
   a.	For MCQ or objective only exams, the results will be immediate, and you can straight view it after your done with any MCQ examinations.
@@ -164,6 +175,7 @@ if ($_SESSION["userRole"] != "student") {
       </div>
     </div>
   </div>
+</div>
 </div>
 
 <?php require "common/footer_student.php"?>

@@ -21,9 +21,8 @@
                     <a class="nav-link" style="color:#2B5EA4;" href="lecturer_exampaper_page.php"><i class="bi bi-newspaper"></i> Manage Exam Paper</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link position-relative me-3" style="color:#2B5EA4;" href="lecturer_completed_exam_list">
+                    <a class="nav-link position-relative" style="color:#2B5EA4;" href="lecturer_completed_exam_list">
                         Paper to be mark
-                        <span id="" class="position-absolute top-0 start-100 translate-middle badge bg-warning rounded-pill text-dark">1</span>
                     </a>
                 </li>
                 <li class="nav-item">

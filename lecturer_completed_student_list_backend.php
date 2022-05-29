@@ -45,7 +45,7 @@
                     <td>'.$data["ClassName"].'</td>
                     <td>'.$data["PaperName"].'</td>
                     <td>'.$data["ModuleName"].'</td>
-                    <td> <a href="#" class="stubtn">View</a></td>
+                    <td> <a href="lecturer_marking_main.php?id='.$p_id.'" class="stubtn">View</a></td>
                 </tr>';
         echo $row;
     }

@@ -157,7 +157,7 @@
                             
                             $diffre = timeDiff($start, $end);
                             $value = durationformater($diffre);
-                            echo '<div class="main-bg-color p-3 m-0 text-white shadow p-3" style="border-radius:15px;">
+                            echo '<div class="main-bg-color p-3 m-0 text-white shadow" style="border-radius:15px;">
                             <table style="width:100%;height:80%;">
                             <tr>
                                 <th>Name</th>

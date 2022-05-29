@@ -10,9 +10,9 @@ if ($_SESSION["userRole"] != "student") {
   window.location.href="guest_home_page.php";</script>';
 }
 
-$req = "SELECT * FROM (((module 
-INNER JOIN student ON module.CompanyID = student.CompanyID) 
-INNER JOIN exam ON module.ModuleID = exam.ModuleID)
+$req = "SELECT * FROM (((exam_class 
+INNER JOIN student ON exam_class.ClassID = student.ClassID) 
+INNER JOIN exam ON exam_class.ExamID = exam.ExamID)
 INNER JOIN exam_paper ON exam.PaperID = exam_paper.PaperID) 
 WHERE StudentID =".$_SESSION['userID']." AND exam.isPublished = 1 ORDER BY exam.ExamEndDateTime DESC";
 $fetched = mysqli_query($con,$req);

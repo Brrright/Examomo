@@ -22,36 +22,31 @@
     $examquery = mysqli_query($con, $fetchexam);
     $examrow = mysqli_num_rows($examquery);
 
-    $req = "SELECT * FROM student
+    $req = "SELECT * FROM student 
+            -- INNER JOIN class ON student.ClassID = class.ClassID
             INNER JOIN result ON student.StudentID = result.StudentID
+            -- INNER JOIN question_multiple_choice ON question_multiple_choice.PaperID = result.PaperID
+            -- INNER JOIN question_structure ON question_structure.PaperID = result.PaperID
             WHERE student.StudentID = ".$_SESSION['userID']."";
-
-    $resultfetched = mysqli_query($con,$req);
-    $resultnumber = mysqli_num_rows($resultfetched);
-    
-?>
-<?php
-    $examlist = "SELECT * FROM student 
-                INNER JOIN result ON student.StudentID = result.StudentID
-                WHERE student.StudentID = ".$_SESSION['userID']."";
 
     $resultfetched = mysqli_query($con,$req);
     $resultnumber = mysqli_num_rows($resultfetched);
 
     if ($resultnumber === 0) {
-        echo 'No Results Found';
+        echo 0;
     }
     else{
         while ($resultrow = mysqli_fetch_array($resultfetched)){
             $totalmark = $resultrow['TotalMark'];
+            
             $marks[] = $totalmark;
         }
         
         $averagemark = array_sum($marks)/$resultnumber;
-        
-        $piemark = $averagemark*1.8;
-    } 
+            
+        $piemark = $averagemark*1.8;}
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -88,13 +83,12 @@
     <div class="profilecontainer my-4 shadow p-2 mb-5">
         <div class="container" style="border-radius:15px;">
             <?php 
-                $req = "SELECT StudentName FROM student 
-                INNER JOIN result ON student.StudentID = result.StudentID
-                WHERE student.StudentID = ".$_SESSION['userID']."";
+                $req2 = "SELECT StudentName FROM student 
+                WHERE StudentID = ".$_SESSION['userID']."";
 
-                $resultfetched = mysqli_query($con,$req);
-                $resultnumber = mysqli_num_rows($resultfetched);
-                $resultrow = mysqli_fetch_array($resultfetched);
+                $resultfetched2 = mysqli_query($con,$req2);
+                $resultnumber = mysqli_num_rows($resultfetched2);
+                $resultrow = mysqli_fetch_array($resultfetched2);
                 
                 $test = '<center>
                             <p class="fs-3 main-color m-0 " style="font-family:Poppins;">'.$resultrow["StudentName"].' - Results Page</p>
@@ -113,10 +107,13 @@
                 <?php
                     $fetching = "SELECT * FROM result INNER JOIN exam ON result.ExamID =  exam.ExamID WHERE result.StudentID = ".$_SESSION['userID']."";
                     $resultquery = mysqli_query($con, $fetching);
-
+                    $resultnumber2 = mysqli_num_rows($resultquery);
+                    if ($resultnumber2 === 0) {
+                        echo '<center><p class="fs-5 m-0" style="font-family:Poppins; color:black;">No Results Found...</p></center>';
+                    }
                         while ($result = mysqli_fetch_array($resultquery)){
-                            $resultlist = '<div class="pill-nav">
-                                <a class="active fs-4" style="font-family:Poppins;">'.$result["ExamName"].' - '.$result["TotalMark"].'%</a>
+                            $resultlist = '<div class="profilecontainer m-1 p-1" style="background-color:#2B5EA4;">
+                            <span class="fs-4 m-1" style="font-family:Poppins;color:white;">'.$result["ExamName"].'</span><span class="profilecontainer main-color p-1 m-0 fs-4" style="font-family:Poppins;float:right;">'.$result["TotalMark"].'%</span>
                             </div>';
                             echo $resultlist;
                             }
@@ -135,14 +132,13 @@
                                             <div class="mask full">
                                                 <div class="fill"></div>
                                             </div>
-                                        
                                             <div class="mask half">
                                                 <div class="fill"></div>
                                             </div>
-                                        
                                             <div class="inside-circle">
-                                                <span class="count" style="font-family:Poppins;"><?php echo $averagemark?></span>
-                                                <span class="count2" style="font-family:Poppins;">%</span>
+                                                <span class="count" style="font-family:Poppins;">
+                                                <?php echo $averagemark?>%
+                                                </span>
                                             </div>
 
                                         </div>       
@@ -173,16 +169,3 @@
     <?php require "common/footer_student.php";?>
 </body>
 </html>
-<script>
-    $('.count').each(function () {
-        $(this).prop('Counter',0).animate({
-            Counter: $(this).text()
-        }, {
-            duration: 4000,
-            easing: 'swing',
-            step: function (now) {
-                $(this).text(Math.ceil(now));
-            }
-        });
-    });
-</script>

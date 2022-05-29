@@ -7,6 +7,7 @@
     <?php 
         require "common/HeadImportInfo.php";
     ?>
+    <link rel="stylesheet" href="css/weestyle.css">
     <link rel="stylesheet" href="css/commonCSS.css">
     <link rel="stylesheet" href="css/mingliangCSS.css">
 
@@ -15,9 +16,6 @@
 <body>
     <?php 
         require "common/header_guest.php";
-        // require "common/header_admin.php";
-        // require "common/header_lecturer.php";
-        // require "common/header_student.php";
     ?>
     <br>
     <section class="section-full" style="min-height:80vh;">
@@ -28,9 +26,9 @@
                 <p class="text-justify pb-5" style="font-size:20px;">is an online examination platform that ensures the honesty of students’ work while providing the necessary functions to conduct examinations and sufficient quality-of-life features for the students. </p>
             </div>
             <div class="d-flex flex-column justify-content-center align-content-center mt-3 mb-3 p-3" style="width:300px; height:auto;">
-                <a class="btn btn-primary main-bg-color text-white mb-5 fs-3" href="guest_registration_page.php">Get Started!</a>
+                <a class="colorbtn btn text-white mb-5 fs-3" href="guest_registration_page.php">Get Started!</a>
                 <div class="btn-group">
-                    <button  class="btn btn-primary main-bg-color text-white dropdown-toggle fs-3"  data-bs-toggle="dropdown">
+                    <button  class="colorbtn btn text-white dropdown-toggle fs-3"  data-bs-toggle="dropdown">
                         <span style="width:30px; height:30px" class="bi bi-person-circle"></span>
                         Login as
                     </button>
@@ -150,7 +148,7 @@
     </section>
     <div class="d-flex justify-content-around align-items-center " style="margin:50px;">
         <h2 class="font-caveat"><b>Create your own company account</b></h2>
-        <a href="guest_registration_page.php" class="btn btn-primary main-bg-color  font-caveat fs-3 rounded-pill btn-hover" style="width:200px;">Get Started  <i class="ms-2 btn-hover bi bi-arrow-right-circle"></i> </a>
+        <a href="guest_registration_page.php" class="btn btn-primary main-bg-color colorbtn font-caveat fs-3 rounded-pill btn-hover" style="width:200px;">Get Started  <i class="ms-2 btn-hover bi bi-arrow-right-circle"></i> </a>
     </div>
     <?php 
         require "common/footer_guest.php";

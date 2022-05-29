@@ -19,7 +19,7 @@
 
 
   // sql for student details who took exam
-  $studentfetch= "SELECT student.StudentID, student.StudentName, student.StudentEmail, class.ClassName, class.ClassID, exam_paper.PaperName, module.ModuleName
+  $studentfetch= "SELECT student.StudentID, student.StudentName, student.StudentEmail, class.ClassName, class.ClassID, exam_paper.PaperID, exam_paper.PaperName, module.ModuleName
                   FROM exam 
                   INNER JOIN student ON student.CompanyID = exam.CompanyID
                   INNER JOIN exam_class ON exam_class.ExamID = exam.ExamID
@@ -84,7 +84,7 @@
                       <td>'.$data2["ClassName"].'</td>
                       <td>'.$data2["PaperName"].'</td>
                       <td>'.$data2["ModuleName"].'</td>
-                      <td> <a href="#" class="stubtn">View</a></td>
+                      <td> <a href="lecturer_marking_main.php?id='.$data2["PaperID"].'&stuid='.$data2['StudentID'].'" class="stubtn">View</a></td>
                     </tr>';
                   echo $row;
             }

@@ -66,7 +66,23 @@
 
     <br>
     <div class="d-flex justify-content-evenly">
-        <div class="profilecontainer main-color h3 m-0 p-2" id="timer"></div>
+        <div class="profilecontainer main-color h3 m-0 p-2" id="timer"><div class="spinner-grow text-primary" role="status">
+  <span class="visually-hidden">Loading...</span>
+</div>
+<div class="spinner-grow text-secondary" role="status">
+  <span class="visually-hidden">Loading...</span>
+</div>
+<div class="spinner-grow text-success" role="status">
+  <span class="visually-hidden">Loading...</span>
+</div>
+<div class="spinner-grow text-danger" role="status">
+  <span class="visually-hidden">Loading...</span>
+</div>
+<div class="spinner-grow text-warning" role="status">
+  <span class="visually-hidden">Loading...</span>
+</div>
+
+</div>
         <h1 class="text-center" style="font-family: 'Caveat'; font-weight: bold; color: #2B5EA4;">Structure Question</h1>
         <div class="dropdown">
             <button type="button" class="btn btn-primary dropdown-toggle" id="addnewFB" data-bs-toggle="dropdown" aria-expanded="false" style="display:block; margin-right: 15%; margin-left:auto;">Add New Feedback</button>
@@ -154,6 +170,48 @@
 <script src="js/mingliangJS.js"></script>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script>
+        window.addEventListener("load", onloadAgreement) 
+        async function onloadAgreement(){
+            const { value: accept } = await Swal.fire({
+            title: 'Honesty is the best policy',
+            input: 'checkbox',
+            imageUrl: 'img/lecturer/exampaper.jpg',
+            imageWidth: 400,
+            imageHeight: 200,
+            imageAlt: 'Custom image',
+            imageAlt: 'Custom image',
+            showClass: {
+                popup: 'animate__animated animate__fadeInDown'
+            },
+            hideClass: {
+                popup: 'animate__animated animate__fadeOutUp'
+            },
+            inputValue: 1,
+            inputPlaceholder:
+                'I understand and wish to continue',
+            confirmButtonText:
+                'Continue <i class="fa fa-arrow-right"></i>',
+            inputValidator: (result) => {
+                return !result && 'You need to agree in order to take the exam.'
+            }
+            })
+
+            if (accept) {
+                let timerInterval
+            Swal.fire({
+                title: 'Goodluck with your exam :)',
+                timer: 1000,
+                timerProgressBar: true,
+                didOpen: () => {
+                    Swal.showLoading()
+                },
+                willClose: () => {
+                    clearInterval(timerInterval)
+                }
+            })
+            }
+        }
+
     var numOfSwitchTab = 0;
     document.addEventListener("visibilitychange", function() {
         // console.log(document.hidden);
