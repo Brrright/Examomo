@@ -102,7 +102,7 @@
     <div class="container" style="width:85%; height:80%;">
         <div class="row">
             <div class="col-xl-6 mx-auto">
-                <div class="card p-3 shadow p-3 mb-5" style="height:100%;">
+                <div class="card p-3 shadow p-3 mb-5" style="height:100%; overflow: scroll;">
                     <center><p class="fs-3 main-color m-0" style="font-family:Poppins;">Exam Results</p></center>
                 <?php
                     $fetching = "SELECT * FROM result INNER JOIN exam ON result.ExamID =  exam.ExamID WHERE result.StudentID = ".$_SESSION['userID']."";
@@ -137,7 +137,7 @@
                                             </div>
                                             <div class="inside-circle">
                                                 <span class="count" style="font-family:Poppins;">
-                                                <?php echo(round($averagemark,2))?>%
+                                                <?php echo(round($averagemark,2));?>%
                                                 </span>
                                             </div>
 
@@ -153,7 +153,7 @@
                                 <path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
                                 </defs>
                                 <g class="parallax">
-                                <use xlink:href="#gentle-wave" x="48" y="0" fill="rgba(255,255,255,0.7" />
+                                <use xlink:href="#gentle-wave" x="48" y="0" fill="rgba(255,255,255,0.7)" />
                                 <use xlink:href="#gentle-wave" x="48" y="2" fill="rgba(255,255,255,0.5)" />
                                 <use xlink:href="#gentle-wave" x="48" y="4" fill="rgba(255,255,255,0.3)" />
                                 <use xlink:href="#gentle-wave" x="48" y="6" fill="#fff" />
