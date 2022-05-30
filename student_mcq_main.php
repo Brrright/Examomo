@@ -22,6 +22,7 @@
 
 
         // get paper id after exam paper creation
+        $examID = $_GET['eid'];
         $paperid = $_GET['id'];
         $sql = "SELECT * FROM question_multiple_choice WHERE PaperID = $paperid";
         $sql2 = "SELECT * FROM question_multiple_choice WHERE PaperID = $paperid";
@@ -100,6 +101,8 @@
     <div class="col-xl-7">
         <form class="was-validated" id="questionFormID">
             <div class="bg d-flex mx-auto flex-column p-5 m-5 shadow p-3 mb-5" style="background-color: white; width: 90%; border-radius: 10px;">
+                <input type="hidden" name="exam_id" value="<?php echo $examID;?>">
+
                 <div id="question-content">
                     <!-- --------------------------------------------------------------------- -->
                     <p class="fs-2 fw-bold p-3" style="color: #2B5EA4;" id="no-submit">
@@ -225,7 +228,7 @@
                 let timerInterval
             Swal.fire({
                 title: 'Goodluck with your exam :)',
-                timer: 1000,
+                timer: 500,
                 timerProgressBar: true,
                 didOpen: () => {
                     Swal.showLoading()
@@ -321,6 +324,28 @@
         if (Timerdistance < 0) {
             clearInterval(Timerinterval);
             document.getElementById("timer").innerHTML = "Time over";
+            let timerInterval
+            Swal.fire({
+            title: 'Time\'s up!',
+            html: 'Good job! I will close in <b></b> milliseconds.',
+            timer: 2000,
+            timerProgressBar: true,
+            didOpen: () => {
+                Swal.showLoading()
+                const b = Swal.getHtmlContainer().querySelector('b')
+                timerInterval = setInterval(() => {
+                b.textContent = Swal.getTimerLeft()
+                }, 100)
+            },
+            willClose: () => {
+                clearInterval(timerInterval)
+            }
+            }).then((result) => {
+            /* Read more about handling dismissals below */
+            if (result.dismiss === Swal.DismissReason.timer) {
+                window.location.href="student_exam_list.php"
+            }
+            })
         }
         
     }, 1000);
@@ -458,9 +483,11 @@
             })
             .then(function(response) {
                 if(!response.error) {
+                    // console.log(response)
                     window.location.href="student_exam_list.php";
                 }
                 else if(response.error == 0) {
+                    // console.log(response)
                     window.location.href="student_exam_list.php";
                 }
                 else {

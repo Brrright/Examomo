@@ -84,7 +84,7 @@
                       <td>'.$data2["ClassName"].'</td>
                       <td>'.$data2["PaperName"].'</td>
                       <td>'.$data2["ModuleName"].'</td>
-                      <td> <a href="lecturer_marking_main.php?id='.$data2["PaperID"].'&stuid='.$data2['StudentID'].'" class="stubtn">View</a></td>
+                      <td> <a href="lecturer_marking_main.php?id='.$data2["PaperID"].'&stuid='.$data2['StudentID'].'&eid='.$_GET['id'].'" class="stubtn">View</a></td>
                     </tr>';
                   echo $row;
             }

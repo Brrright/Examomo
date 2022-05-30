@@ -200,7 +200,7 @@
                 let timerInterval
             Swal.fire({
                 title: 'Goodluck with your exam :)',
-                timer: 1000,
+                timer: 500,
                 timerProgressBar: true,
                 didOpen: () => {
                     Swal.showLoading()

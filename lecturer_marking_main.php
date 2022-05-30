@@ -58,6 +58,7 @@
         <!-- panel for question creation form -->
         <div class="col-xl-7">
             <form class="was-validated" id="questionFormID">
+                <input type="hidden" name="eid" value="<?php echo $_GET["eid"]?>">
                 <div class="bg d-flex mx-auto flex-column p-5 m-5 shadow p-3 mb-5" style="background-color: white; width: 90%; border-radius: 10px;">
                     <div id="question-content">
                         <!-- --------------------------------------------------------------------- -->
@@ -232,10 +233,12 @@
             })
             .then(function(response) {
                 if(!response.error) {
-                    window.location.href="lecturer_completed_exam_list.php";
+                    console.log(response)
+                    // window.location.href="lecturer_completed_exam_list.php";
                 }
                 else if(response.error == 0) {
-                    window.location.href="lecturer_completed_exam_list.php";
+                    console.log(response)
+                    // window.location.href="lecturer_completed_exam_list.php";
                 }
                 else {
                     console.log(response.error)

@@ -137,7 +137,7 @@
                                             </div>
                                             <div class="inside-circle">
                                                 <span class="count" style="font-family:Poppins;">
-                                                <?php echo $averagemark?>%
+                                                <?php echo(round($averagemark,2))?>%
                                                 </span>
                                             </div>
 

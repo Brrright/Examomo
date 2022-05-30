@@ -31,6 +31,7 @@
     $PaperID = $body['paper_id'];
     $questionID = $body['question_id'];
     $studentanswer = $body['mcq_answer'];
+    $ExamID = $body["exam_id"];
 
 
     $wronganswer = 0;
@@ -38,7 +39,7 @@
     $answersql ="SELECT question_multiple_choice.Mark, question_multiple_choice.CorrectAnswer, exam.ExamID
                 FROM question_multiple_choice
                 INNER JOIN exam ON question_multiple_choice.PaperID = exam.PaperID
-                WHERE question_multiple_choice.MQuestionID = ".$questionID." AND question_multiple_choice.PaperID = ".$PaperID."";
+                WHERE question_multiple_choice.MQuestionID = ".$questionID." AND question_multiple_choice.PaperID = ".$PaperID." AND exam.ExamID = ".$ExamID."";
 
     $answerquery = mysqli_query($con, $answersql);
     if(!$answerquery) {
@@ -50,7 +51,6 @@
     $answerrow = mysqli_fetch_array($answerquery);
     $correct = $answerrow['CorrectAnswer'];
     $marks = $answerrow['Mark'];
-    $examid = $answerrow['ExamID'];
 
     $existsql ="SELECT * FROM student_answer
                 WHERE MQuestionID = $questionID AND StudentID = $studentID";
@@ -70,7 +70,7 @@
         if ($studentanswer == $correct){
             $sqlcorrect ="INSERT INTO student_answer 
                         (Answer, markReceived, MQuestionID, SQuestionID, StudentID, LecturerID, CompanyID, ExamID, PaperID)
-                        VALUES ('$studentanswer', '$marks', '$questionID', NULL, '$studentID', NULL, '$companyID', '$examid', '$PaperID')";
+                        VALUES ('$studentanswer', '$marks', '$questionID', NULL, '$studentID', NULL, '$companyID', '$ExamID', '$PaperID')";
 
             // error message when no query found
             $resultcorrect = mysqli_query($con, $sqlcorrect);
@@ -84,7 +84,7 @@
         else {
             $sqlwrong ="INSERT INTO student_answer 
                         (Answer, markReceived, MQuestionID, SQuestionID, StudentID, LecturerID, CompanyID, ExamID, PaperID)
-                        VALUES ('$studentanswer', '$wronganswer', '$questionID', NULL, '$studentID', NULL, '$companyID', '$examid', '$PaperID')";
+                        VALUES ('$studentanswer', '$wronganswer', '$questionID', NULL, '$studentID', NULL, '$companyID', '$ExamID', '$PaperID')";
 
             // error message when no query found
             $resultwrong = mysqli_query($con, $sqlwrong);
@@ -106,7 +106,7 @@
                         SQuestionID = NULL,
                         LecturerID = NULL,
                         CompanyID = $companyID,
-                        ExamID = $examid,
+                        ExamID = $ExamID,
                         PaperID = $PaperID
                         WHERE MQuestionID = $questionID AND StudentID = $studentID";
 
@@ -126,7 +126,7 @@
                         SQuestionID = NULL,
                         LecturerID = NULL,
                         CompanyID = $companyID,
-                        ExamID = $examid,
+                        ExamID = $ExamID,
                         PaperID = $PaperID
                         WHERE MQuestionID = $questionID AND StudentID = $studentID";
 
@@ -140,29 +140,47 @@
         }
     }
     
+    //-----------------------------------
     // get total marks from student answer
-    $answerexistsql ="SELECT SUM(markReceived) FROM student_answer 
-                WHERE PaperID = $PaperID AND StudentID = $studentID AND ExamID = $examid";
+    $answerexistsql ="SELECT SUM(markReceived) AS totalMarkReceived FROM student_answer 
+                WHERE PaperID = $PaperID AND StudentID = $studentID AND ExamID = $ExamID";
     $answerexistquery = mysqli_query($con, $answerexistsql);
 
     $marksarray = mysqli_fetch_array($answerexistquery);
-    $totalmark = $marksarray[0];
+    $markReceived = $marksarray["totalMarkReceived"];
 
 
     // check if result record exist
     $checkresultsql ="SELECT * FROM result
-                        WHERE PaperID = $PaperID AND StudentID = $studentID AND ExamID = $examid";
+                        WHERE PaperID = $PaperID AND StudentID = $studentID AND ExamID = $ExamID";
     $checkresultquery = mysqli_query($con, $checkresultsql);
 
     $numOfExisting = mysqli_num_rows($checkresultquery);
     
 
+    //get total mark specified by the lecturer
+    $getAllMark = mysqli_query($con, "SELECT Mark FROM question_multiple_choice WHERE PaperID = $PaperID");
+    if(!$getAllMark) {
+        $response["error"] = 'Error occured when getting marks from mcq table:'.mysqli_error($con);
+        echo json_encode($response);
+        return;
+    }
+    $totalMarkOfPaper = 0;
+    while($dataOfMark = mysqli_fetch_array($getAllMark)) {
+        $totalMarkOfPaper = $totalMarkOfPaper + intval($dataOfMark["Mark"]);
+    }
+    $totalmark = ($markReceived/$totalMarkOfPaper)*100;
+    $response["markReceived"] = $markReceived;
+
+    $response["totalMarkOfPaper"] = $totalMarkOfPaper;
+    $response["total_mark"] = $totalmark;
+    
     // insert new result record
     if ($numOfExisting == 0) {
 
         $sqlresults ="INSERT INTO result 
                     (TotalMark, PaperID, CompanyID, StudentID, ExamID)
-                    VALUES ('$totalmark', '$PaperID', '$companyID', '$studentID', '$examid')";
+                    VALUES ('$totalmark', '$PaperID', '$companyID', '$studentID', '$ExamID')";
 
         // error message when no query found
         $resultquery = mysqli_query($con, $sqlresults);
@@ -178,7 +196,7 @@
         $updateresultsql ="UPDATE result SET
                         TotalMark = '$totalmark',
                         CompanyID = $companyID
-                        WHERE PaperID = $PaperID AND StudentID = $studentID AND ExamID = $examid";
+                        WHERE PaperID = $PaperID AND StudentID = $studentID AND ExamID = $ExamID";
 
         // error message when no query found
         $resultquery2 = mysqli_query($con, $updateresultsql);

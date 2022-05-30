@@ -40,7 +40,7 @@ $studentprofileresult = mysqli_query($con, $studentsql);
         <h6 class="text-uppercase fw-bold m-2">  
           Student Email  : '.$studentprofile["StudentEmail"].'</h6>
         <h6 class="text-uppercase fw-bold m-2">
-          Student Password  : '.$studentprofile["StudentPassword"].'</h6>
+          Student Password  : ••••••••</h6>
         <h6 class="text-uppercase fw-bold m-2">
           Student Class Name  : '.$studentprofile["ClassName"].'</h6>
         <h6 class="text-uppercase fw-bold m-2">

@@ -218,7 +218,7 @@
                         
                         $averagemark = array_sum($marks)/$resultnumber;
                         $resultpanel = '<p class="fs-3 text-center" style="color:white;font-family:Poppins;"">
-                        Your Exam Performance<br><span>'.$averagemark.'%</span></p>';
+                        Your Exam Performance<br><span>'.round($averagemark,2).'%</span></p>';
 
                         echo $resultpanel;
                         
@@ -257,7 +257,7 @@
                     if ($resultnumber === 0) {
                         echo 0;
                     }
-                    else{echo $averagemark;}?>%;">
+                    else{echo(round($averagemark,2));}?>%;">
                     </div>
                 </div>
                 </a>
