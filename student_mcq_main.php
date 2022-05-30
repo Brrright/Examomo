@@ -41,7 +41,7 @@
         $rowcount = mysqli_num_rows($result);
 
         $sql3 = "SELECT exam.ExamEndDateTime FROM question_multiple_choice 
-                INNER JOIN exam ON question_multiple_choice.PaperID = exam.PaperID WHERE question_multiple_choice.PaperID = $paperid  AND exam.isPublished = 1";
+                INNER JOIN exam ON question_multiple_choice.PaperID = exam.PaperID WHERE question_multiple_choice.PaperID = $paperid  AND exam.isPublished = 1 AND exam.ExamID = $examID";
 
         $sqlquery = mysqli_query($con,$sql3);
         if(!$sqlquery) {
@@ -50,8 +50,6 @@
 
         $examDetails = mysqli_fetch_array($sqlquery);
         $examEndDate = $examDetails["ExamEndDateTime"];
-        // echo $examEndDate;
-
     ?>
     <link rel="stylesheet" href="css/weestyle.css">
     <link rel="stylesheet" href="css/bryanCSS.css">
@@ -300,15 +298,16 @@
 
     var countDownDate = <?php echo strtotime($examEndDate); ?> * 1000;
     //This is the get current time or change to get clicked
-    var Timernow = <?php echo time() ?> * 1000;
-    console.log(countDownDate + " " + Timernow);
     
     // Update the count down every 1 second
     var Timerinterval = setInterval(function() {
-        Timernow = Timernow + 1000;
+        var Timernow =  new Date().getTime();
+        // console.log("end: " +countDownDate + ", now:" + Timernow);
+
         
         // Find the distance between now an the count down date
         var Timerdistance = countDownDate - Timernow;
+        Timerdistance = Timerdistance - 28800000;
         
         // Time calculations for days, hours, minutes and seconds
         var Timerdays = Math.floor(Timerdistance / (1000 * 60 * 60 * 24));

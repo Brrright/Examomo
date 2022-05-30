@@ -50,7 +50,7 @@
                 </p>
                 <div class="form-floating">
                     <input type="text" class="form-control shadow-sm sec-template" id="comNameInput" name="company_name" placeholder="Organization Name" pattern="[a-zA-Z][a-zA-Z ]{5,}" required>
-                    <label class="text-secondary" for="comNameInput">Organizaiton Name</label>
+                    <label class="text-secondary" for="comNameInput">Organization Name</label>
                     <div class="valid-feedback">Valid <i class="bi bi-check2-circle"></i>.</div>
                     <div class="invalid-feedback">Please fill out this field with valid input.</div>
                 </div>
