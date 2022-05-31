@@ -1,14 +1,15 @@
 <?php
   require "common/conn.php";
-  if (!isset($_SESSION["userID"])) {
-    echo '<script>alert("Please login before you access this page.");
-    window.location.href="guest_home_page.php";</script>';
-  }
+     // identify if user logged in
+     if (!isset($_SESSION["userID"])) {
+        echo '<script>alert("Please login before you access this page.");
+        window.location.href="logout.php";</script>';
+    }
 
-  if ($_SESSION["userRole"] != "lecturer") {
-    echo '<script>alert("You have not access to this page.");
-    window.location.href="guest_home_page.php";</script>';
-  }
+    if ($_SESSION["userRole"] != "lecturer") {
+        echo '<script>alert("You have no access to this page.");
+        window.location.href="logout.php";</script>';
+    }
   $fetched = mysqli_query($con, "SELECT * FROM exam WHERE CompanyID = ".$_SESSION['companyID']." AND LecturerID = ".$_SESSION['userID']." AND ExamEndDateTime < curtime()");
   $numOfRow = mysqli_num_rows($fetched);
 
@@ -103,7 +104,7 @@
         </div>
     </div>
         <div class="profilecontainer my-4 shadow p-3 mb-5">
-          <table class="table table-hover mx-auto align-middle" style="width:95%;" id="table-app">
+          <table class="table table-hover table-striped mx-auto align-middle" style="width:95%;" id="table-app">
                       <caption>List of Completed Exams : <?php echo $numOfRow;?> in Total (all record)</caption>
                       <thead>
                           <tr>

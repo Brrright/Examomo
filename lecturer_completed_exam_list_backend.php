@@ -4,12 +4,12 @@
     // identify if user logged in
     if (!isset($_SESSION["userID"])) {
         echo '<script>alert("Please login before you access this page.");
-        window.location.href="guest_home_page.php";</script>';
+        window.location.href="logout.php";</script>';
     }
 
     if ($_SESSION["userRole"] != "lecturer") {
         echo '<script>alert("You have no access to this page.");
-        window.location.href="guest_home_page.php";</script>';
+        window.location.href="logout.php";</script>';
     }
 
     function timeDiff($firstTime,$lastTime){
@@ -77,7 +77,7 @@
     if(isset($_GET['exam_name'])) {
         $exam_name = $_GET['exam_name'];
     }
-    $fetched = mysqli_query($con, "SELECT * FROM exam WHERE CompanyID = ".$_SESSION['companyID']." AND LecturerID = ".$_SESSION['userID']." AND ExamEndDateTime > curtime() AND ExamName LIKE'%$exam_name%'");
+    $fetched = mysqli_query($con, "SELECT * FROM exam WHERE CompanyID = ".$_SESSION['companyID']." AND LecturerID = ".$_SESSION['userID']." AND ExamEndDateTime < curtime() AND ExamName LIKE'%$exam_name%'");
     $numOfRow = mysqli_num_rows($fetched);
     if ($numOfRow === 0) {
         echo '<tr>

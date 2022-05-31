@@ -7,11 +7,11 @@
     }
     // if (!isset($_SESSION["userID"])) {
     //     echo '<script>alert("Please login before you access this page.");
-    //     window.location.href="guest_home_page.php";</script>';
+    //     window.location.href="logout.php";</script>';
     // }
     // if ($_SESSION["userRole"] != "student") {
     //     echo '<script>alert("You have no access to this page.");
-    //     window.location.href="guest_home_page.php";</script>';
+    //     window.location.href="logout.php";</script>';
     // }
 
     require("common/conn.php");

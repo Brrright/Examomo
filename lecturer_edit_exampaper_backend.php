@@ -2,6 +2,17 @@
 
     require "common/conn.php";
 
+        // identify if user logged in
+        if (!isset($_SESSION["userID"])) {
+            echo '<script>alert("Please login before you access this page.");
+            window.location.href="logout.php";</script>';
+        }
+    
+        if ($_SESSION["userRole"] != "lecturer") {
+            echo '<script>alert("You have no access to this page.");
+            window.location.href="logout.php";</script>';
+        }
+
     // pass lecturer id and submission status
     $id = $_SESSION['userID'];
     $submit = $_POST['submit'];

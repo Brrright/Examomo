@@ -6,17 +6,15 @@
     return;
   }
 
-  // identify if user logged in
-  if (!isset($_SESSION["userID"])) {
+    // identify if user logged in
+    if (!isset($_SESSION["userID"])) {
       echo '<script>alert("Please login before you access this page.");
-      window.location.href="guest_home_page.php";</script>';
-      return;
+      window.location.href="logout.php";</script>';
   }
 
   if ($_SESSION["userRole"] != "lecturer") {
-      echo '<script>alert("You have not access to this page.");
-      window.location.href="guest_home_page.php";</script>';
-      return;
+      echo '<script>alert("You have no access to this page.");
+      window.location.href="logout.php";</script>';
   }
   //use post to get the module ID selected
   if(isset($_GET['moduleID'])) {

@@ -1,5 +1,5 @@
 <?php
-        require "common/conn.php";
+require "common/conn.php";
 
 if(!isset($_POST)) {
     '<script>

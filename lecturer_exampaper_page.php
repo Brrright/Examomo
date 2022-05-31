@@ -1,15 +1,16 @@
 <?php
     require "common/conn.php";
 
-    if (!isset($_SESSION["userID"])) {
-        echo '<script>alert("Please login before you access this page.");
-        window.location.href="guest_home_page.php";</script>';
-    }
+     // identify if user logged in
+     if (!isset($_SESSION["userID"])) {
+      echo '<script>alert("Please login before you access this page.");
+      window.location.href="logout.php";</script>';
+  }
 
-    if ($_SESSION["userRole"] != "lecturer") {
-      echo '<script>alert("You have not access to this page.");
-      window.location.href="guest_home_page.php";</script>';
-    }
+  if ($_SESSION["userRole"] != "lecturer") {
+      echo '<script>alert("You have no access to this page.");
+      window.location.href="logout.php";</script>';
+  }
 
     // retrieve drafted exam details
     $draftpapersql = "SELECT exam_paper.PaperID, exam_paper.PaperName, exam_paper.PaperType, module.ModuleName FROM exam_paper INNER JOIN module ON exam_paper.ModuleID = module.ModuleID WHERE exam_paper.CompanyID = ".$_SESSION['companyID']." AND exam_paper.PaperName LIKE '%(drafted)%' AND exam_paper.LecturerID = ".$_SESSION["userID"]."";

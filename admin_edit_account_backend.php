@@ -1,6 +1,5 @@
 <?php
 
-    require "common/conn.php";
     // identify if user logged in
     if (!isset($_SESSION["userID"])) {
         echo '<script>alert("Please login before you access this page.");
@@ -26,7 +25,7 @@
 
 
     if (!mysqli_query($con,$sql)) {
-        die('Error: ' . mysqli_error($con));
+        echo('Error: ' . mysqli_error($con));
     }
 
     else {

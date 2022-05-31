@@ -1,13 +1,14 @@
 <?php
   require "common/conn.php";
-  if (!isset($_SESSION["userID"])) {
-    echo '<script>alert("Please login before you access this page.");
-    window.location.href="guest_home_page.php";</script>';
+    // identify if user logged in
+    if (!isset($_SESSION["userID"])) {
+      echo '<script>alert("Please login before you access this page.");
+      window.location.href="logout.php";</script>';
   }
 
   if ($_SESSION["userRole"] != "lecturer") {
-    echo '<script>alert("You have not access to this page.");
-    window.location.href="guest_home_page.php";</script>';
+      echo '<script>alert("You have no access to this page.");
+      window.location.href="logout.php";</script>';
   }
 
   // sql for exam name
@@ -59,7 +60,7 @@
         </div>
     </div>
     <div class="profilecontainer my-4 shadow p-3 mb-5">
-      <table class="table table-hover mx-auto align-middle " style="width:95%" id="table-app">
+      <table class="table table-hover mx-auto  table-striped align-middle " style="width:95%" id="table-app">
         <caption>List of Students taking the exam : <?php echo $numOfRow;?> in Total (all record)</caption>
         <thead>
             <tr>
@@ -74,7 +75,7 @@
           <?php
           if ($numOfRow === 0) {
             echo '<tr>
-                <td colspan="7" align="center">No data Found</td>
+                <td colspan="7" align="center">No student take this exam</td>
             </tr>';
             return;
             }

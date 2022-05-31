@@ -3,6 +3,7 @@
     if(isset($_SESSION['userID'])){
 		header('location:'.$_GET['role'].'_home_page.php');
 	}
+    
     // check role and set the variable
     if (isset($_GET['role'])) {
         if ($_GET['role'] == "admin") {

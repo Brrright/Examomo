@@ -5,15 +5,16 @@
             window.location.href="lecturer_completed_exam_list.php";</script>';
         }
     
-        if (!isset($_SESSION["userID"])) {
-            echo '<script>alert("Please login before you access this page.");
-            window.location.href="guest_home_page.php";</script>';
-        }
-    
-        if ($_SESSION["userRole"] != "lecturer") {
-            echo '<script>alert("You have no access to this page.");
-            window.location.href="guest_home_page.php";</script>';
-        }
+          // identify if user logged in
+    if (!isset($_SESSION["userID"])) {
+        echo '<script>alert("Please login before you access this page.");
+        window.location.href="logout.php";</script>';
+    }
+
+    if ($_SESSION["userRole"] != "lecturer") {
+        echo '<script>alert("You have no access to this page.");
+        window.location.href="logout.php";</script>';
+    }
 
 
         // get paper id after exam paper creation
@@ -233,12 +234,12 @@
             })
             .then(function(response) {
                 if(!response.error) {
-                    // console.log(response)
-                    window.location.href="lecturer_completed_exam_list.php";
+                    console.log(response)
+                    // window.location.href="lecturer_completed_exam_list.php";
                 }
                 else if(response.error == 0) {
-                    // console.log(response)
-                    window.location.href="lecturer_completed_exam_list.php";
+                    console.log(response)
+                    // window.location.href="lecturer_completed_exam_list.php";
                 }
                 else {
                     console.log(response.error)

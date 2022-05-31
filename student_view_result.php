@@ -2,12 +2,12 @@
     require "common/conn.php";
     if (!isset($_SESSION["userID"])) {
         echo '<script>alert("Please login before you access this page.");
-        window.location.href="guest_home_page.php";</script>';
+        window.location.href="logout.php";</script>';
     }
 
     if ($_SESSION["userRole"] != "student") {
         echo '<script>alert("You have not access to this page.");
-        window.location.href="guest_home_page.php";</script>';
+        window.location.href="logout.php";</script>';
       }
 
       // get current datetime
@@ -101,8 +101,8 @@
     </section>
     <div class="container" style="width:85%; height:80%;">
         <div class="row">
-            <div class="col-xl-6 mx-auto">
-                <div class="card p-3 shadow p-3 mb-5" style="height:100%; overflow: scroll;">
+            <div class="col-xl-6 mx-auto  mb-5">
+                <div class="card p-3 shadow p-3" style="height:100%; overflow: scroll;">
                     <center><p class="fs-3 main-color m-0" style="font-family:Poppins;">Exam Results</p></center>
                 <?php
                     $fetching = "SELECT * FROM result INNER JOIN exam ON result.ExamID =  exam.ExamID WHERE result.StudentID = ".$_SESSION['userID']."";
@@ -116,13 +116,13 @@
                             <span class="fs-4 m-1" style="font-family:Poppins;color:white;">'.$result["ExamName"].'</span><span class="profilecontainer main-color p-1 m-0 fs-4" style="font-family:Poppins;float:right;">'.$result["TotalMark"].'%</span>
                             </div>';
                             echo $resultlist;
-                            }
+                        }
                     ?>        
                 </div>
             </div>
 
             <div class="col-xl-6">
-                <div class="card p-3 shadow p-3 mb-0" style="width:100%;border-radius:15px;height:100%; overflow:hidden;">
+                <div class="card p-3 shadow p-3 mb-0" style="width:100%; border-radius:15px;height:100%; overflow:hidden;">
                     <center><p class="fs-3 main-color m-0" style="font-family:Poppins;">Average Performance</p></center>
                         <div class="colorpanel" style="border-radius:15px;height:100%;max-height:100%; overflow:hidden;">
                             <div class="area">
@@ -160,12 +160,12 @@
                                 </g>
                                 </svg>
                             </div>
-                    </div>
-                </div >
-            </div>
+                        </div>
+                </div>
             </div>
         </div>
+    </div>
         
-    <?php require "common/footer_student.php";?>
+<?php require "common/footer_student.php";?>
 </body>
 </html>
