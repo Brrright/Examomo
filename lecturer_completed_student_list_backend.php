@@ -40,14 +40,37 @@
         return;
     }
 
-    while ($data = mysqli_fetch_array($isfetched)) {
-        $row = '<tr>
-                    <td>'.$data["StudentName"].' <br> '.$data["StudentEmail"].'</td>
-                    <td>'.$data["ClassName"].'</td>
-                    <td>'.$data["PaperName"].'</td>
-                    <td>'.$data["ModuleName"].'</td>
+    while ($data2 = mysqli_fetch_array($isfetched)) {
+        if ($data2["PaperType"] != "MCQ") {
+          $row = '<tr>
+                    <td>'.$data2["StudentName"].' <br> '.$data2["StudentEmail"].'</td>
+                    <td>'.$data2["ClassName"].'</td>
+                    <td>'.$data2["PaperName"].'</td>
+                    <td>'.$data2["ModuleName"].'</td>
                     <td> <a href="lecturer_marking_main.php?id='.$data2["PaperID"].'&stuid='.$data2['StudentID'].'&eid='.$_GET['id'].'" class="stubtn">View</a></td>
-                </tr>';
-        echo $row;
-    }
+                  </tr>';
+                  
+          }
+          else {
+            $result = mysqli_query($con, "SELECT * FROM result WHERE ExamID = ".$_GET["id"]." AND StudentID = ".$data2["StudentID"]."");
+            if(!$result) {
+              echo mysqli_error($con);
+            }
+            $resultMark = mysqli_fetch_array($result);
+            if($resultMark["TotalMark"] == "") {
+              $result_total_mark = "(no answer)";
+            }
+            else {
+              $result_total_mark = $resultMark["TotalMark"];
+            }
+            $row = '<tr>
+                      <td>'.$data2["StudentName"].' <br> '.$data2["StudentEmail"].'</td>
+                      <td>'.$data2["ClassName"].'</td>
+                      <td>'.$data2["PaperName"].'</td>
+                      <td>'.$data2["ModuleName"].'</td>
+                      <td>No action, mark is auto generated <br> Marks gained: '.$result_total_mark.' </td>
+                  </tr>';
+          }
+                echo $row;
+        }
   ?>

@@ -20,7 +20,7 @@
 
 
   // sql for student details who took exam
-  $studentfetch= "SELECT student.StudentID, student.StudentName, student.StudentEmail, class.ClassName, class.ClassID, exam_paper.PaperID, exam_paper.PaperName, module.ModuleName
+  $studentfetch= "SELECT student.StudentID, student.StudentName, student.StudentEmail, class.ClassName, class.ClassID, exam_paper.PaperID, exam_paper.PaperName,exam_paper.PaperType, module.ModuleName
                   FROM exam 
                   INNER JOIN student ON student.CompanyID = exam.CompanyID
                   INNER JOIN exam_class ON exam_class.ExamID = exam.ExamID
@@ -80,15 +80,38 @@
             return;
             }
             while ($data2 = mysqli_fetch_array($isfetched)) {
-            $row = '<tr>
-                      <td>'.$data2["StudentName"].' <br> '.$data2["StudentEmail"].'</td>
-                      <td>'.$data2["ClassName"].'</td>
-                      <td>'.$data2["PaperName"].'</td>
-                      <td>'.$data2["ModuleName"].'</td>
-                      <td> <a href="lecturer_marking_main.php?id='.$data2["PaperID"].'&stuid='.$data2['StudentID'].'&eid='.$_GET['id'].'" class="stubtn">View</a></td>
-                    </tr>';
-                  echo $row;
-            }
+              if ($data2["PaperType"] != "MCQ") {
+                $row = '<tr>
+                          <td>'.$data2["StudentName"].' <br> '.$data2["StudentEmail"].'</td>
+                          <td>'.$data2["ClassName"].'</td>
+                          <td>'.$data2["PaperName"].'</td>
+                          <td>'.$data2["ModuleName"].'</td>
+                          <td> <a href="lecturer_marking_main.php?id='.$data2["PaperID"].'&stuid='.$data2['StudentID'].'&eid='.$_GET['id'].'" class="stubtn">View</a></td>
+                        </tr>';
+                        
+                }
+                else {
+                  $result = mysqli_query($con, "SELECT * FROM result WHERE ExamID = ".$_GET["id"]." AND StudentID = ".$data2["StudentID"]."");
+                  if(!$result) {
+                    echo mysqli_error($con);
+                  }
+                  $resultMark = mysqli_fetch_array($result);
+                  if($resultMark["TotalMark"] == "") {
+                    $result_total_mark = "(no answer)";
+                  }
+                  else {
+                    $result_total_mark = $resultMark["TotalMark"];
+                  }
+                  $row = '<tr>
+                            <td>'.$data2["StudentName"].' <br> '.$data2["StudentEmail"].'</td>
+                            <td>'.$data2["ClassName"].'</td>
+                            <td>'.$data2["PaperName"].'</td>
+                            <td>'.$data2["ModuleName"].'</td>
+                            <td>No action, mark is auto generated <br> Marks gained: '.$result_total_mark.' </td>
+                        </tr>';
+                }
+                      echo $row;
+                }
             ?>
         </tbody>
       </table>

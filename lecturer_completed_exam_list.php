@@ -10,7 +10,7 @@
         echo '<script>alert("You have no access to this page.");
         window.location.href="logout.php";</script>';
     }
-  $fetched = mysqli_query($con, "SELECT * FROM exam WHERE CompanyID = ".$_SESSION['companyID']." AND LecturerID = ".$_SESSION['userID']." AND ExamEndDateTime < curtime()");
+  $fetched = mysqli_query($con, "SELECT * FROM exam INNER JOIN exam_paper ON exam.PaperID = exam_paper.PaperID WHERE exam.CompanyID = ".$_SESSION['companyID']." AND exam.LecturerID = ".$_SESSION['userID']." AND exam.ExamEndDateTime < curtime() ORDER BY exam.ExamEndDateTime DESC");
   $numOfRow = mysqli_num_rows($fetched);
 
   function timeDiff($firstTime,$lastTime){
@@ -108,6 +108,7 @@
                       <caption>List of Completed Exams : <?php echo $numOfRow;?> in Total (all record)</caption>
                       <thead>
                           <tr>
+                              <th>Exam Type</th>
                               <th>Exam Name</th>
                               <th>Exam Dates</th>
                               <th>Exam Duration</th>
@@ -121,21 +122,22 @@
                             <td colspan="7" align="center">No data Found</td>
                         </tr>';
                         return;
-                        }
-                        while ($data = mysqli_fetch_array($fetched)) {
+                    }
+                    while ($data = mysqli_fetch_array($fetched)) {
                         $start =  $data['ExamStartDateTime'];
                         $end = $data['ExamEndDateTime'];
           
                         $difference = timeDiff($start, $end);
                         $value = durationformater($difference);
                         $row = '<tr>
+                                <td>'.$data["PaperType"].'</td>
                                 <td>'.$data["ExamName"].'</td>
                                 <td>Start : '.$data["ExamStartDateTime"].'<br>End   : '.$data["ExamEndDateTime"].'</td>
                                 <td>'.$value.'</td>
                                 <td> <a href="lecturer_completed_student_list.php?id='.$data["ExamID"].'"><button class="btn stubtn">View</button></a></td>
                               </tr>';
                             echo $row;
-                        }
+                    }
                         ?>
                         </tbody>
           </table>
