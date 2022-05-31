@@ -198,9 +198,10 @@
                     $req = "SELECT * FROM student 
                             -- INNER JOIN class ON student.ClassID = class.ClassID
                             INNER JOIN result ON student.StudentID = result.StudentID
+                            INNER JOIN exam ON exam.ExamID = result.ExamID
                             -- INNER JOIN question_multiple_choice ON question_multiple_choice.PaperID = result.PaperID
                             -- INNER JOIN question_structure ON question_structure.PaperID = result.PaperID
-                            WHERE student.StudentID = ".$_SESSION['userID']."";
+                            WHERE student.StudentID = ".$_SESSION['userID']." AND exam.ExamEndDateTime <= '$date_clicked'";
 
                     $resultfetched = mysqli_query($con,$req);
                     $resultnumber = mysqli_num_rows($resultfetched);

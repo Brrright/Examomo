@@ -159,7 +159,6 @@
         if (result.isConfirmed) {
             const saveBtn = document.getElementById("save-btn");
             saveBtn.click()
-            // window.location.href="student_exam_list.php";
         }
         })                
       }
@@ -235,11 +234,11 @@
             .then(function(response) {
                 if(!response.error) {
                     console.log(response)
-                    // window.location.href="lecturer_completed_exam_list.php";
+                    window.location.href="lecturer_completed_exam_list.php";
                 }
                 else if(response.error == 0) {
                     console.log(response)
-                    // window.location.href="lecturer_completed_exam_list.php";
+                    window.location.href="lecturer_completed_exam_list.php";
                 }
                 else {
                     console.log(response.error)
