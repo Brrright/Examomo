@@ -1,20 +1,20 @@
 <?php
 
-    if (!isset($_POST)) {
-        echo '<script>alert("You have not selected an exam paper.");
-        window.location.href="student_exam_list.php";</script>';
-        return;
+if (!isset($_POST)) {
+    echo '<script>alert("You have not selected an exam paper.");
+    window.location.href="student_exam_list.php";</script>';
+    return;
+}
+require("common/conn.php");
+    if (!isset($_SESSION["userID"])) {
+        echo '<script>alert("Please login before you access this page.");
+        window.location.href="logout.php";</script>';
     }
-    // if (!isset($_SESSION["userID"])) {
-    //     echo '<script>alert("Please login before you access this page.");
-    //     window.location.href="logout.php";</script>';
-    // }
-    // if ($_SESSION["userRole"] != "student") {
-    //     echo '<script>alert("You have no access to this page.");
-    //     window.location.href="logout.php";</script>';
-    // }
+    if ($_SESSION["userRole"] != "student") {
+        echo '<script>alert("You have no access to this page.");
+        window.location.href="logout.php";</script>';
+    }
 
-    require("common/conn.php");
     
     $body = json_decode(file_get_contents("php://input"), true);
     $response = [];

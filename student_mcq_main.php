@@ -302,13 +302,10 @@
 
     var countDownDate = <?php echo strtotime($examEndDate); ?> * 1000;
     //This is the get current time or change to get clicked
-    
     // Update the count down every 1 second
     var Timerinterval = setInterval(function() {
         var Timernow =  new Date().getTime();
         // console.log("end: " +countDownDate + ", now:" + Timernow);
-
-        
         // Find the distance between now an the count down date
         var Timerdistance = countDownDate - Timernow;
         Timerdistance = Timerdistance - 28800000;

@@ -56,7 +56,7 @@
   <!-- Main function carousel -->
 
   <section class="carousel-section">
-  <div class="admincontainer my-0 p-6 shadow p-3 mb-5">
+  <div class="admincontainer my-0  shadow p-3 mb-3">
     <div class="container carousel p-0">
       <div id="carouselIndicators" class="carousel slide carousel-fade" data-bs-ride="carousel">
         <div class="carousel-indicators">
