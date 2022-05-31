@@ -1,13 +1,14 @@
 <?php
   require "common/conn.php";
-  if (!isset($_SESSION["userID"])) {
-    echo '<script>alert("Please login before you access this page.");
-    window.location.href="guest_home_page.php";</script>';
+    // identify if user logged in
+    if (!isset($_SESSION["userID"])) {
+      echo '<script>alert("Please login before you access this page.");
+      window.location.href="logout.php";</script>';
   }
 
   if ($_SESSION["userRole"] != "lecturer") {
-    echo '<script>alert("You have not access to this page.");
-    window.location.href="guest_home_page.php";</script>';
+      echo '<script>alert("You have no access to this page.");
+      window.location.href="logout.php";</script>';
   }
 
 
@@ -39,14 +40,37 @@
         return;
     }
 
-    while ($data = mysqli_fetch_array($isfetched)) {
-        $row = '<tr>
-                    <td>'.$data["StudentName"].' <br> '.$data["StudentEmail"].'</td>
-                    <td>'.$data["ClassName"].'</td>
-                    <td>'.$data["PaperName"].'</td>
-                    <td>'.$data["ModuleName"].'</td>
-                    <td> <a href="lecturer_marking_main.php?id='.$p_id.'" class="stubtn">View</a></td>
-                </tr>';
-        echo $row;
-    }
+    while ($data2 = mysqli_fetch_array($isfetched)) {
+        if ($data2["PaperType"] != "MCQ") {
+          $row = '<tr>
+                    <td>'.$data2["StudentName"].' <br> '.$data2["StudentEmail"].'</td>
+                    <td>'.$data2["ClassName"].'</td>
+                    <td>'.$data2["PaperName"].'</td>
+                    <td>'.$data2["ModuleName"].'</td>
+                    <td> <a href="lecturer_marking_main.php?id='.$data2["PaperID"].'&stuid='.$data2['StudentID'].'&eid='.$_GET['id'].'" class="stubtn">View</a></td>
+                  </tr>';
+                  
+          }
+          else {
+            $result = mysqli_query($con, "SELECT * FROM result WHERE ExamID = ".$_GET["id"]." AND StudentID = ".$data2["StudentID"]."");
+            if(!$result) {
+              echo mysqli_error($con);
+            }
+            $resultMark = mysqli_fetch_array($result);
+            if($resultMark["TotalMark"] == "") {
+              $result_total_mark = "(no answer)";
+            }
+            else {
+              $result_total_mark = $resultMark["TotalMark"];
+            }
+            $row = '<tr>
+                      <td>'.$data2["StudentName"].' <br> '.$data2["StudentEmail"].'</td>
+                      <td>'.$data2["ClassName"].'</td>
+                      <td>'.$data2["PaperName"].'</td>
+                      <td>'.$data2["ModuleName"].'</td>
+                      <td>No action, mark is auto generated <br> Marks gained: '.$result_total_mark.' </td>
+                  </tr>';
+          }
+                echo $row;
+        }
   ?>

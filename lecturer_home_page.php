@@ -1,15 +1,16 @@
 <?php
 
   require "common/conn.php";
-  if (!isset($_SESSION["userID"])) {
-    echo '<script>alert("Please login before you access this page.");
-    window.location.href="guest_home_page.php";</script>';
-  }
+      // identify if user logged in
+      if (!isset($_SESSION["userID"])) {
+        echo '<script>alert("Please login before you access this page.");
+        window.location.href="logout.php";</script>';
+    }
 
-  if ($_SESSION["userRole"] != "lecturer") {
-    echo '<script>alert("You have not access to this page.");
-    window.location.href="guest_home_page.php";</script>';
-  }
+    if ($_SESSION["userRole"] != "lecturer") {
+        echo '<script>alert("You have no access to this page.");
+        window.location.href="logout.php";</script>';
+    }
 ?>
 
 <!DOCTYPE html>
@@ -55,7 +56,7 @@
   <!-- Main function carousel -->
 
   <section class="carousel-section">
-  <div class="admincontainer my-0 p-6 shadow p-3 mb-5">
+  <div class="admincontainer my-0  shadow p-3 mb-3">
     <div class="container carousel p-0">
       <div id="carouselIndicators" class="carousel slide carousel-fade" data-bs-ride="carousel">
         <div class="carousel-indicators">

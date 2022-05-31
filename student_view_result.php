@@ -2,12 +2,12 @@
     require "common/conn.php";
     if (!isset($_SESSION["userID"])) {
         echo '<script>alert("Please login before you access this page.");
-        window.location.href="guest_home_page.php";</script>';
+        window.location.href="logout.php";</script>';
     }
 
     if ($_SESSION["userRole"] != "student") {
         echo '<script>alert("You have not access to this page.");
-        window.location.href="guest_home_page.php";</script>';
+        window.location.href="logout.php";</script>';
       }
 
       // get current datetime
@@ -15,19 +15,20 @@
     $date_clicked = date('Y-m-d H:i:s');
 
     // sql for exam details
-    $fetchexam ="SELECT exam.ExamName, exam.ExamStartDateTime, exam.ExamEndDateTime FROM student
+    $fetchexam ="SELECT exam.ExamName, exam.ExamEndDateTime, exam.ExamEndDateTime FROM student
                 INNER JOIN exam_class ON student.ClassID = exam_class.ClassID
                 INNER JOIN exam ON exam_class.ExamID = exam.ExamID
-                WHERE student.StudentID = ".$_SESSION["userID"]." AND ExamStartDateTime >= '$date_clicked' AND isPublished LIKE 1 ORDER BY ExamStartDateTime DESC LIMIT 2";
+                WHERE student.StudentID = ".$_SESSION["userID"]." AND ExamEndDateTime <= '$date_clicked' AND isPublished LIKE 1 ORDER BY ExamEndDateTime DESC LIMIT 2";
     $examquery = mysqli_query($con, $fetchexam);
     $examrow = mysqli_num_rows($examquery);
 
     $req = "SELECT * FROM student 
             -- INNER JOIN class ON student.ClassID = class.ClassID
             INNER JOIN result ON student.StudentID = result.StudentID
+            INNER JOIN exam ON exam.ExamID = result.ExamID
             -- INNER JOIN question_multiple_choice ON question_multiple_choice.PaperID = result.PaperID
             -- INNER JOIN question_structure ON question_structure.PaperID = result.PaperID
-            WHERE student.StudentID = ".$_SESSION['userID']."";
+            WHERE student.StudentID = ".$_SESSION['userID']." AND ExamEndDateTime <= '$date_clicked'";
 
     $resultfetched = mysqli_query($con,$req);
     $resultnumber = mysqli_num_rows($resultfetched);
@@ -101,11 +102,11 @@
     </section>
     <div class="container" style="width:85%; height:80%;">
         <div class="row">
-            <div class="col-xl-6 mx-auto">
-                <div class="card p-3 shadow p-3 mb-5" style="height:100%;">
+            <div class="col-xl-6 mx-auto  mb-5">
+                <div class="card p-3 shadow p-3" style="height:100%; overflow: scroll;">
                     <center><p class="fs-3 main-color m-0" style="font-family:Poppins;">Exam Results</p></center>
                 <?php
-                    $fetching = "SELECT * FROM result INNER JOIN exam ON result.ExamID =  exam.ExamID WHERE result.StudentID = ".$_SESSION['userID']."";
+                    $fetching = "SELECT * FROM result INNER JOIN exam ON result.ExamID =  exam.ExamID WHERE result.StudentID = ".$_SESSION['userID']." AND ExamEndDateTime <= '$date_clicked'";
                     $resultquery = mysqli_query($con, $fetching);
                     $resultnumber2 = mysqli_num_rows($resultquery);
                     if ($resultnumber2 === 0) {
@@ -116,13 +117,13 @@
                             <span class="fs-4 m-1" style="font-family:Poppins;color:white;">'.$result["ExamName"].'</span><span class="profilecontainer main-color p-1 m-0 fs-4" style="font-family:Poppins;float:right;">'.$result["TotalMark"].'%</span>
                             </div>';
                             echo $resultlist;
-                            }
+                        }
                     ?>        
                 </div>
             </div>
 
             <div class="col-xl-6">
-                <div class="card p-3 shadow p-3 mb-0" style="width:100%;border-radius:15px;height:100%; overflow:hidden;">
+                <div class="card p-3 shadow p-3 mb-0" style="width:100%; border-radius:15px;height:100%; overflow:hidden;">
                     <center><p class="fs-3 main-color m-0" style="font-family:Poppins;">Average Performance</p></center>
                         <div class="colorpanel" style="border-radius:15px;height:100%;max-height:100%; overflow:hidden;">
                             <div class="area">
@@ -137,7 +138,7 @@
                                             </div>
                                             <div class="inside-circle">
                                                 <span class="count" style="font-family:Poppins;">
-                                                <?php echo $averagemark?>%
+                                                <?php echo(round($averagemark,2));?>%
                                                 </span>
                                             </div>
 
@@ -153,19 +154,19 @@
                                 <path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
                                 </defs>
                                 <g class="parallax">
-                                <use xlink:href="#gentle-wave" x="48" y="0" fill="rgba(255,255,255,0.7" />
+                                <use xlink:href="#gentle-wave" x="48" y="0" fill="rgba(255,255,255,0.7)" />
                                 <use xlink:href="#gentle-wave" x="48" y="2" fill="rgba(255,255,255,0.5)" />
                                 <use xlink:href="#gentle-wave" x="48" y="4" fill="rgba(255,255,255,0.3)" />
                                 <use xlink:href="#gentle-wave" x="48" y="6" fill="#fff" />
                                 </g>
                                 </svg>
                             </div>
-                    </div>
-                </div >
-            </div>
+                        </div>
+                </div>
             </div>
         </div>
+    </div>
         
-    <?php require "common/footer_student.php";?>
+<?php require "common/footer_student.php";?>
 </body>
 </html>

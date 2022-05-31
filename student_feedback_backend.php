@@ -1,5 +1,7 @@
 <?php
     require("common/conn.php");
+    if(!isset($_POST))
+        return;
 
     $body = json_decode(file_get_contents("php://input"), true);
     $response = [];

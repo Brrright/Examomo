@@ -1,14 +1,15 @@
 <?php require
 "common/conn.php";
-if (!isset($_SESSION["userID"])) {
-    echo '<script>alert("Please login before you access this page.");
-    window.location.href="guest_home_page.php";</script>';
-}
+    // identify if user logged in
+    if (!isset($_SESSION["userID"])) {
+        echo '<script>alert("Please login before you access this page.");
+        window.location.href="logout.php";</script>';
+    }
 
-if ($_SESSION["userRole"] != "admin") {
-    echo '<script>alert("You have no access to this page.");
-    window.location.href="guest_home_page.php";</script>';
-}
+    if ($_SESSION["userRole"] != "admin") {
+        echo '<script>alert("You have no access to this page.");
+        window.location.href="logout.php";</script>';
+    }
 // havent replied
 $sentsql = "SELECT feedback.FeedbackID, feedback.FeedbackContent, feedback.FeedbackStatus, feedback.FeedbackDateTime, student.StudentName, student.StudentEmail 
 FROM feedback INNER JOIN student ON feedback.StudentID = student.StudentID 

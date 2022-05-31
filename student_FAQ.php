@@ -2,12 +2,12 @@
 require "common/conn.php";
 if (!isset($_SESSION["userID"])) {
     echo '<script>alert("Please login before you access this page.");
-    window.location.href="guest_home_page.php";</script>';
+    window.location.href="logout.php";</script>';
 }
 
 if ($_SESSION["userRole"] != "student") {
     echo '<script>alert("You have not access to this page.");
-    window.location.href="guest_home_page.php";</script>';
+    window.location.href="logout.php";</script>';
   }
 ?>
 
@@ -89,7 +89,7 @@ if ($_SESSION["userRole"] != "student") {
       </h2>
       <div id="panelsStayOpen-collapseFour" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingFour">
         <div class="accordion-body">
-        Students are not advisable to switch to other tabs during the examination process. This is because the system has an implementation whereby if a switch tab were to be detected in the process of the examination, it will give a warning to the user for the third attempt. If a fourth switch tab detection gets detected, the user will be forced to end their exams and will have their accounts banned.
+        Students are not advisable to switch to other tabs during the examination process. This is because the system has an implementation whereby if a switch tab were to be detected in the process of the examination, it will give a warning to the user for the first attempt. If a second switch tab detection gets detected, the user will be forced to end their exams and will have their accounts banned.
       </div>
     </div>
     <div class="accordion-item">

@@ -3,13 +3,13 @@
       // identify if user logged in
       if (!isset($_SESSION["userID"])) {
           echo '<script>alert("Please login before you access this page.");
-          window.location.href="guest_home_page.php";</script>';
+          window.location.href="logout.php";</script>';
           return;
       }
     
       if ($_SESSION["userRole"] != "student") {
           echo '<script>alert("You have not access to this page.");
-          window.location.href="guest_home_page.php";</script>';
+          window.location.href="logout.php";</script>';
           return;
       }
       //use post to get the module ID selected
@@ -18,7 +18,7 @@
       }
       else {
         echo '<script>alert("Please enter this page by using correct path.");
-        window.location.href="guest_home_page.php";</script>';
+        window.location.href="logout.php";</script>';
         return;
       }
 

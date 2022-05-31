@@ -8,8 +8,8 @@
     <title>Examomo | Term and condition</title>
 </head>
 <body class="p-5 mx-auto" style="width:70%">
-    <div class="logo-style text-center p-4 m-3" style="font-size:4vw">
-        <a href="guest_home_page.php" style="text-decoration:none; color:#2B5EA4;">
+    <div class="logo-style p-4 m-3 btn" style="font-size:4vw">
+        <a onclick="history.back()" style="color:#2B5EA4;">
             <img src="img/logo_small_no_text.png" alt="logo" style="width:6vw; padding-bottom:10px;">
             Examomo
         </a>

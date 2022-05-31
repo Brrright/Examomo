@@ -2,14 +2,15 @@
     require "common/conn.php";
     require "common/HeadImportInfo.php";
 
-    if (!isset($_SESSION["userID"])) {
+     // identify if user logged in
+     if (!isset($_SESSION["userID"])) {
         echo '<script>alert("Please login before you access this page.");
-        window.location.href="guest_home_page.php";</script>';
+        window.location.href="logout.php";</script>';
     }
 
     if ($_SESSION["userRole"] != "lecturer") {
         echo '<script>alert("You have no access to this page.");
-        window.location.href="guest_home_page.php";</script>';
+        window.location.href="logout.php";</script>';
     }
     
     // get paper id after exam paper creation

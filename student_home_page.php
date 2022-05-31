@@ -2,12 +2,12 @@
     require "common/conn.php";
     if (!isset($_SESSION["userID"])) {
         echo '<script>alert("Please login before you access this page.");
-        window.location.href="guest_home_page.php";</script>';
+        window.location.href="logout.php";</script>';
     }
 
     if ($_SESSION["userRole"] != "student") {
         echo '<script>alert("You have not access to this page.");
-        window.location.href="guest_home_page.php";</script>';
+        window.location.href="logout.php";</script>';
       }
 
       // get current datetime
@@ -198,9 +198,10 @@
                     $req = "SELECT * FROM student 
                             -- INNER JOIN class ON student.ClassID = class.ClassID
                             INNER JOIN result ON student.StudentID = result.StudentID
+                            INNER JOIN exam ON exam.ExamID = result.ExamID
                             -- INNER JOIN question_multiple_choice ON question_multiple_choice.PaperID = result.PaperID
                             -- INNER JOIN question_structure ON question_structure.PaperID = result.PaperID
-                            WHERE student.StudentID = ".$_SESSION['userID']."";
+                            WHERE student.StudentID = ".$_SESSION['userID']." AND exam.ExamEndDateTime <= '$date_clicked'";
 
                     $resultfetched = mysqli_query($con,$req);
                     $resultnumber = mysqli_num_rows($resultfetched);
@@ -218,7 +219,7 @@
                         
                         $averagemark = array_sum($marks)/$resultnumber;
                         $resultpanel = '<p class="fs-3 text-center" style="color:white;font-family:Poppins;"">
-                        Your Exam Performance<br><span>'.$averagemark.'%</span></p>';
+                        Your Exam Performance<br><span>'.round($averagemark,2).'%</span></p>';
 
                         echo $resultpanel;
                         
@@ -257,7 +258,7 @@
                     if ($resultnumber === 0) {
                         echo 0;
                     }
-                    else{echo $averagemark;}?>%;">
+                    else{echo(round($averagemark,2));}?>%;">
                     </div>
                 </div>
                 </a>

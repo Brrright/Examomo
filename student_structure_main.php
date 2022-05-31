@@ -200,7 +200,7 @@
                 let timerInterval
             Swal.fire({
                 title: 'Goodluck with your exam :)',
-                timer: 1000,
+                timer: 500,
                 timerProgressBar: true,
                 didOpen: () => {
                     Swal.showLoading()
@@ -220,13 +220,6 @@
 
         if (numOfSwitchTab == 1){
             console.log("1");
-            
-        }
-        else if (numOfSwitchTab == 2) {
-            console.log("2");
-        }
-        else if (numOfSwitchTab == 3) {
-            console.log("3");
             const Toast = Swal.mixin({
             toast: true,
             position: 'center',
@@ -238,18 +231,19 @@
                 toast.addEventListener('mouseleave', Swal.resumeTimer)
             }
             })
-
+    
             Toast.fire({
             icon: 'warning',
             title: 'Are you cheating?'
             })
         }
-        else if (numOfSwitchTab == 4) {
+        else if (numOfSwitchTab == 2) {
+            console.log("2");
             let timerInterval
             Swal.fire({
             icon: 'warning',
             title: 'You break the rules!',
-            html: 'Find admin to activate your account again, Good Bye!.',
+            html: 'Find admin for any issues!.',
             timer: 2000,
             timerProgressBar: true,
             didOpen: () => {
@@ -265,7 +259,18 @@
             }).then((result) => {
             /* Read more about handling dismissals below */
             if (result.dismiss === Swal.DismissReason.timer) {
-                window.location.href="logout.php"
+                axios.post("student_get_ban.php", {
+                    reason: "break_rule"
+                })
+                .then(function(response) {
+                    if(!response.error) {
+                        // console.log(response)
+                        window.location.href="logout.php"
+                    }
+                    else {
+                        console.log(response.error)
+                    }
+                })
             }
             })
         }

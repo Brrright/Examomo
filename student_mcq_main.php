@@ -12,16 +12,17 @@
     
         if (!isset($_SESSION["userID"])) {
             echo '<script>alert("Please login before you access this page.");
-            window.location.href="guest_home_page.php";</script>';
+            window.location.href="logout.php";</script>';
         }
     
         if ($_SESSION["userRole"] != "student") {
             echo '<script>alert("You have no access to this page.");
-            window.location.href="guest_home_page.php";</script>';
+            window.location.href="logout.php";</script>';
         }
 
 
         // get paper id after exam paper creation
+        $examID = $_GET['eid'];
         $paperid = $_GET['id'];
         $sql = "SELECT * FROM question_multiple_choice WHERE PaperID = $paperid";
         $sql2 = "SELECT * FROM question_multiple_choice WHERE PaperID = $paperid";
@@ -40,7 +41,7 @@
         $rowcount = mysqli_num_rows($result);
 
         $sql3 = "SELECT exam.ExamEndDateTime FROM question_multiple_choice 
-                INNER JOIN exam ON question_multiple_choice.PaperID = exam.PaperID WHERE question_multiple_choice.PaperID = $paperid  AND exam.isPublished = 1";
+                INNER JOIN exam ON question_multiple_choice.PaperID = exam.PaperID WHERE question_multiple_choice.PaperID = $paperid  AND exam.isPublished = 1 AND exam.ExamID = $examID";
 
         $sqlquery = mysqli_query($con,$sql3);
         if(!$sqlquery) {
@@ -49,8 +50,6 @@
 
         $examDetails = mysqli_fetch_array($sqlquery);
         $examEndDate = $examDetails["ExamEndDateTime"];
-        // echo $examEndDate;
-
     ?>
     <link rel="stylesheet" href="css/weestyle.css">
     <link rel="stylesheet" href="css/bryanCSS.css">
@@ -85,8 +84,7 @@
         <div class="dropdown">
         <button type="button" class="btn btn-primary dropdown-toggle" id="addFB" data-bs-toggle="dropdown" aria-expanded="false" style="display:block; margin-right: 15%; margin-left:auto;">Add New Feedback</button>
         <form class="dropdown-menu p-4 shadow p-3 mb-5" id="feedbackForm" aria-labelledby="addFB" style="width: 100%">
-        <!-- <form class="dropdown-menu p-4 shadow p-3 mb-5" action="student_feedback_insert_backend.php" method="POST" aria-labelledby="addFB" style="width: 60%"> -->
-            <input type="text" class="form-control shadow-sm" id="adm-floatingInput" name="fb_content" placeholder="Enter feedback here..." required>
+            <input type="text" class="form-control shadow-sm" id="adm-floatingInput" name="content" placeholder="Enter feedback here..." required>
             <br>
             <div class= "d-flex flex-wrap justify-content-around">
             <button type="submit" class="btn btn-primary" style="border:none;">Submit</button>
@@ -100,6 +98,8 @@
     <div class="col-xl-7">
         <form class="was-validated" id="questionFormID">
             <div class="bg d-flex mx-auto flex-column p-5 m-5 shadow p-3 mb-5" style="background-color: white; width: 90%; border-radius: 10px;">
+                <input type="hidden" name="exam_id" value="<?php echo $examID;?>">
+
                 <div id="question-content">
                     <!-- --------------------------------------------------------------------- -->
                     <p class="fs-2 fw-bold p-3" style="color: #2B5EA4;" id="no-submit">
@@ -194,6 +194,7 @@
 
 
 <script src="js/mingliangJS.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script>
      window.addEventListener("load", onloadAgreement) 
      async function onloadAgreement(){
@@ -222,34 +223,27 @@
         })
 
         if (accept) {
-                let timerInterval
-            Swal.fire({
-                title: 'Goodluck with your exam :)',
-                timer: 1000,
-                timerProgressBar: true,
-                didOpen: () => {
-                    Swal.showLoading()
-                },
-                willClose: () => {
-                    clearInterval(timerInterval)
-                }
-            })
+            let timerInterval
+        Swal.fire({
+            title: 'Goodluck with your exam :)',
+            timer: 500,
+            timerProgressBar: true,
+            didOpen: () => {
+                Swal.showLoading()
+            },
+            willClose: () => {
+                clearInterval(timerInterval)
             }
+        })
+        }
     }
     var numOfSwitchTab = 0;
     document.addEventListener("visibilitychange", function() {
-        // console.log(document.hidden);
         if (document.visibilityState != "visible") {
         numOfSwitchTab = numOfSwitchTab + 1;
 
         if (numOfSwitchTab == 1){
             console.log("1");
-        }
-        else if (numOfSwitchTab == 2) {
-            console.log("2");
-        }
-        else if (numOfSwitchTab == 3) {
-            console.log("3");
             const Toast = Swal.mixin({
             toast: true,
             position: 'center',
@@ -261,18 +255,19 @@
                 toast.addEventListener('mouseleave', Swal.resumeTimer)
             }
             })
-
+    
             Toast.fire({
             icon: 'warning',
             title: 'Are you cheating?'
             })
         }
-        else if (numOfSwitchTab == 4) {
+        else if (numOfSwitchTab == 2) {
+            console.log("2");
             let timerInterval
             Swal.fire({
             icon: 'warning',
             title: 'You break the rules!',
-            html: 'Find admin to activate your account again, Good Bye!.',
+            html: 'Find admin for any issues!.',
             timer: 2000,
             timerProgressBar: true,
             didOpen: () => {
@@ -288,7 +283,17 @@
             }).then((result) => {
             /* Read more about handling dismissals below */
             if (result.dismiss === Swal.DismissReason.timer) {
-                window.location.href="logout.php"
+                axios.post("student_get_ban.php", {
+                    reason: "break_rule"
+                })
+                .then(function(response) {
+                    if(!response.error) {
+                        window.location.href="logout.php"
+                    }
+                    else {
+                        console.log(response.error)
+                    }
+                })
             }
             })
         }
@@ -297,15 +302,13 @@
 
     var countDownDate = <?php echo strtotime($examEndDate); ?> * 1000;
     //This is the get current time or change to get clicked
-    var Timernow = <?php echo time() ?> * 1000;
-    console.log(countDownDate + " " + Timernow);
-    
     // Update the count down every 1 second
     var Timerinterval = setInterval(function() {
-        Timernow = Timernow + 1000;
-        
+        var Timernow =  new Date().getTime();
+        // console.log("end: " +countDownDate + ", now:" + Timernow);
         // Find the distance between now an the count down date
         var Timerdistance = countDownDate - Timernow;
+        Timerdistance = Timerdistance - 28800000;
         
         // Time calculations for days, hours, minutes and seconds
         var Timerdays = Math.floor(Timerdistance / (1000 * 60 * 60 * 24));
@@ -321,6 +324,28 @@
         if (Timerdistance < 0) {
             clearInterval(Timerinterval);
             document.getElementById("timer").innerHTML = "Time over";
+            let timerInterval
+            Swal.fire({
+            title: 'Time\'s up!',
+            html: 'Good job! I will close in <b></b> milliseconds.',
+            timer: 2000,
+            timerProgressBar: true,
+            didOpen: () => {
+                Swal.showLoading()
+                const b = Swal.getHtmlContainer().querySelector('b')
+                timerInterval = setInterval(() => {
+                b.textContent = Swal.getTimerLeft()
+                }, 100)
+            },
+            willClose: () => {
+                clearInterval(timerInterval)
+            }
+            }).then((result) => {
+            /* Read more about handling dismissals below */
+            if (result.dismiss === Swal.DismissReason.timer) {
+                window.location.href="student_exam_list.php"
+            }
+            })
         }
         
     }, 1000);
@@ -458,9 +483,11 @@
             })
             .then(function(response) {
                 if(!response.error) {
+                    // console.log(response)
                     window.location.href="student_exam_list.php";
                 }
                 else if(response.error == 0) {
+                    // console.log(response)
                     window.location.href="student_exam_list.php";
                 }
                 else {
