@@ -1,56 +1,56 @@
+<?php 
+    require "common/conn.php";
+    require "common/HeadImportInfo.php";
+    if (!isset($_GET["id"])) {
+        echo '<script>alert("You have not selected an exam paper.");
+        window.location.href="student_exam_list.php";</script>';
+    }
+
+    if (!isset($_SESSION["userID"])) {
+        echo '<script>alert("Please login before you access this page.");
+        window.location.href="logout.php";</script>';
+    }
+
+    if ($_SESSION["userRole"] != "student") {
+        echo '<script>alert("You have no access to this page.");
+        window.location.href="logout.php";</script>';
+    }
+
+
+    // get paper id after exam paper creation
+    $examID = $_GET['eid'];
+    $paperid = $_GET['id'];
+    $sql = "SELECT * FROM question_multiple_choice WHERE PaperID = $paperid";
+    $sql2 = "SELECT * FROM question_multiple_choice WHERE PaperID = $paperid";
+
+    $result = mysqli_query($con, $sql);
+    $result2 = mysqli_query($con, $sql);
+
+    if(!$result) {
+        echo 'err when fetching mcq question'. mysqli_error($con);
+    }
+
+    if(!$result2) {
+        echo 'err when fetching mcq question'. mysqli_error($con);
+    }
+
+    $rowcount = mysqli_num_rows($result);
+
+    $sql3 = "SELECT exam.ExamEndDateTime FROM question_multiple_choice 
+            INNER JOIN exam ON question_multiple_choice.PaperID = exam.PaperID WHERE question_multiple_choice.PaperID = $paperid  AND exam.isPublished = 1 AND exam.ExamID = $examID";
+
+    $sqlquery = mysqli_query($con,$sql3);
+    if(!$sqlquery) {
+        echo 'err when fetching mcq and exam question'. mysqli_error($con);
+    }
+
+    $examDetails = mysqli_fetch_array($sqlquery);
+    $examEndDate = $examDetails["ExamEndDateTime"];
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
 
-    <?php 
-        require "common/conn.php";
-        require "common/HeadImportInfo.php";
-        if (!isset($_GET["id"])) {
-            echo '<script>alert("You have not selected an exam paper.");
-            window.location.href="lecturer_exampaper_page.php";</script>';
-        }
-    
-        if (!isset($_SESSION["userID"])) {
-            echo '<script>alert("Please login before you access this page.");
-            window.location.href="logout.php";</script>';
-        }
-    
-        if ($_SESSION["userRole"] != "student") {
-            echo '<script>alert("You have no access to this page.");
-            window.location.href="logout.php";</script>';
-        }
-
-
-        // get paper id after exam paper creation
-        $examID = $_GET['eid'];
-        $paperid = $_GET['id'];
-        $sql = "SELECT * FROM question_multiple_choice WHERE PaperID = $paperid";
-        $sql2 = "SELECT * FROM question_multiple_choice WHERE PaperID = $paperid";
-
-        $result = mysqli_query($con, $sql);
-        $result2 = mysqli_query($con, $sql);
-
-        if(!$result) {
-            echo 'err when fetching mcq question'. mysqli_error($con);
-        }
-
-        if(!$result2) {
-            echo 'err when fetching mcq question'. mysqli_error($con);
-        }
-
-        $rowcount = mysqli_num_rows($result);
-
-        $sql3 = "SELECT exam.ExamEndDateTime FROM question_multiple_choice 
-                INNER JOIN exam ON question_multiple_choice.PaperID = exam.PaperID WHERE question_multiple_choice.PaperID = $paperid  AND exam.isPublished = 1 AND exam.ExamID = $examID";
-
-        $sqlquery = mysqli_query($con,$sql3);
-        if(!$sqlquery) {
-            echo 'err when fetching mcq and exam question'. mysqli_error($con);
-        }
-
-        $examDetails = mysqli_fetch_array($sqlquery);
-        $examEndDate = $examDetails["ExamEndDateTime"];
-    ?>
     <link rel="stylesheet" href="css/weestyle.css">
     <link rel="stylesheet" href="css/bryanCSS.css">
     <link rel="stylesheet" href="css/commonCSS.css"> 
@@ -59,7 +59,6 @@
 </head>
 <body>
     <!-- header -->
-    <?php require "common/header_student.php"?>
 
     <br>
     <div class="d-flex justify-content-evenly">
@@ -84,7 +83,7 @@
         <div class="dropdown">
         <button type="button" class="btn btn-primary dropdown-toggle" id="addFB" data-bs-toggle="dropdown" aria-expanded="false" style="display:block; margin-right: 15%; margin-left:auto;">Add New Feedback</button>
         <form class="dropdown-menu p-4 shadow p-3 mb-5" id="feedbackForm" aria-labelledby="addFB" style="width: 100%">
-            <input type="text" class="form-control shadow-sm" id="adm-floatingInput" name="content" placeholder="Enter feedback here..." required>
+            <input type="text" class="form-control shadow-sm" id="adm-floatingInput" name="content" pattern="[a-zA-Z][a-zA-Z0-9- ]{3,}" placeholder="Enter feedback here..." required>
             <br>
             <div class= "d-flex flex-wrap justify-content-around">
             <button type="submit" class="btn btn-primary" style="border:none;">Submit</button>
@@ -534,8 +533,6 @@
         inputfile.value ="";
     }
 </script>
-<!-- footer -->
-<?php include "./common/footer_student.php"?>
 <br><br><br><br>
 </body>
 </html>

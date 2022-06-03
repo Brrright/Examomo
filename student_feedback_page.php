@@ -29,9 +29,12 @@ $numOfRow2 = mysqli_num_rows($repliedresult);
   <center><h1 style="font-family: 'Caveat';">Write Feedback</h1></center>
     <div class="dropdown">
         <button type="button" class="btn btn-primary dropdown-toggle" id="addFB" data-bs-toggle="dropdown" aria-expanded="false" style="display:block; margin-right: 15%; margin-left:auto;">Add New Feedback</button>
-        <form class="dropdown-menu p-4 shadow p-3 mb-5" action="student_feedback_insert_backend.php" method="POST" aria-labelledby="addFB" style="width: 60%">
-            <input type="text" class="form-control shadow-sm" id="adm-floatingInput" name="fb_content" placeholder="Enter feedback here..." required>
+        <form class="dropdown-menu p-4 shadow p-3 mb-5 was-validated" action="student_feedback_insert_backend.php" method="POST" aria-labelledby="addFB" style="width: 60%">
+            <input type="text" class="form-control shadow-sm" id="adm-floatingInput validationServer03" aria-describedby="validationServer03Feedback" pattern="[a-zA-Z][a-zA-Z0-9- ]{3,}" name="fb_content" placeholder="Enter feedback here..." required>
             <br>
+            <div id="validationServer03Feedback" class="invalid-feedback">
+                Please provide a valid input.
+                </div>
             <div class= "d-flex flex-wrap justify-content-around">
             <button type="submit" value="submit" class="btn btn-primary" style="border:none;">Submit</button>
             </div>
