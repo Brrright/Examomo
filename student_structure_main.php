@@ -2,7 +2,7 @@
         require "common/conn.php";
         if (!isset($_GET["id"])) {
             echo '<script>alert("You have not selected an exam paper.");
-            window.location.href="lecturer_exampaper_page.php";</script>';
+            window.location.href="student_exam_list.php";</script>';
         }
     
         if (!isset($_SESSION["userID"])) {
@@ -61,8 +61,6 @@
     <title>Structure Questions</title>
 </head>
 <body>
-    <!-- header -->
-    <?php require "common/header_student.php"?>
 
     <br>
     <div class="d-flex justify-content-evenly">
@@ -87,7 +85,7 @@
         <div class="dropdown">
             <button type="button" class="btn btn-primary dropdown-toggle" id="addnewFB" data-bs-toggle="dropdown" aria-expanded="false" style="display:block; margin-right: 15%; margin-left:auto;">Add New Feedback</button>
             <form class="dropdown-menu p-4 shadow p-3 mb-5" id="feedbackForm" aria-labelledby="addnewFB" style="width: 100%">
-                <input type="text" class="form-control shadow-sm" id="adm-floatingInput" name="content" placeholder="Enter feedback here..." required>
+                <input type="text" class="form-control shadow-sm" id="adm-floatingInput" pattern="[a-zA-Z][a-zA-Z0-9- ]{3,}" name="content" placeholder="Enter feedback here..." required>
                 <br>
                 <div class= "d-flex flex-wrap justify-content-around">
                 <button type="submit" class="btn btn-primary" style="border:none;">Submit</button>
@@ -513,7 +511,5 @@
     }
 </script>
 
-<!-- footer -->
-<?php include "./common/footer_student.php"?>
 </body>
 </html>

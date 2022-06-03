@@ -25,16 +25,6 @@
     $ExamID = $body["eid"];
     $marking = $body['givenmark'];
 
-    // $answersql ="SELECT exam.ExamID
-    //             FROM question_structure
-    //             INNER JOIN exam ON question_structure.PaperID = exam.PaperID
-    //             WHERE question_structure.SQuestionID = ".$questionID." AND question_structure.PaperID = ".$PaperID."";
-
-    // $answerquery = mysqli_query($con, $answersql);
-    // while ($answerrow = mysqli_fetch_array($answerquery)){
-    //     $examid = $answerrow['ExamID'];
-    // }WRONG -> 1 PAPER ID CAN BELONGS TO MANY EXAM
-
     $sqlcorrect ="UPDATE student_answer SET
                     markReceived = '$marking',
                     LecturerID = $lecturerID,

@@ -10,6 +10,7 @@
         echo '<script>alert("You have no access to this page.");
         window.location.href="logout.php";</script>';
     }
+    
 // havent replied
 $sentsql = "SELECT feedback.FeedbackID, feedback.FeedbackContent, feedback.FeedbackStatus, feedback.FeedbackDateTime, student.StudentName, student.StudentEmail 
 FROM feedback INNER JOIN student ON feedback.StudentID = student.StudentID 
@@ -115,11 +116,14 @@ $numOfRow2 = mysqli_num_rows($repliedresult);
                             <img src="img/admin/admin.png" alt="...">
                         </div>
                         <div class="col-10">
-                        <form action="admin_feedback_insert_backend.php" method="POST">
+                        <form action="admin_feedback_insert_backend.php" method="POST" class="was-validated">
                             
-                            <input type="text" class="form-control shadow-sm" id="adm-floatingInput" name="fb_content" placeholder="Enter feedback here... (select a feedback first)" disabled>
+                            <input type="text" class="form-control shadow-sm" name="fb_content" id="validationServer03 adm-floatingInput" aria-describedby="validationServer03Feedback" placeholder="Enter feedback here... (select a feedback first)" disabled>
                                 <br>
                             <div class= "d-flex flex-wrap justify-content-around">
+                            <div id="validationServer03Feedback" class="invalid-feedback">
+                            Please provide a valid input.
+                            </div>
                             <button type="submit" value="submit" class="btn btn-primary" style="border:none;" disabled>Submit</button>
                             </div>
                         </form>

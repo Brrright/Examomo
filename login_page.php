@@ -1,14 +1,11 @@
 <?php
     require "common/conn.php";
-    if(isset($_SESSION['userID'])){
-		header('location:'.$_GET['role'].'_home_page.php');
-	}
     
     // check role and set the variable
     if (isset($_GET['role'])) {
         if ($_GET['role'] == "admin") {
             $role = "Admin";
-            $path = "guest_home_page.php";
+            $path = "admin_home_page.php";
         }
         else if ($_GET['role'] == "lecturer") {
             $role = "Lecturer";
@@ -19,6 +16,12 @@
             $path = "student_home_page.php";
         }
     }
+    else {
+        header('location: guest_home_page.php');
+    }
+    if(isset($_SESSION['userID'])){
+		header('location:'.$_GET['role'].'_home_page.php');
+	}
 ?>
 <!DOCTYPE html>
 <html lang="en">

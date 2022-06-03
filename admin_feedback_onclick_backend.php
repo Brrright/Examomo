@@ -36,10 +36,13 @@
 
     while ($rfeedback = mysqli_fetch_array($sentresult)) {
         if ($rfeedback["FeedbackReply"] == null) {
-            $feedbackreply = '<form action="admin_feedback_insert_backend.php" method="POST">
+            $feedbackreply = '<form action="admin_feedback_insert_backend.php" method="POST"  class="was-validated">
             <input type="hidden" value="'.$rfeedback["FeedbackID"].'" name="fbID">
-            <input type="text" class="form-control shadow-sm" id="adm-floatingInput" name="content" placeholder="Enter feedback here...">
+            <input type="text" class="form-control shadow-sm"  id="validationServer03 adm-floatingInput" aria-describedby="validationServer03Feedback" pattern="[a-zA-Z][a-zA-Z0-9- ]{3,}" name="content" placeholder="Enter feedback here..." required>
                 <br>
+                <div id="validationServer03Feedback" class="invalid-feedback">
+                Please provide a valid input.
+                </div>
             <div class= "d-flex flex-wrap justify-content-around">
             <button type="submit" value="submit" class="btn btn-primary" style="border:none;">Submit</button>
             </div>
