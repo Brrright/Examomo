@@ -41,7 +41,7 @@
 
 <!-- header -->
 <?php require "common/header_admin.php"?>
-<center><h1 style="font-family: 'Caveat';">Edit Accounts</h1></center>
+<center><h1 style="font-family: 'Caveat';">Edit Module</h1></center>
 <div class="container">
     <form class ="was-validated" action="admin_edit_module_backend.php" method="post">
         <div class="profilecontainer my-4 p-4 shadow p-3 mb-5">
