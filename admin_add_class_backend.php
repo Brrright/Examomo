@@ -37,7 +37,7 @@
                 }
             }
             
-            echo '<script>alert("Student created successfully.");
+            echo '<script>alert("Class created successfully.");
             window.location.href = "admin_class_list.php";
             </script>';
         }

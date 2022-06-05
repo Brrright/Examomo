@@ -137,7 +137,7 @@
             <div class="row">
                         <div class="col-sm-6">
                             <p class="fs-3 main-color mx-auto" style="text-align: center; font-family:Poppins;">
-                                Upcoming Exams
+                                Take Exams <i class="bi bi-arrow-down ms-4"></i>
                             </p>
                         </div>
                     </div>
