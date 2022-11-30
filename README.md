@@ -2,7 +2,7 @@
 An online examination system produced by Asia Pacific University students. (Diploma FYP)
 
 - Program Leader & Programmer: CHIAH MING LIANG - TP061801
-- Programer & Designer: WEE TZE HOE - TP061037
+- Programmer & Designer: WEE TZE HOE - TP061037
 - Programmer: LAI CAL WYN - TP061064
 - Programmer: BRYAN GOH KA HEE - TP061000
 
